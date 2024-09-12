@@ -22,7 +22,7 @@ Leia mais sobre como fazer uma mensagem de commit em: https://www.conventionalco
 4. **Abra um Pull Request no Github**: Após subir suas alterações, abra um pull request e aguarde a revisão 🎉
 Lembre-se de colocar uma mensagem na pull request e adicionar uma label para melhor identificação
 
-![image](https://github.com/InfoCorpUFMT/Ligeirao-FrontEnd/assets/97123796/de458a26-821c-435a-b8a6-ddecc761054b)
+![image](./assets/pr.png)
 
 ## Links Úteis
 
