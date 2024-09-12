@@ -30,7 +30,7 @@ Lembre-se de colocar uma mensagem na pull request e adicionar uma label para mel
 
 Seguem os links de todas as documentações das tecnologias usadas nesse projeto:
 
-- [Engenharia de Requisitos](https://www.overleaf.com/read/zshdfftpkpzb#5e5158)
-- [Modelagem de Banco de Dados](https://www.overleaf.com/read/mctdhnchkzjq#3d07ad)
+- [Engenharia de Requisitos](https://pt.overleaf.com/read/frtcrbrscwgs#5915a5)
+- [Modelagem de Banco de Dados](https://pt.overleaf.com/read/vdwdjvqvtwwr#5cba88)
 - [WireFrame]()
-- [Figma](https://www.figma.com/design/CjYwdrL9oQQUDsOn5ad2f1/Projeto---Dist.-de-Encargos?node-id=11-2&t=GGyOd9XYRZsrYcCT-1)
+- [Figma]()
