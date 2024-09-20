@@ -1,0 +1,6 @@
+@api_rota_oeste_HostAddress = http://localhost:5092
+
+GET {{api_rota_oeste_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
