@@ -53,6 +53,26 @@ public class UsuarioRepository : IUsuarioRepository
     }
 
     /**
+     * Método serve para alterar os dados de um usuário parcialmente
+     */
+    public async Task<bool> Atualizar(UsuarioPatchDTO request)
+    {
+        UsuarioModel usuarioModel = await BuscaPorId(request.Id);
+        
+        if(usuarioModel == null)
+            return false;
+        
+        // O mapeamento de atualização deve ignorar campos nulos
+        _mapper.Map(request, usuarioModel);
+        
+        _dbContext.Usuarios.Update(usuarioModel);
+        await _dbContext.SaveChangesAsync();
+
+        return true;
+
+    }
+
+    /**
      * Método usado para realizar deleção relacional de uma entidade do tipo Usuario 
      */
     public async Task<bool> Apagar(int id)
@@ -60,10 +80,8 @@ public class UsuarioRepository : IUsuarioRepository
        UsuarioModel usuario = await _dbContext.Usuarios.FindAsync(id);
 
        if (usuario == null)
-       {
-           throw new Exception($"Usuário para o ID: {id} não foi encontrado");
-       }
-
+           return false;
+       
        _dbContext.Usuarios.Remove(usuario);
        await _dbContext.SaveChangesAsync();
 
