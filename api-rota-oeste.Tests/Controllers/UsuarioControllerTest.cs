@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using api_rota_oeste.Controllers;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
+using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
@@ -11,15 +12,15 @@ namespace api_rota_oeste.Tests.Controllers
     public class UsuarioControllerTest
     {
         private readonly UsuarioController _controller;
-        private readonly Mock<IUsuarioRepository> _usuarioRepositoryMock;
+        private readonly Mock<IUsuarioService> _usuarioServiceMock;
 
         public UsuarioControllerTest()
         {
             // Criando os mocks necessários
-            _usuarioRepositoryMock = new Mock<IUsuarioRepository>();
+            _usuarioServiceMock = new Mock<IUsuarioService>();
     
             // Inicializando o controller com o mock do repositório
-            _controller = new UsuarioController(_usuarioRepositoryMock.Object);
+            _controller = new UsuarioController(_usuarioServiceMock.Object);
         }
 
 
@@ -44,7 +45,7 @@ namespace api_rota_oeste.Tests.Controllers
                 null
             );
 
-            _usuarioRepositoryMock.Setup(repo => repo.Adicionar(It.IsAny<UsuarioRequestDTO>()))
+            _usuarioServiceMock.Setup(repo => repo.AdicionarAsync(It.IsAny<UsuarioRequestDTO>()))
                 .ReturnsAsync(usuarioResponse);
 
             // Act
@@ -62,15 +63,15 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task ObterPorId_DeveRetornar200ComUsuario()
         {
             // Arrange
-            var usuarioModel = new UsuarioModel
-            {
-                Id = 1,
-                Nome = "Teste",
-                Telefone = "66992337652",
-                Senha = "12345"
-            };
+            var usuarioModel = new UsuarioResponseDTO
+            (
+                1,
+                "66992337652",
+                "Teste",
+                null
+            );
 
-            _usuarioRepositoryMock.Setup(repo => repo.BuscaPorId(It.IsAny<int>()))
+            _usuarioServiceMock.Setup(repo => repo.BuscaPorIdAsync(It.IsAny<int>()))
                 .ReturnsAsync(usuarioModel);
 
             // Act
@@ -87,8 +88,8 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task ObterPorId_DeveRetornar404SeNaoEncontrado()
         {
             // Arrange
-            _usuarioRepositoryMock.Setup(repo => repo.BuscaPorId(It.IsAny<int>()))
-                .ReturnsAsync((UsuarioModel)null);
+            _usuarioServiceMock.Setup(repo => repo.BuscaPorIdAsync(It.IsAny<int>()))
+                .ReturnsAsync((UsuarioResponseDTO) null);
 
             // Act
             var result = await _controller.ObterPorId(1);
@@ -109,7 +110,7 @@ namespace api_rota_oeste.Tests.Controllers
                 Telefone = "66992337652"
             };
 
-            _usuarioRepositoryMock.Setup(repo => repo.Atualizar(It.IsAny<UsuarioPatchDTO>()))
+            _usuarioServiceMock.Setup(repo => repo.AtualizarAsync(It.IsAny<UsuarioPatchDTO>()))
                 .ReturnsAsync(true);
 
             // Act
@@ -130,7 +131,7 @@ namespace api_rota_oeste.Tests.Controllers
                 Telefone = "66992337652"
             };
 
-            _usuarioRepositoryMock.Setup(repo => repo.Atualizar(It.IsAny<UsuarioPatchDTO>()))
+            _usuarioServiceMock.Setup(repo => repo.AtualizarAsync(It.IsAny<UsuarioPatchDTO>()))
                 .ReturnsAsync(false);
 
             // Act
@@ -145,7 +146,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task Apagar_DeveRetornar204NoContent()
         {
             // Arrange
-            _usuarioRepositoryMock.Setup(repo => repo.Apagar(It.IsAny<int>()))
+            _usuarioServiceMock.Setup(repo => repo.ApagarAsync(It.IsAny<int>()))
                 .ReturnsAsync(true);
 
             // Act
@@ -159,7 +160,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task Apagar_DeveRetornar404SeNaoEncontrado()
         {
             // Arrange
-            _usuarioRepositoryMock.Setup(repo => repo.Apagar(It.IsAny<int>()))
+            _usuarioServiceMock.Setup(repo => repo.ApagarAsync(It.IsAny<int>()))
                 .ReturnsAsync(false);
 
             // Act

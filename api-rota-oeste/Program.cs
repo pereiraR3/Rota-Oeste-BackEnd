@@ -1,6 +1,8 @@
 using api_rota_oeste.Data;
 using api_rota_oeste.Repositories;
 using api_rota_oeste.Repositories.Interfaces;
+using api_rota_oeste.Services;
+using api_rota_oeste.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +23,7 @@ builder.Services.AddEntityFrameworkSqlServer()
 
 // Permitir a injecao dos serviços abaixo, no contexto de aplicação
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 // Ativando o AutoMapper no contexto de aplicação
 builder.Services.AddAutoMapper(typeof(Program));

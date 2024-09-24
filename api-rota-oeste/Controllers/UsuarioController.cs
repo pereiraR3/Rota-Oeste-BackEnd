@@ -1,5 +1,6 @@
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
+using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -10,11 +11,11 @@ namespace api_rota_oeste.Controllers;
 public class UsuarioController : ControllerBase
 {
 
-    private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IUsuarioService _usuarioService;
 
-    public UsuarioController(IUsuarioRepository usuarioRepository)
+    public UsuarioController(IUsuarioService usuarioService)
     {
-        _usuarioRepository = usuarioRepository;
+        _usuarioService = usuarioService;
     }
 
     /// <summary>
@@ -30,11 +31,11 @@ public class UsuarioController : ControllerBase
     [SwaggerResponse(400, "Dados inválidos ou incompletos")]
     public async Task<ActionResult<UsuarioResponseDTO>> Adicionar(UsuarioRequestDTO usuario)
     {
-        UsuarioResponseDTO usuarioResponseDto = await _usuarioRepository.Adicionar(usuario);
+        UsuarioResponseDTO usuarioResponseDto = await _usuarioService.AdicionarAsync(usuario);
 
         // Retorna 201 Created com a URL para acessar o usuário criado
         return CreatedAtAction(
-            nameof(_usuarioRepository.BuscaPorId), // Nome da ação que busca o usuário pelo ID
+            nameof(_usuarioService.BuscaPorIdAsync), // Nome da ação que busca o usuário pelo ID
             new { id = usuarioResponseDto.Id }, // Parâmetro para a rota
             usuarioResponseDto // O objeto criado
         );
@@ -53,7 +54,7 @@ public class UsuarioController : ControllerBase
     [SwaggerResponse(404, "Usuário não encontrado")]
     public async Task<ActionResult<UsuarioResponseDTO>> ObterPorId(int id)
     {
-        UsuarioModel usuario = await _usuarioRepository.BuscaPorId(id);
+        UsuarioResponseDTO usuario = await _usuarioService.BuscaPorIdAsync(id);
 
         if (usuario == null)
         {
@@ -79,7 +80,7 @@ public class UsuarioController : ControllerBase
     [SwaggerResponse(400, "Requisição inválida. Verifique os dados enviados.")]
     public async Task<IActionResult> Atualizar(UsuarioPatchDTO usuario)
     {
-        var statusResultado = await _usuarioRepository.Atualizar(usuario);
+        var statusResultado = await _usuarioService.AtualizarAsync(usuario);
     
         if (statusResultado == false)
             return NotFound();
@@ -102,7 +103,7 @@ public class UsuarioController : ControllerBase
     [SwaggerResponse(404, "Usuário não encontrado")]
     public async Task<IActionResult> Apagar(int id)
     {
-        var status = await _usuarioRepository.Apagar(id);
+        var status = await _usuarioService.ApagarAsync(id);
 
         if (!status)
             return NotFound(); // Retorna 404 Not Found se o usuário não for encontrado

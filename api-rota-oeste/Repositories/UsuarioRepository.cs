@@ -23,13 +23,13 @@ public class UsuarioRepository : IUsuarioRepository
     /**
      * Método que serve para salvar uma nova instância da entidade usuario no banco de dados
      */
-    public async Task<UsuarioResponseDTO> Adicionar(UsuarioRequestDTO request)
+    public async Task<UsuarioModel> Adicionar(UsuarioRequestDTO request)
     {
         UsuarioModel usuario = new UsuarioModel(request);
         await _dbContext.Usuarios.AddAsync(usuario);
         await _dbContext.SaveChangesAsync();
-        
-        return _mapper.Map<UsuarioResponseDTO>(usuario);
+
+        return usuario;
     }
 
     /**
@@ -37,19 +37,10 @@ public class UsuarioRepository : IUsuarioRepository
      */
     public async Task<UsuarioModel> BuscaPorId(int id)
     {
-        try
-        {
-            UsuarioModel usuario = await _dbContext.Usuarios.FindAsync(id);
-
-            return usuario;
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Erro ao buscar usuário: {e.Message}");
-            return null;
-        }
         
+        UsuarioModel usuario = await _dbContext.Usuarios.FindAsync(id);
+        
+        return usuario;
     }
 
     /**
