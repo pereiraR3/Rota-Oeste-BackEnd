@@ -15,6 +15,7 @@ public class UsuarioMap : IEntityTypeConfiguration<UsuarioModel>
         
         // Configurando o ID auto gerado da classe Usuario
         builder.HasKey(x => x.Id);
+        
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd();
         

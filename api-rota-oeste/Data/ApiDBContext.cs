@@ -13,8 +13,8 @@ public class ApiDBContext : DbContext
             
     }
         
-    public DbSet<UsuarioModel> Usuarios { get; set; }
-    public DbSet<ClienteModel> Clientes { get; set; }
+    public DbSet<UsuarioModel?> Usuarios { get; set; }
+    public DbSet<ClienteModel?> Clientes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -8,9 +8,9 @@ namespace api_rota_oeste.Repositories.Interfaces;
 public interface IUsuarioRepository
 {
     
-    Task<UsuarioModel> Adicionar(UsuarioRequestDTO request);
+    Task<UsuarioModel?> Adicionar(UsuarioRequestDTO request);
 
-    Task<UsuarioModel> BuscaPorId(int id);
+    Task<UsuarioModel?> BuscaPorId(int id);
     
     Task<bool> Atualizar(UsuarioPatchDTO request);
     

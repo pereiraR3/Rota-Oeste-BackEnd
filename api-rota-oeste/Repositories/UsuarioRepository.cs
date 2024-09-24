@@ -23,9 +23,9 @@ public class UsuarioRepository : IUsuarioRepository
     /**
      * Método que serve para salvar uma nova instância da entidade usuario no banco de dados
      */
-    public async Task<UsuarioModel> Adicionar(UsuarioRequestDTO request)
+    public async Task<UsuarioModel?> Adicionar(UsuarioRequestDTO request)
     {
-        UsuarioModel usuario = new UsuarioModel(request);
+        UsuarioModel? usuario = new UsuarioModel(request);
         await _dbContext.Usuarios.AddAsync(usuario);
         await _dbContext.SaveChangesAsync();
 
@@ -35,10 +35,10 @@ public class UsuarioRepository : IUsuarioRepository
     /**
      * Método que serve para recuperar determinado usuario por meio de seu ID
      */
-    public async Task<UsuarioModel> BuscaPorId(int id)
+    public async Task<UsuarioModel?> BuscaPorId(int id)
     {
         
-        UsuarioModel usuario = await _dbContext.Usuarios.FindAsync(id);
+        UsuarioModel? usuario = await _dbContext.Usuarios.FindAsync(id);
         
         return usuario;
     }
@@ -48,7 +48,7 @@ public class UsuarioRepository : IUsuarioRepository
      */
     public async Task<bool> Atualizar(UsuarioPatchDTO request)
     {
-        UsuarioModel usuarioModel = await BuscaPorId(request.Id);
+        UsuarioModel? usuarioModel = await BuscaPorId(request.Id);
         
         if(usuarioModel == null)
             return false;
@@ -68,7 +68,7 @@ public class UsuarioRepository : IUsuarioRepository
      */
     public async Task<bool> Apagar(int id)
     {
-       UsuarioModel usuario = await _dbContext.Usuarios.FindAsync(id);
+       UsuarioModel? usuario = await _dbContext.Usuarios.FindAsync(id);
 
        if (usuario == null)
            return false;

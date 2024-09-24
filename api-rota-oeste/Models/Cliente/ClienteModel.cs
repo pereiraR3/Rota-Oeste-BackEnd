@@ -8,7 +8,7 @@ public class ClienteModel
     
     public int UsuarioId { get; set; }
     
-    public virtual UsuarioModel Usuario { get; set; }
+    public virtual UsuarioModel? Usuario { get; set; }
     
     public string Nome { get; set; }
     
@@ -17,7 +17,7 @@ public class ClienteModel
     public byte[]? Foto { get; set; }
     public ClienteModel(){}
 
-    public ClienteModel(ClienteRequestDTO request, UsuarioModel usuario)
+    public ClienteModel(ClienteRequestDTO request, UsuarioModel? usuario)
     {
         this.UsuarioId = request.UsuarioId;
         this.Usuario = usuario;
