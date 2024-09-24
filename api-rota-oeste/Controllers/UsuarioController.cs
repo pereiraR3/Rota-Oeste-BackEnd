@@ -52,7 +52,8 @@ public class UsuarioController : ControllerBase
     [HttpGet("{id}")]
     [SwaggerOperation(Summary = "Busca um usuário pelo ID", Description = "Obtém os detalhes do usuário através do ID fornecido.")]
     [SwaggerResponse(200, "Usuário encontrado", typeof(UsuarioResponseDTO))]
-    [SwaggerResponse(404, "Usuário não encontrado")]    public async Task<ActionResult<UsuarioResponseDTO>> ObterPorId(int id)
+    [SwaggerResponse(404, "Usuário não encontrado")]
+    public async Task<ActionResult<UsuarioResponseDTO>> ObterPorId(int id)
     {
         UsuarioModel usuario = await _usuarioRepository.BuscaPorId(id);
 
@@ -63,6 +64,29 @@ public class UsuarioController : ControllerBase
 
         return Ok(usuario);
 
+    }
+    
+    /// <summary>
+    /// Atualiza parcialmente os dados de um usuário.
+    /// </summary>
+    /// <param name="usuario">Objeto contendo os dados a serem atualizados no usuário.</param>
+    /// <returns>Retorna um status indicando o sucesso ou falha da operação.</returns>
+    /// <response code="204">Usuário atualizado com sucesso, sem conteúdo no corpo da resposta.</response>
+    /// <response code="404">Usuário não encontrado para o ID fornecido.</response>
+    /// <response code="400">Requisição inválida. Verifique os dados enviados.</response>
+    [HttpPatch]
+    [SwaggerOperation(Summary = "Atualiza parcialmente os dados de um usuário", Description = "Permite a atualização parcial dos dados de um usuário com base no ID e nos campos fornecidos.")]
+    [SwaggerResponse(204, "Usuário atualizado com sucesso, sem conteúdo no corpo da resposta.")]
+    [SwaggerResponse(404, "Usuário não encontrado para o ID fornecido.")]
+    [SwaggerResponse(400, "Requisição inválida. Verifique os dados enviados.")]
+    public async Task<ActionResult<UsuarioResponseDTO>> Atualizar(UsuarioPatchDTO usuario)
+    {
+        var statusResultado = await _usuarioRepository.Atualizar(usuario);
+    
+        if (statusResultado == false)
+            return NotFound();
+    
+        return NoContent();
     }
 
     /// <summary>
@@ -83,9 +107,7 @@ public class UsuarioController : ControllerBase
         var status = await _usuarioRepository.Apagar(id);
 
         if (!status)
-        {
             return NotFound(); // Retorna 404 Not Found se o usuário não for encontrado
-        }
 
         return NoContent(); // Retorna 204 No Content se o usuário foi removido com sucesso
     }
