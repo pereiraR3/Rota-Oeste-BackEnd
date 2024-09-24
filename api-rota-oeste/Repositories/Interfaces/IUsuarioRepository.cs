@@ -12,6 +12,8 @@ public interface IUsuarioRepository
 
     Task<UsuarioModel> BuscaPorId(int id);
     
+    Task<bool> Atualizar(UsuarioPatchDTO request);
+    
     Task<bool> Apagar(int id);
     
 }
