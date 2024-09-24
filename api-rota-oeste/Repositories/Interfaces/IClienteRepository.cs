@@ -12,9 +12,9 @@ public interface IClienteRepository
   
   Task<List<ClienteModel>> AdicionarColecao(ClienteCollectionDTO request);
 
-  Task<ClienteModel> BuscaPorId(int id);
+  Task<ClienteModel?> BuscaPorId(int id);
   
-  Task<List<ClienteModel>> BuscaTodos();
+  Task<List<ClienteModel?>> BuscaTodos();
   
   Task<bool> Apagar(int id);
 
