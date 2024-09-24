@@ -10,12 +10,10 @@ namespace api_rota_oeste.Controllers;
 public class UsuarioController : ControllerBase
 {
 
-    private readonly ILogger<UsuarioController> _logger;
     private readonly IUsuarioRepository _usuarioRepository;
 
-    public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepository usuarioRepository)
+    public UsuarioController(IUsuarioRepository usuarioRepository)
     {
-        _logger = logger;
         _usuarioRepository = usuarioRepository;
     }
 
@@ -79,7 +77,7 @@ public class UsuarioController : ControllerBase
     [SwaggerResponse(204, "Usuário atualizado com sucesso, sem conteúdo no corpo da resposta.")]
     [SwaggerResponse(404, "Usuário não encontrado para o ID fornecido.")]
     [SwaggerResponse(400, "Requisição inválida. Verifique os dados enviados.")]
-    public async Task<ActionResult<UsuarioResponseDTO>> Atualizar(UsuarioPatchDTO usuario)
+    public async Task<IActionResult> Atualizar(UsuarioPatchDTO usuario)
     {
         var statusResultado = await _usuarioRepository.Atualizar(usuario);
     

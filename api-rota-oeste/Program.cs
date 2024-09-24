@@ -24,6 +24,7 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 // Ativando o AutoMapper no contexto de aplicação
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Habilitando as anotações do Swagger
 builder.Services.AddSwaggerGen(c =>
