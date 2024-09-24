@@ -1,7 +1,8 @@
-
 namespace api_rota_oeste.Models.RespostaAlternativa;
-public record RespostaAlternativaRequestDTO
-(
+
+public record RespostaAlternativaResponseDTO(
+    
+    int Id, 
     
     int QuestaoId,
     

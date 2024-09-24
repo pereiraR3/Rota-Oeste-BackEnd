@@ -2,7 +2,6 @@ using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace api_rota_oeste.Services;
 
@@ -20,16 +19,22 @@ public class UsuarioService : IUsuarioService
         _mapper = mapper;
     }
     
+    /**
+     * Método da camada de serviço -> para criar uma entidade do tipo usuário
+     */
     public async Task<UsuarioResponseDTO> AdicionarAsync(UsuarioRequestDTO request)
     {
-        UsuarioModel usuarioModel = await _usuarioRepository.Adicionar(request);
+        UsuarioModel? usuarioModel = await _usuarioRepository.Adicionar(request);
         
         return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
     }
 
+    /**
+     * Método da camada de serviço -> para buscar uma entidade do tipo usuário pelo ID
+     */
     public async Task<UsuarioResponseDTO> BuscaPorIdAsync(int id)
     {
-       UsuarioModel usuarioModel = await _usuarioRepository.BuscaPorId(id);
+       UsuarioModel? usuarioModel = await _usuarioRepository.BuscaPorId(id);
 
        if (usuarioModel == null) 
            throw new KeyNotFoundException("Usuário não encontrado");
@@ -37,6 +42,9 @@ public class UsuarioService : IUsuarioService
        return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
     }
 
+    /**
+     * Método da camada de serviço -> para atualizar um entidade do tipo usuário 
+     */
     public async Task<bool> AtualizarAsync(UsuarioPatchDTO request)
     {
         var resultado = await _usuarioRepository.Atualizar(request);
@@ -47,6 +55,9 @@ public class UsuarioService : IUsuarioService
         return resultado;
     }
 
+    /**
+     * Método da camada de serviço -> para fazer a deleção relacional de uma entidade do tipo usuário
+     */
     public async Task<bool> ApagarAsync(int id)
     {
         var resultado = await _usuarioRepository.Apagar(id);

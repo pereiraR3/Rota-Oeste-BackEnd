@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using api_rota_oeste.Controllers;
 using api_rota_oeste.Models.Usuario;
-using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

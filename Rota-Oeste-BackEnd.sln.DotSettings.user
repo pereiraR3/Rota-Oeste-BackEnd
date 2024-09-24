@@ -12,5 +12,8 @@
     &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Atualizar_DeveRetornarFalse&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.UsuarioServiceTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.ClienteRepositoryTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.ClienteServiceTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.ClienteControllerTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
