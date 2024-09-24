@@ -17,7 +17,11 @@
 
   <ItemGroup>
 
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="8.0.1" />
+
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+
+    <PackageReference Include="InMemoryDbSet" Version="2.0.10" />
 
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
 
@@ -36,8 +40,14 @@
     </PackageReference>
 
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+
+    <PackageReference Include="Moq" Version="4.20.72" />
+
+    <PackageReference Include="Moq.EntityFrameworkCore" Version="8.0.1.2" />
     
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
+    
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.8.0" />
 
   </ItemGroup>
 

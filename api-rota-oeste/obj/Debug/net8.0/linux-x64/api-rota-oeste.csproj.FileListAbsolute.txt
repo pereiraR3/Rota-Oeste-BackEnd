@@ -126,3 +126,12 @@
 /home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Swashbuckle.AspNetCore.Annotations.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Castle.Core.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Moq.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Moq.EntityFrameworkCore.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/HealthChecks.UI.Core.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/HealthChecks.UI.Data.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/HealthChecks.UI.InMemory.Storage.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/InMemoryDbSet.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Microsoft.EntityFrameworkCore.InMemory.dll
