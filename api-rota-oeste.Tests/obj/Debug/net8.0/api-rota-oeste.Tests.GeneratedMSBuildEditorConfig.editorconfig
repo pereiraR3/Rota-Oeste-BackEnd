@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = api_rota_oeste.Tests
-build_property.ProjectDir = /home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/
+build_property.ProjectDir = C:\Users\andre\OneDrive\Área de Trabalho\cloneMain\Rota-Oeste-BackEnd\api-rota-oeste.Tests\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
