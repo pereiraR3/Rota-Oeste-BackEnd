@@ -4764,33 +4764,41 @@
     ]
   },
   "packageFolders": {
-    "/home/phost/.nuget/packages/": {}
+    "C:\\Users\\andre\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\OneDrive\\Área de Trabalho\\cloneMain\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj",
       "projectName": "api-rota-oeste.Tests",
-      "projectPath": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj",
-      "packagesPath": "/home/phost/.nuget/packages/",
-      "outputPath": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/obj/",
+      "projectPath": "C:\\Users\\andre\\OneDrive\\Área de Trabalho\\cloneMain\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj",
+      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\andre\\OneDrive\\Área de Trabalho\\cloneMain\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/phost/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/api-rota-oeste.csproj": {
-              "projectPath": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/api-rota-oeste.csproj"
+            "C:\\Users\\andre\\OneDrive\\Área de Trabalho\\cloneMain\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj": {
+              "projectPath": "C:\\Users\\andre\\OneDrive\\Área de Trabalho\\cloneMain\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj"
             }
           }
         }
@@ -4799,6 +4807,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4835,22 +4848,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.8, 8.0.8]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.8, 8.0.8]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -4859,7 +4862,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'InMemoryDbSet 2.0.10' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "message": "O pacote 'InMemoryDbSet 2.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "InMemoryDbSet",
       "targetGraphs": [
         "net8.0"
