@@ -17,7 +17,7 @@ namespace api_rota_oeste.Models.CheckList
         public CheckListModel(CheckListRequestDTO req, UsuarioModel? usuario)
         {
             this.Nome = req.Nome;
-            this.DataCriacao = req.DataCriacao;
+            this.DataCriacao = DateTime.Now; //a dataCriacao do Checklist é definida como a data no momento da criacao
             this.Usuario = usuario;
             this.UsuarioId = req.UsuarioId;
             
