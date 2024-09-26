@@ -14,6 +14,7 @@ namespace api_rota_oeste.Models.CheckList
         public int UsuarioId { get; set; }
         public virtual UsuarioModel? Usuario { get; set; }
 
+        public CheckListModel() { }
         public CheckListModel(CheckListRequestDTO req, UsuarioModel? usuario)
         {
             this.Nome = req.Nome;

@@ -10,6 +10,6 @@ namespace api_rota_oeste.Models.CheckList
       int Id,
       int UsuarioId,
       string Nome,
-      DateTime DataCriacao
+      DateTime? DataCriacao
     );
 }
