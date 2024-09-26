@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="..\build\api-rota-oeste.props" />
+  <Import Project="../build/api-rota-oeste.props" />
 </Project>
