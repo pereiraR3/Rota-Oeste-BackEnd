@@ -1,7 +1,12 @@
-namespace api_rota_oeste.Models.CheckList;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-public record CheckListRequestDTO(
-    string? Nome,
-    DateTime DataCriacao,
-    int UsuarioId
-);
+namespace api_rota_oeste.Models.CheckList
+{
+    public record CheckListRequestDTO
+    (
+
+    );
+}

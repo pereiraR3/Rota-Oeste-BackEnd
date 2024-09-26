@@ -1,5 +1,4 @@
 using api_rota_oeste.Data.Map;
-using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Usuario;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +15,12 @@ public class ApiDBContext : DbContext
         
     public DbSet<UsuarioModel?> Usuarios { get; set; }
     public DbSet<ClienteModel?> Clientes { get; set; }
-    public DbSet<CheckListModel?> CheckLists { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+            
         modelBuilder.ApplyConfiguration(new UsuarioMap());
         modelBuilder.ApplyConfiguration(new ClienteMap());
-        modelBuilder.ApplyConfiguration(new CheckListMap());
 
         base.OnModelCreating(modelBuilder);
     }

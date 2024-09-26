@@ -7,9 +7,6 @@ namespace api_rota_oeste.Models.CheckList
 {
     public record CheckListResponseDTO
     (
-      int Id,
-      int UsuarioId,
-      string Nome,
-      DateTime? DataCriacao
+        
     );
 }
