@@ -1,9 +1,8 @@
 ﻿using api_rota_oeste.Data;
 using api_rota_oeste.Models.Questao;
+using api_rota_oeste.Repositories;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.HttpResults;
-
-namespace PrimeiraAPI.Repository;
 
 public class QuestaoRepository : IQuestaoRepository
 {

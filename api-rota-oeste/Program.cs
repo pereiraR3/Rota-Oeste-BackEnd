@@ -4,7 +4,6 @@ using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
 using api_rota_oeste.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using PrimeiraAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 

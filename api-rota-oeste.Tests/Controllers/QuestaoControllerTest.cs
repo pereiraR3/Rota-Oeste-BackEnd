@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 using System.Collections.Generic;
+using api_rota_oeste.Repositories;
 using AutoMapper;
-using PrimeiraAPI.Repository;
 
 namespace api_rota_oeste.Tests.Controllers
 {

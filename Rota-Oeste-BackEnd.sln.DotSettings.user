@@ -1,7 +1,12 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=7F91285C_002DEAFE_002D4B65_002D8920_002D66005D1AC11D/@EntryIndexedValue">6E10266F-DAB0-4128-8B83-56DFC4139084</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=xUnit/@EntryIndexedValue">33ff99d8-b1ad-4ed5-a4fd-376b97c2c841</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9089b6f7_002Dc08c_002D4801_002Db3af_002Da81e1b95497e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Adicionar_DeveRetornarUsuarioResponseDTO" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=74f948af_002D12c7_002D46c0_002D8298_002D293ce3acc290/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="QuestaoRepositoryTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.QuestaoRepositoryTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9089b6f7_002Dc08c_002D4801_002Db3af_002Da81e1b95497e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Adicionar_DeveRetornarUsuarioResponseDTO" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Adicionar_DeveRetornarUsuarioResponseDTO&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.BuscarPorId_DeveRetornarUsuarioModel&lt;/TestId&gt;&#xD;
@@ -29,5 +34,7 @@
     &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Obter_QuandoQuestaoNaoExiste_DeveRetornarNotFound&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Atualizar_DeveRetornarNoContent&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Obter_QuandoQuestaoNaoExiste_DeveLancarKeyNotFoundException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

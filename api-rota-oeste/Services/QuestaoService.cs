@@ -1,6 +1,6 @@
 ﻿using api_rota_oeste.Models.Questao;
+using api_rota_oeste.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using PrimeiraAPI.Repository;
 using AutoMapper;
 
 namespace api_rota_oeste.Services;

@@ -1,5 +1,4 @@
-﻿using PrimeiraAPI.Repository;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
 using api_rota_oeste.Services.Interfaces;
@@ -15,7 +14,6 @@ using Xunit;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using api_rota_oeste.Models.Questao;
-using PrimeiraAPI.Repository;
 
 namespace api_rota_oeste.Tests.Services;
 
