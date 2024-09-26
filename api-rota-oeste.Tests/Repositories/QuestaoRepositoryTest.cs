@@ -6,7 +6,6 @@ using Xunit;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using api_rota_oeste.Models.Questao;
-using PrimeiraAPI.Repository;
 
 namespace api_rota_oeste.Tests.Repositories;
 

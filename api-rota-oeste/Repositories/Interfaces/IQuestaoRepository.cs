@@ -1,7 +1,7 @@
 ﻿using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models;
 
-namespace PrimeiraAPI.Repository;
+namespace api_rota_oeste.Repositories;
 
 public interface IQuestaoRepository
 {

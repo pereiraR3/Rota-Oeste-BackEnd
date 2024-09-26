@@ -1,7 +1,6 @@
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Services;
 using Microsoft.AspNetCore.Mvc;
-using PrimeiraAPI.Repository;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace api_rota_oeste.Controllers;
