@@ -4,6 +4,7 @@ using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
 using api_rota_oeste.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using PrimeiraAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,9 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
+
+builder.Services.AddTransient<IQuestaoRepository, QuestaoRepository>();
+builder.Services.AddTransient<QuestaoService>();
 
 // Ativando o AutoMapper no contexto de aplicação
 builder.Services.AddAutoMapper(typeof(Program));

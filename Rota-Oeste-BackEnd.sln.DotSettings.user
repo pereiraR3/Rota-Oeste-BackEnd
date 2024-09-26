@@ -1,19 +1,33 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=7F91285C_002DEAFE_002D4B65_002D8920_002D66005D1AC11D/@EntryIndexedValue">6E10266F-DAB0-4128-8B83-56DFC4139084</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=xUnit/@EntryIndexedValue">33ff99d8-b1ad-4ed5-a4fd-376b97c2c841</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9089b6f7_002Dc08c_002D4801_002Db3af_002Da81e1b95497e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Adicionar_DeveRetornarUsuarioResponseDTO" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Adicionar_DeveRetornarUsuarioResponseDTO&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.BuscarPorId_DeveRetornarUsuarioModel&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.BuscarPorId_DeveRetornarNotFound&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Apagar_DeveRetornarTrue&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Apagar_DeveRetornarFalse&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Atualizar_DeveRetornarTrue&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Atualizar_DeveRetornarFalse&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.UsuarioServiceTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.ClienteRepositoryTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.ClienteServiceTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.ClienteControllerTest&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9089b6f7_002Dc08c_002D4801_002Db3af_002Da81e1b95497e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Adicionar_DeveRetornarUsuarioResponseDTO" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Adicionar_DeveRetornarUsuarioResponseDTO&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.BuscarPorId_DeveRetornarUsuarioModel&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.BuscarPorId_DeveRetornarNotFound&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Apagar_DeveRetornarTrue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Apagar_DeveRetornarFalse&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Atualizar_DeveRetornarTrue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.UsuarioRepositoryTest.Atualizar_DeveRetornarFalse&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.UsuarioServiceTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.ClienteRepositoryTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.ClienteServiceTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.ClienteControllerTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Repositories.QuestaoRepositoryTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest.criar_questao&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest.listar_questoes&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest.obter_questao_por_id&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest.deletar_questao_por_id&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest.deletar_questao_por_id_nao_existe&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest.editar_questao_por_id_e_dto&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Criar_DeveRetornarCreated&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Listar_DeveRetornarListaDeQuestoes&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Obter_DeveRetornarQuestaoPorId&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Excluir_DeveRetornarNoContent&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Obter_QuandoQuestaoNaoExiste_DeveRetornarNotFound&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Atualizar_DeveRetornarNoContent&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6E10266F-DAB0-4128-8B83-56DFC4139084::net8.0::api_rota_oeste.Tests.Controllers.QuestaoControllerTest.Obter_QuandoQuestaoNaoExiste_DeveLancarKeyNotFoundException&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

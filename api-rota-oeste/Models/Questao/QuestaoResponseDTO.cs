@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace api_rota_oeste.Models.Questao
-{
-    public class QuestaoResponseDTO
-    (
-
-    );
-}
+namespace api_rota_oeste.Models.Questao;
+public class QuestaoResponseDTO(
+    string titulo,
+    
+    string tipo
+);
