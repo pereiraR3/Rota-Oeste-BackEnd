@@ -1,34 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj": {}
+    "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj": {}
   },
   "projects": {
-    "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj": {
+    "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj",
         "projectName": "api-rota-oeste.Tests",
-        "projectPath": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj",
-        "packagesPath": "/home/phost/.nuget/packages/",
-        "outputPath": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/obj/",
+        "projectPath": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj",
+        "packagesPath": "C:\\Users\\vinic\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [
-          "/home/phost/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\vinic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/api-rota-oeste.csproj": {
-                "projectPath": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/api-rota-oeste.csproj"
+              "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj": {
+                "projectPath": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj"
               }
             }
           }
@@ -37,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -73,41 +80,34 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/api-rota-oeste.csproj": {
+    "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/api-rota-oeste.csproj",
+        "projectUniqueName": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj",
         "projectName": "api-rota-oeste",
-        "projectPath": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/api-rota-oeste.csproj",
-        "packagesPath": "/home/phost/.nuget/packages/",
-        "outputPath": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/obj/",
+        "projectPath": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj",
+        "packagesPath": "C:\\Users\\vinic\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/phost/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\vinic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -120,6 +120,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -194,20 +199,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[8.0.8, 8.0.8]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.8, 8.0.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -216,12 +207,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

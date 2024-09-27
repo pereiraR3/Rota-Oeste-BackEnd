@@ -1,5 +1,6 @@
 using api_rota_oeste.Data.Map;
 using api_rota_oeste.Models.Cliente;
+using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.Usuario;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,8 @@ public class ApiDBContext : DbContext
         
     public DbSet<UsuarioModel?> Usuarios { get; set; }
     public DbSet<ClienteModel?> Clientes { get; set; }
+    
+    public DbSet<QuestaoModel?> Questoes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

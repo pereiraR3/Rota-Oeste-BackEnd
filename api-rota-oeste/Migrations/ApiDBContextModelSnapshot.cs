@@ -47,9 +47,35 @@ namespace api_rota_oeste.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Telefone")
+                        .IsUnique();
+
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.Questao.QuestaoModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("tipo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("titulo")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("questao");
                 });
 
             modelBuilder.Entity("api_rota_oeste.Models.Usuario.UsuarioModel", b =>
@@ -79,6 +105,9 @@ namespace api_rota_oeste.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Telefone")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });

@@ -28,6 +28,9 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
+builder.Services.AddTransient<IQuestaoRepository, QuestaoRepository>();
+builder.Services.AddTransient<QuestaoService>();
+
 // Ativando o AutoMapper no contexto de aplicação
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
