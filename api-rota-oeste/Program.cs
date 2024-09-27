@@ -28,6 +28,9 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
+builder.Services.AddScoped<ICheckListRepository, CheckListRepository>();
+builder.Services.AddScoped<ICheckListService, CheckListService>();
+
 builder.Services.AddTransient<IQuestaoRepository, QuestaoRepository>();
 builder.Services.AddTransient<QuestaoService>();
 
