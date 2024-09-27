@@ -1,0 +1,83 @@
+## Ignore Visual Studio temporary files, build results, and
+## common output folders
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (Mono Auto Generated)
+mono_crash.*
+
+# Auto-generated files (by Visual Studio)
+.vscode/
+.vs/
+
+# Build Folders
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Uncomment if you have tasks that create the following files
+#*.log
+#*.tlog
+#*.vspscc
+#*.vssscc
+
+# ASP.NET Scaffolding
+Generated_Code/
+
+# NuGet packages
+*.nupkg
+# The packages folder can be ignored if NuGet Restore is used in the solution.
+**/packages
+# Uncomment if necessary however generally it will be restored by MSBuild.
+# project.lock.json
+# project.fragment.lock.json
+# If using Paket dependency manager, comment out if it is used in your project
+#*.paket/*
+#*.paket.restore.targets
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# PHPStorm
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# JetBrains Rider
+.idea/
+.idea_modules/
+*.sln.iml
+.DS_Store
+
+# Rider projects
+.idea/
+
+# Code coverage
+coverage/
+*.coverage
+*.coveragexml
