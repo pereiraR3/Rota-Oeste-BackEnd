@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Usuario;
 using Xunit;
 using api_rota_oeste.Models.CheckList;

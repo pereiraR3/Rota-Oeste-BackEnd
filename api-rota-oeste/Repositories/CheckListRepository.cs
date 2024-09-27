@@ -1,6 +1,5 @@
 ﻿using api_rota_oeste.Data;
 using api_rota_oeste.Models.CheckList;
-using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
