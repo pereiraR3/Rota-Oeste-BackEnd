@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("api-rota-oeste")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68e7a4ca7bb890607d8cfead4b901206717ae6f8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d9fd12c8339727359d2ed4f8867417be029b52f")]
 [assembly: System.Reflection.AssemblyProductAttribute("api-rota-oeste")]
 [assembly: System.Reflection.AssemblyTitleAttribute("api-rota-oeste")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
