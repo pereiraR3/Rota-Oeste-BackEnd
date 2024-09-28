@@ -1,5 +1,6 @@
 using AutoMapper;
 using api_rota_oeste.Models.Cliente;
+using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.Usuario;
 public class AutoMapperProfile : Profile
@@ -14,6 +15,8 @@ public class AutoMapperProfile : Profile
         CreateMap<QuestaoModel, QuestaoResponseDTO>();
         
         CreateMap<QuestaoRequestDTO, QuestaoModel>();
+        
+        CreateMap<InteracaoRequestDTO, InteracaoModel>();
             
         // O mapeamento de atualização deve ignorar campos nulos
         CreateMap<UsuarioPatchDTO, UsuarioModel>()

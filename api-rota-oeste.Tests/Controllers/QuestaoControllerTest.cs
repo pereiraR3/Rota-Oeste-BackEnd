@@ -6,6 +6,7 @@ using Moq;
 using Xunit;
 using System.Collections.Generic;
 using api_rota_oeste.Repositories;
+using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
 
 namespace api_rota_oeste.Tests.Controllers
@@ -14,7 +15,7 @@ namespace api_rota_oeste.Tests.Controllers
     {
         private readonly Mock<IQuestaoRepository> _questaoRepositoryMock;
         private readonly Mock<IMapper> _mapperMock;
-        private readonly QuestaoService _questaoService;
+        private readonly IQuestaoService _questaoService;
         private readonly QuestaoController _controller;
 
         public QuestaoControllerTest()
@@ -38,7 +39,7 @@ namespace api_rota_oeste.Tests.Controllers
             var result = _controller.criar(questaoDto);
 
             // Assert
-            var actionResult = Assert.IsType<CreatedResult>(result);
+            var actionResult = Assert.IsType<OkResult>(result);
             _questaoRepositoryMock.Verify(repo => repo.criar(questaoModel), Times.Once);
         }
 

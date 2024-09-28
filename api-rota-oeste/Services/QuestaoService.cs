@@ -1,12 +1,12 @@
 ﻿using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Repositories;
+using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 
 namespace api_rota_oeste.Services;
 
-public class QuestaoService
-{
+public class QuestaoService : IQuestaoService{
     private readonly IQuestaoRepository _repository;
     private readonly IMapper _mapper;
     

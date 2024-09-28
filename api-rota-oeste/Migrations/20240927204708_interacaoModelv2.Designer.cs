@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api_rota_oeste.Data;
 
@@ -11,9 +12,11 @@ using api_rota_oeste.Data;
 namespace api_rota_oeste.Migrations
 {
     [DbContext(typeof(ApiDBContext))]
-    partial class ApiDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240927204708_interacaoModelv2")]
+    partial class interacaoModelv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
