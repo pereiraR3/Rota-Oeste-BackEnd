@@ -47,7 +47,7 @@ public class QuestaoRepositoryTest
         // Act: Adicionar a questão ao banco de dados em memória
         _questaoRepository.criar(questao);
 
-        // Verifica se o usuário foi persistido corretamente no banco de dados
+        // Verifica se a questão foi persistida corretamente no banco de dados
         var questaoNoBanco = await _dbContext.Questoes.FirstOrDefaultAsync(u => u.titulo == "tituloteste" && u.tipo == "tipoteste");
         Assert.NotNull(questaoNoBanco);
         Assert.Equal("tituloteste", questaoNoBanco.titulo);

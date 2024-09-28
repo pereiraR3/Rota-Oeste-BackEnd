@@ -1,5 +1,6 @@
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Services;
+using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -9,9 +10,9 @@ namespace api_rota_oeste.Controllers;
 [Route("questao")]
 public class QuestaoController : ControllerBase {
     
-    private readonly QuestaoService _service;
+    private readonly IQuestaoService _service;
 
-    public QuestaoController(QuestaoService service)
+    public QuestaoController(IQuestaoService service)
     {
         _service = service;
     }
@@ -20,7 +21,7 @@ public class QuestaoController : ControllerBase {
     [SwaggerOperation(Summary = "Adiciona uma nova questão", Description = "Cria uma nova questão com base nos dados fornecidos no corpo da requisição.")]
     public ActionResult criar(QuestaoRequestDTO questao){
         _service.criar(questao);
-        return Created();
+        return Ok();
     }
 
     [HttpGet("list")]

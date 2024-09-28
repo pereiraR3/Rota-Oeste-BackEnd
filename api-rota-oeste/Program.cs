@@ -32,7 +32,11 @@ builder.Services.AddScoped<ICheckListRepository, CheckListRepository>();
 builder.Services.AddScoped<ICheckListService, CheckListService>();
 
 builder.Services.AddTransient<IQuestaoRepository, QuestaoRepository>();
-builder.Services.AddTransient<QuestaoService>();
+builder.Services.AddTransient<IQuestaoService,QuestaoService>();
+
+builder.Services.AddTransient<IInteracaoRepository, InteracaoRepository>();
+builder.Services.AddTransient<IInteracaoService, InteracaoService>();
+
 
 // Ativando o AutoMapper no contexto de aplicação
 builder.Services.AddAutoMapper(typeof(Program));
