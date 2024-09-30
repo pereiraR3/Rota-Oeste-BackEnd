@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using api_rota_oeste.Data;
+using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Usuario;
@@ -18,6 +19,7 @@ public class InteracaoRepositoryTest
     private readonly InteracaoRepository _interacaoRepository;
     private readonly UsuarioRepository _usuarioRepository;
     private readonly ClienteRepository _clienteRepository;
+    private readonly CheckListRepository _checkListRepository;
 
     public InteracaoRepositoryTest()
     {
@@ -40,35 +42,36 @@ public class InteracaoRepositoryTest
         _usuarioRepository = new UsuarioRepository(_dbContext, _mapper);
         _clienteRepository = new ClienteRepository(_mapper, _dbContext, _usuarioRepository);
     }
-    
+
     [Fact]
     public async Task Adicionar()
     {
-        
+
         var usuario = new UsuarioRequestDTO("teste", "teste", "123", null);
 
         _usuarioRepository.Adicionar(usuario);
-        
+
         var request = new ClienteRequestDTO(1, "teste", "teste", null);
-        
+
         _clienteRepository.Adicionar(request);
 
         var cliente = await _clienteRepository.BuscaPorId(1);
-        
+
         // Arrange: Criar  com dados fictícios
         var interacao = new InteracaoModel();
         interacao.Status = true;
         var data = DateTime.Now;
         interacao.Data = data;
-        interacao.cliente = cliente;
-        
-        
+        interacao.Cliente = cliente;
+
+
         // Act: Adicionar a interacao ao banco de dados em memória
         _interacaoRepository.criar(interacao);
 
         // Verifica se a interacao foi persistido corretamente no banco de dados
-        var interacaoNoBanco = await _dbContext.Interacoes.FirstOrDefaultAsync(u => u.cliente == cliente && u.Status == true);
+        var interacaoNoBanco = await _dbContext.Interacoes.FirstOrDefaultAsync(u => u.Cliente == cliente && u.Status == true);
         Assert.NotNull(interacaoNoBanco);
         Assert.Equal(data, interacaoNoBanco.Data);
     }
+
 }

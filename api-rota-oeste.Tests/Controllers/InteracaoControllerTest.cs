@@ -24,8 +24,9 @@ public class InteracaoControllerTest
         // Arrange
         var interacaoDto = new InteracaoRequestDTO(
             ClienteId: 1,
-            Status: true,
-            Telefone: "123456789"
+            CheckListId: 1,
+            Status: true
+            //Telefone: "123456789"
         );
 
         // Act

@@ -25,6 +25,9 @@ public class AutoMapperProfile : Profile
         CreateMap<UsuarioPatchDTO, UsuarioModel>()
             .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
+        CreateMap<InteracaoPatchDTO, InteracaoModel>()
+            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
     }
     
     

@@ -33,12 +33,12 @@ public class InteracaoServiceTest
     public async Task criar_DeveAdicionarNovaInteracao()
     {
         // Arrange
-        var interacaoDto = new InteracaoRequestDTO(1, true, "123456789");
+        var interacaoDto = new InteracaoRequestDTO(1, 1, true);
         var clienteModel = new ClienteModel { Id = 1, Nome = "Cliente Teste", Telefone = "123456789" };
         var interacaoModel = new InteracaoModel
         {
             Status = true,
-            cliente = clienteModel,
+            Cliente = clienteModel,
             Data = DateTime.Now
         };
 

@@ -25,7 +25,7 @@ public class InteracaoService : IInteracaoService {
         var clienteModel = _mapper.Map<ClienteModel>(cliente);
         var interacaoModel = new InteracaoModel();
         interacaoModel.Status = interacaoDTO.Status;
-        interacaoModel.cliente = clienteModel;
+        interacaoModel.Cliente = clienteModel;
         interacaoModel.Data = DateTime.Now;
         _repository.criar(interacaoModel);
     }

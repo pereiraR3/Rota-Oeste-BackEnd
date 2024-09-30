@@ -5211,19 +5211,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vinic\\.nuget\\packages\\": {}
+    "C:\\Users\\andre\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\OneDrive\\Área de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj",
       "projectName": "api-rota-oeste",
-      "projectPath": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj",
-      "packagesPath": "C:\\Users\\vinic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vinic\\Documents\\Projetos\\Rota-Oeste-BackEnd\\api-rota-oeste\\obj\\",
+      "projectPath": "C:\\Users\\andre\\OneDrive\\Área de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\api-rota-oeste.csproj",
+      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\andre\\OneDrive\\Área de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\vinic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5340,7 +5345,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'InMemoryDbSet 2.0.10' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "message": "O pacote 'InMemoryDbSet 2.0.10' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net8.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
       "libraryId": "InMemoryDbSet",
       "targetGraphs": [
         "net8.0"
