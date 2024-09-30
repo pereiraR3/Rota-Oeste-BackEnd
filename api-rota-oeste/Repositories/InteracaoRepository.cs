@@ -18,9 +18,10 @@ public class InteracaoRepository: IInteracaoRepository {
 
     // Construtor para injeção de dependência do contexto
 
-    public InteracaoRepository(ApiDBContext context)
+    public InteracaoRepository(ApiDBContext context, IMapper mapper)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        _mapper = mapper;
     }
 
     public InteracaoRepository(ApiDBContext context, IMapper mapper, ICheckListRepository checkListRepository, IClienteRepository clienteRepository)
@@ -57,12 +58,14 @@ public class InteracaoRepository: IInteracaoRepository {
         return interacao;
     }
 
-    public async Task<bool> Atualizar(InteracaoModel interacao) 
+    public async Task<bool> Atualizar(InteracaoPatchDTO req) 
     {
-        InteracaoModel? intModel = await BuscarPorId(interacao.Id);
+        InteracaoModel? intModel = await BuscarPorId(req.Id);
 
         if (intModel == null)
-            return false;
+            throw new Exception("interacao nao encontrada");
+
+        _mapper.Map(req, intModel);
 
         _context.Interacoes.Update(intModel);
         await _context.SaveChangesAsync();

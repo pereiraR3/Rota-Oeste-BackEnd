@@ -19,7 +19,7 @@ public class AutoMapperProfile : Profile
         
         CreateMap<QuestaoRequestDTO, QuestaoModel>();
         
-        CreateMap<InteracaoRequestDTO, InteracaoModel>();
+        CreateMap<InteracaoRequestDTO, InteracaoModel>().ReverseMap();
             
         // O mapeamento de atualização deve ignorar campos nulos
         CreateMap<UsuarioPatchDTO, UsuarioModel>()

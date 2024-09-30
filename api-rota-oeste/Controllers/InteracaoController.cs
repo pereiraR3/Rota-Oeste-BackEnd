@@ -22,4 +22,5 @@ public class InteracaoController : ControllerBase {
         _service.criar(interacao);
         return Ok();
     }
+
 }

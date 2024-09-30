@@ -22,6 +22,8 @@ namespace api_rota_oeste.Tests.Repositories
     {
         private readonly DbContextOptions<ApiDBContext> options;
         private readonly ApiDBContext _context;
+        private readonly IMapper _mapper;
+        private readonly IInteracaoRepository intRepository;
         
         public InteracaoRepositoryTest2()
         {
@@ -30,10 +32,19 @@ namespace api_rota_oeste.Tests.Repositories
                 .UseInMemoryDatabase(databaseName: "ApiRotaOesteTestDB")
             .Options;
 
-            _context = new ApiDBContext(options);
-
             using (var _context = new ApiDBContext(options)) 
-            { 
+            {
+                //
+                var mapperConfig = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<InteracaoModel, InteracaoResponseDTO>();
+                    cfg.CreateMap<InteracaoRequestDTO, InteracaoModel>();
+                    cfg.CreateMap<InteracaoPatchDTO, InteracaoModel>()
+                        .ForAllMembers(ops => ops.Condition((src, dest, srcMember) => srcMember != null));
+                });
+
+                _mapper = mapperConfig.CreateMapper();
+                //
                 _context.Database.EnsureDeleted();
                 _context.Database.EnsureCreated();
 
@@ -51,17 +62,20 @@ namespace api_rota_oeste.Tests.Repositories
         {
             using(var _context = new ApiDBContext(options))
             {
-                var intRepository = new InteracaoRepository(_context);
+                var intRepository = new InteracaoRepository(_context, _mapper);
                 var interacao = await intRepository.BuscarPorId(1);
                 Assert.NotNull(interacao);
 
-                var mybool = false;
+                bool mybool = false;
 
-                interacao.Status = mybool;
-                await intRepository.Atualizar(interacao);
+                var interacaoPatch = new InteracaoPatchDTO { Id = interacao.Id, Status = mybool, Data = interacao.Data };
+
+
+                //interacao.Status = mybool;
+                await intRepository.Atualizar(interacaoPatch);
             }
 
-            using (var context = new ApiDBContext(options)) 
+            using (var _context = new ApiDBContext(options)) 
             {
                 var mybool = false;
 

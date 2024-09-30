@@ -38,7 +38,7 @@ public class InteracaoRepositoryTest
         });
 
         // Inicializando o repositório
-        _interacaoRepository = new InteracaoRepository(_dbContext);
+        _interacaoRepository = new InteracaoRepository(_dbContext, _mapper);
         _usuarioRepository = new UsuarioRepository(_dbContext, _mapper);
         _clienteRepository = new ClienteRepository(_mapper, _dbContext, _usuarioRepository);
     }

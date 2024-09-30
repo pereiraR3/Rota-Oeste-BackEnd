@@ -9,5 +9,5 @@ public interface IInteracaoRepository {
 
     Task<InteracaoModel?> BuscarPorId(int id);
 
-    Task<bool> Atualizar(InteracaoModel req);
+    Task<bool> Atualizar(InteracaoPatchDTO req);
 }
