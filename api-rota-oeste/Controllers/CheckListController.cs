@@ -35,7 +35,7 @@ namespace api_rota_oeste.Controllers
         [SwaggerOperation(Summary = "Busca um checklist pelo ID",
         Description = "Busca o checklist associado ao ID fornecido.")]
         [SwaggerResponse(200, "Checklist encontrado com sucesso")]
-        [SwaggerResponse(404, "Checklist n�o encontrado")]
+        [SwaggerResponse(404, "Checklist não encontrado")]
         public async Task<ActionResult<CheckListResponseDTO>> BuscarPorId(int id)
         {
             CheckListResponseDTO? check = await _checkListService.BuscarPorIdAsync(id);
@@ -64,7 +64,7 @@ namespace api_rota_oeste.Controllers
         [SwaggerOperation(Summary = "Remove um checklist",
         Description = "Remove o checklist associado ao ID fornecido. Retorna 204 No Content se a remo��o for bem-sucedida.")]
         [SwaggerResponse(204, "Checklist removido com sucesso")]
-        [SwaggerResponse(404, "Checklist n�o encontrado")]
+        [SwaggerResponse(404, "Checklist não encontrado")]
         public async Task<IActionResult> Delete(int id)
         {
             var status = await _checkListService.ApagarAsync(id);
