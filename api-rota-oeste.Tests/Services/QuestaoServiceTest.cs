@@ -53,7 +53,7 @@ public class QuestaoServiceTest
         _questaoRepository.criar(questao);
 
         var questaoSalva = _questaoRepository.obter(1);
-        Assert.Equal("tituloteste", questaoSalva.titulo);
+        Assert.Equal("tituloteste", questaoSalva.Titulo);
 
     }
 
@@ -72,8 +72,8 @@ public class QuestaoServiceTest
         var questoes = _questaoService.listar();
         Assert.NotNull(questoes);
 
-        Assert.Equal("tituloteste", questoes[0].titulo);
-        Assert.Equal("tituloteste2", questoes[1].titulo);
+        Assert.Equal("tituloteste", questoes[0].Titulo);
+        Assert.Equal("tituloteste2", questoes[1].Titulo);
     }
     
     [Fact]

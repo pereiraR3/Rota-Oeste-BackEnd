@@ -4,6 +4,8 @@ namespace api_rota_oeste.Repositories.Interfaces;
 
 public interface IInteracaoRepository {
     
-    void criar(InteracaoModel interacao);
+    Task<InteracaoModel?> Adicionar(InteracaoModel interacaoModel);
+    
+    Task<InteracaoModel?> BuscarPorId(int id);
     
 }

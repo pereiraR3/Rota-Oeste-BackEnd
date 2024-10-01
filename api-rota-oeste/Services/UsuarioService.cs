@@ -11,20 +11,31 @@ namespace api_rota_oeste.Services;
 public class UsuarioService : IUsuarioService
 {
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IRepository _repository;
     private readonly IMapper _mapper;
 
-    public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper)
+    public UsuarioService(
+        
+        IUsuarioRepository usuarioRepository,
+        IMapper mapper,
+        IRepository repository
+        
+        )
     {
         _usuarioRepository = usuarioRepository;
         _mapper = mapper;
+        _repository = repository;
     }
     
     /**
      * Método da camada de serviço -> para criar uma entidade do tipo usuário
      */
-    public async Task<UsuarioResponseDTO> AdicionarAsync(UsuarioRequestDTO request)
+    public async Task<UsuarioResponseDTO> AdicionarAsync(UsuarioRequestDTO usuarioRequestDto)
     {
-        UsuarioModel? usuarioModel = await _usuarioRepository.Adicionar(request);
+        
+        var usuario = new UsuarioModel(usuarioRequestDto);
+
+        UsuarioModel? usuarioModel = await _usuarioRepository.Adicionar(usuario);
         
         return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
     }
@@ -34,25 +45,33 @@ public class UsuarioService : IUsuarioService
      */
     public async Task<UsuarioResponseDTO> BuscaPorIdAsync(int id)
     {
+        if(id <= 0)
+            throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
+        
        UsuarioModel? usuarioModel = await _usuarioRepository.BuscaPorId(id);
 
        if (usuarioModel == null) 
            throw new KeyNotFoundException("Usuário não encontrado");
-
+       
        return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
     }
 
     /**
      * Método da camada de serviço -> para atualizar um entidade do tipo usuário 
      */
-    public async Task<bool> AtualizarAsync(UsuarioPatchDTO request)
+    public async Task<bool> AtualizarAsync(UsuarioPatchDTO usuarioPatchDto)
     {
-        var resultado = await _usuarioRepository.Atualizar(request);
+        UsuarioModel? usuarioModel = await _usuarioRepository.BuscaPorId(usuarioPatchDto.Id);
         
-        if(!resultado)
-            throw new Exception("Erro ao atualizar usuário.");
+        if(usuarioModel == null)
+            return false;
         
-        return resultado;
+        // O mapeamento de atualização deve ignorar campos nulos
+        _mapper.Map<UsuarioPatchDTO>(usuarioPatchDto);
+        
+        _repository.Salvar();
+
+        return true;
     }
 
     /**
@@ -60,6 +79,9 @@ public class UsuarioService : IUsuarioService
      */
     public async Task<bool> ApagarAsync(int id)
     {
+        if(id <= 0)
+            throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
+        
         var resultado = await _usuarioRepository.Apagar(id);
         
         if(!resultado)

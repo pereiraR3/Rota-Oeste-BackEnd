@@ -50,7 +50,7 @@ namespace api_rota_oeste.Tests.Repositories
         public async Task Add_DeveAdicionarCheck()
         {
             // Arrange
-            var checkRequest = new CheckListRequestDTO("Nome", DateTime.Now, 1);
+            var checkRequest = new CheckListRequestDTO(1, "Nome", DateTime.Now);
             var usuario = new UsuarioModel { Id = 2, Nome = "Usuario Teste1", Senha = "122123", Telefone = "123456789" };
 
             _usuarioRepositoryMock.Setup(repo => repo.BuscaPorId(It.IsAny<int>()))
@@ -70,8 +70,8 @@ namespace api_rota_oeste.Tests.Repositories
         public async Task AddCollection_DeveAdicionarChecks()
         {
             // Arrange
-            var checkRequest1 = new CheckListRequestDTO("Nome", DateTime.Now, 1);
-            var checkRequest2 = new CheckListRequestDTO("Outro Nome", DateTime.Now, 2);
+            var checkRequest1 = new CheckListRequestDTO(1, "Nome", DateTime.Now);
+            var checkRequest2 = new CheckListRequestDTO(2,"Outro Nome", DateTime.Now);
             var checkCollection = new CheckListCollectionDTO(new List<CheckListRequestDTO> { checkRequest1, checkRequest2 });
 
             var usuario = new UsuarioModel { Id = 1, Nome = "Usuário Teste", Senha = "122123", Telefone = "123456789" };

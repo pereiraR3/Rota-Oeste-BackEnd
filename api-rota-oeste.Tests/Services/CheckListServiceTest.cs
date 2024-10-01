@@ -29,7 +29,7 @@ namespace api_rota_oeste.Tests.Services
         public async Task AddAsync_DeveAdicionarCheck()
         {
             // Arrange
-            var checkReq= new CheckListRequestDTO("Nome", DateTime.Now, 1);
+            var checkReq= new CheckListRequestDTO(1, "Nome", DateTime.Now);
             var checkModel = new CheckListModel { Id = 1, Nome = "Teste", DataCriacao = DateTime.Now};
             var checkResponse = new CheckListResponseDTO(1, 1, "Teste", DateTime.Now);
 
@@ -52,8 +52,8 @@ namespace api_rota_oeste.Tests.Services
             // Arrange
             var checkReq = new CheckListCollectionDTO(new List<CheckListRequestDTO>
             {
-                new CheckListRequestDTO("Nome", DateTime.Now, 1),
-                new CheckListRequestDTO("Nome2", DateTime.Now, 2)
+                new CheckListRequestDTO(1, "Nome", DateTime.Now),
+                new CheckListRequestDTO(2, "Nome2", DateTime.Now)
             });
 
             var checksModel = new List<CheckListModel>

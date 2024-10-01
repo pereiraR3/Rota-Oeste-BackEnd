@@ -22,6 +22,33 @@ namespace api_rota_oeste.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("api_rota_oeste.Models.CheckList.CheckListModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DataCriacao")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("checklist");
+                });
+
             modelBuilder.Entity("api_rota_oeste.Models.Cliente.ClienteModel", b =>
                 {
                     b.Property<int>("Id")
@@ -35,8 +62,8 @@ namespace api_rota_oeste.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
@@ -44,7 +71,8 @@ namespace api_rota_oeste.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_usuario");
 
                     b.HasKey("Id");
 
@@ -53,7 +81,7 @@ namespace api_rota_oeste.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("cliente");
                 });
 
             modelBuilder.Entity("api_rota_oeste.Models.Interacao.InteracaoModel", b =>
@@ -63,6 +91,9 @@ namespace api_rota_oeste.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CheckListId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
@@ -75,9 +106,11 @@ namespace api_rota_oeste.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CheckListId");
+
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("Interacoes");
+                    b.ToTable("interacao");
                 });
 
             modelBuilder.Entity("api_rota_oeste.Models.Questao.QuestaoModel", b =>
@@ -88,19 +121,50 @@ namespace api_rota_oeste.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("tipo")
+                    b.Property<int>("CheckListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tipo")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("titulo")
+                    b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CheckListId");
+
                     b.ToTable("questao");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.RespostaAlternativa.RespostaAlternativaModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Alternativa")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InteracaoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuestaoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InteracaoId");
+
+                    b.HasIndex("QuestaoId");
+
+                    b.ToTable("resposta_alternativa");
                 });
 
             modelBuilder.Entity("api_rota_oeste.Models.Usuario.UsuarioModel", b =>
@@ -116,8 +180,8 @@ namespace api_rota_oeste.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("Senha")
                         .IsRequired()
@@ -134,7 +198,18 @@ namespace api_rota_oeste.Migrations
                     b.HasIndex("Telefone")
                         .IsUnique();
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("usuario");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.CheckList.CheckListModel", b =>
+                {
+                    b.HasOne("api_rota_oeste.Models.Usuario.UsuarioModel", "Usuario")
+                        .WithMany("CheckLists")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("api_rota_oeste.Models.Cliente.ClienteModel", b =>
@@ -150,17 +225,62 @@ namespace api_rota_oeste.Migrations
 
             modelBuilder.Entity("api_rota_oeste.Models.Interacao.InteracaoModel", b =>
                 {
-                    b.HasOne("api_rota_oeste.Models.Cliente.ClienteModel", "cliente")
+                    b.HasOne("api_rota_oeste.Models.CheckList.CheckListModel", "CheckList")
+                        .WithMany()
+                        .HasForeignKey("CheckListId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("api_rota_oeste.Models.Cliente.ClienteModel", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CheckList");
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.Questao.QuestaoModel", b =>
+                {
+                    b.HasOne("api_rota_oeste.Models.CheckList.CheckListModel", "CheckList")
+                        .WithMany("Questoes")
+                        .HasForeignKey("CheckListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("cliente");
+                    b.Navigation("CheckList");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.RespostaAlternativa.RespostaAlternativaModel", b =>
+                {
+                    b.HasOne("api_rota_oeste.Models.Interacao.InteracaoModel", "Interacao")
+                        .WithMany()
+                        .HasForeignKey("InteracaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api_rota_oeste.Models.Questao.QuestaoModel", "Questao")
+                        .WithMany()
+                        .HasForeignKey("QuestaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Interacao");
+
+                    b.Navigation("Questao");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.CheckList.CheckListModel", b =>
+                {
+                    b.Navigation("Questoes");
                 });
 
             modelBuilder.Entity("api_rota_oeste.Models.Usuario.UsuarioModel", b =>
                 {
+                    b.Navigation("CheckLists");
+
                     b.Navigation("Clientes");
                 });
 #pragma warning restore 612, 618

@@ -1,45 +1,63 @@
 using api_rota_oeste.Models.CheckList;
+using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
 
 namespace api_rota_oeste.Services
 {
+    
+    /**
+     * Representa a camada de serviço, isto é, a camada onde fica as regras de negócio da aplicação
+     */
     public class CheckListService : ICheckListService
     {
-        private readonly ICheckListRepository _repository;
+        private readonly ICheckListRepository _repositoryCheckList;
+        private readonly IUsuarioRepository _repositoryUsuario;
         private readonly IMapper _mapper;
 
-        public CheckListService(ICheckListRepository repository, IMapper mapper)
+        public CheckListService(
+            
+            ICheckListRepository repositoryCheckList,
+            IUsuarioRepository repositoryUsuario,
+            IMapper mapper
+            
+            )
         {
-            _repository = repository;
+            _repositoryCheckList = repositoryCheckList;
+            _repositoryUsuario = repositoryUsuario;
             _mapper = mapper;
         }
 
-        public async Task<CheckListResponseDTO> AddAsync(CheckListRequestDTO req)
+        /**
+        * Método da camada de servico -> para criar uma entidade do tipo checklist
+        */
+        public async Task<CheckListResponseDTO> AdicionarAsync(CheckListRequestDTO checkListRequestDto)
         {
-            CheckListModel check = await _repository.Add(req);
+            UsuarioModel? usuarioModel = await _repositoryUsuario.BuscaPorId(checkListRequestDto.UsuarioId);
 
+            if (usuarioModel == null)
+                throw new KeyNotFoundException("Usuário não encontrado");
+            
+            CheckListModel checkListModel = new CheckListModel(checkListRequestDto, usuarioModel);
+            
+            var check = await _repositoryCheckList.Adicionar(checkListModel);
+
+            usuarioModel.CheckLists.Add(check);
+            
             return _mapper.Map<CheckListResponseDTO>(check);
         }
 
-        public async Task<List<CheckListResponseDTO>> AddCollectionAsync(CheckListCollectionDTO req)
+        /**
+         * Método da camada de servico -> para buscar determinada entidade checklist por Id
+         */
+        public async Task<CheckListResponseDTO?> BuscarPorIdAsync(int id)
         {
-            List<CheckListModel> checks = await _repository.AddCollection(req);
-
-            if (checks == null || !checks.Any())
-                throw new InvalidOperationException("Conteúdo não encontrado");
-
-            List<CheckListResponseDTO> resp = checks
-                .Select(i => _mapper.Map<CheckListResponseDTO>(i))
-                .ToList();
-
-            return resp;
-        }
-
-        public async Task<CheckListResponseDTO?> FindByIdAsync(int id)
-        {
-            var check = await _repository.FindById(id);
+            
+            if(id <= 0)
+                throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
+            
+            var check = await _repositoryCheckList.BuscarPorId(id);
 
             if (check == null)
                 throw new KeyNotFoundException("Entidade checklist não encontrada");
@@ -47,10 +65,13 @@ namespace api_rota_oeste.Services
             return _mapper.Map<CheckListResponseDTO>(check);
         }
 
-        public async Task<List<CheckListResponseDTO>> GetAllAsync()
+        /**
+        * Método da camada de servico -> para buscar todas as entidades do tipo checklist
+        */
+        public async Task<List<CheckListResponseDTO>> BuscarTodosAsync()
         {
 
-            List<CheckListModel?> checks = await _repository.GetAll();
+            List<CheckListModel?> checks = await _repositoryCheckList.BuscarTodos();
 
             if (checks == null || !checks.Any())
                 throw new InvalidOperationException("Conteúdo não encontrado");
@@ -61,18 +82,46 @@ namespace api_rota_oeste.Services
 
             return resp;
         }
-        public async Task<bool> DeleteAsync(int id)
+
+        /**
+        * Método da camada de servico -> para atualizar parcialmente uma entidade do tipo checklist
+        */
+        public async Task<bool> AtualizarAsync(CheckListPatchDTO checkListPatchDto)
         {
-            var result = await _repository.Delete(id);
+
+            CheckListModel? checkListModel = await _repositoryCheckList.BuscarPorId(checkListPatchDto.Id);
+            
+            if(checkListModel == null)
+                throw new KeyNotFoundException("CheckList não encontrado");
+            
+            _mapper.Map<CheckListPatchDTO>(checkListModel);
+
+            return true;
+
+        }
+
+        /**
+         * Método da camada de servico -> para apagar um entidade checklist por Id
+         */
+        public async Task<bool> ApagarAsync(int id)
+        {
+            if(id <= 0)
+                throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
+            
+            var result = await _repositoryCheckList.Apagar(id);
 
             if (!result)
                 throw new ApplicationException("Objeto não encontrado");
 
             return true;
         }
-        public async Task<bool> DeleteAllAsync()
+        
+        /**
+         * Método da camada de servico -> para apagar todas as entidades do tipo checklist
+         */
+        public async Task<bool> ApagarTodosAsync()
         {
-            var result = await _repository.DeleteAll();
+            var result = await _repositoryCheckList.ApagarTodos();
 
             if (!result)
                 throw new ApplicationException("Operação não foi realizada");

@@ -1,6 +1,5 @@
 using api_rota_oeste.Data;
 using api_rota_oeste.Models.Cliente;
-using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -12,49 +11,38 @@ public class ClienteRepository : IClienteRepository
     
     private readonly IMapper _mapper;
     private readonly ApiDBContext _dbContext;
-    private readonly IUsuarioRepository _usuarioRepository;
     
     public ClienteRepository(IMapper mapper, ApiDBContext dbContext, IUsuarioRepository usuarioRepository)
     {
         _mapper = mapper; // Injetando AutoMapper
         _dbContext = dbContext; // Injetando contexto de DB
-        _usuarioRepository = usuarioRepository;
     }
     
-    public async Task<ClienteModel> Adicionar(ClienteRequestDTO request)
+    public async Task<ClienteModel> Adicionar(ClienteModel clienteModel)
     {
         
-        UsuarioModel? usuario = await _usuarioRepository.BuscaPorId(request.UsuarioId);
-        
-        if (usuario == null)
-            throw new Exception($"Usuário não encontrado ID: {request.UsuarioId}");
-        
-        ClienteModel cliente = new ClienteModel(request, usuario);
-        
-        await _dbContext.AddAsync(cliente);
+        await _dbContext.AddAsync(clienteModel);
         await _dbContext.SaveChangesAsync();
         
-        return cliente;
+        return clienteModel;
     }
+    
 
     /**
      * Inserção em massa de entidades do tipo cliente
      */
-    public async Task<List<ClienteModel>> AdicionarColecao(ClienteCollectionDTO request)
+    public async Task<List<ClienteModel>> AdicionarColecao(List<ClienteModel> clienteModels)
     {
-
-        UsuarioModel? usuario = await _usuarioRepository.BuscaPorId(request.Clientes.FirstOrDefault()!.UsuarioId);
         
         List<ClienteModel> clientes = new List<ClienteModel>();
         
-        foreach (var cliente in request.Clientes)
+        foreach (var cliente in clienteModels)
         {
-            ClienteModel clienteModel = new ClienteModel(cliente, usuario);
             
-            _dbContext.Add(clienteModel);
+            _dbContext.Add(cliente);
             await _dbContext.SaveChangesAsync();
             
-            clientes.Add(clienteModel);
+            clientes.Add(cliente);
             
         }
         
@@ -65,30 +53,19 @@ public class ClienteRepository : IClienteRepository
     /**
      * Método que serve para recuperar determinado usuario por meio de seu ID
      */
-    public async Task<ClienteModel?> BuscaPorId(int id)
+    public async Task<ClienteModel?> BuscarPorId(int id)
     {
-        try
-        {
-            ClienteModel? cliente = _dbContext.Clientes.FirstOrDefault(c => c.Id == id);
-
-            return cliente;
-            
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro ao buscar cliente: {ex.Message}");
-            return null;
-        }
+        return await _dbContext.Set<ClienteModel>().FindAsync(id);
+     
     }
 
     /**
      * Método que serve para recuperar todos os clientes do banco de dados
      */
-    public async Task<List<ClienteModel?>> BuscaTodos()
+    public async Task<List<ClienteModel>> BuscarTodos()
     {
-        List<ClienteModel?> clientes = await _dbContext.Clientes.ToListAsync();
         
-        return clientes;
+        return await _dbContext.Set<ClienteModel>().ToListAsync();
         
     }
 
@@ -115,14 +92,14 @@ public class ClienteRepository : IClienteRepository
      */
     public async Task<bool> ApagarTodos()
     {
-        List<ClienteModel>? clientes = await BuscaTodos();
+        List<ClienteModel> clientes = await BuscarTodos();
 
         if (clientes.Count == 0)
             return false;
 
         foreach (var cliente in clientes)
         {
-            _dbContext.Remove(cliente);
+            if (cliente != null) _dbContext.Clientes.Remove(cliente);
             await _dbContext.SaveChangesAsync();
         }
         

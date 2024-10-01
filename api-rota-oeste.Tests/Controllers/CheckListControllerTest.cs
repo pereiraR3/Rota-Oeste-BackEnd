@@ -27,7 +27,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task Add_DeveRetornarCreatedAtAction_QuandoCheckListAdicionado()
         {
             // Arrange
-            var checkRequest = new CheckListRequestDTO("Teste", DateTime.Now, 1);
+            var checkRequest = new CheckListRequestDTO(1, "Teste", DateTime.Now);
             var checkResponse = new CheckListResponseDTO(1, 1, "Teste", DateTime.Now);
 
             _service
@@ -49,8 +49,8 @@ namespace api_rota_oeste.Tests.Controllers
             // Arrange
             var checkCollection = new CheckListCollectionDTO(new List<CheckListRequestDTO>
             {
-                new CheckListRequestDTO("Teste1", DateTime.Now, 1),
-                new CheckListRequestDTO("Teste2", DateTime.Now, 2)
+                new CheckListRequestDTO(1, "Teste1", DateTime.Now),
+                new CheckListRequestDTO(2, "Teste2", DateTime.Now)
             });
 
             var checkResponseList = new List<CheckListResponseDTO>
