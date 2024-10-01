@@ -78,6 +78,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Adicionar o middleware de tratamento global de exceções
+app.UseMiddleware<api_rota_oeste.Middlewares.ExceptionHandlingMiddleware>();
+
 // Configurar para usar o CORS
 app.UseCors("PermitirTodos");
 
