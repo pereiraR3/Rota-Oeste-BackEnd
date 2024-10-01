@@ -28,6 +28,7 @@ public class ApiDBContext : DbContext
         modelBuilder.ApplyConfiguration(new UsuarioMap());
         modelBuilder.ApplyConfiguration(new ClienteMap());
         modelBuilder.ApplyConfiguration(new CheckListMap());
+        modelBuilder.ApplyConfiguration(new InteracaoMap());
 
         base.OnModelCreating(modelBuilder);
     }
