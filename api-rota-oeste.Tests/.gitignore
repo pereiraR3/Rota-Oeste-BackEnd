@@ -1,0 +1,120 @@
+# Compilação do Visual Studio
+.vs/
+.vscode/
+.idea/
+
+# Artefatos de compilação
+bin/
+obj/
+out/
+
+# Logs e arquivos temporários
+*.log
+*.tss
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Diretório de pacotes NuGet
+*.nupkg
+**/packages/*
+
+# Logs do sistema
+*.log
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Arquivos gerados automaticamente pelo sistema
+Generated/
+Backup*/
+
+# Arquivos de dependência do NuGet e lock do projeto
+project.lock.json
+project.fragment.lock.json
+*.props
+*.targets
+
+# SDK e arquivos de configuração gerados automaticamente
+global.json
+
+# Arquivos de configuração pessoais do desenvolvedor
+*.csproj.user
+*.csproj.DotSettings.user
+*.csproj.userosscache
+*.sln.ide
+
+# Arquivos de configuração da infraestrutura
+*.env
+.env.*
+
+# Certificados e arquivos sensíveis
+*.pfx
+*.cer
+*.key
+
+# Arquivos de cache do Rider e VS Code
+.idea/
+.vscode/
+
+# Diretórios do Azure e publicações
+.publish/
+PublishOutput/
+
+# Diretórios de publicação e deployment (geralmente gerados por dotnet publish)
+publish/
+wwwroot/
+
+# Arquivos de teste (Logs, dumps, e arquivos locais de execução de testes)
+TestResults/
+*.coverage
+*.trx
+coverage/
+coverage.cobertura.xml
+
+# Arquivos de build de Docker (em caso de uso com Docker)
+**/docker-compose.override.yml
+Dockerfile.*
+
+# Arquivos de backup gerados pelo IDE
+*.orig
+*.bak
+
+# Arquivos relacionados a TFS/Azure DevOps
+$tf/
+*.tfignore
+
+# Arquivos de configuração local e cache do Windows/Mac
+Thumbs.db
+.DS_Store
+
+# Yarn/NPM cache
+.yarn/*
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Arquivos específicos de Linux/macOS
+*~
+
+# Exclusão de arquivos gerados pelo Rider/JetBrains
+*.DotSettings.user
+.idea/
+.idea_modules/
+modules.xml
+/*.ipr
+/*.iws
+/*.iml
+
+# Ocultar IDE's específicas
+MonoDevelop
+
+# Configuração específica do sistema operacional
+app.config
