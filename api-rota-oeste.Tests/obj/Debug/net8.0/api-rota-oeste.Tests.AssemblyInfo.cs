@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("api-rota-oeste.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecb7c5fb026294bc0a30ae25fb29304517fce8ed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b378b89736b193135262795a2529fd677facccbb")]
 [assembly: System.Reflection.AssemblyProductAttribute("api-rota-oeste.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("api-rota-oeste.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

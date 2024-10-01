@@ -12,7 +12,7 @@ namespace api_rota_oeste.Repositories;
 public class InteracaoRepository: IInteracaoRepository {
 
     private readonly ApiDBContext _context;
-    private readonly IMapper? _mapper;
+    private readonly IMapper _mapper;
     private readonly ICheckListRepository? _checkListRepository;
     private readonly IClienteRepository? _clienteRepository;
 
@@ -34,9 +34,13 @@ public class InteracaoRepository: IInteracaoRepository {
 
     public async Task<InteracaoModel> Criar(InteracaoRequestDTO req)
     {
-        var cliente = new ClienteModel();
+        var cliente = await _clienteRepository.BuscaPorId(req.ClienteId);
 
-        var check = new CheckListModel();
+        if (cliente == null) throw new Exception("Cliente nao existe");
+
+        var check = await _checkListRepository.FindById(req.CheckListId);
+
+        if (check == null) throw new Exception("Checklist nao existe");
 
         var interacao = new InteracaoModel(req, cliente, check);
 

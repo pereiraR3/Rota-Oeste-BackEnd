@@ -1,12 +1,105 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6E10266F-DAB0-4128-8B83-56DFC4139084}|api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj|c:\\users\\andre\\onedrive\\\u00E1rea de trabalho\\updateinteracao\\rota-oeste-backend\\api-rota-oeste.tests\\controllers\\interacaocontrollertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E10266F-DAB0-4128-8B83-56DFC4139084}|api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj|solutionrelative:api-rota-oeste.tests\\controllers\\interacaocontrollertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E10266F-DAB0-4128-8B83-56DFC4139084}|api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj|c:\\users\\andre\\onedrive\\\u00E1rea de trabalho\\updateinteracao\\rota-oeste-backend\\api-rota-oeste.tests\\services\\interacaoservicetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E10266F-DAB0-4128-8B83-56DFC4139084}|api-rota-oeste.Tests\\api-rota-oeste.Tests.csproj|solutionrelative:api-rota-oeste.tests\\services\\interacaoservicetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F91285C-EAFE-4B65-8920-66005D1AC11D}|api-rota-oeste\\api-rota-oeste.csproj|c:\\users\\andre\\onedrive\\\u00E1rea de trabalho\\updateinteracao\\rota-oeste-backend\\api-rota-oeste\\controllers\\interacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F91285C-EAFE-4B65-8920-66005D1AC11D}|api-rota-oeste\\api-rota-oeste.csproj|solutionrelative:api-rota-oeste\\controllers\\interacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F91285C-EAFE-4B65-8920-66005D1AC11D}|api-rota-oeste\\api-rota-oeste.csproj|c:\\users\\andre\\onedrive\\\u00E1rea de trabalho\\updateinteracao\\rota-oeste-backend\\api-rota-oeste\\repositories\\interacaorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F91285C-EAFE-4B65-8920-66005D1AC11D}|api-rota-oeste\\api-rota-oeste.csproj|solutionrelative:api-rota-oeste\\repositories\\interacaorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F91285C-EAFE-4B65-8920-66005D1AC11D}|api-rota-oeste\\api-rota-oeste.csproj|c:\\users\\andre\\onedrive\\\u00E1rea de trabalho\\updateinteracao\\rota-oeste-backend\\api-rota-oeste\\models\\interacao\\interacaopatchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F91285C-EAFE-4B65-8920-66005D1AC11D}|api-rota-oeste\\api-rota-oeste.csproj|solutionrelative:api-rota-oeste\\models\\interacao\\interacaopatchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InteracaoPatchDTO.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\Models\\Interacao\\InteracaoPatchDTO.cs",
+              "RelativeDocumentMoniker": "api-rota-oeste\\Models\\Interacao\\InteracaoPatchDTO.cs",
+              "ToolTip": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\Models\\Interacao\\InteracaoPatchDTO.cs",
+              "RelativeToolTip": "api-rota-oeste\\Models\\Interacao\\InteracaoPatchDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T02:54:54.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InteracaoControllerTest.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\Controllers\\InteracaoControllerTest.cs",
+              "RelativeDocumentMoniker": "api-rota-oeste.Tests\\Controllers\\InteracaoControllerTest.cs",
+              "ToolTip": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\Controllers\\InteracaoControllerTest.cs",
+              "RelativeToolTip": "api-rota-oeste.Tests\\Controllers\\InteracaoControllerTest.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAqwFYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T01:15:10.318Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InteracaoController.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\Controllers\\InteracaoController.cs",
+              "RelativeDocumentMoniker": "api-rota-oeste\\Controllers\\InteracaoController.cs",
+              "ToolTip": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\Controllers\\InteracaoController.cs",
+              "RelativeToolTip": "api-rota-oeste\\Controllers\\InteracaoController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAIwDsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T01:24:59.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InteracaoServiceTest.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\Services\\InteracaoServiceTest.cs",
+              "RelativeDocumentMoniker": "api-rota-oeste.Tests\\Services\\InteracaoServiceTest.cs",
+              "ToolTip": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste.Tests\\Services\\InteracaoServiceTest.cs",
+              "RelativeToolTip": "api-rota-oeste.Tests\\Services\\InteracaoServiceTest.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAIwHAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T02:17:05.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "InteracaoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\Repositories\\InteracaoRepository.cs",
+              "RelativeDocumentMoniker": "api-rota-oeste\\Repositories\\InteracaoRepository.cs",
+              "ToolTip": "C:\\Users\\andre\\OneDrive\\\u00C1rea de Trabalho\\updateInteracao\\Rota-Oeste-BackEnd\\api-rota-oeste\\Repositories\\InteracaoRepository.cs",
+              "RelativeToolTip": "api-rota-oeste\\Repositories\\InteracaoRepository.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAIwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T00:48:32.198Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
