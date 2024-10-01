@@ -1,19 +1,21 @@
 ﻿using api_rota_oeste.Models.CheckList;
 
+/**
+ * Interface que serve para definir os metódos que irão operar na camada de persistência
+ * em relação à entidade CheckList
+ */
 namespace api_rota_oeste.Repositories.Interfaces
 {
     public interface ICheckListRepository
     {
-        Task<CheckListModel> Add(CheckListRequestDTO req);
+        Task<CheckListModel?> Adicionar(CheckListModel checkListModel);
+        
+        Task<CheckListModel?> BuscarPorId(int id);
 
-        Task<List<CheckListModel>> AddCollection(CheckListCollectionDTO req);
+        Task<List<CheckListModel>> BuscarTodos();
 
-        Task<CheckListModel?> FindById(int id);
+        Task<bool> Apagar(int id);
 
-        Task<List<CheckListModel?>> GetAll();
-
-        Task<bool> Delete(int id);
-
-        Task<bool> DeleteAll();
+        Task<bool> ApagarTodos();
     }
 }

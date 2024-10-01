@@ -1,4 +1,3 @@
-using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Usuario;
 
 namespace api_rota_oeste.Services.Interfaces;

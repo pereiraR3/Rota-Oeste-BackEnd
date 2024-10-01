@@ -4,16 +4,16 @@ namespace api_rota_oeste.Repositories.Interfaces;
 
 /**
  * Interface que serve para definir os metódos que irão operar na camada de persistência
+ * em relação à entidade Usuario
  */
 public interface IUsuarioRepository
 {
     
-    Task<UsuarioModel?> Adicionar(UsuarioRequestDTO request);
+    Task<UsuarioModel?> Adicionar(UsuarioModel usuario);
 
     Task<UsuarioModel?> BuscaPorId(int id);
     
-    Task<bool> Atualizar(UsuarioPatchDTO request);
-    
     Task<bool> Apagar(int id);
-    
+
+
 }

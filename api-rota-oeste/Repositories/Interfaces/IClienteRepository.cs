@@ -4,17 +4,16 @@ namespace api_rota_oeste.Repositories.Interfaces;
 
 /**
  * Interface que serve para definir os metódos que irão operar na camada de persistência
+ * em relação à entidade Cliente
  */
 public interface IClienteRepository
 {
  
-  Task<ClienteModel> Adicionar(ClienteRequestDTO request);
+  Task<ClienteModel> Adicionar(ClienteModel clienteModel);
   
-  Task<List<ClienteModel>> AdicionarColecao(ClienteCollectionDTO request);
-
-  Task<ClienteModel?> BuscaPorId(int id);
+  Task<ClienteModel?> BuscarPorId(int id);
   
-  Task<List<ClienteModel?>> BuscaTodos();
+  Task<List<ClienteModel>> BuscarTodos();
   
   Task<bool> Apagar(int id);
 

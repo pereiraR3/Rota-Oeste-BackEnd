@@ -2,6 +2,7 @@ using api_rota_oeste.Data;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
@@ -23,9 +24,8 @@ public class UsuarioRepository : IUsuarioRepository
     /**
      * Método que serve para salvar uma nova instância da entidade usuario no banco de dados
      */
-    public async Task<UsuarioModel?> Adicionar(UsuarioRequestDTO request)
+    public async Task<UsuarioModel?> Adicionar(UsuarioModel usuario)
     {
-        UsuarioModel? usuario = new UsuarioModel(request);
         await _dbContext.Usuarios.AddAsync(usuario);
         await _dbContext.SaveChangesAsync();
 
@@ -37,8 +37,12 @@ public class UsuarioRepository : IUsuarioRepository
      */
     public async Task<UsuarioModel?> BuscaPorId(int id)
     {
-        
-        UsuarioModel? usuario = await _dbContext.Usuarios.FindAsync(id);
+
+        UsuarioModel? usuario = await _dbContext
+            .Usuarios
+            .Include(x => x.Clientes)
+            .Include(x => x.CheckLists)
+            .FirstOrDefaultAsync(x => x.Id == id);
         
         return usuario;
     }

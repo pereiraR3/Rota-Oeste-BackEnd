@@ -1,4 +1,6 @@
 
+using api_rota_oeste.Models.Usuario;
+
 namespace api_rota_oeste.Models.Cliente;
 
 public record ClienteResponseDTO
@@ -12,6 +14,8 @@ public record ClienteResponseDTO
     
     string Telefone, 
     
-    byte[] Foto
+    byte[] Foto,
+    
+    UsuarioModel? Usuario
     
 );

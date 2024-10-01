@@ -7,6 +7,17 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirTodos",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -22,6 +33,7 @@ builder.Services.AddEntityFrameworkSqlServer()
     );
 
 // Permitir a injecao dos serviços abaixo, no contexto de aplicação
+
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
@@ -31,12 +43,20 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<ICheckListRepository, CheckListRepository>();
 builder.Services.AddScoped<ICheckListService, CheckListService>();
 
-builder.Services.AddTransient<IQuestaoRepository, QuestaoRepository>();
-builder.Services.AddTransient<IQuestaoService,QuestaoService>();
+builder.Services.AddScoped<IQuestaoRepository, QuestaoRepository>();
+builder.Services.AddScoped<IQuestaoService,QuestaoService>();
 
-builder.Services.AddTransient<IInteracaoRepository, InteracaoRepository>();
-builder.Services.AddTransient<IInteracaoService, InteracaoService>();
+builder.Services.AddScoped<IInteracaoRepository, InteracaoRepository>();
+builder.Services.AddScoped<IInteracaoService, InteracaoService>();
 
+builder.Services.AddScoped<IRepository, Repository>();
+
+// Registrar o serviço WhatsAppService com HttpClient
+builder.Services.AddHttpClient<IWhatsAppService, WhatsAppService>(client =>
+{
+    client.BaseAddress = new Uri("https://graph.facebook.com/v20.0/399397036595516/messages");
+    client.DefaultRequestHeaders.Add("Authorization", $"Bearer EAAWgnQyeEUEBO3J2Vw5trFeqpFsYHxSHAaSN4Pg3cHLZBxZBY2ZAqoPP5qzTIZC9XTMGlPuWmbnOC62ZCLNZCVNHrDmpypMMoSsRpwjy2mmGGrDrCKR84l9wbYHAOyTPp0ktAK0bWTcXXp2APyggC1Q6PbNi6o0BZCWQyHEZAQpgpoHXlTsCR59WDZCK9fO1Qx9qcovaZBtgVMhqhtX8IjxPMSsNY0kEQZD");
+});
 
 // Ativando o AutoMapper no contexto de aplicação
 builder.Services.AddAutoMapper(typeof(Program));
@@ -57,6 +77,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Configurar para usar o CORS
+app.UseCors("PermitirTodos");
 
 // Add -> mapeamento de controllers
 app.MapControllers();

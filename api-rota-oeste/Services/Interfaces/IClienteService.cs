@@ -8,9 +8,9 @@ public interface IClienteService
   
     Task<List<ClienteResponseDTO>> AdicionarColecaoAsync(ClienteCollectionDTO request);
 
-    Task<ClienteResponseDTO?> BuscaPorIdAsync(int id);
+    Task<ClienteResponseDTO?> BuscarPorIdAsync(int id);
   
-    Task<List<ClienteResponseDTO>> BuscaTodosAsync();
+    Task<List<ClienteResponseDTO>> BuscarTodosAsync();
   
     Task<bool> ApagarAsync(int id);
 

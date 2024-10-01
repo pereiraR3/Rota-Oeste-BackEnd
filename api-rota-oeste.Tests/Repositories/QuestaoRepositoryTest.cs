@@ -48,9 +48,9 @@ public class QuestaoRepositoryTest
         _questaoRepository.criar(questao);
 
         // Verifica se a questão foi persistida corretamente no banco de dados
-        var questaoNoBanco = await _dbContext.Questoes.FirstOrDefaultAsync(u => u.titulo == "tituloteste" && u.tipo == "tipoteste");
+        var questaoNoBanco = await _dbContext.Questoes.FirstOrDefaultAsync(u => u.Titulo == "tituloteste" && u.Tipo == "tipoteste");
         Assert.NotNull(questaoNoBanco);
-        Assert.Equal("tituloteste", questaoNoBanco.titulo);
+        Assert.Equal("tituloteste", questaoNoBanco.Titulo);
     }
     
     [Fact]
@@ -69,8 +69,8 @@ public class QuestaoRepositoryTest
             
         //Assert: verifica se o retorno é o esperado
         Assert.NotNull(questaoModel);
-        Assert.Equal(questao.titulo, questaoModel.titulo);
-        Assert.Equal(questao.tipo, questaoModel.tipo);
+        Assert.Equal(questao.Titulo, questaoModel.Titulo);
+        Assert.Equal(questao.Tipo, questaoModel.Tipo);
     }
     
     [Fact]
@@ -112,8 +112,8 @@ public class QuestaoRepositoryTest
             
         //Assert: verifica se o retorno é o esperado
         Assert.NotNull(questoes);
-        Assert.Equal(questoes[0].titulo, questao1.titulo);
-        Assert.Equal(questoes[1].titulo, questao2.titulo);
+        Assert.Equal(questoes[0].Titulo, questao1.Titulo);
+        Assert.Equal(questoes[1].Titulo, questao2.Titulo);
     }
     
     [Fact]
@@ -128,7 +128,7 @@ public class QuestaoRepositoryTest
         // Act: Adicionar o usuário ao banco de dados em memória e removê-lo
         _questaoRepository.criar(questao1);
         _questaoRepository.deletar(1);
-        var questaoBanco = await _dbContext.Questoes.FirstOrDefaultAsync(u => u.titulo == "tituloteste");
+        var questaoBanco = await _dbContext.Questoes.FirstOrDefaultAsync(u => u.Titulo == "tituloteste");
 
         // Assert: verifica se o retorno é o esperado
         Assert.Null(questaoBanco);
