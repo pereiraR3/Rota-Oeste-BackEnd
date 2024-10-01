@@ -1,11 +1,10 @@
-﻿namespace api_rota_oeste.Models.Interacao
-{
-    public class InteracaoPatchDTO
-    {
-        public int Id { get; set; }
+﻿namespace api_rota_oeste.Models.Interacao;
 
-        public bool Status { get; set; }
+public record InteracaoPatchDTO(
+    
+    int Id,
+    
+    bool? Status
+    
+);
 
-        public DateTime Data { get; set; }
-    }
-}

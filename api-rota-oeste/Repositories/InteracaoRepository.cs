@@ -1,79 +1,50 @@
 ﻿using api_rota_oeste.Data;
-using api_rota_oeste.Models.CheckList;
-using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
-using Azure.Core;
-using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
-public class InteracaoRepository: IInteracaoRepository {
+/**
+ * Representa a camada de persistência de dados, isto é, em relação à classe interacao
+ */
+public class InteracaoRepository: IInteracaoRepository 
+{
 
     private readonly ApiDBContext _context;
     private readonly IMapper _mapper;
-    private readonly ICheckListRepository? _checkListRepository;
-    private readonly IClienteRepository? _clienteRepository;
-
+    
     // Construtor para injeção de dependência do contexto
-
-    public InteracaoRepository(ApiDBContext context, IMapper mapper)
+    public InteracaoRepository(
+        
+        ApiDBContext context,
+        IMapper mapper
+        )
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _mapper = mapper;
     }
-
-    public InteracaoRepository(ApiDBContext context, IMapper mapper, ICheckListRepository checkListRepository, IClienteRepository clienteRepository)
+    
+    /**
+     * Método que serve para salvar uma nova instância da entidade interacao no banco de dados
+     */
+    public async Task<InteracaoModel?> Adicionar(InteracaoModel interacaoModel)
     {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
-        _mapper = mapper;
-        _checkListRepository = checkListRepository;
-        _clienteRepository = clienteRepository;
-    }
-
-    public async Task<InteracaoModel> Criar(InteracaoRequestDTO req)
-    {
-        var cliente = await _clienteRepository.BuscaPorId(req.ClienteId);
-
-        if (cliente == null) throw new Exception("Cliente nao existe");
-
-        var check = await _checkListRepository.FindById(req.CheckListId);
-
-        if (check == null) throw new Exception("Checklist nao existe");
-
-        var interacao = new InteracaoModel(req, cliente, check);
-
-        await _context.AddAsync(interacao);
+        
+        await _context.Interacoes.AddAsync(interacaoModel);
+        
         await _context.SaveChangesAsync();
-
-        return interacao;
+        
+        return interacaoModel;
+        
     }
 
-    public void criar(InteracaoModel interacaoModel){
-        _context.Interacoes.Add(interacaoModel);
-        _context.SaveChanges();
-    }
+    /**
+      * Método que serve para buscar por determinada entidade do tipo interacao
+      */
     public async Task<InteracaoModel?> BuscarPorId(int id)
     {
-
-        InteracaoModel? interacao = await _context.Interacoes.FindAsync(id);
-
-        return interacao;
+       return await _context.Interacoes.FindAsync(id);
     }
-
-    public async Task<bool> Atualizar(InteracaoPatchDTO req) 
-    {
-        InteracaoModel? intModel = await BuscarPorId(req.Id);
-
-        if (intModel == null)
-            throw new Exception("interacao nao encontrada");
-
-        _mapper.Map(req, intModel);
-
-        _context.Interacoes.Update(intModel);
-        await _context.SaveChangesAsync();
-
-        return true;
-    }
+    
 }

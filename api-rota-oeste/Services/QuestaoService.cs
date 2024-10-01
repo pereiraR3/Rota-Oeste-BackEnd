@@ -1,67 +1,126 @@
-﻿using api_rota_oeste.Models.Questao;
+﻿using api_rota_oeste.Models.CheckList;
+using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Repositories;
+using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 
 namespace api_rota_oeste.Services;
 
+/**
+ * Representa a camada de serviço, isto é, a camada onde fica as regras de negócio da aplicação
+ */
 public class QuestaoService : IQuestaoService{
-    private readonly IQuestaoRepository _repository;
+    
+    private readonly IQuestaoRepository _repositoryQuestao;
+    private readonly ICheckListRepository _repositoryCheckList;
+    private readonly IRepository _repository;
     private readonly IMapper _mapper;
     
-    public QuestaoService(IQuestaoRepository repository, IMapper mapper)
+    public QuestaoService(
+        
+        IQuestaoRepository repository,
+        IMapper mapper,
+        ICheckListRepository repositoryCheckList,
+        IRepository repository1
+        
+        )
     {
         _mapper = mapper;
-        _repository = repository;
+        _repositoryCheckList = repositoryCheckList;
+        _repository = repository1;
+        _repositoryQuestao = repository;
     }
     
-    public void criar(QuestaoRequestDTO questao){
-        if (questao is null)
-        {
-            throw new KeyNotFoundException("Questão não pode ser nulo");
-        }
-        var questaoModel = _mapper.Map<QuestaoModel>(questao);
-        _repository.criar(questaoModel);
-    }
-
-    public List<QuestaoModel> listar()
+    /**
+    * Método da camada de serviço -> para criar uma entidade do tipo questao
+   */
+    public async Task<QuestaoResponseDTO> AdicionarAsync(QuestaoRequestDTO questaoRequest)
     {
-        var questoes = _repository.listar();
-        if (questoes == null)
-        {
-            throw new KeyNotFoundException("Não há questões registradas.");
-        }
-        return questoes;
-    }
 
-    public QuestaoResponseDTO obter(int id)
+        CheckListModel? checkListModel = await _repositoryCheckList.BuscarPorId(questaoRequest.CheckListId);
+
+        if (checkListModel == null)
+            throw new KeyNotFoundException("CheckList não encontrado");
+        
+        var questaoModel = new QuestaoModel(questaoRequest, checkListModel);
+        
+        var questao = await _repositoryQuestao.Adicionar(questaoModel);
+        
+        checkListModel.Questoes.Add(questao);
+        
+        return _mapper.Map<QuestaoResponseDTO>(questao);
+        
+    }
+    
+    /**
+    * Método da camada de serviço -> para buscar uma entidade do tipo questao pelo ID
+    */
+    public async Task<QuestaoResponseDTO> BuscarPorIdAsync(int id)
     {
-        var questao = _repository.obter(id);
+        if(id <= 0)
+            throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
+        
+        var questao = await _repositoryQuestao.BuscarPorId(id);
+        
         if (questao == null)
         {
             throw new KeyNotFoundException("Não há questão registrada com o ID informado.");
         }
+        
         var questaoConvertida = _mapper.Map<QuestaoResponseDTO>(questao);
+        
         return questaoConvertida;
     }
-    public void editar(int id, QuestaoRequestDTO editar){
-        var questaoObtida = _repository.obter(id);
-        if (questaoObtida == null)
-        {
-            throw new KeyNotFoundException("Não há questão registrada com o ID informado.");
-        }
-        questaoObtida.tipo = editar.tipo;
-        questaoObtida.titulo = editar.titulo;
-        _repository.salvar();
+    
+    
+    /**
+    * Método da camada de serviço -> para atualizar um entidade do tipo questao
+    */
+    public Task<List<QuestaoResponseDTO>> BuscarTodosAsync()
+    {
+        var questoes = _repositoryQuestao.BuscarTodos();
+        
+        return Task.FromResult(questoes.Result.Select(_mapper.Map<QuestaoResponseDTO>).ToList());
     }
+    
+    /**
+    * Método da camada de serviço -> para fazer a atualização de um entidade do tipo questao
+    */
+    public async Task<bool> AtualizarAsync(QuestaoPatchDTO questaoPatch)
+    {
+        QuestaoModel? questaoModel = await _repositoryQuestao.BuscarPorId(questaoPatch.Id);
 
-    public void deletar(int id){
-        var questaoObtida = _repository.obter(id);
+        if (questaoModel == null)
+            throw new KeyNotFoundException("Questão não encontrada");
+        
+        // O mapeamento de atualização deve ignorar campos nulos
+        _mapper.Map(questaoPatch, questaoModel);
+        
+        _repository.Salvar();
+
+        return true;
+    }
+    
+    
+    /**
+    * Método da camada de serviço -> para fazer a deleção relacional de uma entidade do tipo questao
+    */
+    public async Task<bool> ApagarAsync(int id)
+    {
+        if (id <= 0)
+            throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
+
+        var questaoObtida = await _repositoryQuestao.BuscarPorId(id); 
+
         if (questaoObtida == null)
         {
-            throw new KeyNotFoundException("Não há questão registrada com o ID informado.");
+            throw new KeyNotFoundException("Questão não encontrada.");
         }
-        _repository.deletar(id);
+
+        await _repositoryQuestao.Apagar(id);
+
+        return true;
     }
+    
 }

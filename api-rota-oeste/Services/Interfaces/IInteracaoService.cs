@@ -4,11 +4,10 @@ namespace api_rota_oeste.Services.Interfaces;
 
 public interface IInteracaoService {
     
-    public void criar(InteracaoRequestDTO interacaoModel);
+    public Task<InteracaoResponseDTO> AdicionarAsync(InteracaoRequestDTO interacao);
+    
+    public Task<InteracaoResponseDTO> BuscarPorIdAsync(int id);
 
-    public Task<InteracaoResponseDTO> CriarAsync(InteracaoRequestDTO req);
-
-    public Task<InteracaoModel?> BuscarPorId(int id);
-
-    public Task<bool> Atualizar(InteracaoPatchDTO req);
+    public Task<bool> AtualizarAsync(InteracaoPatchDTO interacao);
+    
 }

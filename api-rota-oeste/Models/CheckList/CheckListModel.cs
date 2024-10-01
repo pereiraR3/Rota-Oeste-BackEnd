@@ -1,27 +1,48 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.Usuario;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace api_rota_oeste.Models.CheckList
+namespace api_rota_oeste.Models.CheckList;
+
+[Table("checklist")]
+public class CheckListModel
 {
-    public class CheckListModel
-    {
-        public int Id { get; set; }
-        public string? Nome { get; set; }
-        public DateTime? DataCriacao { get; set; }
-        public int UsuarioId { get; set; }
-        public virtual UsuarioModel? Usuario { get; set; }
+    
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+    
+    [Required(ErrorMessage = "UsuarioId é necessário")]
+    public int UsuarioId { get; set; }
+    
+    [Required(ErrorMessage = "Nome é necessário")]
+    [StringLength(60, ErrorMessage = "O nome não pode exceder 60 caracteres")]
+    public string? Nome { get; set; }
+    
+    [Required(ErrorMessage = "Data de Criação é necessária")]
+    [DataType(DataType.Date)]
+    public DateTime? DataCriacao { get; set; }
+    
+    [JsonIgnore]
+    [ForeignKey("UsuarioId")]
+    public virtual UsuarioModel Usuario { get; set; }
 
-        public CheckListModel() { }
-        public CheckListModel(CheckListRequestDTO req, UsuarioModel? usuario)
-        {
-            this.Nome = req.Nome;
-            this.DataCriacao = DateTime.Now; //a dataCriacao do Checklist � definida como a data no momento da criacao
-            this.Usuario = usuario;
-            this.UsuarioId = req.UsuarioId;
+    [JsonIgnore] public virtual List<QuestaoModel> Questoes { get; set; } = new List<QuestaoModel>();
+
+    public CheckListModel() { }
+    
+    public CheckListModel(CheckListRequestDTO checkListRequestDto, UsuarioModel usuario) {
+        
+        this.Nome = checkListRequestDto.Nome;
+        
+        this.DataCriacao = DateTime.Now; 
+        
+        this.Usuario = usuario;
+        
+        this.UsuarioId = checkListRequestDto.UsuarioId;
             
-        }
     }
+    
 }

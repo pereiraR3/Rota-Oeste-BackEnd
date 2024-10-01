@@ -4,13 +4,14 @@ namespace api_rota_oeste.Services.Interfaces;
 
 public interface IQuestaoService {
 
-    public void criar(QuestaoRequestDTO questao);
+    public Task<QuestaoResponseDTO> AdicionarAsync(QuestaoRequestDTO questao);
     
-    public List<QuestaoModel> listar();
+    public Task<QuestaoResponseDTO> BuscarPorIdAsync(int id);
+    
+    public Task<List<QuestaoResponseDTO>> BuscarTodosAsync();
 
-    public QuestaoResponseDTO obter(int id);
+    public Task<bool> AtualizarAsync(QuestaoPatchDTO request);
 
-    public void editar(int id, QuestaoRequestDTO editar);
-
-    public void deletar(int id);
+    public Task<bool> ApagarAsync(int id);
+    
 }

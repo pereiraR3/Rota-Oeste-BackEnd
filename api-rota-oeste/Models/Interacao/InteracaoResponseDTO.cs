@@ -1,16 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using api_rota_oeste.Models.CheckList;
+using api_rota_oeste.Models.Cliente;
 
-namespace api_rota_oeste.Models.Interacao
-{
-    public record InteracaoResponseDTO
-    (
-        int Id,
-        int ClienteId,
-        int CheckListId,
-        DateTime DataCriacao,
-        bool Status
-    );
-}
+namespace api_rota_oeste.Models.Interacao;
+
+public record InteracaoResponseDTO
+(
+    
+    int Id,
+    
+    int ClienteId,
+    
+    int CheckListId,
+    
+    bool Status,
+    
+    ClienteResponseDTO? Cliente,
+    
+    CheckListResponseDTO? CheckList
+    
+);
+

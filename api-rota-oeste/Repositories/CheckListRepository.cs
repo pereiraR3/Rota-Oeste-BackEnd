@@ -1,6 +1,5 @@
 using api_rota_oeste.Data;
 using api_rota_oeste.Models.CheckList;
-using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +8,7 @@ namespace api_rota_oeste.Repositories
 {
     public class CheckListRepository : ICheckListRepository
     {
+        
         private readonly IMapper _mapper;
         private readonly ApiDBContext _context;
         private readonly IUsuarioRepository _repository;
@@ -20,45 +20,30 @@ namespace api_rota_oeste.Repositories
             _repository = repository;
         }
 
-        public async Task<CheckListModel> Add(CheckListRequestDTO req)
+        public async Task<CheckListModel?> Adicionar(CheckListModel checkList)
         {
-            var usuario = await _repository.BuscaPorId(req.UsuarioId);
 
-            if (usuario == null) throw new Exception($"Usuário de id {req.UsuarioId} não foi encontrado");
-            
-            var check = new CheckListModel(req, usuario);
-
-            await _context.AddAsync(check);
+            await _context.AddAsync(checkList);
             await _context.SaveChangesAsync(); 
 
-            return check;
+            return checkList;
         }
 
-        public async Task<CheckListModel?> FindById(int id)
+        public async Task<CheckListModel?> BuscarPorId(int id)
         {
-            try
-            {
-                var check = _context.CheckLists.FirstOrDefault(c => c.Id == id);
+            
+            return await _context.CheckLists.FindAsync(id);
 
-                return check;
-
-            }
-            catch
-            {
-                Console.WriteLine($"CheckList de Id {id} não encontrado");
-                return null;
-            }
         }
 
-        public async Task<List<CheckListModel?>> GetAll()
+        public async Task<List<CheckListModel>> BuscarTodos()
         {
-            List<CheckListModel?> check = await _context.CheckLists.ToListAsync();
 
-            return check;
+            return await _context.CheckLists.ToListAsync();
 
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> Apagar(int id)
         {
             var check = _context.CheckLists.FirstOrDefault(c => c.Id == id);
 
@@ -71,9 +56,9 @@ namespace api_rota_oeste.Repositories
             return true;
         }
 
-        public async Task<bool> DeleteAll()
+        public async Task<bool> ApagarTodos()
         {
-            List<CheckListModel?> checks = await GetAll();
+            List<CheckListModel?> checks = await BuscarTodos();
 
             if (checks == null) return false;
 
@@ -84,28 +69,6 @@ namespace api_rota_oeste.Repositories
             }
 
             return true;
-        }
-
-        public async Task<List<CheckListModel>> AddCollection(CheckListCollectionDTO req)
-        {
-
-            UsuarioModel? usuario = await _repository.BuscaPorId(req.CheckLists.FirstOrDefault()!.UsuarioId);
-
-            List<CheckListModel> checks = new List<CheckListModel>();
-
-            foreach (var check in req.CheckLists)
-            {
-                CheckListModel checkModel = new CheckListModel(check, usuario);
-
-                _context.Add(checkModel);
-                await _context.SaveChangesAsync();
-
-                checks.Add(checkModel);
-
-            }
-
-            return checks.ToList();
-
         }
 
     }

@@ -4,16 +4,16 @@ namespace api_rota_oeste.Services.Interfaces
 {
     public interface ICheckListService
     {
-        Task<CheckListResponseDTO> AddAsync(CheckListRequestDTO req);
+        Task<CheckListResponseDTO> AdicionarAsync(CheckListRequestDTO req);
+        
+        Task<CheckListResponseDTO?> BuscarPorIdAsync(int id);
 
-        Task<List<CheckListResponseDTO>> AddCollectionAsync(CheckListCollectionDTO req);
+        Task<List<CheckListResponseDTO>> BuscarTodosAsync();
 
-        Task<CheckListResponseDTO?> FindByIdAsync(int id);
+        Task<bool> AtualizarAsync(CheckListPatchDTO checkListPatchDto);
+        
+        Task<bool> ApagarAsync(int id);
 
-        Task<List<CheckListResponseDTO>> GetAllAsync();
-
-        Task<bool> DeleteAsync(int id);
-
-        Task<bool> DeleteAllAsync();
+        Task<bool> ApagarTodosAsync();
     }
 }

@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace api_rota_oeste.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("checklist")]
     public class CheckListController : ControllerBase
     {
         private readonly ICheckListService _checkListService;
@@ -16,44 +16,29 @@ namespace api_rota_oeste.Controllers
             _checkListService = checklistService;
         }
 
-        [HttpPost]
+        [HttpPost("adicionar")]
         [SwaggerOperation(Summary = "Adiciona um novo checklist",
         Description = "Adiciona um checklist ao sistema e retorna o checklist criado.")]
         [SwaggerResponse(201, "Checklist criado com sucesso")]
-        public async Task<ActionResult<CheckListResponseDTO>> Add(CheckListRequestDTO check)
+        public async Task<ActionResult<CheckListResponseDTO>> Adicionar(CheckListRequestDTO check)
         {
-            CheckListResponseDTO checkListResponse = await _checkListService.AddAsync(check);
+            CheckListResponseDTO checkListResponse = await _checkListService.AdicionarAsync(check);
 
             return CreatedAtAction(
-                nameof(FindById), // Nome da a��o que busca o cliente pelo ID
-                new { id = checkListResponse.Id }, // Par�metro para a rota
+                nameof(BuscarPorId), // Nome da ação que busca o cliente pelo ID
+                new { id = checkListResponse.Id }, // Parâmetro para a rota
                 checkListResponse // O objeto criado
             );
         }
 
-        [HttpPost("colecao")]
-        [SwaggerOperation(Summary = "Adiciona uma cole��o de checklists",
-        Description = "Adiciona uma cole��o de checklists ao sistema.")]
-        [SwaggerResponse(200, "checklists criados com sucesso")]
-        [SwaggerResponse(204, "Nenhum checklist adicionado")]
-        public async Task<ActionResult<List<CheckListResponseDTO>>> AddColletction(CheckListCollectionDTO checks)
-        {
-            List<CheckListResponseDTO> checkResponse = await _checkListService.AddCollectionAsync(checks);
-
-            if (checkResponse == null)
-                return NoContent();
-
-            return Ok(checkResponse);
-        }
-
-        [HttpGet("{id}")]
+        [HttpGet("buscarPorId/{id}")]
         [SwaggerOperation(Summary = "Busca um checklist pelo ID",
         Description = "Busca o checklist associado ao ID fornecido.")]
         [SwaggerResponse(200, "Checklist encontrado com sucesso")]
         [SwaggerResponse(404, "Checklist n�o encontrado")]
-        public async Task<ActionResult<CheckListResponseDTO>> FindById(int id)
+        public async Task<ActionResult<CheckListResponseDTO>> BuscarPorId(int id)
         {
-            CheckListResponseDTO? check = await _checkListService.FindByIdAsync(id);
+            CheckListResponseDTO? check = await _checkListService.BuscarPorIdAsync(id);
 
             if (check == null)
             {
@@ -63,29 +48,26 @@ namespace api_rota_oeste.Controllers
             return Ok(check);
         }
 
-        [HttpGet]
+        [HttpGet("buscarTodos")]
         [SwaggerOperation(Summary = "Busca todos os checklists",
         Description = "Retorna uma lista de todos os checklists do sistema.")]
         [SwaggerResponse(200, "Checklists encontrados com sucesso")]
         [SwaggerResponse(204, "Nenhum checklist encontrado")]
-        public async Task<ActionResult<List<CheckListResponseDTO>>> GetAll()
+        public async Task<ActionResult<List<CheckListResponseDTO>>> BuscarTodos()
         {
-            List<CheckListResponseDTO> checkResponse = await _checkListService.GetAllAsync();
-
-            if (checkResponse == null)
-                return NoContent();
+            List<CheckListResponseDTO> checkResponse = await _checkListService.BuscarTodosAsync();
 
             return Ok(checkResponse);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("apagarPorId/{id}")]
         [SwaggerOperation(Summary = "Remove um checklist",
         Description = "Remove o checklist associado ao ID fornecido. Retorna 204 No Content se a remo��o for bem-sucedida.")]
         [SwaggerResponse(204, "Checklist removido com sucesso")]
         [SwaggerResponse(404, "Checklist n�o encontrado")]
         public async Task<IActionResult> Delete(int id)
         {
-            var status = await _checkListService.DeleteAsync(id);
+            var status = await _checkListService.ApagarAsync(id);
 
             if (!status)
                 return NotFound(); // Retorna 404 Not Found se o checklist n�o for encontrado
@@ -93,14 +75,35 @@ namespace api_rota_oeste.Controllers
             return NoContent(); // Retorna 204 No Content se o checklist foi removido com sucesso
         }
 
-        [HttpDelete]
+        [HttpPatch("atualizar")]
+        [SwaggerOperation(
+            Summary = "Atualiza as informações de um checklist",
+            Description = "Atualiza as informações de um checklist através do ID e das novas informações."
+        )]
+        [SwaggerResponse(204, "CheckList atualizado com sucesso")]
+        [SwaggerResponse(400, "Erro nos dados fornecidos")]
+        [SwaggerResponse(404, "CheckList não encontrado")]
+        public async Task<IActionResult> Atualizar(CheckListPatchDTO checkListPatchDto)
+        {
+            
+            var questaoExistente = await _checkListService.BuscarPorIdAsync(checkListPatchDto.Id);
+            if (questaoExistente == null)
+                return NotFound("Questão não encontrada");
+
+            await _checkListService.AtualizarAsync(checkListPatchDto);
+            return NoContent();
+            
+            
+        }
+        
+        [HttpDelete("apagarTodos")]
         [SwaggerOperation(Summary = "Remove todos os checklists",
         Description = "Remove todos os checklists do sistema.")]
         [SwaggerResponse(204, "Todos os checklists removidos com sucesso")]
         [SwaggerResponse(404, "Nenhum checklist encontrado")]
         public async Task<IActionResult> DeleteAll()
         {
-            var status = await _checkListService.DeleteAllAsync();
+            var status = await _checkListService.ApagarTodosAsync();
 
             if (!status)
                 return NotFound(); // Retorna 404 Not Found se nenhum checklist for encontrado

@@ -1,3 +1,6 @@
+using api_rota_oeste.Models.CheckList;
+using api_rota_oeste.Models.Cliente;
+
 namespace api_rota_oeste.Models.Usuario
 {
     public record UsuarioResponseDTO
@@ -8,7 +11,11 @@ namespace api_rota_oeste.Models.Usuario
         
         string Nome, 
         
-        byte[] Foto
+        byte[] Foto,
+        
+        List<ClienteResponseDTO>? Clientes,
+        
+        List<CheckListResponseDTO>? CheckLists
         
     );
 }

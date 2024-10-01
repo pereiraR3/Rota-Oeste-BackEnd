@@ -1,11 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using api_rota_oeste.Models.CheckList;
 
 namespace api_rota_oeste.Models.Questao;
-public class QuestaoResponseDTO(
-    string titulo,
+public record QuestaoResponseDTO(
     
-    string tipo
+    int Id,
+    
+    int CheckListId,
+    
+    string Titulo,
+    
+    string Tipo,
+    
+    CheckListModel? CheckList
+    
 );
