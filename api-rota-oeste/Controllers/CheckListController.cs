@@ -75,6 +75,27 @@ namespace api_rota_oeste.Controllers
             return NoContent(); // Retorna 204 No Content se o checklist foi removido com sucesso
         }
 
+        [HttpPatch("atualizar")]
+        [SwaggerOperation(
+            Summary = "Atualiza as informações de um checklist",
+            Description = "Atualiza as informações de um checklist através do ID e das novas informações."
+        )]
+        [SwaggerResponse(204, "CheckList atualizado com sucesso")]
+        [SwaggerResponse(400, "Erro nos dados fornecidos")]
+        [SwaggerResponse(404, "CheckList não encontrado")]
+        public async Task<IActionResult> Atualizar(CheckListPatchDTO checkListPatchDto)
+        {
+            
+            var questaoExistente = await _checkListService.BuscarPorIdAsync(checkListPatchDto.Id);
+            if (questaoExistente == null)
+                return NotFound("Questão não encontrada");
+
+            await _checkListService.AtualizarAsync(checkListPatchDto);
+            return NoContent();
+            
+            
+        }
+        
         [HttpDelete("apagarTodos")]
         [SwaggerOperation(Summary = "Remove todos os checklists",
         Description = "Remove todos os checklists do sistema.")]

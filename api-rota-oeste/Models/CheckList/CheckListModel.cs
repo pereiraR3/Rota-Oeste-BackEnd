@@ -28,9 +28,8 @@ public class CheckListModel
     [JsonIgnore]
     [ForeignKey("UsuarioId")]
     public virtual UsuarioModel Usuario { get; set; }
-    
-    [JsonIgnore]
-    public virtual List<QuestaoModel> Questoes { get; set; }
+
+    [JsonIgnore] public virtual List<QuestaoModel> Questoes { get; set; } = new List<QuestaoModel>();
 
     public CheckListModel() { }
     

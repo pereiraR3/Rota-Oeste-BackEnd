@@ -19,15 +19,16 @@ public class ApiDBContext : DbContext
     public DbSet<CheckListModel> CheckLists { get; set; }
     public DbSet<QuestaoModel> Questoes { get; set; }
     
-    public DbSet<InteracaoModel?> Interacoes { get; set; }
+    public DbSet<InteracaoModel> Interacoes { get; set; }
     
     public DbSet<RespostaAlternativaModel> RespostaAlternativaModels { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        
         modelBuilder.ApplyConfiguration(new InteracaoConfiguration());
         base.OnModelCreating(modelBuilder);        
+        
     }
     
 }

@@ -23,10 +23,18 @@ namespace api_rota_oeste.Controllers
         )]
         [SwaggerResponse(200, "Questão adicionada com sucesso")]
         [SwaggerResponse(400, "Erro nos dados fornecidos")]
-        public async Task<ActionResult> Adicionar([FromBody] QuestaoRequestDTO questao)
+        public async Task<CreatedAtActionResult> Adicionar([FromBody] QuestaoRequestDTO questao)
         {
-            await _service.AdicionarAsync(questao);
-            return Ok();
+            
+            QuestaoResponseDTO questaoResponseDto = await _service.AdicionarAsync(questao);
+
+            // Retorna 201 Created com a URL para acessar o usuário criado
+            return CreatedAtAction(
+                nameof(BuscarPorId), // Nome da ação que busca o usuário pelo ID
+                new { id = questaoResponseDto.Id }, // Parâmetro para a rota
+                questaoResponseDto // O objeto criado
+            );
+            
         }
         
         [HttpGet("buscarTodos")]
@@ -48,16 +56,17 @@ namespace api_rota_oeste.Controllers
         )]
         [SwaggerResponse(200, "Questão encontrada", typeof(QuestaoResponseDTO))]
         [SwaggerResponse(404, "Questão não encontrada")]
-        public async Task<ActionResult<QuestaoResponseDTO>> Obter(int id)
+        public async Task<ActionResult<QuestaoResponseDTO>> BuscarPorId(int id)
         {
             var questao = await _service.BuscarPorIdAsync(id);
+            
             if (questao == null)
                 return NotFound("Questão não encontrada");
 
             return Ok(questao);
         }
         
-        [HttpPut("atualizar")]
+        [HttpPatch("atualizar")]
         [SwaggerOperation(
             Summary = "Atualiza as informações de uma questão",
             Description = "Atualiza as informações de uma questão através do ID e das novas informações."
@@ -68,10 +77,12 @@ namespace api_rota_oeste.Controllers
         public async Task<ActionResult> Atualizar([FromBody] QuestaoPatchDTO questao)
         {
             var questaoExistente = await _service.BuscarPorIdAsync(questao.Id);
+            
             if (questaoExistente == null)
                 return NotFound("Questão não encontrada");
 
             await _service.AtualizarAsync(questao);
+            
             return NoContent();
         }
         

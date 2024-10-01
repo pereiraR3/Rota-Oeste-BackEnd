@@ -1,4 +1,4 @@
-﻿using api_rota_oeste.Models.CheckList;
+﻿﻿using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Repositories.Interfaces;
@@ -27,6 +27,7 @@ public class InteracaoService : IInteracaoService {
         IRepository repository1
         
         )
+
     {
         _mapper = mapper;
         _clienteRepository = clienteRepository;
@@ -73,22 +74,20 @@ public class InteracaoService : IInteracaoService {
     /**
      * Método da camada de servico -> para atualizar parcialmente uma entidade interacao
      */
-    public Task<bool> AtualizarAsync(InteracaoPatchDTO req)
+    public async Task<bool> AtualizarAsync(InteracaoPatchDTO interacaoPatch)
     {
-
-        try
-        {
-            _mapper.Map<InteracaoPatchDTO>(req);
+        
+        var interacaoModel = await _repositoryInteracao.BuscarPorId(interacaoPatch.Id);
+        
+        if(interacaoModel == null)
+            throw new KeyNotFoundException("Interação não encontrada");
+        
+        // O mapeamento de atualização deve ignorar campos nulos
+        _mapper.Map(interacaoPatch, interacaoModel);
             
-            _repository.Salvar();
+        _repository.Salvar();
 
-            return Task.FromResult(true);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
-
+        return true;
     }
     
 }

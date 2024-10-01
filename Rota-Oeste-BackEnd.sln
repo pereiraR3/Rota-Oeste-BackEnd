@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api-rota-oeste", "api-rota-oeste\api-rota-oeste.csproj", "{7F91285C-EAFE-4B65-8920-66005D1AC11D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api-rota-oeste.Tests", "api-rota-oeste.Tests\api-rota-oeste.Tests.csproj", "{6E10266F-DAB0-4128-8B83-56DFC4139084}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api-rota-oeste.Tests", "api-rota-oeste.Tests\api-rota-oeste.Tests.csproj", "{BDDA2D88-6219-4ACA-8B2F-B1202E07F60F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7F91285C-EAFE-4B65-8920-66005D1AC11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F91285C-EAFE-4B65-8920-66005D1AC11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F91285C-EAFE-4B65-8920-66005D1AC11D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E10266F-DAB0-4128-8B83-56DFC4139084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E10266F-DAB0-4128-8B83-56DFC4139084}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E10266F-DAB0-4128-8B83-56DFC4139084}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E10266F-DAB0-4128-8B83-56DFC4139084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDDA2D88-6219-4ACA-8B2F-B1202E07F60F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDDA2D88-6219-4ACA-8B2F-B1202E07F60F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDDA2D88-6219-4ACA-8B2F-B1202E07F60F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDDA2D88-6219-4ACA-8B2F-B1202E07F60F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

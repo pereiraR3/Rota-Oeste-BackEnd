@@ -1,0 +1,88 @@
+<changelist name="Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]" date="1727793670361" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 10/1/24, 10:41 AM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.pdb" />
+    <option name="AFTER_PATH" value="api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.pdb" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.pdb" />
+  </binary>
+  <binary>
+    <option name="AFTER_PATH" value="api-rota-oeste/bin/Debug/net8.0/linux-x64/Newtonsoft.Json.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/Newtonsoft.Json.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.pdb" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.pdb" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste1.pdb" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/refint/api-rota-oeste.dll" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/refint/api-rota-oeste.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste.Tests/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste.Tests/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/project.nuget.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.csproj.CoreCompileInputs.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.csproj.CoreCompileInputs.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.csproj.CoreCompileInputs.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfoInputs.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfoInputs.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.AssemblyInfoInputs.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.dll" />
+    <option name="AFTER_PATH" value="api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste1.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/project.nuget.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/project.nuget.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/project.nuget1.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.genruntimeconfig.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.genruntimeconfig.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.genruntimeconfig.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste2.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.assets.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.assets.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.Tests.assets.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.Tests.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.dll" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste3.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfoInputs.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfoInputs.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.Tests.AssemblyInfoInputs.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.assets.cache" />
+    <option name="AFTER_PATH" value="api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.assets.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/shelf/Uncommitted_changes_before_Update_at_10_1_24,_10_41 AM_[Changes]/api-rota-oeste.assets.cache" />
+  </binary>
+</changelist>

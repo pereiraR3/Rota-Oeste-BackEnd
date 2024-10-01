@@ -51,7 +51,7 @@ namespace api_rota_oeste.Controllers
             return Ok(interacao);
         }
         
-        [HttpPut("atualizar")]
+        [HttpPatch("atualizar")]
         [SwaggerOperation(
             Summary = "Atualiza uma interação",
             Description = "Atualiza os dados da interação existente com base nas informações fornecidas."
@@ -74,4 +74,5 @@ namespace api_rota_oeste.Controllers
             return Ok();
         }
     }
+    
 }

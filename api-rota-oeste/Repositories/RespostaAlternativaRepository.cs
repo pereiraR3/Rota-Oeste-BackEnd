@@ -1,6 +1,5 @@
 using api_rota_oeste.Data;
 using api_rota_oeste.Models.RespostaAlternativa;
-using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
 
 namespace api_rota_oeste.Services;

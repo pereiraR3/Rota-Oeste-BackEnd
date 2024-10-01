@@ -1,4 +1,4 @@
-namespace api_rota_oeste.Models.Interacao;
+﻿namespace api_rota_oeste.Models.Interacao;
 
 public record InteracaoPatchDTO(
     
@@ -7,3 +7,4 @@ public record InteracaoPatchDTO(
     bool? Status
     
 );
+

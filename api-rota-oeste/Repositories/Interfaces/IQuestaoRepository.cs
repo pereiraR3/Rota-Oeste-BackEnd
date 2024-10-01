@@ -1,5 +1,4 @@
-﻿using api_rota_oeste.Models.Cliente;
-using api_rota_oeste.Models.Questao;
+﻿using api_rota_oeste.Models.Questao;
 
 namespace api_rota_oeste.Repositories;
 

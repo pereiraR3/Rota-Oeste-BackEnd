@@ -1,0 +1,16 @@
+
+api-rota-oeste/api-rota-oeste.csproj.user
+api-rota-oeste/obj/project.nuget.cache
+*.bin
+*.cache
+api-rota-oeste/obj/project.nuget.cache
+api-rota-oeste/obj/project.assets.json
+.vs/Rota-Oeste-BackEnd/DesignTimeBuild/.dtbcache.v2
+.vs/Rota-Oeste-BackEnd/FileContentIndex/3487c970-8e78-43ab-b152-5a94b9abe6fc.vsidx
+api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.genruntimeconfig.cache
+.vs/Rota-Oeste-BackEnd/config/applicationhost.config
+.vs/Rota-Oeste-BackEnd/FileContentIndex/559ed7e7-7f0e-4935-a15f-329c5ce5e131.vsidx
+api-rota-oeste/obj/project.nuget.cache
+api-rota-oeste/obj/project.assets.json
+api-rota-oeste/obj/Debug/net8.0/refint/api-rota-oeste.dll
+api-rota-oeste/obj/Debug/net8.0/ref/api-rota-oeste.dll

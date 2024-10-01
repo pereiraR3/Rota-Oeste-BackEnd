@@ -1,6 +1,4 @@
 ﻿using api_rota_oeste.Data;
-using api_rota_oeste.Models.CheckList;
-using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
@@ -48,6 +46,5 @@ public class InteracaoRepository: IInteracaoRepository
     {
        return await _context.Interacoes.FindAsync(id);
     }
-    
     
 }

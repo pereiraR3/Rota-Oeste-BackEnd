@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
-using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
 using Moq;
 using Xunit;
@@ -14,14 +13,16 @@ namespace api_rota_oeste.Tests.Services
     public class UsuarioServiceTest
     {
         private readonly Mock<IUsuarioRepository> _usuarioRepositoryMock;
+        private readonly Mock<IRepository> _repositoryMock;
         private readonly Mock<IMapper> _mapperMock;
         private readonly UsuarioService _usuarioService;
 
         public UsuarioServiceTest()
         {
             _usuarioRepositoryMock = new Mock<IUsuarioRepository>();
+            _repositoryMock = new Mock<IRepository>();
             _mapperMock = new Mock<IMapper>();
-            _usuarioService = new UsuarioService(_usuarioRepositoryMock.Object, _mapperMock.Object);
+            _usuarioService = new UsuarioService(_usuarioRepositoryMock.Object, _mapperMock.Object, _repositoryMock.Object);
         }
 
         // Teste para AdicionarAsync
@@ -50,10 +51,12 @@ namespace api_rota_oeste.Tests.Services
                 1,
                 "66992337652",
                 "Teste",
+                null,
+                null,
                 null
             );
 
-            _usuarioRepositoryMock.Setup(repo => repo.Adicionar(It.IsAny<UsuarioRequestDTO>()))
+            _usuarioRepositoryMock.Setup(repo => repo.Adicionar(It.IsAny<UsuarioModel>()))
                 .ReturnsAsync(usuarioModel);
 
             _mapperMock.Setup(mapper => mapper.Map<UsuarioResponseDTO>(usuarioModel))
@@ -87,6 +90,8 @@ namespace api_rota_oeste.Tests.Services
                 1,
                 "66992337652",
                 "Teste",
+                null,
+                null,
                 null
             );
 
@@ -129,8 +134,22 @@ namespace api_rota_oeste.Tests.Services
                 Telefone = "66992337652"
             };
 
-            _usuarioRepositoryMock.Setup(repo => repo.Atualizar(It.IsAny<UsuarioPatchDTO>()))
-                .ReturnsAsync(true);
+            var usuarioModel = new UsuarioModel
+            {
+                Id = 1,
+                Nome = "Teste",
+                Telefone = "66992337652",
+                Senha = "12345"
+            };
+
+            _usuarioRepositoryMock.Setup(repo => repo.BuscaPorId(usuarioPatch.Id))
+                .ReturnsAsync(usuarioModel);
+
+            _mapperMock.Setup(mapper => mapper.Map(usuarioPatch, usuarioModel))
+                .Verifiable();
+
+            _repositoryMock.Setup(repo => repo.Salvar())
+                .Verifiable();
 
             // Act
             var result = await _usuarioService.AtualizarAsync(usuarioPatch);
@@ -141,7 +160,7 @@ namespace api_rota_oeste.Tests.Services
 
         // Teste para AtualizarAsync - Falha
         [Fact]
-        public async Task AtualizarAsync_DeveLancarExcecao_SeFalhaNaAtualizacao()
+        public async Task AtualizarAsync_DeveRetornarFalse_SeUsuarioNaoEncontrado()
         {
             // Arrange
             var usuarioPatch = new UsuarioPatchDTO
@@ -151,11 +170,14 @@ namespace api_rota_oeste.Tests.Services
                 Telefone = "66992337652"
             };
 
-            _usuarioRepositoryMock.Setup(repo => repo.Atualizar(It.IsAny<UsuarioPatchDTO>()))
-                .ReturnsAsync(false);
+            _usuarioRepositoryMock.Setup(repo => repo.BuscaPorId(usuarioPatch.Id))
+                .ReturnsAsync((UsuarioModel)null);
 
-            // Act & Assert
-            await Assert.ThrowsAsync<Exception>(() => _usuarioService.AtualizarAsync(usuarioPatch));
+            // Act
+            var result = await _usuarioService.AtualizarAsync(usuarioPatch);
+
+            // Assert
+            Assert.False(result);
         }
 
         // Teste para ApagarAsync - Sucesso

@@ -1,115 +1,104 @@
+using System;
 using api_rota_oeste.Controllers;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace api_rota_oeste.Tests.Controllers
 {
     public class CheckListControllerTest
     {
+        private readonly Mock<ICheckListService> _checkListServiceMock;
         private readonly CheckListController _controller;
-        private readonly Mock<ICheckListService> _service;
 
         public CheckListControllerTest()
         {
-            _service = new Mock<ICheckListService>();
-            _controller = new CheckListController(_service.Object); 
+            _checkListServiceMock = new Mock<ICheckListService>();
+            _controller = new CheckListController(_checkListServiceMock.Object);
         }
 
         [Fact]
-        public async Task Add_DeveRetornarCreatedAtAction_QuandoCheckListAdicionado()
+        public async Task Adicionar_DeveRetornarCreated()
         {
             // Arrange
-            var checkRequest = new CheckListRequestDTO(1, "Teste", DateTime.Now);
-            var checkResponse = new CheckListResponseDTO(1, 1, "Teste", DateTime.Now);
+            var checkListRequest = new CheckListRequestDTO(1, "Checklist Teste");
+            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null);
 
-            _service
-                .Setup(s => s.AddAsync(checkRequest))
-                .ReturnsAsync(checkResponse);
+            _checkListServiceMock.Setup(service => service.AdicionarAsync(checkListRequest))
+                .ReturnsAsync(checkListResponse);
 
             // Act
-            var result = await _controller.Add(checkRequest);
+            var result = await _controller.Adicionar(checkListRequest);
 
             // Assert
-            var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-            Assert.Equal("FindById", actionResult.ActionName);
-            Assert.Equal(checkResponse, actionResult.Value);
+            var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
+            Assert.Equal(201, createdAtActionResult.StatusCode);
+            Assert.Equal(checkListResponse, createdAtActionResult.Value);
         }
 
         [Fact]
-        public async Task AddCollection_DeveRetornarOk_QuandoChecksAdicionados()
+        public async Task BuscarPorId_DeveRetornarOkSeEncontrado()
         {
             // Arrange
-            var checkCollection = new CheckListCollectionDTO(new List<CheckListRequestDTO>
-            {
-                new CheckListRequestDTO(1, "Teste1", DateTime.Now),
-                new CheckListRequestDTO(2, "Teste2", DateTime.Now)
-            });
+            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null);
 
-            var checkResponseList = new List<CheckListResponseDTO>
-            {
-                new CheckListResponseDTO(1, 1, "Teste1", DateTime.Now),
-                new CheckListResponseDTO(2, 2, "Teste2", DateTime.Now)
-            };
-
-            _service
-                .Setup(s => s.AddCollectionAsync(checkCollection))
-                .ReturnsAsync(checkResponseList);
+            _checkListServiceMock.Setup(service => service.BuscarPorIdAsync(1))
+                .ReturnsAsync(checkListResponse);
 
             // Act
-            var result = await _controller.AddColletction(checkCollection);
+            var result = await _controller.BuscarPorId(1);
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Equal(checkResponseList, actionResult.Value);
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            Assert.Equal(200, okResult.StatusCode);
+            Assert.Equal(checkListResponse, okResult.Value);
         }
 
         [Fact]
-        public async Task FindById_DeveRetornarOk_QuandoCheckEncontrado()
+        public async Task BuscarPorId_DeveRetornarNotFoundSeNaoEncontrado()
         {
             // Arrange
-            var checkResponse = new CheckListResponseDTO(1, 1, "Teste", DateTime.Now);
-
-            _service
-                .Setup(s => s.FindByIdAsync(1))
-                .ReturnsAsync(checkResponse);
-
-            // Act
-            var result = await _controller.FindById(1);
-
-            // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Equal(checkResponse, actionResult.Value);
-        }
-
-        [Fact]
-        public async Task FindById_DeveRetornarNotFound_QuandoCheckNaoEncontrado()
-        {
-            // Arrange
-            _service
-                .Setup(s => s.FindByIdAsync(1))
+            _checkListServiceMock.Setup(service => service.BuscarPorIdAsync(It.IsAny<int>()))
                 .ReturnsAsync((CheckListResponseDTO)null);
 
             // Act
-            var result = await _controller.FindById(1);
+            var result = await _controller.BuscarPorId(1);
 
             // Assert
             Assert.IsType<NotFoundResult>(result.Result);
         }
 
         [Fact]
-        public async Task Delete_DeveRetornarNoContent_QuandoCheckRemovidoComSucesso()
+        public async Task BuscarTodos_DeveRetornarOkComChecklists()
         {
             // Arrange
-            _service
-                .Setup(s => s.DeleteAsync(1))
+            var checkListsResponse = new List<CheckListResponseDTO>
+            {
+                new CheckListResponseDTO(1, 1, "Checklist 1", DateTime.Now, null, null),
+                new CheckListResponseDTO(2, 1, "Checklist 2", DateTime.Now, null, null)
+            };
+
+            _checkListServiceMock.Setup(service => service.BuscarTodosAsync())
+                .ReturnsAsync(checkListsResponse);
+
+            // Act
+            var result = await _controller.BuscarTodos();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            Assert.Equal(200, okResult.StatusCode);
+            Assert.Equal(checkListsResponse, okResult.Value);
+        }
+
+        [Fact]
+        public async Task Delete_DeveRetornarNoContentSeApagarComSucesso()
+        {
+            // Arrange
+            _checkListServiceMock.Setup(service => service.ApagarAsync(It.IsAny<int>()))
                 .ReturnsAsync(true);
 
             // Act
@@ -120,11 +109,10 @@ namespace api_rota_oeste.Tests.Controllers
         }
 
         [Fact]
-        public async Task Delete_DeveRetornarNotFound_QuandoCheckNaoEncontrado()
+        public async Task Delete_DeveRetornarNotFoundSeNaoEncontrado()
         {
             // Arrange
-            _service
-                .Setup(s => s.DeleteAsync(1))
+            _checkListServiceMock.Setup(service => service.ApagarAsync(It.IsAny<int>()))
                 .ReturnsAsync(false);
 
             // Act
@@ -135,41 +123,68 @@ namespace api_rota_oeste.Tests.Controllers
         }
 
         [Fact]
-        public async Task GetAll_DeveRetornarOk_QuandoChecksExistem()
+        public async Task Atualizar_DeveRetornarNoContentSeAtualizarComSucesso()
         {
             // Arrange
-            var checks = new List<CheckListResponseDTO>
-            {
-                new CheckListResponseDTO(1, 1, "Teste1", DateTime.Now),
-                new CheckListResponseDTO(2, 2, "Teste2", DateTime.Now)
-            };
+            var checkListPatchDto = new CheckListPatchDTO(1, "Novo Nome");
+            var checkListResponse = new CheckListResponseDTO(1, 1, "Novo Nome", DateTime.Now, null, null);
 
-            _service
-                .Setup(s => s.GetAllAsync())
-                .ReturnsAsync(checks);
+            _checkListServiceMock.Setup(service => service.BuscarPorIdAsync(checkListPatchDto.Id))
+                .ReturnsAsync(checkListResponse);
+
+            _checkListServiceMock.Setup(service => service.AtualizarAsync(checkListPatchDto))
+                .ReturnsAsync(true);
 
             // Act
-            var result = await _controller.GetAll();
+            var result = await _controller.Atualizar(checkListPatchDto);
 
             // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Equal(checks, actionResult.Value);
+            Assert.IsType<NoContentResult>(result);
         }
 
         [Fact]
-        public async Task GetAll_DeveRetornarNoContent_QuandoNenhumCheckEncontrado()
+        public async Task Atualizar_DeveRetornarNotFoundSeNaoEncontrado()
         {
             // Arrange
-            _service
-                .Setup(s => s.GetAllAsync())
-                .ReturnsAsync((List<CheckListResponseDTO>)null);
+            var checkListPatchDto = new CheckListPatchDTO(1, "Novo Nome");
+
+            _checkListServiceMock.Setup(service => service.BuscarPorIdAsync(checkListPatchDto.Id))
+                .ReturnsAsync((CheckListResponseDTO)null);
 
             // Act
-            var result = await _controller.GetAll();
+            var result = await _controller.Atualizar(checkListPatchDto);
 
             // Assert
-            Assert.IsType<NoContentResult>(result.Result);
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal("Questão não encontrada", notFoundResult.Value);
         }
 
+        [Fact]
+        public async Task DeleteAll_DeveRetornarNoContentSeApagarTodosComSucesso()
+        {
+            // Arrange
+            _checkListServiceMock.Setup(service => service.ApagarTodosAsync())
+                .ReturnsAsync(true);
+
+            // Act
+            var result = await _controller.DeleteAll();
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public async Task DeleteAll_DeveRetornarNotFoundSeNaoExistiremChecklists()
+        {
+            // Arrange
+            _checkListServiceMock.Setup(service => service.ApagarTodosAsync())
+                .ReturnsAsync(false);
+
+            // Act
+            var result = await _controller.DeleteAll();
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result);
+        }
     }
 }

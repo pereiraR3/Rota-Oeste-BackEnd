@@ -1,165 +1,190 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using api_rota_oeste.Models.CheckList;
+using api_rota_oeste.Models.Questao;
+using api_rota_oeste.Repositories;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
-using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
 using Moq;
 using Xunit;
-using System.Threading.Tasks;
-using api_rota_oeste.Models.Questao;
-using api_rota_oeste.Data;
-using api_rota_oeste.Repositories;
-using AutoMapper;
-using Xunit;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using api_rota_oeste.Models.Questao;
 
-namespace api_rota_oeste.Tests.Services;
-
-public class QuestaoServiceTest
+namespace api_rota_oeste.Tests.Services
 {
-    private readonly ApiDBContext _dbContext;
-    private readonly Mock<IQuestaoRepository> _questaoRepositoryMock;
-    private readonly Mock<IMapper> _mapperMock;
-    private readonly QuestaoService _questaoService;
-    private readonly QuestaoRepository _questaoRepository;
-
-    public QuestaoServiceTest()
+    public class QuestaoServiceTest
     {
-        // Configuração do DbContext para usar o InMemoryDatabase
-        var options = new DbContextOptionsBuilder<ApiDBContext>()
-            .UseInMemoryDatabase(databaseName: "ApiRotaOesteTestDB")
-            .Options;
+        private readonly Mock<IQuestaoRepository> _questaoRepositoryMock;
+        private readonly Mock<IMapper> _mapperMock;
+        private readonly Mock<ICheckListRepository> _repositoryCheckListMock;
+        private readonly Mock<IRepository> _repositoryMock;
+        private readonly QuestaoService _questaoService;
 
-        _dbContext = new ApiDBContext(options);
+        public QuestaoServiceTest()
+        {
+            _repositoryCheckListMock = new Mock<ICheckListRepository>();
+            _questaoRepositoryMock = new Mock<IQuestaoRepository>();
+            _mapperMock = new Mock<IMapper>();
+            _repositoryMock = new Mock<IRepository>();
         
-        _questaoRepositoryMock = new Mock<IQuestaoRepository>();
-        _mapperMock = new Mock<IMapper>();
-        _questaoService = new QuestaoService(_questaoRepositoryMock.Object, _mapperMock.Object);
-        _questaoRepository = new QuestaoRepository(_dbContext);
-    }
+            _questaoService = new QuestaoService(
+                _questaoRepositoryMock.Object,
+                _mapperMock.Object,
+                _repositoryCheckListMock.Object,
+                _repositoryMock.Object
+            );
+        }
 
-    [Fact]
-    public async Task criar_questao()
-    {
-        var questaoDTO = new QuestaoRequestDTO("tituloteste", "tipoteste");
-        Assert.NotNull(questaoDTO);
-        var questao = new QuestaoModel("tituloteste", "tipoteste");
-        
-        _mapperMock.Setup(mapper => mapper.Map<QuestaoModel>(questaoDTO))
-            .Returns(questao);
-        
-        _questaoRepository.criar(questao);
+        [Fact]
+        public async Task AdicionarAsync_DeveRetornarQuestaoResponseDTO()
+        {
+            // Arrange
+            var questaoRequest = new QuestaoRequestDTO(1, "Titulo Teste", "Tipo Teste");
+   
+            var checkListModel = new CheckListModel
+            {
+                Id = 1,
+                Nome = "CheckList Teste",
+                Questoes = new List<QuestaoModel>(),
+                Usuario = null,
+                UsuarioId = 1,
+                DataCriacao = DateTime.Today
+            };
 
-        var questaoSalva = _questaoRepository.obter(1);
-        Assert.Equal("tituloteste", questaoSalva.Titulo);
+            var questaoModel = new QuestaoModel
+            {
+                Id = 1,
+                Titulo = "Titulo Teste",
+                Tipo = "Tipo Teste",
+                CheckList = checkListModel
+            };
 
-    }
-
-    [Fact]
-    public async Task listar_questoes()
-    {
-        var questao1 = new QuestaoModel("tituloteste", "tipoteste");
-        var questao2 = new QuestaoModel("tituloteste2", "tipoteste2");
-        var listaQuestoes = new List<QuestaoModel>() { questao1, questao2 };
-        _questaoRepository.criar(questao1);
-        _questaoRepository.criar(questao2);
-        
-        _questaoRepositoryMock.Setup(repo => repo.listar())
-            .Returns(listaQuestoes);
-        
-        var questoes = _questaoService.listar();
-        Assert.NotNull(questoes);
-
-        Assert.Equal("tituloteste", questoes[0].Titulo);
-        Assert.Equal("tituloteste2", questoes[1].Titulo);
-    }
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel);
     
-    [Fact]
-    public async Task obter_questao_por_id()
-    {
-        var questao1 = new QuestaoModel("tituloteste", "tipoteste");
-        _questaoRepository.criar(questao1);
-        
-        var questao2 = new QuestaoResponseDTO("tituloteste", "tipoteste");
-        
-        
-        _questaoRepositoryMock.Setup(repo => repo.obter(1))
-            .Returns(questao1);
-        
-        _mapperMock.Setup(mapper => mapper.Map<QuestaoResponseDTO>(questao1))
-            .Returns(questao2);
-        
-        var questao = _questaoService.obter(1);
+            // Configurando o mock para buscar o CheckList
+            _repositoryCheckListMock.Setup(repo => repo.BuscarPorId(questaoRequest.CheckListId))
+                .ReturnsAsync(checkListModel);
+            
+            _questaoRepositoryMock.Setup(repo => repo.Adicionar(It.IsAny<QuestaoModel>()))
+                .ReturnsAsync(questaoModel);
+            
+            _mapperMock.Setup(mapper => mapper.Map<QuestaoResponseDTO>(questaoModel))
+                .Returns(questaoResponse);
 
-        Assert.Equal(questao, questao2);
+            // Act
+            var result = await _questaoService.AdicionarAsync(questaoRequest);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("Titulo Teste", result.Titulo);
+            Assert.Equal("Tipo Teste", result.Tipo);
+        }
+
+        [Fact]
+        public async Task BuscarPorIdAsync_DeveRetornarQuestaoResponseDTO_SeEncontrado()
+        {
+            
+            CheckListModel checkListModel = new CheckListModel
+            {
+                Id = 1,
+                Nome = "CheckList Teste",
+                Questoes = null,
+                Usuario = null,
+                UsuarioId = 1,
+                DataCriacao = DateTime.Today
+            };
+            
+            // Arrange
+            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Teste", Tipo = "Tipo Teste" };
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel);
+
+            _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(It.IsAny<int>()))
+                .ReturnsAsync(questaoModel);
+            _mapperMock.Setup(mapper => mapper.Map<QuestaoResponseDTO>(questaoModel))
+                .Returns(questaoResponse);
+
+            // Act
+            var result = await _questaoService.BuscarPorIdAsync(1);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("Titulo Teste", result.Titulo);
+            Assert.Equal("Tipo Teste", result.Tipo);
+        }
+
+        [Fact]
+        public async Task BuscarPorIdAsync_DeveLancarExcecao_SeNaoEncontrado()
+        {
+            // Arrange
+            _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(It.IsAny<int>()))
+                .ReturnsAsync((QuestaoModel)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => _questaoService.BuscarPorIdAsync(1));
+        }
+
+        [Fact]
+        public async Task AtualizarAsync_DeveRetornarTrue_SeAtualizacaoBemSucedida()
+        {
+            // Arrange
+            var questaoPatch = new QuestaoPatchDTO(1, "Novo Titulo", "Novo Tipo");
+            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Antigo", Tipo = "Tipo Antigo" };
+
+            _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(questaoPatch.Id))
+                .ReturnsAsync(questaoModel);
+            _mapperMock.Setup(mapper => mapper.Map(questaoPatch, questaoModel))
+                .Verifiable();
+
+            // Act
+            var result = await _questaoService.AtualizarAsync(questaoPatch);
+
+            // Assert
+            Assert.True(result);
+            _mapperMock.Verify(mapper => mapper.Map(questaoPatch, questaoModel), Times.Once);
+        }
+
+        [Fact]
+        public async Task AtualizarAsync_DeveLancarExcecao_SeQuestaoNaoEncontrada()
+        {
+            // Arrange
+            var questaoPatch = new QuestaoPatchDTO(1, "Novo Titulo", "Novo Tipo");
+
+            _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(questaoPatch.Id))
+                .ReturnsAsync((QuestaoModel)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => _questaoService.AtualizarAsync(questaoPatch));
+        }
+
+        [Fact]
+        public async Task ApagarAsync_DeveRetornarTrue_SeApagarBemSucedido()
+        {
+            // Arrange
+            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Teste", Tipo = "Tipo Teste" };
+
+            _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(It.IsAny<int>()))
+                .ReturnsAsync(questaoModel);
+    
+            _questaoRepositoryMock.Setup(repo => repo.Apagar(It.IsAny<int>()))
+                .ReturnsAsync(true);
+
+            // Act
+            var result = await _questaoService.ApagarAsync(1);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task ApagarAsync_DeveLancarExcecao_SeQuestaoNaoEncontrada()
+        {
+            // Arrange
+            _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(1))
+                .ReturnsAsync((QuestaoModel)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => _questaoService.ApagarAsync(1));
+        }
+
     }
-    
-    [Fact]
-    public async Task deletar_questao_por_id()
-    {
-        var questao1 = new QuestaoModel("tituloteste", "tipoteste");
-        _questaoRepository.criar(questao1);
-        
-        _questaoRepositoryMock.Setup(repo => repo.obter(1))
-            .Returns(questao1);
-        
-        // Mockar o método deletar para confirmar que o método será chamado
-        _questaoRepositoryMock.Setup(repo => repo.deletar(questao1.Id))
-            .Verifiable();  // Verificará se o método foi chamado durante o teste
-        
-        // Act
-        _questaoService.deletar(questao1.Id);
-        
-        // Assert
-        // Verifica se o método obter foi chamado com o ID 1
-        _questaoRepositoryMock.Verify(repo => repo.obter(1), Times.Once);
-    
-        // Verifica se o método deletar foi chamado com o ID da questão
-        _questaoRepositoryMock.Verify(repo => repo.deletar(questao1.Id), Times.Once);
-    }
-    
-    [Fact]
-    public void deletar_questao_por_id_nao_existe()
-    {
-        // Arrange
-        _questaoRepositoryMock.Setup(repo => repo.obter(It.IsAny<int>()))
-            .Returns((QuestaoModel)null); // Retorna null para simular que a questão não foi encontrada
-    
-        // Act & Assert
-        var exception = Assert.Throws<KeyNotFoundException>(() => _questaoService.deletar(1));
-
-        // Verifica se a mensagem de exceção está correta
-        Assert.Equal("Não há questão registrada com o ID informado.", exception.Message);
-
-        // Verifica se o método obter foi chamado com o ID 1
-        _questaoRepositoryMock.Verify(repo => repo.obter(1), Times.Once);
-
-        // Verifica que o método deletar não foi chamado, pois a questão não foi encontrada
-        _questaoRepositoryMock.Verify(repo => repo.deletar(It.IsAny<int>()), Times.Never);
-    }
-
-    
-    [Fact]
-    public async Task editar_questao_por_id_e_dto()
-    {
-        var questao1 = new QuestaoRequestDTO("tituloteste", "tipoteste");
-        var questao2 = new QuestaoModel("tituloteste", "tipoteste");
-        _questaoRepository.criar(questao2);
-        
-        // Mockar o método deletar para confirmar que o método será chamado
-        _questaoRepositoryMock.Setup(repo => repo.salvar())
-            .Verifiable();  // Verificará se o método foi chamado durante o teste
-        
-        _questaoRepositoryMock.Setup(repo => repo.obter(1))
-            .Returns(questao2);
-        
-        _questaoService.editar(1, questao1);
-        
-        Assert.Equal(_questaoRepository.obter(1), questao2);
-        _questaoRepositoryMock.Verify(repo => repo.obter(1), Times.Once);
-        _questaoRepositoryMock.Verify(repo => repo.salvar(), Times.Once);
-    }
-    
 }

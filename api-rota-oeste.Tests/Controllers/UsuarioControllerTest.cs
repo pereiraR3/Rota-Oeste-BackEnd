@@ -18,31 +18,17 @@ namespace api_rota_oeste.Tests.Controllers
             // Criando os mocks necessários
             _usuarioServiceMock = new Mock<IUsuarioService>();
     
-            // Inicializando o controller com o mock do repositório
+            // Inicializando o controller com o mock do serviço
             _controller = new UsuarioController(_usuarioServiceMock.Object);
         }
-
 
         // Teste para o método Adicionar
         [Fact]
         public async Task Adicionar_DeveRetornar201Created()
         {
             // Arrange
-            var usuarioRequest = new UsuarioRequestDTO
-            (
-                "66992337652",
-                "Teste",
-                "12345",
-                null
-            );
-
-            var usuarioResponse = new UsuarioResponseDTO
-            (
-                1,
-                "66992337652",
-                "Teste",
-                null
-            );
+            var usuarioRequest = new UsuarioRequestDTO("66992337652", "Teste", "12345", null);
+            var usuarioResponse = new UsuarioResponseDTO(1, "66992337652", "Teste", null, null, null);
 
             _usuarioServiceMock.Setup(repo => repo.AdicionarAsync(It.IsAny<UsuarioRequestDTO>()))
                 .ReturnsAsync(usuarioResponse);
@@ -51,8 +37,7 @@ namespace api_rota_oeste.Tests.Controllers
             var result = await _controller.Adicionar(usuarioRequest);
 
             // Assert
-            var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result); // Valida o tipo correto
-            Assert.NotNull(createdAtActionResult);
+            var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
             Assert.Equal(201, createdAtActionResult.StatusCode);
             Assert.Equal(usuarioResponse, createdAtActionResult.Value);
         }
@@ -62,33 +47,26 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task ObterPorId_DeveRetornar200ComUsuario()
         {
             // Arrange
-            var usuarioModel = new UsuarioResponseDTO
-            (
-                1,
-                "66992337652",
-                "Teste",
-                null
-            );
+            var usuarioResponse = new UsuarioResponseDTO(1, "66992337652", "Teste", null, null, null);
 
             _usuarioServiceMock.Setup(repo => repo.BuscaPorIdAsync(It.IsAny<int>()))
-                .ReturnsAsync(usuarioModel);
+                .ReturnsAsync(usuarioResponse);
 
             // Act
             var result = await _controller.ObterPorId(1);
 
             // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result.Result); // Verifica se o tipo retornado é OkObjectResult
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
             Assert.Equal(200, okResult.StatusCode);
-            Assert.Equal(usuarioModel, okResult.Value);
+            Assert.Equal(usuarioResponse, okResult.Value);
         }
-
 
         [Fact]
         public async Task ObterPorId_DeveRetornar404SeNaoEncontrado()
         {
             // Arrange
             _usuarioServiceMock.Setup(repo => repo.BuscaPorIdAsync(It.IsAny<int>()))
-                .ReturnsAsync((UsuarioResponseDTO) null);
+                .ReturnsAsync((UsuarioResponseDTO)null);
 
             // Act
             var result = await _controller.ObterPorId(1);
@@ -102,12 +80,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task Atualizar_DeveRetornar204NoContent()
         {
             // Arrange
-            var usuarioPatch = new UsuarioPatchDTO
-            {
-                Id = 1,
-                Nome = "Novo Nome",
-                Telefone = "66992337652"
-            };
+            var usuarioPatch = new UsuarioPatchDTO { Id = 1, Nome = "Novo Nome", Telefone = "66992337652" };
 
             _usuarioServiceMock.Setup(repo => repo.AtualizarAsync(It.IsAny<UsuarioPatchDTO>()))
                 .ReturnsAsync(true);
@@ -123,12 +96,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task Atualizar_DeveRetornar404SeNaoEncontrado()
         {
             // Arrange
-            var usuarioPatch = new UsuarioPatchDTO
-            {
-                Id = 1,
-                Nome = "Novo Nome",
-                Telefone = "66992337652"
-            };
+            var usuarioPatch = new UsuarioPatchDTO { Id = 1, Nome = "Novo Nome", Telefone = "66992337652" };
 
             _usuarioServiceMock.Setup(repo => repo.AtualizarAsync(It.IsAny<UsuarioPatchDTO>()))
                 .ReturnsAsync(false);

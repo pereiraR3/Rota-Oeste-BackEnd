@@ -1,4 +1,3 @@
-
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 
@@ -20,3 +19,4 @@ public record InteracaoResponseDTO
     CheckListResponseDTO? CheckList
     
 );
+

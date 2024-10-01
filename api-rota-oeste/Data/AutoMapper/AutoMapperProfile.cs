@@ -4,6 +4,7 @@ using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Usuario;
+
 public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
@@ -52,7 +53,6 @@ public class AutoMapperProfile : Profile
             // -> O mapeamento de atualização deve ignorar campos nulos
             CreateMap<InteracaoPatchDTO, InteracaoModel>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
-
             
         // Configuração dos mapeamentos relativos à entidade Usuario
         

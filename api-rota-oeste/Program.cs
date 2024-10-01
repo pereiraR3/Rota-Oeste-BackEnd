@@ -69,9 +69,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Adicionar o middleware de tratamento global de exceções
-app.UseMiddleware<api_rota_oeste.Middlewares.ExceptionHandlingMiddleware>();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

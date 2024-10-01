@@ -14,19 +14,19 @@ namespace api_rota_oeste.Services
     {
         private readonly ICheckListRepository _repositoryCheckList;
         private readonly IUsuarioRepository _repositoryUsuario;
+        private readonly IRepository _repository;
         private readonly IMapper _mapper;
 
         public CheckListService(
             
             ICheckListRepository repositoryCheckList,
             IUsuarioRepository repositoryUsuario,
-            IMapper mapper
-            
-            )
+            IMapper mapper, IRepository repository)
         {
             _repositoryCheckList = repositoryCheckList;
             _repositoryUsuario = repositoryUsuario;
             _mapper = mapper;
+            _repository = repository;
         }
 
         /**
@@ -94,8 +94,11 @@ namespace api_rota_oeste.Services
             if(checkListModel == null)
                 throw new KeyNotFoundException("CheckList não encontrado");
             
-            _mapper.Map<CheckListPatchDTO>(checkListModel);
+            // O mapeamento de atualização deve ignorar campos nulos
+            _mapper.Map(checkListPatchDto, checkListModel);
 
+            _repository.Salvar();
+            
             return true;
 
         }

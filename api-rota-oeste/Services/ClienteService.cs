@@ -1,4 +1,5 @@
 using api_rota_oeste.Models.Cliente;
+using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
@@ -34,13 +35,18 @@ public class ClienteService : IClienteService
     public async Task<ClienteResponseDTO> AdicionarAsync(ClienteRequestDTO clienteRequest)
     {
 
-        var usuarioModel = await _usuarioRepository.BuscaPorId(clienteRequest.UsuarioId);
+        UsuarioModel? usuarioModel = await _usuarioRepository.BuscaPorId(clienteRequest.UsuarioId);
+
+        if (usuarioModel == null)
+            throw new KeyNotFoundException("Usuário não encontrado");
         
         ClienteModel cliente = new ClienteModel(clienteRequest, usuarioModel);
         
+        var clienteModel = await _clienteRepository.Adicionar(cliente);
+        
         usuarioModel.Clientes.Add(cliente);
         
-        return _mapper.Map<ClienteResponseDTO>(cliente);
+        return _mapper.Map<ClienteResponseDTO>(clienteModel);
     }
     
     /**

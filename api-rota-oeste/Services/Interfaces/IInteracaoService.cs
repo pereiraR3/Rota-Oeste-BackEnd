@@ -9,5 +9,5 @@ public interface IInteracaoService {
     public Task<InteracaoResponseDTO> BuscarPorIdAsync(int id);
 
     public Task<bool> AtualizarAsync(InteracaoPatchDTO interacao);
-
+    
 }

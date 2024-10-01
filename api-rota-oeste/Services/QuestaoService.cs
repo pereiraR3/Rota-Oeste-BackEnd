@@ -87,15 +87,15 @@ public class QuestaoService : IQuestaoService{
     /**
     * Método da camada de serviço -> para fazer a atualização de um entidade do tipo questao
     */
-    public async Task<bool> AtualizarAsync(QuestaoPatchDTO request)
+    public async Task<bool> AtualizarAsync(QuestaoPatchDTO questaoPatch)
     {
-        QuestaoModel? questaoModel = await _repositoryQuestao.BuscarPorId(request.Id);
+        QuestaoModel? questaoModel = await _repositoryQuestao.BuscarPorId(questaoPatch.Id);
 
         if (questaoModel == null)
             throw new KeyNotFoundException("Questão não encontrada");
         
         // O mapeamento de atualização deve ignorar campos nulos
-        _mapper.Map<QuestaoPatchDTO>(questaoModel);
+        _mapper.Map(questaoPatch, questaoModel);
         
         _repository.Salvar();
 
@@ -106,22 +106,21 @@ public class QuestaoService : IQuestaoService{
     /**
     * Método da camada de serviço -> para fazer a deleção relacional de uma entidade do tipo questao
     */
-    public async Task<bool> ApagarAsync(int id){
-        
-        if(id <= 0)
+    public async Task<bool> ApagarAsync(int id)
+    {
+        if (id <= 0)
             throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
-        
-        var questaoObtida = _repositoryQuestao.BuscarPorId(id);
-        
+
+        var questaoObtida = await _repositoryQuestao.BuscarPorId(id); 
+
         if (questaoObtida == null)
         {
             throw new KeyNotFoundException("Questão não encontrada.");
         }
-        
+
         await _repositoryQuestao.Apagar(id);
 
         return true;
-
     }
     
 }
