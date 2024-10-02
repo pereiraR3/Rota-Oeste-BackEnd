@@ -29,7 +29,7 @@ namespace api_rota_oeste.Tests.Controllers
             var questaoRequest = new QuestaoRequestDTO(1, "Titulo Teste", "Tipo Teste");
 
             _questaoServiceMock.Setup(service => service.AdicionarAsync(It.IsAny<QuestaoRequestDTO>()))
-                .ReturnsAsync(new QuestaoResponseDTO(1, 1,"Titulo Teste", "Tipo Teste", null));
+                .ReturnsAsync(new QuestaoResponseDTO(1, 1,"Titulo Teste", "Tipo Teste", null, null));
 
             // Act
             var result = await _controller.Adicionar(questaoRequest);
@@ -55,8 +55,8 @@ namespace api_rota_oeste.Tests.Controllers
 
             var questoes = new List<QuestaoResponseDTO>
             {
-                new QuestaoResponseDTO(1, 1,"Titulo 1", "Tipo 1", checkListModel),
-                new QuestaoResponseDTO(2, 1,"Titulo 2", "Tipo 2", checkListModel)
+                new QuestaoResponseDTO(1, 1,"Titulo 1", "Tipo 1", checkListModel, null),
+                new QuestaoResponseDTO(2, 1,"Titulo 2", "Tipo 2", checkListModel, null)
             };
 
             _questaoServiceMock.Setup(service => service.BuscarTodosAsync())
@@ -87,7 +87,7 @@ namespace api_rota_oeste.Tests.Controllers
                 DataCriacao = DateTime.Today
             };
 
-            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel);
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel, null);
 
             _questaoServiceMock.Setup(service => service.BuscarPorIdAsync(It.IsAny<int>()))
                 .ReturnsAsync(questaoResponse);

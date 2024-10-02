@@ -101,7 +101,7 @@ public class ClienteService : IClienteService
     public async Task<List<ClienteResponseDTO>> BuscarTodosAsync()
     {
 
-        List<ClienteModel> clienteModels = await _clienteRepository.BuscarTodos();
+        List<ClienteModel>? clienteModels = await _clienteRepository.BuscarTodos();
         
         List<ClienteResponseDTO> clientesResponse = clienteModels
             .Select(i => _mapper.Map<ClienteResponseDTO>(i))

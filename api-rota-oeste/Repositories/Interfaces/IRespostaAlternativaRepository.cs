@@ -15,6 +15,6 @@ public interface IRespostaAlternativaRepository
     
     Task<bool> Apagar(int id);
     
-    Task<bool> ApagarTodos(int id);
+    Task<bool> ApagarTodos();
     
 }

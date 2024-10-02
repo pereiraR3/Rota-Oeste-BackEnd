@@ -24,13 +24,13 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             var interacaoRequest = new InteracaoRequestDTO(1, 1, true);
-            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null);
+            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null, null);
 
             _interacaoServiceMock.Setup(service => service.AdicionarAsync(interacaoRequest))
                 .ReturnsAsync(interacaoResponse);
 
             // Act
-            var result = await _interacaoController.Criar(interacaoRequest);
+            var result = await _interacaoController.Adicionar(interacaoRequest);
 
             // Assert
             var createdResult = Assert.IsType<CreatedAtActionResult>(result.Result);
@@ -44,7 +44,7 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             var interacaoId = 1;
-            var interacaoResponse = new InteracaoResponseDTO(interacaoId, 1, 1, true, null, null);
+            var interacaoResponse = new InteracaoResponseDTO(interacaoId, 1, 1, true, null, null, null);
 
             _interacaoServiceMock.Setup(service => service.BuscarPorIdAsync(interacaoId))
                 .ReturnsAsync(interacaoResponse);
@@ -83,7 +83,7 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             var interacaoPatch = new InteracaoPatchDTO(1, true);
-            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null);
+            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null, null);
 
             _interacaoServiceMock.Setup(service => service.BuscarPorIdAsync(interacaoPatch.Id))
                 .ReturnsAsync(interacaoResponse);
@@ -125,7 +125,7 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             var interacaoPatch = new InteracaoPatchDTO(1, true);
-            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null);
+            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null, null);
 
             _interacaoServiceMock.Setup(service => service.BuscarPorIdAsync(interacaoPatch.Id))
                 .ReturnsAsync(interacaoResponse);

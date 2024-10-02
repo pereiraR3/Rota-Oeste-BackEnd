@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
@@ -102,7 +102,7 @@ namespace api_rota_oeste.Tests.Services
                 .Returns(usuarioResponse);
 
             // Act
-            var result = await _usuarioService.BuscaPorIdAsync(1);
+            var result = await _usuarioService.BuscarPorIdAsync(1);
 
             // Assert
             Assert.NotNull(result);
@@ -119,7 +119,39 @@ namespace api_rota_oeste.Tests.Services
                 .ReturnsAsync((UsuarioModel)null);
 
             // Act & Assert
-            await Assert.ThrowsAsync<KeyNotFoundException>(() => _usuarioService.BuscaPorIdAsync(1));
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => _usuarioService.BuscarPorIdAsync(1));
+        }
+        
+        [Fact]
+        public async Task BuscarTodosAsync_DeveRetornarListaDeUsuarios_QuandoExistiremUsuarios()
+        {
+            // Arrange
+            var usuarioModels = new List<UsuarioModel>
+            {
+                new UsuarioModel { Id = 1, Nome = "Usuário 1" },
+                new UsuarioModel { Id = 2, Nome = "Usuário 2" }
+            };
+
+            _usuarioRepositoryMock.Setup(x => x.BuscarTodos()).ReturnsAsync(usuarioModels);
+
+            var usuarioResponseDtos = usuarioModels
+                .Select(u => new UsuarioResponseDTO(u.Id, u.Telefone, u.Nome, null, null, null))
+                .ToList();
+
+            _mapperMock.Setup(x => x.Map<UsuarioResponseDTO>(It.IsAny<UsuarioModel>()))
+                .Returns((UsuarioModel source) => new UsuarioResponseDTO(source.Id, source.Telefone, source.Nome, null, null, null));
+
+            // Act
+            var result = await _usuarioService.BuscarTodosAsync();
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(usuarioResponseDtos.Count, result.Count);
+            for (int i = 0; i < usuarioResponseDtos.Count; i++)
+            {
+                Assert.Equal(usuarioResponseDtos[i].Id, result[i].Id);
+                Assert.Equal(usuarioResponseDtos[i].Nome, result[i].Nome);
+            }
         }
 
         // Teste para AtualizarAsync - Sucesso

@@ -2,6 +2,7 @@
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
@@ -40,11 +41,57 @@ public class InteracaoRepository: IInteracaoRepository
     }
 
     /**
-      * Método que serve para buscar por determinada entidade do tipo interacao
-      */
+    * Método que serve para buscar por determinada entidade do tipo interacao
+    */
     public async Task<InteracaoModel?> BuscarPorId(int id)
     {
-       return await _context.Interacoes.FindAsync(id);
+        return await _context.Interacoes
+            .Include(x => x.CheckList)
+            .Include(x => x.Cliente)
+            .Include(x => x.RespostaAlternativaModels)
+            .FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    /**
+    * Método que serve para buscar por determinada entidade do tipo interacao
+    */
+    public async Task<List<InteracaoModel>> BuscarTodos()
+    {
+        
+        return await _context.Interacoes.ToListAsync();
+        
+    }
+
+    /**
+    * Método que serve para buscar por determinada entidade do tipo interacao
+    */
+    public async Task<bool> ApagarPorId(int id)
+    {
+
+        var interacaoModel = await _context.Interacoes.FindAsync(id);
+        
+        if(interacaoModel == null)
+            return false;
+        
+        _context.Interacoes.Remove(interacaoModel);
+        
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+    /**
+    * Método que serve para buscar por determinada entidade do tipo interacao
+    */
+    public async Task<bool> ApagarTodos()
+    {
+        
+        _context.Interacoes.RemoveRange(_context.Interacoes);
+        
+        await _context.SaveChangesAsync();
+
+        return true;
+        
     }
     
 }

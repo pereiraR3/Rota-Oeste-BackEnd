@@ -13,6 +13,8 @@ public interface IUsuarioRepository
 
     Task<UsuarioModel?> BuscaPorId(int id);
     
+    Task<List<UsuarioModel>> BuscarTodos();
+    
     Task<bool> Apagar(int id);
 
 

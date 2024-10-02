@@ -23,7 +23,7 @@ namespace api_rota_oeste.Controllers
         )]
         [SwaggerResponse(201, "Interação criada com sucesso", typeof(InteracaoResponseDTO))]
         [SwaggerResponse(400, "Erro nos dados fornecidos")]
-        public async Task<ActionResult<InteracaoResponseDTO>> Criar([FromBody] InteracaoRequestDTO req)
+        public async Task<ActionResult<InteracaoResponseDTO>> Adicionar([FromBody] InteracaoRequestDTO req)
         {
             var intResponseDto = await _serviceInteracao.AdicionarAsync(req);
 
@@ -45,10 +45,22 @@ namespace api_rota_oeste.Controllers
         {
             var interacao = await _serviceInteracao.BuscarPorIdAsync(id);
 
-            if (interacao == null)
-                return NotFound("Interação não encontrada");
-
             return Ok(interacao);
+        }
+        
+        [HttpGet("buscarTodos")]
+        [SwaggerOperation(
+            Summary = "Lista as interações",
+            Description = "Lista todas as interações armazenadas no banco de dados."
+        )]
+        [SwaggerResponse(200, "Lista de interações retornada com sucesso", typeof(List<InteracaoModel>))]
+        public async Task<ActionResult<List<InteracaoResponseDTO>>> BuscarTodos()
+        {
+            
+            var interacoes = await _serviceInteracao.BuscarTodosAsync();
+            
+            return Ok(interacoes);
+            
         }
         
         [HttpPatch("atualizar")]
@@ -61,10 +73,6 @@ namespace api_rota_oeste.Controllers
         [SwaggerResponse(400, "Erro ao atualizar a interação")]
         public async Task<IActionResult> Atualizar([FromBody] InteracaoPatchDTO interacao)
         {
-            var busca = await _serviceInteracao.BuscarPorIdAsync(interacao.Id);
-
-            if (busca == null)
-                return NoContent();
 
             var result = await _serviceInteracao.AtualizarAsync(interacao);
 
@@ -73,6 +81,40 @@ namespace api_rota_oeste.Controllers
 
             return Ok();
         }
+        
+        [HttpDelete("apagarPorId/{id}")]
+        [SwaggerOperation(
+            Summary = "Remove uma interação",
+            Description = "Deleta as informações de uma interação no banco de dados."
+        )]
+        [SwaggerResponse(204, "Interação removida com sucesso")]
+        [SwaggerResponse(404, "Interação não encontrada")]
+        public async Task<ActionResult> ApagarPorId(int id)
+        {
+
+            await _serviceInteracao.ApagarAsync(id);
+            
+            return NoContent();
+        }        
+        
+        
+        [HttpDelete("apagarTodos")]
+        [SwaggerOperation(
+            Summary = "Remove todos as interações",
+            Description = "Remove todos os interações do sistema."
+        )]
+        [SwaggerResponse(204, "Todos os interações removidos com sucesso")]
+        [SwaggerResponse(404, "Nenhum interações encontrado")]
+        public async Task<IActionResult> ApagarTodos()
+        {
+            var status = await _serviceInteracao.ApagarTodosAsync();
+
+            if (!status)
+                return NotFound(); // Retorna 404 Not Found se nenhuma interação for encontrada
+
+            return NoContent(); // Retorna 204 No Content se todos as interações foram removidas com sucesso
+        }
+        
     }
     
 }

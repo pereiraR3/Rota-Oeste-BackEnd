@@ -1,6 +1,7 @@
 ﻿﻿using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Interacao;
+using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
@@ -42,17 +43,20 @@ public class InteracaoService : IInteracaoService {
     public async Task<InteracaoResponseDTO> AdicionarAsync(InteracaoRequestDTO interacaoDto) {
         
         ClienteModel? clienteModel = await _clienteRepository.BuscarPorId(interacaoDto.ClienteId);
+
+        if (clienteModel == null)
+            throw new KeyNotFoundException("Cliente não encontrado");
         
         CheckListModel? checkListModel = await _checkListRepository.BuscarPorId(interacaoDto.CheckListId);
-        
-        if(checkListModel == null || clienteModel == null)
-            return null;
+
+        if (checkListModel == null)
+            throw new KeyNotFoundException("CheckList não encontrado");
         
         InteracaoModel? interacaoModel = new InteracaoModel(interacaoDto, clienteModel, checkListModel);
         
-        var resultado = await _repositoryInteracao.Adicionar(interacaoModel);
+        var interacao = await _repositoryInteracao.Adicionar(interacaoModel);
         
-        return _mapper.Map<InteracaoResponseDTO>(interacaoModel);
+        return _mapper.Map<InteracaoResponseDTO>(interacao);
         
     }
     
@@ -68,7 +72,21 @@ public class InteracaoService : IInteracaoService {
         
         if(interacao == null) throw new ArgumentNullException(nameof(id));
 
+        interacao = RefatoraoMinInteracaoModel(interacao);
+
         return _mapper.Map<InteracaoResponseDTO>(interacao);
+    }
+
+    /**
+    * Método da camada de servico -> para buscar todas as entidades do tipo interacao
+    */
+    public async Task<List<InteracaoResponseDTO>> BuscarTodosAsync()
+    {
+        var interacao = await _repositoryInteracao.BuscarTodos();
+        
+        return interacao
+            .Select(_mapper.Map<InteracaoResponseDTO>)
+            .ToList();
     }
 
     /**
@@ -88,6 +106,75 @@ public class InteracaoService : IInteracaoService {
         _repository.Salvar();
 
         return true;
+    }
+    
+    /**
+     * Método da camada de servico -> para apagar uma determinada interacao
+     */
+    public async Task<bool> ApagarAsync(int id)
+    {
+        if (id <= 0)
+            throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
+
+        var interacao = await _repositoryInteracao.BuscarPorId(id); 
+
+        if (interacao == null)
+            throw new KeyNotFoundException("Questão não encontrada.");
+        
+        await _repositoryInteracao.ApagarPorId(id);
+
+        return true;
+    }
+
+    /**
+     * Método da camada de servico -> para apagar todas as entidades interacao
+     */
+    public async Task<bool> ApagarTodosAsync()
+    {
+
+        await _repositoryInteracao.ApagarTodos();
+
+        return true;
+
+    }
+    
+    /**
+     * Método da camada de serviço -> para fazer a refatoracao de InteracaoModel -> InteracaoResponseDTO sem que haja
+     * problemas de dependência circular de modo que puxem apenas as informações que foram julgadas como necessárias
+     */
+    public InteracaoModel RefatoraoMinInteracaoModel(InteracaoModel interacaoModel)
+    {
+        var interacaoRespostaAlternativaModels = interacaoModel.RespostaAlternativaModels
+            .Select(o => new RespostaAlternativaModel
+            {
+                Id = o.Id,
+                Alternativa = o.Alternativa,
+                Questao = o.Questao,
+                Interacao = o.Interacao
+                
+            }).ToList();
+        
+        interacaoModel.RespostaAlternativaModels = interacaoRespostaAlternativaModels;
+
+        if (interacaoModel.CheckList != null)
+            interacaoModel.CheckList = new CheckListModel
+            {
+                Id = interacaoModel.CheckList.Id,
+                Usuario = interacaoModel.CheckList.Usuario,
+                Nome = interacaoModel.CheckList.Nome,
+                DataCriacao = interacaoModel.CheckList.DataCriacao
+            };
+
+        if (interacaoModel.Cliente != null)
+            interacaoModel.Cliente = new ClienteModel
+            {
+                Id = interacaoModel.Cliente.Id,
+                UsuarioId = interacaoModel.Cliente.UsuarioId,
+                Nome = interacaoModel.Cliente.Nome,
+                Telefone = interacaoModel.Cliente.Telefone,
+            };
+        
+        return interacaoModel;
     }
     
 }

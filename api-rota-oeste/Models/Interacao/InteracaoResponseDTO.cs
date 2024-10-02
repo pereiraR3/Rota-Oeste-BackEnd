@@ -1,5 +1,6 @@
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
+using api_rota_oeste.Models.RespostaAlternativa;
 
 namespace api_rota_oeste.Models.Interacao;
 
@@ -16,7 +17,9 @@ public record InteracaoResponseDTO
     
     ClienteResponseDTO? Cliente,
     
-    CheckListResponseDTO? CheckList
+    CheckListResponseDTO? CheckList,
+    
+    List<RespostaAlternativaModel>? RespostaAlternativaModels
     
 );
 

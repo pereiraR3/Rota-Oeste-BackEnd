@@ -53,11 +53,14 @@ public class QuestaoRepository : IQuestaoRepository
     /**
      * Método que serve para buscar por determinada entidade do tipo questao 
      */
-    public async Task<QuestaoModel> BuscarPorId(int id)
+    public async Task<QuestaoModel?> BuscarPorId(int id)
     {
-        var questao = await _context.Questoes.FindAsync(id);
         
-        return questao;
+        return await _context.Questoes
+            .Include(x => x.CheckList)
+            .Include(x => x.RespostaAlternativaModels)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        
     }
     
     /**

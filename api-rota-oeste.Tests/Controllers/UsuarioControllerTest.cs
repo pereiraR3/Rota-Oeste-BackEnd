@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using api_rota_oeste.Controllers;
 using api_rota_oeste.Models.Usuario;
@@ -49,11 +50,11 @@ namespace api_rota_oeste.Tests.Controllers
             // Arrange
             var usuarioResponse = new UsuarioResponseDTO(1, "66992337652", "Teste", null, null, null);
 
-            _usuarioServiceMock.Setup(repo => repo.BuscaPorIdAsync(It.IsAny<int>()))
+            _usuarioServiceMock.Setup(repo => repo.BuscarPorIdAsync(It.IsAny<int>()))
                 .ReturnsAsync(usuarioResponse);
 
             // Act
-            var result = await _controller.ObterPorId(1);
+            var result = await _controller.BuscarPorId(1);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
@@ -65,14 +66,35 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task ObterPorId_DeveRetornar404SeNaoEncontrado()
         {
             // Arrange
-            _usuarioServiceMock.Setup(repo => repo.BuscaPorIdAsync(It.IsAny<int>()))
+            _usuarioServiceMock.Setup(repo => repo.BuscarPorIdAsync(It.IsAny<int>()))
                 .ReturnsAsync((UsuarioResponseDTO)null);
 
             // Act
-            var result = await _controller.ObterPorId(1);
+            var result = await _controller.BuscarPorId(1);
 
             // Assert
             Assert.IsType<NotFoundResult>(result.Result);
+        }
+        
+        [Fact]
+        public async Task BuscarTodos_DeveRetornarOkComListaDeUsuarios_QuandoExistiremUsuarios()
+        {
+            // Arrange
+            var usuarioResponseDtos = new List<UsuarioResponseDTO>()
+            {
+                new UsuarioResponseDTO(1, "66992337652", "Usuário 1", null, null, null),
+                new UsuarioResponseDTO(2, "66992337653", "Usuário 2", null, null, null)
+            };
+
+            _usuarioServiceMock.Setup(service => service.BuscarTodosAsync()).ReturnsAsync(usuarioResponseDtos);
+
+            // Act
+            var result = await _controller.BuscarTodos();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var usuarios = Assert.IsType<List<UsuarioResponseDTO>>(okResult.Value);
+            Assert.Equal(usuarioResponseDtos.Count, usuarios.Count);
         }
 
         // Teste para o método Atualizar
@@ -107,7 +129,7 @@ namespace api_rota_oeste.Tests.Controllers
             // Assert
             Assert.IsType<NotFoundResult>(result);
         }
-
+        
         // Teste para o método Apagar
         [Fact]
         public async Task Apagar_DeveRetornar204NoContent()
@@ -117,7 +139,7 @@ namespace api_rota_oeste.Tests.Controllers
                 .ReturnsAsync(true);
 
             // Act
-            var result = await _controller.Apagar(1);
+            var result = await _controller.ApagarPorId(1);
 
             // Assert
             Assert.IsType<NoContentResult>(result);
@@ -131,7 +153,7 @@ namespace api_rota_oeste.Tests.Controllers
                 .ReturnsAsync(false);
 
             // Act
-            var result = await _controller.Apagar(1);
+            var result = await _controller.ApagarPorId(1);
 
             // Assert
             Assert.IsType<NotFoundResult>(result);

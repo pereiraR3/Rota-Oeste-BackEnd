@@ -30,7 +30,7 @@ public class UsuarioController : ControllerBase
 
         // Retorna 201 Created com a URL para acessar o usuário criado
         return CreatedAtAction(
-            nameof(ObterPorId), // Nome da ação que busca o usuário pelo ID
+            nameof(BuscarPorId), // Nome da ação que busca o usuário pelo ID
             new { id = usuarioResponseDto.Id }, // Parâmetro para a rota
             usuarioResponseDto // O objeto criado
         );
@@ -43,15 +43,28 @@ public class UsuarioController : ControllerBase
     )]
     [SwaggerResponse(200, "Usuário encontrado", typeof(UsuarioResponseDTO))]
     [SwaggerResponse(404, "Usuário não encontrado")]
-    public async Task<ActionResult<UsuarioResponseDTO>> ObterPorId(int id)
+    public async Task<ActionResult<UsuarioResponseDTO>> BuscarPorId(int id)
     {
-        UsuarioResponseDTO? usuario = await _usuarioService.BuscaPorIdAsync(id);
+        UsuarioResponseDTO? usuario = await _usuarioService.BuscarPorIdAsync(id);
 
         if (usuario == null)
             return NotFound();
         
         return Ok(usuario);
 
+    }
+    
+    [HttpGet("buscarTodos")]
+    [SwaggerOperation(
+        Summary = "Lista os usuários",
+        Description = "Lista todas os usuários armazenadas no banco de dados."
+    )]
+    [SwaggerResponse(200, "Lista de usuários retornada com sucesso", typeof(List<UsuarioModel>))]
+    public async Task<ActionResult<List<UsuarioResponseDTO>>> BuscarTodos()
+    {
+        var usuarios = await _usuarioService.BuscarTodosAsync();
+        
+        return Ok(usuarios);
     }
     
     [HttpPatch("atualizar")]
@@ -79,7 +92,7 @@ public class UsuarioController : ControllerBase
     )]
     [SwaggerResponse(204, "Usuário removido com sucesso")]
     [SwaggerResponse(404, "Usuário não encontrado")]
-    public async Task<IActionResult> Apagar(int id)
+    public async Task<IActionResult> ApagarPorId(int id)
     {
         var status = await _usuarioService.ApagarAsync(id);
 

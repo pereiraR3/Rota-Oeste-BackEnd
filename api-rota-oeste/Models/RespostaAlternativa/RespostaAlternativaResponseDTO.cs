@@ -1,3 +1,6 @@
+using api_rota_oeste.Models.Interacao;
+using api_rota_oeste.Models.Questao;
+
 namespace api_rota_oeste.Models.RespostaAlternativa;
 
 public record RespostaAlternativaResponseDTO(
@@ -8,6 +11,12 @@ public record RespostaAlternativaResponseDTO(
     
     int InteracaoId,
     
-    int Alternativa
+    int? Alternativa,
+    
+    byte[]? Foto,
+    
+    QuestaoModel? Questao,
+    
+    InteracaoModel? Interacao
     
 );

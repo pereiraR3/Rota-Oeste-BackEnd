@@ -10,6 +10,6 @@ public record ClienteRequestDTO
     
     string Telefone, 
     
-    byte[] Foto
+    byte[]? Foto
     
 );

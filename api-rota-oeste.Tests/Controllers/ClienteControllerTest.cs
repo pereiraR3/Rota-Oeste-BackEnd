@@ -25,7 +25,7 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             var clienteRequest = new ClienteRequestDTO(1, "Teste", "123456789", null);
-            var clienteResponse = new ClienteResponseDTO(1, 1, "Teste", "123456789", null, null);
+            var clienteResponse = new ClienteResponseDTO(1, 1, "Teste", "123456789", null);
 
             _clienteServiceMock.Setup(service => service.AdicionarAsync(clienteRequest))
                 .ReturnsAsync(clienteResponse);
@@ -52,8 +52,8 @@ namespace api_rota_oeste.Tests.Controllers
 
             var clienteResponses = new List<ClienteResponseDTO>
             {
-                new ClienteResponseDTO(1, 1, "Cliente 1", "123456789", null, null),
-                new ClienteResponseDTO(2, 2, "Cliente 2", "987654321", null, null)
+                new ClienteResponseDTO(1, 1, "Cliente 1", "123456789", null),
+                new ClienteResponseDTO(2, 2, "Cliente 2", "987654321", null)
             };
 
             _clienteServiceMock.Setup(service => service.AdicionarColecaoAsync(clienteCollection))
@@ -74,7 +74,7 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             var clienteId = 1;
-            var clienteResponse = new ClienteResponseDTO(clienteId, 1, "Cliente Teste", "123456789", null, null);
+            var clienteResponse = new ClienteResponseDTO(clienteId, 1, "Cliente Teste", "123456789", null);
 
             _clienteServiceMock.Setup(service => service.BuscarPorIdAsync(clienteId))
                 .ReturnsAsync(clienteResponse);
@@ -113,8 +113,8 @@ namespace api_rota_oeste.Tests.Controllers
             // Arrange
             var clientesResponse = new List<ClienteResponseDTO>
             {
-                new ClienteResponseDTO(1, 1, "Cliente 1", "123456789", null, null),
-                new ClienteResponseDTO(2, 2, "Cliente 2", "987654321", null, null)
+                new ClienteResponseDTO(1, 1, "Cliente 1", "123456789", null),
+                new ClienteResponseDTO(2, 2, "Cliente 2", "987654321", null)
             };
 
             _clienteServiceMock.Setup(service => service.BuscarTodosAsync())

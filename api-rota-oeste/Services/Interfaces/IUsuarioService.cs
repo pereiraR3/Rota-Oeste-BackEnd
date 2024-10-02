@@ -6,7 +6,9 @@ public interface IUsuarioService
 {
     Task<UsuarioResponseDTO> AdicionarAsync(UsuarioRequestDTO request);
 
-    Task<UsuarioResponseDTO> BuscaPorIdAsync(int id);
+    Task<UsuarioResponseDTO> BuscarPorIdAsync(int id);
+    
+    Task<List<UsuarioResponseDTO>> BuscarTodosAsync();
     
     Task<bool> AtualizarAsync(UsuarioPatchDTO request);
     
