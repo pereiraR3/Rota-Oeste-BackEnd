@@ -30,7 +30,7 @@ namespace api_rota_oeste.Tests.Controllers
                 .ReturnsAsync(interacaoResponse);
 
             // Act
-            var result = await _interacaoController.Criar(interacaoRequest);
+            var result = await _interacaoController.Adicionar(interacaoRequest);
 
             // Assert
             var createdResult = Assert.IsType<CreatedAtActionResult>(result.Result);

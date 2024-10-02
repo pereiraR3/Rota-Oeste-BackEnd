@@ -4,10 +4,12 @@ using System.Text.Json.Serialization;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.RespostaAlternativa;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Models.Interacao;
 
 [Table("interacao")]
+[Index(nameof(ClienteId), nameof(CheckListId), IsUnique = true)]
 public class InteracaoModel
 {
     

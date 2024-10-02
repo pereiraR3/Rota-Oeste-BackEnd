@@ -8,6 +8,13 @@ public interface IInteracaoService {
     
     public Task<InteracaoResponseDTO> BuscarPorIdAsync(int id);
 
+    public Task<List<InteracaoResponseDTO>> BuscarTodosAsync();
+    
     public Task<bool> AtualizarAsync(InteracaoPatchDTO interacao);
+    
+    public Task<bool> ApagarAsync(int id);
+
+    public Task<bool> ApagarTodosAsync();
+    
     
 }

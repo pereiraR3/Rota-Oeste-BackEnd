@@ -81,7 +81,9 @@ public class QuestaoService : IQuestaoService{
     {
         var questoes = await _repositoryQuestao.BuscarTodos();
         
-        return questoes.Select(_mapper.Map<QuestaoResponseDTO>).ToList();
+        return questoes
+            .Select(_mapper.Map<QuestaoResponseDTO>)
+            .ToList();
     }
     
     /**

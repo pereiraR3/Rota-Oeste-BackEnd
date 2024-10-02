@@ -7,7 +7,7 @@ public record RespostaAlternativaRequestDTO
     
     int InteracaoId,
     
-    int? Alternativa,
+    int Alternativa,
     
     byte[]? Foto
     

@@ -26,7 +26,7 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             var checkListRequest = new CheckListRequestDTO(1, "Checklist Teste");
-            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null);
+            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null, null);
 
             _checkListServiceMock.Setup(service => service.AdicionarAsync(checkListRequest))
                 .ReturnsAsync(checkListResponse);
@@ -44,7 +44,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task BuscarPorId_DeveRetornarOkSeEncontrado()
         {
             // Arrange
-            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null);
+            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null, null);
 
             _checkListServiceMock.Setup(service => service.BuscarPorIdAsync(1))
                 .ReturnsAsync(checkListResponse);
@@ -78,8 +78,8 @@ namespace api_rota_oeste.Tests.Controllers
             // Arrange
             var checkListsResponse = new List<CheckListResponseDTO>
             {
-                new CheckListResponseDTO(1, 1, "Checklist 1", DateTime.Now, null, null),
-                new CheckListResponseDTO(2, 1, "Checklist 2", DateTime.Now, null, null)
+                new CheckListResponseDTO(1, 1, "Checklist 1", DateTime.Now, null, null, null),
+                new CheckListResponseDTO(2, 1, "Checklist 2", DateTime.Now, null, null, null)
             };
 
             _checkListServiceMock.Setup(service => service.BuscarTodosAsync())
@@ -127,7 +127,7 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             var checkListPatchDto = new CheckListPatchDTO(1, "Novo Nome");
-            var checkListResponse = new CheckListResponseDTO(1, 1, "Novo Nome", DateTime.Now, null, null);
+            var checkListResponse = new CheckListResponseDTO(1, 1, "Novo Nome", DateTime.Now, null, null, null);
 
             _checkListServiceMock.Setup(service => service.BuscarPorIdAsync(checkListPatchDto.Id))
                 .ReturnsAsync(checkListResponse);

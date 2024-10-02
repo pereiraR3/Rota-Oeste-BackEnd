@@ -10,8 +10,8 @@ namespace api_rota_oeste.Middlewares
 
         public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
         {
-            _next = next;
-            _logger = logger;
+            _next = next ?? throw new ArgumentNullException(nameof(next));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -22,32 +22,52 @@ namespace api_rota_oeste.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Ocorreu um erro inesperado.");
                 await HandleExceptionAsync(context, ex);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            var statusCode = HttpStatusCode.InternalServerError; // 500 por padrão
-            var result = JsonSerializer.Serialize(new { error = "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde." });
+            var statusCode = GetStatusCode(exception);
+            var response = new ErrorResponse
+            {
+                StatusCode = (int)statusCode,
+                Message = GetErrorMessage(exception)
+            };
 
-            // Exceção personalizada
-            if (exception is ArgumentException)
-            {
-                statusCode = HttpStatusCode.BadRequest; // 400
-                result = JsonSerializer.Serialize(new { error = exception.Message });
-            }
-            else if (exception is KeyNotFoundException)
-            {
-                statusCode = HttpStatusCode.NotFound; // 404
-                result = JsonSerializer.Serialize(new { error = "O recurso solicitado não foi encontrado." });
-            }
+            _logger.LogError(exception, "Erro capturado pelo middleware. Status code: {StatusCode}, Mensagem: {Message}", response.StatusCode, response.Message);
 
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)statusCode;
+            context.Response.StatusCode = response.StatusCode;
 
-            return context.Response.WriteAsync(result);
+            var jsonResponse = JsonSerializer.Serialize(response, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+
+            await context.Response.WriteAsync(jsonResponse);
+        }
+
+        private HttpStatusCode GetStatusCode(Exception exception) => exception switch
+        {
+            ArgumentException => HttpStatusCode.BadRequest,
+            KeyNotFoundException => HttpStatusCode.NotFound,
+            UnauthorizedAccessException => HttpStatusCode.Unauthorized,
+            _ => HttpStatusCode.InternalServerError
+        };
+
+        private string GetErrorMessage(Exception exception) => exception switch
+        {
+            ArgumentException argEx => argEx.Message,
+            KeyNotFoundException => "O recurso solicitado não foi encontrado.",
+            UnauthorizedAccessException => "Você não tem permissão para acessar este recurso.",
+            _ => "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde."
+        };
+
+        private class ErrorResponse
+        {
+            public int StatusCode { get; set; }
+            public string Message { get; set; }
         }
     }
 }

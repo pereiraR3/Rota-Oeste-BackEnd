@@ -9,51 +9,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/RespostaAlternativaControllerTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/RespostaAlternativaServiceTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/CheckListConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/ClienteConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/ClienteRespondeCheckListConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/QuestaoConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/UsuarioConfiguration.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Models/ClienteRespondeCheckList/ClienteRespondeCheckListModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Models/ClienteRespondeCheckList/ClienteRespondeCheckListResponseDTO.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRespondeCheckListRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IClienteRespondeCheckListRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/CheckListControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/CheckListControllerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/ClienteControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/ClienteControllerTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/InteracaoControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/InteracaoControllerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/QuestaoControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/QuestaoControllerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/UsuarioControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/UsuarioControllerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/InteracaoServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/InteracaoServiceTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/UsuarioServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/UsuarioServiceTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/CheckListServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/CheckListServiceTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/ClienteServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/ClienteServiceTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/CheckListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/CheckListController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/InteracaoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/InteracaoController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/QuestaoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/QuestaoController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/UsuarioController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/UsuarioController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/RespostaAlternativaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/RespostaAlternativaController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/ApiDBContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Data/ApiDBContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/AutoMapper/AutoMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Data/AutoMapper/AutoMapperProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/Map/InteracaoMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Map/InteracaoMap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20240930180901_IniTest.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20240930180901_IniTest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241001024022_UpDB.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241001024022_UpDB.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/ApiDBContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Migrations/ApiDBContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/InteracaoConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/InteracaoConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/Map/CheckListMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/Map/InteracaoMap.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Middlewares/ExceptionHandlingMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Middlewares/ExceptionHandlingMiddleware.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241001210442_InitDBStart.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241001210442_InitDBStart.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241001210818_UpdateAttrFoto.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241001210818_UpdateAttrFoto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/ApiDBContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/CheckList/CheckListModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/CheckList/CheckListModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/CheckList/CheckListResponseDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/CheckList/CheckListResponseDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Cliente/ClienteCollectionDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Cliente/ClienteCollectionDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Cliente/ClienteModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Cliente/ClienteModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Cliente/ClienteRequestDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Cliente/ClienteRequestDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Cliente/ClienteResponseDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Cliente/ClienteResponseDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Interacao/InteracaoModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Interacao/InteracaoModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Interacao/InteracaoResponseDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Interacao/InteracaoResponseDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Questao/QuestaoModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Questao/QuestaoModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Questao/QuestaoResponseDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Questao/QuestaoResponseDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/RespostaAlternativa/RespostaAlternativaModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/RespostaAlternativa/RespostaAlternativaModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/RespostaAlternativa/RespostaAlternativaRequestDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/RespostaAlternativa/RespostaAlternativaRequestDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/RespostaAlternativa/RespostaAlternativaResponseDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/RespostaAlternativa/RespostaAlternativaResponseDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Usuario/UsuarioModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Usuario/UsuarioModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IRespostaAlternativaRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IRespostaAlternativaRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IUsuarioRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IUsuarioRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/RespostaAlternativaRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/RespostaAlternativaRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/CheckListRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/CheckListRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/InteracaoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/InteracaoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IInteracaoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IInteracaoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IQuestaoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/Interfaces/IQuestaoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/QuestaoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/QuestaoRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/UsuarioRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/UsuarioRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/CheckListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/CheckListService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/IUsuarioService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/IUsuarioService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/ClienteService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/ClienteService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/InteracaoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/InteracaoService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/ICheckListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/ICheckListService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/IInteracaoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/IInteracaoService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/QuestaoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/QuestaoService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/RespostaAlternativaService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/RespostaAlternativaService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/UsuarioService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/UsuarioService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.pdb" afterDir="false" />
@@ -65,8 +77,6 @@
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/refint/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/refint/api-rota-oeste.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +105,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "a85a27c0-5289-4fe1-89e8-b576af808354.executor": "Debug",
-    "git-widget-placeholder": "sprint02-entidade-respostaalternativa-anthony",
+    "git-widget-placeholder": "sprint03-oauth2-anthony",
     "last_opened_file_path": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -148,7 +158,7 @@
       <workItem from="1727388215606" duration="29000" />
       <workItem from="1727709290773" duration="448000" />
       <workItem from="1727748966644" duration="1633000" />
-      <workItem from="1727870679854" duration="3562000" />
+      <workItem from="1727870679854" duration="28253000" />
     </task>
     <servers />
   </component>

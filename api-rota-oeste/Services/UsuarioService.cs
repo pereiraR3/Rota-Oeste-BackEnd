@@ -1,3 +1,5 @@
+using api_rota_oeste.Models.CheckList;
+using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
@@ -48,12 +50,14 @@ public class UsuarioService : IUsuarioService
         if(id <= 0)
             throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
         
-       UsuarioModel? usuarioModel = await _usuarioRepository.BuscaPorId(id);
+        UsuarioModel? usuarioModel = await _usuarioRepository.BuscaPorId(id);
 
-       if (usuarioModel == null) 
-           throw new KeyNotFoundException("Usuário não encontrado");
+        if (usuarioModel == null) 
+            throw new KeyNotFoundException("Usuário não encontrado");
+
+        usuarioModel = RefatoraoMinUsuarioModel(usuarioModel);
        
-       return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
+        return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
     }
 
     /**
@@ -104,4 +108,35 @@ public class UsuarioService : IUsuarioService
         
         return resultado;
     }
+
+    /**
+     * Método da camada de serviço -> para fazer a refatoracao dos DTOs, de modo que puxem apenas as
+     * informações que foram julgadas como necessárias
+     */
+    public UsuarioModel RefatoraoMinUsuarioModel(UsuarioModel usuarioModel)
+    {
+        var checkListModelsRefatorado = usuarioModel.CheckLists
+            .Select(o => new CheckListModel
+            {
+                Id = o.Id,
+                UsuarioId = o.UsuarioId,
+                Nome = o.Nome,
+                DataCriacao = o.DataCriacao
+            }).ToList();
+
+        var clientModelsRefatorado = usuarioModel.Clientes
+            .Select(o => new ClienteModel
+            {
+                Id = o.Id,
+                UsuarioId = o.UsuarioId,
+                Nome = o.Nome,
+                Telefone = o.Telefone
+            }).ToList();
+
+        usuarioModel.CheckLists = checkListModelsRefatorado;
+        usuarioModel.Clientes = clientModelsRefatorado;
+
+        return usuarioModel;
+    }
+    
 }

@@ -35,15 +35,11 @@ public class RespostaAlternativaController : ControllerBase
     [SwaggerResponse(404, "Resposta alternativa não encontrada.")]
     public async Task<ActionResult<RespostaAlternativaResponseDTO>> BuscarPorId(int id)
     {
-        try
-        {
-            var respostaAlternativa = await _respostaAlternativaService.BuscarPorIdAsync(id);
-            return Ok(respostaAlternativa);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
+     
+        var respostaAlternativa = await _respostaAlternativaService.BuscarPorIdAsync(id);
+        
+        return Ok(respostaAlternativa);
+   
     }
     
     [HttpPatch("atualizar")]
@@ -51,11 +47,7 @@ public class RespostaAlternativaController : ControllerBase
     [SwaggerResponse(404, "Resposta alternativa não encontrada.")]
     public async Task<ActionResult> Atualizar([FromBody] RespostaAlternativaPatchDTO resposta)
     {
-        var respostaAlternativa = await _respostaAlternativaService.BuscarPorIdAsync(resposta.Id);
-
-        if (respostaAlternativa == null)
-            return NotFound("RespostaAlternativa não encontrada");
-
+        
         await _respostaAlternativaService.AtualizarAsync(resposta);
 
         return NoContent();
@@ -66,10 +58,6 @@ public class RespostaAlternativaController : ControllerBase
     [SwaggerResponse(404, "Resposta alternativa não encontrada.")]
     public async Task<ActionResult> ApagarPorId(int id)
     {
-        var respostaAlternativa = await _respostaAlternativaService.BuscarPorIdAsync(id);
-
-        if (respostaAlternativa == null)
-            return NotFound("RespostaAlternativa não encontrada");
 
         await _respostaAlternativaService.ApagarAsync(id);
 

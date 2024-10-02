@@ -31,8 +31,12 @@ namespace api_rota_oeste.Repositories
 
         public async Task<CheckListModel?> BuscarPorId(int id)
         {
-            
-            return await _context.CheckLists.FindAsync(id);
+
+            return await _context.CheckLists
+                .Include(x => x.Usuario)
+                .Include(x => x.Questoes)
+                .Include(x => x.ClienteRespondeCheckLists)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
         }
 

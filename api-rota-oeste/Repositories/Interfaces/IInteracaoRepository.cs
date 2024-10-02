@@ -12,4 +12,10 @@ public interface IInteracaoRepository {
     
     Task<InteracaoModel?> BuscarPorId(int id);
     
+    Task<List<InteracaoModel>> BuscarTodos();
+    
+    Task<bool> ApagarPorId(int id);
+
+    Task<bool> ApagarTodos();
+
 }

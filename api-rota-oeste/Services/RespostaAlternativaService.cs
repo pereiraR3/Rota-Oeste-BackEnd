@@ -44,20 +44,23 @@ public class RespostaAlternativaService : IRespostaAlternativaService
         
         QuestaoModel? questaoModel = await _questaoRepository.BuscarPorId(respostaAlternativa.QuestaoId);
         
-        if(interacaoModel is null)
+        if(interacaoModel == null)
             throw new KeyNotFoundException("Interação não encontrada");
         
-        if(questaoModel is null)
+        if(questaoModel == null)
             throw new KeyNotFoundException("Questão não encontrada");
         
         RespostaAlternativaModel respostaAlternativaModel = new RespostaAlternativaModel(respostaAlternativa, interacaoModel, questaoModel);
         
         RespostaAlternativaModel? resposta = await _respostaAlternativaRepository.Adicionar(respostaAlternativaModel);
 
-        if (resposta != null) interacaoModel.RespostaAlternativaModels.Add(resposta);
+        if (resposta != null)
+        {
+            interacaoModel.RespostaAlternativaModels.Add(resposta);
+            questaoModel.RespostaAlternativaModels.Add(resposta);
 
-        if (resposta != null) questaoModel.RespostaAlternativaModels.Add(resposta);
-
+        }
+        
         return _mapper.Map<RespostaAlternativaResponseDTO>(respostaAlternativaModel);
         
     }

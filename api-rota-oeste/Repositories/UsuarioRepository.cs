@@ -1,4 +1,6 @@
 using api_rota_oeste.Data;
+using api_rota_oeste.Models.CheckList;
+using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
@@ -37,14 +39,11 @@ public class UsuarioRepository : IUsuarioRepository
      */
     public async Task<UsuarioModel?> BuscaPorId(int id)
     {
-
-        UsuarioModel? usuario = await _dbContext
+        return await _dbContext
             .Usuarios
-            .Include(x => x.Clientes)
             .Include(x => x.CheckLists)
+            .Include(x => x.Clientes)
             .FirstOrDefaultAsync(x => x.Id == id);
-        
-        return usuario;
     }
 
     /**

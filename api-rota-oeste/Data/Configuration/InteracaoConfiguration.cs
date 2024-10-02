@@ -15,11 +15,17 @@ public class InteracaoConfiguration : IEntityTypeConfiguration<InteracaoModel>
             .HasForeignKey(i => i.ClienteId)
             .OnDelete(DeleteBehavior.Restrict); // Use Restrict para impedir a exclusão em cascata
         
-            builder
+        builder
             .HasOne(i => i.CheckList)
             .WithMany()
             .HasForeignKey(i => i.CheckListId)
             .OnDelete(DeleteBehavior.Restrict); // Use Restrict para impedir a exclusão em cascata
+            
+        // Configurando a relação entre Interacao e RespostaAlternativa
+        builder.HasMany(q => q.RespostaAlternativaModels)
+            .WithOne(r => r.Interacao)
+            .HasForeignKey(r => r.InteracaoId)
+            .OnDelete(DeleteBehavior.Cascade); // Configura a exclusão em cascata
             
     }
 }

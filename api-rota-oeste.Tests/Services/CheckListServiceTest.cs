@@ -18,7 +18,9 @@ namespace api_rota_oeste.Tests.Services
         private readonly Mock<ICheckListRepository> _repositoryCheckListMock;
         private readonly Mock<IUsuarioRepository> _repositoryUsuarioMock;
         private readonly Mock<IRepository> _repositoryMock;
+        private readonly Mock<IClienteRespondeCheckListRepository> _repositoryClienteRespondeCheckMock;
         private readonly Mock<IMapper> _mapperMock;
+        private readonly Mock<IClienteRepository> _repositoryClienteMock;
         private readonly CheckListService _checkListService;
 
         public CheckListServiceTest()
@@ -27,12 +29,16 @@ namespace api_rota_oeste.Tests.Services
             _repositoryUsuarioMock = new Mock<IUsuarioRepository>();
             _repositoryMock = new Mock<IRepository>();
             _mapperMock = new Mock<IMapper>();
-            
+            _repositoryClienteRespondeCheckMock = new Mock<IClienteRespondeCheckListRepository>();
+            _repositoryClienteMock = new Mock<IClienteRepository>();
+
             _checkListService = new CheckListService(
                 _repositoryCheckListMock.Object,
-                _repositoryUsuarioMock.Object,
+                _repositoryUsuarioMock.Object, 
                 _mapperMock.Object,
-                _repositoryMock.Object
+                _repositoryMock.Object,
+                _repositoryClienteRespondeCheckMock.Object,
+                _repositoryClienteMock.Object
             );
         }
 
@@ -49,7 +55,7 @@ namespace api_rota_oeste.Tests.Services
                 CheckLists = new List<CheckListModel>()
             };
             var checkListModel = new CheckListModel(checkListRequest, usuarioModel);
-            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null);
+            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null, null);
 
             _repositoryUsuarioMock.Setup(repo => repo.BuscaPorId(checkListRequest.UsuarioId))
                 .ReturnsAsync(usuarioModel);
@@ -81,7 +87,7 @@ namespace api_rota_oeste.Tests.Services
                 Nome = "Checklist Teste",
                 UsuarioId = 1
             };
-            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null);
+            var checkListResponse = new CheckListResponseDTO(1, 1, "Checklist Teste", DateTime.Now, null, null, null);
 
             _repositoryCheckListMock.Setup(repo => repo.BuscarPorId(1))
                 .ReturnsAsync(checkListModel);
@@ -118,13 +124,13 @@ namespace api_rota_oeste.Tests.Services
                 new CheckListModel { Id = 1, Nome = "Checklist 1" },
                 new CheckListModel { Id = 2, Nome = "Checklist 2" }
             };
-            var checkListsResponse = checkLists.Select(c => new CheckListResponseDTO(c.Id, c.UsuarioId, c.Nome, DateTime.Now, null, null)).ToList();
+            var checkListsResponse = checkLists.Select(c => new CheckListResponseDTO(c.Id, c.UsuarioId, c.Nome, DateTime.Now, null, null, null)).ToList();
 
             _repositoryCheckListMock.Setup(repo => repo.BuscarTodos())
                 .ReturnsAsync(checkLists);
 
             _mapperMock.Setup(mapper => mapper.Map<CheckListResponseDTO>(It.IsAny<CheckListModel>()))
-                .Returns((CheckListModel source) => new CheckListResponseDTO(source.Id, source.UsuarioId, source.Nome, source.DataCriacao, null, null));
+                .Returns((CheckListModel source) => new CheckListResponseDTO(source.Id, source.UsuarioId, source.Nome, source.DataCriacao, null, null, null));
 
             // Act
             var result = await _checkListService.BuscarTodosAsync();

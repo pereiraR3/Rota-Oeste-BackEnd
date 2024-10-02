@@ -12,8 +12,8 @@ using api_rota_oeste.Data;
 namespace api_rota_oeste.Migrations
 {
     [DbContext(typeof(ApiDBContext))]
-    [Migration("20241001210818_UpdateAttrFoto")]
-    partial class UpdateAttrFoto
+    [Migration("20241002160847_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,6 +95,26 @@ namespace api_rota_oeste.Migrations
                     b.ToTable("cliente");
                 });
 
+            modelBuilder.Entity("api_rota_oeste.Models.ClienteRespondeCheckList.ClienteRespondeCheckListModel", b =>
+                {
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int")
+                        .HasColumnName("id_cliente");
+
+                    b.Property<int>("CheckListId")
+                        .HasColumnType("int")
+                        .HasColumnName("id_checklist");
+
+                    b.HasKey("ClienteId", "CheckListId");
+
+                    b.HasIndex("CheckListId");
+
+                    b.HasIndex("ClienteId", "CheckListId")
+                        .IsUnique();
+
+                    b.ToTable("cliente_responde_checklist");
+                });
+
             modelBuilder.Entity("api_rota_oeste.Models.Interacao.InteracaoModel", b =>
                 {
                     b.Property<int>("Id")
@@ -112,6 +132,9 @@ namespace api_rota_oeste.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id_cliente");
 
+                    b.Property<int?>("ClienteModelId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Data")
                         .HasColumnType("DATETIME2")
                         .HasColumnName("data_criacao");
@@ -124,7 +147,10 @@ namespace api_rota_oeste.Migrations
 
                     b.HasIndex("CheckListId");
 
-                    b.HasIndex("ClienteId");
+                    b.HasIndex("ClienteModelId");
+
+                    b.HasIndex("ClienteId", "CheckListId")
+                        .IsUnique();
 
                     b.ToTable("interacao");
                 });
@@ -170,8 +196,9 @@ namespace api_rota_oeste.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Alternativa")
-                        .HasColumnType("int");
+                    b.Property<int?>("Alternativa")
+                        .HasColumnType("int")
+                        .HasColumnName("alternativa");
 
                     b.Property<byte[]>("Foto")
                         .HasColumnType("VARBINARY(MAX)")
@@ -255,6 +282,25 @@ namespace api_rota_oeste.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("api_rota_oeste.Models.ClienteRespondeCheckList.ClienteRespondeCheckListModel", b =>
+                {
+                    b.HasOne("api_rota_oeste.Models.CheckList.CheckListModel", "CheckList")
+                        .WithMany("ClienteRespondeCheckLists")
+                        .HasForeignKey("CheckListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("api_rota_oeste.Models.Cliente.ClienteModel", "Cliente")
+                        .WithMany("ClienteRespondeCheckLists")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CheckList");
+
+                    b.Navigation("Cliente");
+                });
+
             modelBuilder.Entity("api_rota_oeste.Models.Interacao.InteracaoModel", b =>
                 {
                     b.HasOne("api_rota_oeste.Models.CheckList.CheckListModel", "CheckList")
@@ -268,6 +314,10 @@ namespace api_rota_oeste.Migrations
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("api_rota_oeste.Models.Cliente.ClienteModel", null)
+                        .WithMany("Interacoes")
+                        .HasForeignKey("ClienteModelId");
 
                     b.Navigation("CheckList");
 
@@ -288,13 +338,13 @@ namespace api_rota_oeste.Migrations
             modelBuilder.Entity("api_rota_oeste.Models.RespostaAlternativa.RespostaAlternativaModel", b =>
                 {
                     b.HasOne("api_rota_oeste.Models.Interacao.InteracaoModel", "Interacao")
-                        .WithMany()
+                        .WithMany("RespostaAlternativaModels")
                         .HasForeignKey("InteracaoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("api_rota_oeste.Models.Questao.QuestaoModel", "Questao")
-                        .WithMany()
+                        .WithMany("RespostaAlternativaModels")
                         .HasForeignKey("QuestaoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -306,7 +356,26 @@ namespace api_rota_oeste.Migrations
 
             modelBuilder.Entity("api_rota_oeste.Models.CheckList.CheckListModel", b =>
                 {
+                    b.Navigation("ClienteRespondeCheckLists");
+
                     b.Navigation("Questoes");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.Cliente.ClienteModel", b =>
+                {
+                    b.Navigation("ClienteRespondeCheckLists");
+
+                    b.Navigation("Interacoes");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.Interacao.InteracaoModel", b =>
+                {
+                    b.Navigation("RespostaAlternativaModels");
+                });
+
+            modelBuilder.Entity("api_rota_oeste.Models.Questao.QuestaoModel", b =>
+                {
+                    b.Navigation("RespostaAlternativaModels");
                 });
 
             modelBuilder.Entity("api_rota_oeste.Models.Usuario.UsuarioModel", b =>

@@ -37,6 +37,20 @@ namespace api_rota_oeste.Controllers
             
         }
         
+        [HttpGet("buscarPorId/{id}")]
+        [SwaggerOperation(
+            Summary = "Busca uma questão pelo ID",
+            Description = "Obtém os detalhes de uma questão através do ID fornecido."
+        )]
+        [SwaggerResponse(200, "Questão encontrada", typeof(QuestaoResponseDTO))]
+        [SwaggerResponse(404, "Questão não encontrada")]
+        public async Task<ActionResult<QuestaoResponseDTO>> BuscarPorId(int id)
+        {
+            var questao = await _service.BuscarPorIdAsync(id);
+
+            return Ok(questao);
+        }
+        
         [HttpGet("buscarTodos")]
         [SwaggerOperation(
             Summary = "Lista as questões",
@@ -52,23 +66,6 @@ namespace api_rota_oeste.Controllers
             
         }
         
-        [HttpGet("buscarPorId/{id}")]
-        [SwaggerOperation(
-            Summary = "Busca uma questão pelo ID",
-            Description = "Obtém os detalhes de uma questão através do ID fornecido."
-        )]
-        [SwaggerResponse(200, "Questão encontrada", typeof(QuestaoResponseDTO))]
-        [SwaggerResponse(404, "Questão não encontrada")]
-        public async Task<ActionResult<QuestaoResponseDTO>> BuscarPorId(int id)
-        {
-            var questao = await _service.BuscarPorIdAsync(id);
-            
-            if (questao == null)
-                return NotFound("Questão não encontrada");
-
-            return Ok(questao);
-        }
-        
         [HttpPatch("atualizar")]
         [SwaggerOperation(
             Summary = "Atualiza as informações de uma questão",
@@ -79,10 +76,6 @@ namespace api_rota_oeste.Controllers
         [SwaggerResponse(404, "Questão não encontrada")]
         public async Task<ActionResult> Atualizar([FromBody] QuestaoPatchDTO questao)
         {
-            var questaoExistente = await _service.BuscarPorIdAsync(questao.Id);
-            
-            if (questaoExistente == null)
-                return NotFound("Questão não encontrada");
 
             await _service.AtualizarAsync(questao);
             
@@ -96,14 +89,13 @@ namespace api_rota_oeste.Controllers
         )]
         [SwaggerResponse(204, "Questão removida com sucesso")]
         [SwaggerResponse(404, "Questão não encontrada")]
-        public async Task<ActionResult> Excluir(int id)
+        public async Task<ActionResult> ApagarPorId(int id)
         {
-            var questaoExistente = await _service.BuscarPorIdAsync(id);
-            if (questaoExistente == null)
-                return NotFound("Questão não encontrada");
-
+            
             await _service.ApagarAsync(id);
+            
             return NoContent();
+            
         }
     }
 }

@@ -7,6 +7,7 @@
     &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Services.CheckListServiceTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest.BuscarTodos_DeveRetornarOkComListaDeUsuarios_QuandoExistiremUsuarios&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Services.ClienteServiceTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	

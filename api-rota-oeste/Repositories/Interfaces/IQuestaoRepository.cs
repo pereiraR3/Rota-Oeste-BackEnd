@@ -12,7 +12,7 @@ public interface IQuestaoRepository
     
     Task<List<QuestaoModel>> BuscarTodos();
     
-    Task<QuestaoModel> BuscarPorId(int id);
+    Task<QuestaoModel?> BuscarPorId(int id);
     
     Task<bool> Apagar(int id);
 }

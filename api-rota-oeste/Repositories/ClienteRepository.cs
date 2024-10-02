@@ -55,8 +55,11 @@ public class ClienteRepository : IClienteRepository
      */
     public async Task<ClienteModel?> BuscarPorId(int id)
     {
-        return await _dbContext.Set<ClienteModel>().FindAsync(id);
-     
+        return await _dbContext.Clientes
+            .Include(x => x.Usuario)
+            .Include(x => x.Interacoes)
+            .Include(x => x.ClienteRespondeCheckLists)
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
 
     /**
@@ -65,7 +68,7 @@ public class ClienteRepository : IClienteRepository
     public async Task<List<ClienteModel>> BuscarTodos()
     {
         
-        return await _dbContext.Set<ClienteModel>().ToListAsync();
+        return await _dbContext.Clientes.ToListAsync();
         
     }
 

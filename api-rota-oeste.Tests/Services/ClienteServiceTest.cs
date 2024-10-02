@@ -2,7 +2,6 @@ using System;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
-using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
 using Moq;
 using Xunit;
@@ -48,7 +47,7 @@ namespace api_rota_oeste.Tests.Services
             };
     
             var clienteModel = new ClienteModel(clienteRequest, usuarioModel);
-            var clienteResponse = new ClienteResponseDTO(1, 1, "Nome", "123456789", null, usuarioModel);
+            var clienteResponse = new ClienteResponseDTO(1, 1, "Nome", "123456789", null);
 
             // Mock para buscar o usuário existente
             _usuarioRepositoryMock.Setup(repo => repo.BuscaPorId(clienteRequest.UsuarioId))
@@ -87,13 +86,13 @@ namespace api_rota_oeste.Tests.Services
             var clienteCollectionDto = new ClienteCollectionDTO(clienteRequests);
             var usuarioModel = new UsuarioModel();
             var clientesModel = clienteRequests.Select(req => new ClienteModel(req, usuarioModel)).ToList();
-            var clientesResponse = clientesModel.Select(cliente => new ClienteResponseDTO(cliente.Id, cliente.UsuarioId, cliente.Nome, cliente.Telefone, cliente.Foto, usuarioModel)).ToList();
+            var clientesResponse = clientesModel.Select(cliente => new ClienteResponseDTO(cliente.Id, cliente.UsuarioId, cliente.Nome, cliente.Telefone, cliente.Foto)).ToList();
 
             _usuarioRepositoryMock.Setup(repo => repo.BuscaPorId(It.IsAny<int>()))
                 .ReturnsAsync(usuarioModel);
 
             _mapperMock.Setup(mapper => mapper.Map<ClienteResponseDTO>(It.IsAny<ClienteModel>()))
-                .Returns((ClienteModel source) => new ClienteResponseDTO(source.Id, source.UsuarioId, source.Nome, source.Telefone, source.Foto, source.Usuario));
+                .Returns((ClienteModel source) => new ClienteResponseDTO(source.Id, source.UsuarioId, source.Nome, source.Telefone, source.Foto));
 
             // Act
             var result = await _clienteService.AdicionarColecaoAsync(clienteCollectionDto);
@@ -109,7 +108,7 @@ namespace api_rota_oeste.Tests.Services
         {
             // Arrange
             var clienteModel = new ClienteModel { Id = 1, Nome = "Teste", Telefone = "123456789" };
-            var clienteResponse = new ClienteResponseDTO(1, 1, "Teste", "123456789", null, null);
+            var clienteResponse = new ClienteResponseDTO(1, 1, "Teste", "123456789", null);
 
             _clienteRepositoryMock.Setup(repo => repo.BuscarPorId(1))
                 .ReturnsAsync(clienteModel);
@@ -203,7 +202,7 @@ namespace api_rota_oeste.Tests.Services
                 .ReturnsAsync(clientesModel);
 
             _mapperMock.Setup(mapper => mapper.Map<ClienteResponseDTO>(It.IsAny<ClienteModel>()))
-                .Returns((ClienteModel source) => new ClienteResponseDTO(source.Id, source.UsuarioId, source.Nome, source.Telefone, source.Foto, null));
+                .Returns((ClienteModel source) => new ClienteResponseDTO(source.Id, source.UsuarioId, source.Nome, source.Telefone, source.Foto));
 
             // Act
             var result = await _clienteService.BuscarTodosAsync();
