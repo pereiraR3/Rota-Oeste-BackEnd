@@ -77,11 +77,11 @@ public class QuestaoService : IQuestaoService{
     /**
     * Método da camada de serviço -> para atualizar um entidade do tipo questao
     */
-    public Task<List<QuestaoResponseDTO>> BuscarTodosAsync()
+    public async Task<List<QuestaoResponseDTO>> BuscarTodosAsync()
     {
-        var questoes = _repositoryQuestao.BuscarTodos();
+        var questoes = await _repositoryQuestao.BuscarTodos();
         
-        return Task.FromResult(questoes.Result.Select(_mapper.Map<QuestaoResponseDTO>).ToList());
+        return questoes.Select(_mapper.Map<QuestaoResponseDTO>).ToList();
     }
     
     /**

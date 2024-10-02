@@ -48,6 +48,14 @@ public class UsuarioRepository : IUsuarioRepository
     }
 
     /**
+    * Método serve para buscar todas as entidades do tipo usuario
+    */
+    public async Task<List<UsuarioModel>> BuscarTodos()
+    {
+        return await _dbContext.Usuarios.ToListAsync();
+    }
+
+    /**
      * Método serve para alterar os dados de um usuário parcialmente
      */
     public async Task<bool> Atualizar(UsuarioPatchDTO request)

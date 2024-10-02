@@ -13,6 +13,7 @@ public sealed class ClienteModel
     
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("id")]
     public int Id { get; set; }
     
     [Required(ErrorMessage = "UsuarioId é necessário")]
@@ -21,12 +22,15 @@ public sealed class ClienteModel
     
     [Required(ErrorMessage = "Nome não pode exceder 60 caracteres")]
     [StringLength(60, ErrorMessage = "")]
+    [Column("nome")]
     public string Nome { get; set; }
     
     [Required(ErrorMessage = "Telefone é necessário")]
     [StringLength(11, ErrorMessage = "O telefone não pode exceder 11 caracteres")]
+    [Column("telefone")]
     public string Telefone { get; set; }
     
+    [Column("foto", TypeName = "VARBINARY(MAX)")]
     public byte[]? Foto { get; set; }
     
     [JsonIgnore]

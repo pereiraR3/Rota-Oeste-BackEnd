@@ -43,7 +43,7 @@ public class UsuarioService : IUsuarioService
     /**
      * Método da camada de serviço -> para buscar uma entidade do tipo usuário pelo ID
      */
-    public async Task<UsuarioResponseDTO> BuscaPorIdAsync(int id)
+    public async Task<UsuarioResponseDTO> BuscarPorIdAsync(int id)
     {
         if(id <= 0)
             throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
@@ -54,6 +54,21 @@ public class UsuarioService : IUsuarioService
            throw new KeyNotFoundException("Usuário não encontrado");
        
        return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
+    }
+
+    /**
+    * Método da camada de serviço -> para buscar todas as entidades do tipo usuario
+    */
+    public async Task<List<UsuarioResponseDTO>> BuscarTodosAsync()
+    {
+        
+        List<UsuarioModel> usuarioModels = await _usuarioRepository.BuscarTodos();
+        
+        List<UsuarioResponseDTO> usuarioResponseDtos = usuarioModels
+            .Select(i => _mapper.Map<UsuarioResponseDTO>(i))
+            .ToList();
+        
+        return usuarioResponseDtos;
     }
 
     /**

@@ -102,7 +102,7 @@ namespace api_rota_oeste.Tests.Controllers
                 .ReturnsAsync(true);
 
             // Act
-            var result = await _controller.Delete(1);
+            var result = await _controller.ApagarPorId(1);
 
             // Assert
             Assert.IsType<NoContentResult>(result);
@@ -116,7 +116,7 @@ namespace api_rota_oeste.Tests.Controllers
                 .ReturnsAsync(false);
 
             // Act
-            var result = await _controller.Delete(1);
+            var result = await _controller.ApagarPorId(1);
 
             // Assert
             Assert.IsType<NotFoundResult>(result);
@@ -167,7 +167,7 @@ namespace api_rota_oeste.Tests.Controllers
                 .ReturnsAsync(true);
 
             // Act
-            var result = await _controller.DeleteAll();
+            var result = await _controller.ApagarTodos();
 
             // Assert
             Assert.IsType<NoContentResult>(result);
@@ -181,7 +181,7 @@ namespace api_rota_oeste.Tests.Controllers
                 .ReturnsAsync(false);
 
             // Act
-            var result = await _controller.DeleteAll();
+            var result = await _controller.ApagarTodos();
 
             // Assert
             Assert.IsType<NotFoundResult>(result);

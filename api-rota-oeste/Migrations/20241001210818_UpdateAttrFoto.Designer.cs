@@ -12,8 +12,8 @@ using api_rota_oeste.Data;
 namespace api_rota_oeste.Migrations
 {
     [DbContext(typeof(ApiDBContext))]
-    [Migration("20241001024022_UpDB")]
-    partial class UpDB
+    [Migration("20241001210818_UpdateAttrFoto")]
+    partial class UpdateAttrFoto
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,21 +29,25 @@ namespace api_rota_oeste.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DataCriacao")
                         .IsRequired()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("data_criacao");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(60)")
+                        .HasColumnName("nome");
 
                     b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_usuario");
 
                     b.HasKey("Id");
 
@@ -56,22 +60,26 @@ namespace api_rota_oeste.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<byte[]>("Foto")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("VARBINARY(MAX)")
+                        .HasColumnName("foto");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(60)")
+                        .HasColumnName("nome");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasColumnType("nvarchar(11)")
+                        .HasColumnName("telefone");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int")
@@ -91,21 +99,26 @@ namespace api_rota_oeste.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CheckListId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_checklist");
 
                     b.Property<int>("ClienteId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_cliente");
 
                     b.Property<DateTime>("Data")
-                        .HasColumnType("DATETIME2");
+                        .HasColumnType("DATETIME2")
+                        .HasColumnName("data_criacao");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("BIT");
+                        .HasColumnType("BIT")
+                        .HasColumnName("status");
 
                     b.HasKey("Id");
 
@@ -120,22 +133,26 @@ namespace api_rota_oeste.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CheckListId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_checklist");
 
                     b.Property<string>("Tipo")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("tipo");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(120)
-                        .HasColumnType("nvarchar(120)");
+                        .HasColumnType("nvarchar(120)")
+                        .HasColumnName("titulo");
 
                     b.HasKey("Id");
 
@@ -148,18 +165,25 @@ namespace api_rota_oeste.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Alternativa")
                         .HasColumnType("int");
 
+                    b.Property<byte[]>("Foto")
+                        .HasColumnType("VARBINARY(MAX)")
+                        .HasColumnName("foto");
+
                     b.Property<int>("InteracaoId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_interacao");
 
                     b.Property<int>("QuestaoId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id_questao");
 
                     b.HasKey("Id");
 
@@ -174,27 +198,32 @@ namespace api_rota_oeste.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<byte[]>("Foto")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("VARBINARY(MAX)")
+                        .HasColumnName("foto");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(60)")
+                        .HasColumnName("nome");
 
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(60)")
+                        .HasColumnName("senha");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasColumnType("nvarchar(11)")
+                        .HasColumnName("telefone");
 
                     b.HasKey("Id");
 

@@ -1,6 +1,7 @@
 using api_rota_oeste.Data;
 using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Services;
 
@@ -40,9 +41,12 @@ public class RespostaAlternativaRepository : IRespostaAlternativaRepository
      */
     public async Task<RespostaAlternativaModel?> BuscaPorId(int id)
     {
-        
-        return await _dbContext.RespostaAlternativaModels.FindAsync(id);
-        
+
+        return await _dbContext.RespostaAlternativaModels
+            .Include(x => x.Interacao)
+            .Include(x => x.Questao)
+            .FirstOrDefaultAsync(x => x.Id == id);
+
     }
 
     /**
@@ -65,14 +69,11 @@ public class RespostaAlternativaRepository : IRespostaAlternativaRepository
     /**
      * Método usado para apagar a todos as entidades do tipo RespostaAlternativaModel
      */
-    public async Task<bool> ApagarTodos(int id)
+    public async Task<bool> ApagarTodos()
     {
-        RespostaAlternativaModel? respostaAlternativa = await _dbContext.RespostaAlternativaModels.FindAsync(id);
-
-        if (respostaAlternativa == null)
-            return false;
        
-        _dbContext.RespostaAlternativaModels.Remove(respostaAlternativa);
+        _dbContext.RespostaAlternativaModels.RemoveRange();
+        
         await _dbContext.SaveChangesAsync();
 
         return true;

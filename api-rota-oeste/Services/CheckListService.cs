@@ -114,7 +114,7 @@ namespace api_rota_oeste.Services
             var result = await _repositoryCheckList.Apagar(id);
 
             if (!result)
-                throw new ApplicationException("Objeto não encontrado");
+                throw new KeyNotFoundException("CheckList não encontrado");
 
             return true;
         }

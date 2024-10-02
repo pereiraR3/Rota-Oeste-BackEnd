@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
+using api_rota_oeste.Models.RespostaAlternativa;
 
 namespace api_rota_oeste.Models.Interacao;
 
@@ -12,19 +13,23 @@ public class InteracaoModel
     
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("id")]
     public int Id { get; set; }
     
     [Required(ErrorMessage = "ClienteId é necessário")]
+    [Column("id_cliente")]
     public int ClienteId { get; set; }
 
     [Required(ErrorMessage = "CheckListId é necessário")]
+    [Column("id_checklist")]
     public int CheckListId { get; set; }
     
     [Required(ErrorMessage = "Status é necessário")]
-    [Column(TypeName = "BIT")]
+    [Column("status", TypeName = "BIT")]
     public bool Status { get; set; }
 
-    [Column(TypeName = "DATETIME2")]
+    [DataType(DataType.Date)]
+    [Column("data_criacao", TypeName = "DATETIME2")]
     public DateTime Data { get; set; }
     
     [JsonIgnore]
@@ -34,6 +39,9 @@ public class InteracaoModel
     [JsonIgnore]
     [ForeignKey("CheckListId")]
     public virtual CheckListModel? CheckList { get; set; }
+    
+    [JsonIgnore]
+    public virtual List<RespostaAlternativaModel> RespostaAlternativaModels { get; set; } = new List<RespostaAlternativaModel>();
     
     public InteracaoModel() {}
 

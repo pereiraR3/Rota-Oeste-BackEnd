@@ -59,7 +59,7 @@ namespace api_rota_oeste.Tests.Services
                 CheckList = checkListModel
             };
 
-            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel);
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel, null);
     
             // Configurando o mock para buscar o CheckList
             _repositoryCheckListMock.Setup(repo => repo.BuscarPorId(questaoRequest.CheckListId))
@@ -96,7 +96,7 @@ namespace api_rota_oeste.Tests.Services
             
             // Arrange
             var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Teste", Tipo = "Tipo Teste" };
-            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel);
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel, null);
 
             _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(It.IsAny<int>()))
                 .ReturnsAsync(questaoModel);

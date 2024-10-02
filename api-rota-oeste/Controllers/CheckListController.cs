@@ -60,21 +60,6 @@ namespace api_rota_oeste.Controllers
             return Ok(checkResponse);
         }
 
-        [HttpDelete("apagarPorId/{id}")]
-        [SwaggerOperation(Summary = "Remove um checklist",
-        Description = "Remove o checklist associado ao ID fornecido. Retorna 204 No Content se a remo��o for bem-sucedida.")]
-        [SwaggerResponse(204, "Checklist removido com sucesso")]
-        [SwaggerResponse(404, "Checklist não encontrado")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var status = await _checkListService.ApagarAsync(id);
-
-            if (!status)
-                return NotFound(); // Retorna 404 Not Found se o checklist n�o for encontrado
-
-            return NoContent(); // Retorna 204 No Content se o checklist foi removido com sucesso
-        }
-
         [HttpPatch("atualizar")]
         [SwaggerOperation(
             Summary = "Atualiza as informações de um checklist",
@@ -96,12 +81,27 @@ namespace api_rota_oeste.Controllers
             
         }
         
+        [HttpDelete("apagarPorId/{id}")]
+        [SwaggerOperation(Summary = "Remove um checklist",
+            Description = "Remove o checklist associado ao ID fornecido. Retorna 204 No Content se a remo��o for bem-sucedida.")]
+        [SwaggerResponse(204, "Checklist removido com sucesso")]
+        [SwaggerResponse(404, "Checklist não encontrado")]
+        public async Task<IActionResult> ApagarPorId(int id)
+        {
+            var status = await _checkListService.ApagarAsync(id);
+
+            if (!status)
+                return NotFound(); // Retorna 404 Not Found se o checklist n�o for encontrado
+
+            return NoContent(); // Retorna 204 No Content se o checklist foi removido com sucesso
+        }
+        
         [HttpDelete("apagarTodos")]
         [SwaggerOperation(Summary = "Remove todos os checklists",
         Description = "Remove todos os checklists do sistema.")]
         [SwaggerResponse(204, "Todos os checklists removidos com sucesso")]
         [SwaggerResponse(404, "Nenhum checklist encontrado")]
-        public async Task<IActionResult> DeleteAll()
+        public async Task<IActionResult> ApagarTodos()
         {
             var status = await _checkListService.ApagarTodosAsync();
 

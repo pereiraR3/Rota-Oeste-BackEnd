@@ -43,10 +43,13 @@ namespace api_rota_oeste.Controllers
             Description = "Lista todas as questões armazenadas no banco de dados."
         )]
         [SwaggerResponse(200, "Lista de questões retornada com sucesso", typeof(List<QuestaoModel>))]
-        public async Task<ActionResult<List<QuestaoModel>>> BuscarTodos()
+        public async Task<ActionResult<List<QuestaoResponseDTO>>> BuscarTodos()
         {
+            
             var questoes = await _service.BuscarTodosAsync();
+            
             return Ok(questoes);
+            
         }
         
         [HttpGet("buscarPorId/{id}")]

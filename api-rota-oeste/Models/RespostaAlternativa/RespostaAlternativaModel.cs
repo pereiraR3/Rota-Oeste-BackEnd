@@ -12,13 +12,22 @@ public class RespostaAlternativaModel
         
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id")]
         public int Id { get; set; }
         
         [Required(ErrorMessage = "QuestaoId é necessário")]
+        [Column("id_questao")]
         public int QuestaoId { get; set; }
         
         [Required(ErrorMessage = "InteracaoId é necessário")]
+        [Column("id_interacao")]
         public int InteracaoId { get; set; }
+        
+        [Column("alternativa")]
+        public int? Alternativa { get; set; }
+        
+        [Column( "foto", TypeName = "VARBINARY(MAX)")]
+        public byte[]?  Foto { get; set; }
         
         [JsonIgnore]
         [ForeignKey("InteracaoId")]
@@ -26,9 +35,7 @@ public class RespostaAlternativaModel
         
         [JsonIgnore]
         [ForeignKey("QuestaoId")]
-        public virtual QuestaoModel? Questao { get; set; }
-        
-        public int Alternativa { get; set; }
+        public virtual QuestaoModel Questao { get; set; }
         
         public RespostaAlternativaModel(){}
         
@@ -44,6 +51,7 @@ public class RespostaAlternativaModel
                 this.QuestaoId = request.QuestaoId;
                 this.InteracaoId = request.InteracaoId;
                 this.Alternativa = request.Alternativa;
+                this.Foto = request.Foto;
                 this.Interacao = interacao;
                 this.Questao = questao;
                 

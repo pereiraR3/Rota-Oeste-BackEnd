@@ -1,5 +1,4 @@
-﻿using api_rota_oeste.Models.CheckList;
-using api_rota_oeste.Models.Cliente;
+﻿
 using api_rota_oeste.Models.Interacao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

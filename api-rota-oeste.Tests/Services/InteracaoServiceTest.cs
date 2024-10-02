@@ -52,7 +52,7 @@ namespace api_rota_oeste.Tests.Services
                 Id = 1, Nome = "Checklist Teste", UsuarioId = 1, DataCriacao = DateTime.Now
             };
             var interacaoModel = new InteracaoModel(interacaoRequest, clienteModel, checkListModel);
-            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null);
+            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null, null);
 
             _clienteRepositoryMock.Setup(repo => repo.BuscarPorId(interacaoRequest.ClienteId))
                 .ReturnsAsync(clienteModel);
@@ -106,7 +106,7 @@ namespace api_rota_oeste.Tests.Services
             {
                 Id = 1, ClienteId = 1, CheckListId = 1, Status = true, Data = DateTime.Now
             };
-            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null);
+            var interacaoResponse = new InteracaoResponseDTO(1, 1, 1, true, null, null, null);
 
             _interacaoRepositoryMock.Setup(repo => repo.BuscarPorId(1))
                 .ReturnsAsync(interacaoModel);

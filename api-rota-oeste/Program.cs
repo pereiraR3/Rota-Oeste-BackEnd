@@ -49,6 +49,9 @@ builder.Services.AddScoped<IQuestaoService,QuestaoService>();
 builder.Services.AddScoped<IInteracaoRepository, InteracaoRepository>();
 builder.Services.AddScoped<IInteracaoService, InteracaoService>();
 
+builder.Services.AddScoped<IRespostaAlternativaRepository, RespostaAlternativaRepository>();
+builder.Services.AddScoped<IRespostaAlternativaService, RespostaAlternativaService>();
+
 builder.Services.AddScoped<IRepository, Repository>();
 
 // Registrar o serviço WhatsAppService com HttpClient

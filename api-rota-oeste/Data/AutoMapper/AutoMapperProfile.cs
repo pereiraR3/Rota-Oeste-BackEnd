@@ -22,9 +22,9 @@ public class AutoMapperProfile : Profile
 
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<QuestaoModel, QuestaoResponseDTO>()
-                .ForMember(dest => dest.CheckList, opt => opt.MapFrom(src => src.CheckList));
-
-
+                .ForMember(dest => dest.CheckList, opt => opt.MapFrom(src => src.CheckList))
+                .ForMember(dest => dest.RespostaAlternativaModels, opt => opt.MapFrom(src => src.RespostaAlternativaModels));
+            
             // -> O mapeamento de atualização deve ignorar campos nulos
             CreateMap<QuestaoPatchDTO, QuestaoModel>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
@@ -34,13 +34,11 @@ public class AutoMapperProfile : Profile
             CreateMap<CheckListModel, CheckListResponseDTO>()
                 .ForMember(dest => dest.Questoes, opt => opt.MapFrom(src => src.Questoes))
                 .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src.Usuario));
-
         
             // -> O mapeamento de atualização deve ignorar campos nulos
             CreateMap<CheckListPatchDTO, CheckListModel>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
-
-        
+            
         // Mapeando a Entidade Interacao
 
         CreateMap<InteracaoRequestDTO, InteracaoModel>();
@@ -48,7 +46,8 @@ public class AutoMapperProfile : Profile
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<InteracaoModel, InteracaoResponseDTO>()
                 .ForMember(dest => dest.CheckList, opt => opt.MapFrom(src => src.CheckList))
-                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente));
+                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente))
+                .ForMember(dest => dest.RespostaAlternativaModels, opt => opt.MapFrom(src => src.RespostaAlternativaModels));
             
             // -> O mapeamento de atualização deve ignorar campos nulos
             CreateMap<InteracaoPatchDTO, InteracaoModel>()
