@@ -42,7 +42,7 @@ public class AlternativaService : IAlternativaService
             throw new KeyNotFoundException("Questão não encontrado");
         
         // Obter o próximo valor do Código para a questão
-        int proximoCodigo = await _repositoryAlternativa.ContarPorQuestaoId(alternativaRequest.QuestaoId) + 1;
+        int proximoCodigo = await _repositoryAlternativa.ObterProximoCodigoPorQuestaoId(alternativaRequest.QuestaoId);
         
         // Criar a nova alternativa com o próximo código
         var alternativaModel = new AlternativaModel(alternativaRequest, questaoModel, proximoCodigo);
