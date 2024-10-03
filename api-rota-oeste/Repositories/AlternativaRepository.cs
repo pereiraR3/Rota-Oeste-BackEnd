@@ -54,23 +54,26 @@ public class AlternativaRepository : IAlternativaRepository
      */
     public async Task<AlternativaModel?> BuscarPorId(int id)
     {
-        
-        return await _context.AlternativaModels
-            .Include(x => x.Questao)
-            .FirstOrDefaultAsync(x => x.Id == id);
-        
+
+        return await _context.AlternativaModels.FindAsync(id);
+
     }
     
     /**
     * Método que serve para contar o próximo valor para código em relação a criação de uma nova alternativa
     */
-    public async Task<int> ContarPorQuestaoId(int questaoId)
+    public async Task<int> ObterProximoCodigoPorQuestaoId(int questaoId)
     {
-        return await _context.Set<AlternativaModel>()
+        // Obter o valor máximo de "Codigo" relacionado à "QuestaoId"
+        int maxCodigo = await _context.Set<AlternativaModel>()
             .Where(a => a.QuestaoId == questaoId)
-            .CountAsync();
-        
+            .Select(a => a.Codigo)
+            .DefaultIfEmpty(0) // Se não houver registros, retornará 0
+            .MaxAsync();
+
+        return maxCodigo + 1; // Incrementar para obter o próximo valor
     }
+
     
     /**
      * Método que serve para apagar uma entidade do tipo alternativa pelo seu Id
