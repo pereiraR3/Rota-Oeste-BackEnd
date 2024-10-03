@@ -13,6 +13,7 @@ public class AlternativaModel
     
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("id")]
     public int Id { get; set; }
     
     [Required(ErrorMessage = "QuestaoId é necessário")]
@@ -24,22 +25,25 @@ public class AlternativaModel
     public string Descricao { get; set; }
     
     [Required(ErrorMessage = "Código é necessário")]
+    [Column("codigo")]
     public int Codigo { get; set; }
     
     [JsonIgnore]
     [ForeignKey("QuestaoId")]
     public virtual QuestaoModel Questao { get; set; }
 
+    public AlternativaModel(){}
+    
     public AlternativaModel(
         
-        AlternativaRequestDTO alternativaRequestDTO,
+        AlternativaRequestDTO alternativaRequestDto,
         QuestaoModel questaoModel,
         int codigo
         
         )
     {
-        this.QuestaoId = alternativaRequestDTO.QuestaoId;
-        this.Descricao = alternativaRequestDTO.Descricao;
+        this.QuestaoId = alternativaRequestDto.QuestaoId;
+        this.Descricao = alternativaRequestDto.Descricao;
         this.Codigo = codigo;
         this.Questao = questaoModel;
     }
