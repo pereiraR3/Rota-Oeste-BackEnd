@@ -55,11 +55,9 @@ public class ClienteRepository : IClienteRepository
      */
     public async Task<ClienteModel?> BuscarPorId(int id)
     {
-        return await _dbContext.Clientes
-            .Include(x => x.Usuario)
-            .Include(x => x.Interacoes)
-            .Include(x => x.ClienteRespondeCheckLists)
-            .FirstOrDefaultAsync(x => x.Id == id);
+        
+        return await _dbContext.Clientes.FindAsync(id);
+        
     }
 
     /**

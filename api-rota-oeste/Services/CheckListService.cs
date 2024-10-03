@@ -1,6 +1,7 @@
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.ClienteRespondeCheckList;
+using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
@@ -21,7 +22,8 @@ namespace api_rota_oeste.Services
         private readonly IRepository _repository;
         private readonly IMapper _mapper;
         private readonly IClienteRepository _repositoryCliente;
-
+        private readonly IInteracaoRepository _repositoryInteracao;
+        private readonly ILogger<CheckListService> _logger;
 
         public CheckListService(
             
@@ -29,8 +31,9 @@ namespace api_rota_oeste.Services
             IUsuarioRepository repositoryUsuario,
             IMapper mapper, IRepository repository,
             IClienteRespondeCheckListRepository repositoryClienteRespondeCheck,
-            IClienteRepository repositoryCliente
-            
+            IClienteRepository repositoryCliente,
+            IInteracaoRepository repositoryInteracao,
+            ILogger<CheckListService> logger
             )
         {
             _repositoryCheckList = repositoryCheckList;
@@ -39,6 +42,8 @@ namespace api_rota_oeste.Services
             _repository = repository;
             _repositoryClienteRespondeCheck = repositoryClienteRespondeCheck;
             _repositoryCliente = repositoryCliente;
+            _repositoryInteracao = repositoryInteracao;
+            _logger = logger;
         }
 
         /**
@@ -59,6 +64,8 @@ namespace api_rota_oeste.Services
             {
                 usuarioModel.CheckLists.Add(check);
 
+                check = RefatoraoMinCheckListModel(check);
+                
                 return _mapper.Map<CheckListResponseDTO>(check);
             }
             
@@ -67,34 +74,54 @@ namespace api_rota_oeste.Services
 
         public async Task<ClienteRespondeCheckListResponseDTO> AdicionarClienteRespondeCheckAsync(int clienteId, int checkListId)
         {
-
-            ClienteModel? clienteModel = await _repositoryCliente.BuscarPorId(clienteId);
-
-            if (clienteModel == null)
-                throw new KeyNotFoundException("Cliente não encontrado");
-            
-            CheckListModel? checkListModel = await _repositoryCheckList.BuscarPorId(checkListId);
-            
-            if (checkListModel == null)
-                throw new KeyNotFoundException("CheckList não encontrado");
-            
-            ClienteRespondeCheckListModel clienteResponde = new ClienteRespondeCheckListModel(
+            try
+            {
+                ClienteModel? clienteModel = await _repositoryCliente.BuscarPorId(clienteId);
+                if (clienteModel == null)
+                    throw new KeyNotFoundException("Cliente não encontrado");
                 
-                clienteId,
-                checkListId,
-                clienteModel,
-                checkListModel
-                
+                CheckListModel? checkListModel = await _repositoryCheckList.BuscarPorId(checkListId);
+                if (checkListModel == null)
+                    throw new KeyNotFoundException("CheckList não encontrado");
+
+                ClienteRespondeCheckListModel clienteResponde = new ClienteRespondeCheckListModel(
+                    clienteId,
+                    checkListId,
+                    clienteModel,
+                    checkListModel
                 );
-            
-            ClienteRespondeCheckListModel clienteRespondeCheckListModel = await _repositoryClienteRespondeCheck.Adicionar(clienteResponde);
+                
+                ClienteRespondeCheckListModel? clienteRespondeCheckListModel = await _repositoryClienteRespondeCheck.Adicionar(clienteResponde);
 
-            // Restringindo a navegabilidade das entidades associadas à ClienteRespondeCheckList
-            clienteRespondeCheckListModel = RefatoraoMinClienteRespondeCheckList(clienteRespondeCheckListModel);
-            
-            return _mapper.Map<ClienteRespondeCheckListResponseDTO>(clienteRespondeCheckListModel);
-            
+                if (clienteRespondeCheckListModel == null)
+                    throw new InvalidOperationException("Erro ao adicionar ClienteRespondeCheckList");
+
+                // Criar uma entidade do tipo Interacao após adicionar ClienteRespondeCheckList
+                InteracaoModel interacaoModel = new InteracaoModel
+                {
+                    Cliente = clienteModel,
+                    CheckList = checkListModel,
+                    Status = false, // Defina o status inicial conforme necessário
+                    Data = DateTime.Now // Defina a data de criação
+                };
+                
+                InteracaoModel? interacaoCriada = await _repositoryInteracao.Adicionar(interacaoModel);
+                if (interacaoCriada == null)
+                    throw new InvalidOperationException("Erro ao adicionar Interacao automaticamente");
+
+                // Restringir a navegabilidade das entidades associadas a ClienteRespondeCheckList
+                clienteRespondeCheckListModel = RefatoraoMinClienteRespondeCheckList(clienteRespondeCheckListModel);
+                
+                return _mapper.Map<ClienteRespondeCheckListResponseDTO>(clienteRespondeCheckListModel);
+            }
+            catch (Exception ex)
+            {
+                // Logar o erro para análise posterior
+                _logger.LogError(ex, "Erro ao adicionar ClienteRespondeCheck");
+                throw;
+            }
         }
+
 
         /**
          * Método da camada de servico -> para buscar determinada entidade checklist por Id
@@ -200,32 +227,35 @@ namespace api_rota_oeste.Services
          * Método da camada de serviço -> para fazer a refatoracao do DTO da entidade ClienteResponde,
          * de modo que puxem apenas as informações que foram julgadas como necessárias
          */
-        public ClienteRespondeCheckListModel RefatoraoMinClienteRespondeCheckList(
+        public ClienteRespondeCheckListModel? RefatoraoMinClienteRespondeCheckList(
             
-            ClienteRespondeCheckListModel clienteRespondeCheckListModel
+            ClienteRespondeCheckListModel? clienteRespondeCheckListModel
             
             )
         {
             
-            clienteRespondeCheckListModel.Cliente = new ClienteModel
-            {
-                Id = clienteRespondeCheckListModel.Cliente.Id,
-                Nome = clienteRespondeCheckListModel.Cliente.Nome,
-                Telefone = clienteRespondeCheckListModel.Cliente.Telefone,
-                Foto = clienteRespondeCheckListModel.Cliente.Foto
-                // Não incluímos as outras relações, como Interacoes ou CheckLists
-            };
-            
-            clienteRespondeCheckListModel.CheckList = new CheckListModel
-            {
-                Id = clienteRespondeCheckListModel.CheckList.Id,
-                Nome = clienteRespondeCheckListModel.CheckList.Nome,
-                DataCriacao = clienteRespondeCheckListModel.CheckList.DataCriacao
-                // Não incluímos as outras relações, como Questoes ou Clientes
-            };
-            
+            if(clienteRespondeCheckListModel is null)
+                throw new ArgumentNullException(nameof(clienteRespondeCheckListModel));
+
+            if (clienteRespondeCheckListModel.Cliente != null)
+                clienteRespondeCheckListModel.Cliente = new ClienteModel
+                {
+                    Id = clienteRespondeCheckListModel.Cliente.Id,
+                    Nome = clienteRespondeCheckListModel.Cliente.Nome,
+                    Telefone = clienteRespondeCheckListModel.Cliente.Telefone,
+                    Foto = clienteRespondeCheckListModel.Cliente.Foto
+                    // Não incluímos as outras relações, como Interacoes ou CheckLists
+                };
+
+            if (clienteRespondeCheckListModel.CheckList != null)
+                clienteRespondeCheckListModel.CheckList = new CheckListModel
+                {
+                    Id = clienteRespondeCheckListModel.CheckList.Id,
+                    Nome = clienteRespondeCheckListModel.CheckList.Nome,
+                    DataCriacao = clienteRespondeCheckListModel.CheckList.DataCriacao
+                    // Não incluímos as outras relações, como Questoes ou Clientes
+                };
             return clienteRespondeCheckListModel;
-            
         }
 
         /**
@@ -234,15 +264,20 @@ namespace api_rota_oeste.Services
          */
         public CheckListModel RefatoraoMinCheckListModel(CheckListModel checkListModel)
         {
-
-            checkListModel.Usuario = new UsuarioModel
+            if (checkListModel == null)
             {
-                Id = checkListModel.Usuario.Id,
-                Nome = checkListModel.Usuario.Nome,
-                Telefone = checkListModel.Usuario.Telefone
-            };
+                throw new ArgumentNullException(nameof(checkListModel));
+            }
 
-            // Verifique se existem questões antes de tentar mapeá-las
+            checkListModel.Usuario = checkListModel.Usuario != null
+                ? new UsuarioModel
+                {
+                    Id = checkListModel.Usuario.Id,
+                    Nome = checkListModel.Usuario.Nome,
+                    Telefone = checkListModel.Usuario.Telefone
+                }
+                : null;
+
             if (checkListModel.Questoes != null && checkListModel.Questoes.Any())
             {
                 checkListModel.Questoes = checkListModel.Questoes
@@ -255,7 +290,6 @@ namespace api_rota_oeste.Services
                     }).ToList();
             }
 
-            // Verifique se existem ClienteRespondeCheckLists antes de tentar mapeá-las
             if (checkListModel.ClienteRespondeCheckLists != null && checkListModel.ClienteRespondeCheckLists.Any())
             {
                 checkListModel.ClienteRespondeCheckLists = checkListModel.ClienteRespondeCheckLists
@@ -275,7 +309,6 @@ namespace api_rota_oeste.Services
 
             return checkListModel;
         }
-
-
+        
     }
 }

@@ -19,7 +19,7 @@ public class InteracaoConfiguration : IEntityTypeConfiguration<InteracaoModel>
             .HasOne(i => i.CheckList)
             .WithMany()
             .HasForeignKey(i => i.CheckListId)
-            .OnDelete(DeleteBehavior.Restrict); // Use Restrict para impedir a exclusão em cascata
+            .OnDelete(DeleteBehavior.NoAction); // Use NoAction para impedir a exclusão em cascata
             
         // Configurando a relação entre Interacao e RespostaAlternativa
         builder.HasMany(q => q.RespostaAlternativaModels)

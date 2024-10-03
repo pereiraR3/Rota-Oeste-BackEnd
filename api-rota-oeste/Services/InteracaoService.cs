@@ -52,9 +52,12 @@ public class InteracaoService : IInteracaoService {
         if (checkListModel == null)
             throw new KeyNotFoundException("CheckList não encontrado");
         
-        InteracaoModel? interacaoModel = new InteracaoModel(interacaoDto, clienteModel, checkListModel);
+        InteracaoModel interacaoModel = new InteracaoModel(interacaoDto, clienteModel, checkListModel);
         
-        var interacao = await _repositoryInteracao.Adicionar(interacaoModel);
+        InteracaoModel? interacao = await _repositoryInteracao.Adicionar(interacaoModel);
+
+        if(interacao != null)
+            interacao = RefatoraoMinInteracaoModel(interacao);
         
         return _mapper.Map<InteracaoResponseDTO>(interacao);
         
@@ -72,7 +75,7 @@ public class InteracaoService : IInteracaoService {
         
         if(interacao == null) throw new ArgumentNullException(nameof(id));
 
-        interacao = RefatoraoMinInteracaoModel(interacao);
+        interacao = RefatoraoMediumInteracaoModel(interacao);
 
         return _mapper.Map<InteracaoResponseDTO>(interacao);
     }
@@ -85,7 +88,7 @@ public class InteracaoService : IInteracaoService {
         var interacao = await _repositoryInteracao.BuscarTodos();
         
         return interacao
-            .Select(_mapper.Map<InteracaoResponseDTO>)
+            .Select(i => _mapper.Map<InteracaoResponseDTO>(RefatoraoMinInteracaoModel(i)))
             .ToList();
     }
 
@@ -141,11 +144,12 @@ public class InteracaoService : IInteracaoService {
     /**
      * Método da camada de serviço -> para fazer a refatoracao de InteracaoModel -> InteracaoResponseDTO sem que haja
      * problemas de dependência circular de modo que puxem apenas as informações que foram julgadas como necessárias
+     * ao método GET 
      */
-    public InteracaoModel RefatoraoMinInteracaoModel(InteracaoModel interacaoModel)
+    public InteracaoModel RefatoraoMediumInteracaoModel(InteracaoModel interacaoModel)
     {
         var interacaoRespostaAlternativaModels = interacaoModel.RespostaAlternativaModels
-            .Select(o => new RespostaAlternativaModel
+            .Select(o => new RespostaModel
             {
                 Id = o.Id,
                 Alternativa = o.Alternativa,
@@ -173,6 +177,37 @@ public class InteracaoService : IInteracaoService {
                 Nome = interacaoModel.Cliente.Nome,
                 Telefone = interacaoModel.Cliente.Telefone,
             };
+        
+        return interacaoModel;
+    }
+
+    /**
+     * Método da camada de serviço -> para fazer a refatoracao de InteracaoModel -> InteracaoResponseDTO sem que haja
+     * problemas de dependência circular de modo que puxem apenas as informações que foram julgadas como necessárias
+     * para retornar ao método POST de criação
+     */
+    public InteracaoModel RefatoraoMinInteracaoModel(InteracaoModel interacaoModel)
+    {
+        interacaoModel.RespostaAlternativaModels = new List<RespostaModel>();
+
+        if (interacaoModel.CheckList != null)
+            interacaoModel.CheckList = new CheckListModel
+            {
+                Id = interacaoModel.CheckList.Id,
+                Usuario = interacaoModel.CheckList.Usuario,
+                Nome = interacaoModel.CheckList.Nome,
+                DataCriacao = interacaoModel.CheckList.DataCriacao
+            };
+
+        if (interacaoModel.Cliente != null)
+            interacaoModel.Cliente = new ClienteModel
+            {
+                Id = interacaoModel.Cliente.Id,
+                UsuarioId = interacaoModel.Cliente.UsuarioId,
+                Nome = interacaoModel.Cliente.Nome,
+                Telefone = interacaoModel.Cliente.Telefone,
+            };
+        
         
         return interacaoModel;
     }

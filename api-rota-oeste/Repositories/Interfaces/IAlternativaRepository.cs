@@ -1,4 +1,5 @@
 using api_rota_oeste.Models.Alternativa;
+using api_rota_oeste.Models.Questao;
 
 namespace api_rota_oeste.Repositories.Interfaces;
 
@@ -13,6 +14,8 @@ public interface IAlternativaRepository
     Task<AlternativaModel?> BuscarPorId(int id);
     
     Task<List<AlternativaModel>> BuscarTodos();
+
+    Task<int> ObterProximoCodigoPorQuestaoId(int questaoId);
     
     Task<bool> Apagar(int id);
 }

@@ -1,6 +1,6 @@
 
+using api_rota_oeste.Models.Alternativa;
 using api_rota_oeste.Models.CheckList;
-using api_rota_oeste.Models.RespostaAlternativa;
 
 namespace api_rota_oeste.Models.Questao;
 public record QuestaoResponseDTO(
@@ -13,8 +13,10 @@ public record QuestaoResponseDTO(
     
     string Tipo,
     
-    CheckListModel? CheckList,
+    CheckListResponseDTO? CheckList,
     
-    List<RespostaAlternativaModel>? RespostaAlternativaModels
+    List<QuestaoResponseDTO>? RespostaAlternativaModels,
+    
+    List<AlternativaResponseDTO>? AlternativaModels
     
 );

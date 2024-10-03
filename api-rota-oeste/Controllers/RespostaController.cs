@@ -7,36 +7,36 @@ namespace api_rota_oeste.Controllers;
 
 [ApiController]
 [Route("respostaAlternativa")]
-public class RespostaAlternativaController : ControllerBase
+public class RespostaController : ControllerBase
 {
-    private readonly IRespostaAlternativaService _respostaAlternativaService;
+    private readonly IRespostaService _respostaService;
 
-    public RespostaAlternativaController(IRespostaAlternativaService respostaAlternativaService)
+    public RespostaController(IRespostaService respostaService)
     {
-        _respostaAlternativaService = respostaAlternativaService;
+        _respostaService = respostaService;
     }
     
     [HttpPost("adicionar")]
-    [SwaggerResponse(201, "Resposta alternativa criada com sucesso.", typeof(RespostaAlternativaResponseDTO))]
+    [SwaggerResponse(201, "Resposta alternativa criada com sucesso.", typeof(RespostaResponseDTO))]
     [SwaggerResponse(400, "Dados de entrada inválidos.")]
-    public async Task<CreatedAtActionResult> Adicionar([FromBody] RespostaAlternativaRequestDTO resposta)
+    public async Task<CreatedAtActionResult> Adicionar([FromBody] RespostaRequestDTO resposta)
     {
-        RespostaAlternativaResponseDTO respostaAlternativaResponse = await _respostaAlternativaService.AdicionarAsync(resposta);
+        RespostaResponseDTO respostaResponse = await _respostaService.AdicionarAsync(resposta);
 
         return CreatedAtAction(
             nameof(BuscarPorId),
-            new { id = respostaAlternativaResponse.Id },
-            respostaAlternativaResponse
+            new { id = respostaResponse.Id },
+            respostaResponse
         );
     }
     
     [HttpGet("buscarPorId/{id}")]
-    [SwaggerResponse(200, "Resposta alternativa encontrada.", typeof(RespostaAlternativaResponseDTO))]
+    [SwaggerResponse(200, "Resposta alternativa encontrada.", typeof(RespostaResponseDTO))]
     [SwaggerResponse(404, "Resposta alternativa não encontrada.")]
-    public async Task<ActionResult<RespostaAlternativaResponseDTO>> BuscarPorId(int id)
+    public async Task<ActionResult<RespostaResponseDTO>> BuscarPorId(int id)
     {
      
-        var respostaAlternativa = await _respostaAlternativaService.BuscarPorIdAsync(id);
+        var respostaAlternativa = await _respostaService.BuscarPorIdAsync(id);
         
         return Ok(respostaAlternativa);
    
@@ -45,10 +45,10 @@ public class RespostaAlternativaController : ControllerBase
     [HttpPatch("atualizar")]
     [SwaggerResponse(204, "Resposta alternativa atualizada com sucesso.")]
     [SwaggerResponse(404, "Resposta alternativa não encontrada.")]
-    public async Task<ActionResult> Atualizar([FromBody] RespostaAlternativaPatchDTO resposta)
+    public async Task<ActionResult> Atualizar([FromBody] RespostaPatchDTO resposta)
     {
         
-        await _respostaAlternativaService.AtualizarAsync(resposta);
+        await _respostaService.AtualizarAsync(resposta);
 
         return NoContent();
     }
@@ -59,7 +59,7 @@ public class RespostaAlternativaController : ControllerBase
     public async Task<ActionResult> ApagarPorId(int id)
     {
 
-        await _respostaAlternativaService.ApagarAsync(id);
+        await _respostaService.ApagarAsync(id);
 
         return NoContent();
     }
@@ -69,7 +69,7 @@ public class RespostaAlternativaController : ControllerBase
     [SwaggerResponse(500, "Erro ao tentar apagar todas as respostas alternativas.")]
     public async Task<ActionResult> ApagarTodos()
     {
-        var resultado = await _respostaAlternativaService.ApagarTodosAsync();
+        var resultado = await _respostaService.ApagarTodosAsync();
 
         if (!resultado)
             throw new ApplicationException("Operação violada");

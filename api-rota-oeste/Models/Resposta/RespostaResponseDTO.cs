@@ -3,7 +3,7 @@ using api_rota_oeste.Models.Questao;
 
 namespace api_rota_oeste.Models.RespostaAlternativa;
 
-public record RespostaAlternativaResponseDTO(
+public record RespostaResponseDTO(
     
     int Id, 
     

@@ -10,23 +10,23 @@ using Xunit;
 
 namespace api_rota_oeste.Tests.Controllers;
 
-public class RespostaAlternativaControllerTests
+public class RespostaControllerTests
 {
-    private readonly Mock<IRespostaAlternativaService> _mockRespostaAlternativaService;
-    private readonly RespostaAlternativaController _controller;
+    private readonly Mock<IRespostaService> _mockRespostaAlternativaService;
+    private readonly RespostaController _controller;
 
-    public RespostaAlternativaControllerTests()
+    public RespostaControllerTests()
     {
-        _mockRespostaAlternativaService = new Mock<IRespostaAlternativaService>();
-        _controller = new RespostaAlternativaController(_mockRespostaAlternativaService.Object);
+        _mockRespostaAlternativaService = new Mock<IRespostaService>();
+        _controller = new RespostaController(_mockRespostaAlternativaService.Object);
     }
 
     [Fact]
     public async Task Adicionar_ShouldReturnCreatedAtAction_WhenDataIsValid()
     {
         // Arrange
-        var requestDto = new RespostaAlternativaRequestDTO(1, 1, 2, null);
-        var responseDto = new RespostaAlternativaResponseDTO(1, 1, 1, 2, null, null, null);
+        var requestDto = new RespostaRequestDTO(1, 1, 2, null);
+        var responseDto = new RespostaResponseDTO(1, 1, 1, 2, null, null, null);
 
         _mockRespostaAlternativaService.Setup(x => x.AdicionarAsync(requestDto)).ReturnsAsync(responseDto);
 
@@ -44,7 +44,7 @@ public class RespostaAlternativaControllerTests
     public async Task BuscarPorId_ShouldReturnOk_WhenRespostaAlternativaExists()
     {
         // Arrange
-        var responseDto = new RespostaAlternativaResponseDTO(1, 1, 1, 2, null, null, null);
+        var responseDto = new RespostaResponseDTO(1, 1, 1, 2, null, null, null);
 
         _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ReturnsAsync(responseDto);
 
@@ -76,8 +76,8 @@ public class RespostaAlternativaControllerTests
     public async Task Atualizar_ShouldReturnNoContent_WhenRespostaAlternativaIsUpdated()
     {
         // Arrange
-        var patchDto = new RespostaAlternativaPatchDTO(1, 2, null);
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(patchDto.Id)).ReturnsAsync(new RespostaAlternativaResponseDTO(1, 1, 1, 2, null, null, null));
+        var patchDto = new RespostaPatchDTO(1, 2, null);
+        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(patchDto.Id)).ReturnsAsync(new RespostaResponseDTO(1, 1, 1, 2, null, null, null));
         _mockRespostaAlternativaService.Setup(x => x.AtualizarAsync(patchDto)).ReturnsAsync(true);
 
         // Act
@@ -91,8 +91,8 @@ public class RespostaAlternativaControllerTests
     public async Task Atualizar_ShouldReturnNotFound_WhenRespostaAlternativaDoesNotExist()
     {
         // Arrange
-        var patchDto = new RespostaAlternativaPatchDTO(1, 2, null);
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(patchDto.Id)).ReturnsAsync((RespostaAlternativaResponseDTO)null);
+        var patchDto = new RespostaPatchDTO(1, 2, null);
+        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(patchDto.Id)).ReturnsAsync((RespostaResponseDTO)null);
 
         // Act
         var result = await _controller.Atualizar(patchDto);
@@ -105,7 +105,7 @@ public class RespostaAlternativaControllerTests
     public async Task ApagarPorId_ShouldReturnNoContent_WhenRespostaAlternativaIsDeleted()
     {
         // Arrange
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ReturnsAsync(new RespostaAlternativaResponseDTO(1, 1, 1, 2, null, null, null));
+        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ReturnsAsync(new RespostaResponseDTO(1, 1, 1, 2, null, null, null));
         _mockRespostaAlternativaService.Setup(x => x.ApagarAsync(1)).ReturnsAsync(true);
 
         // Act
@@ -119,7 +119,7 @@ public class RespostaAlternativaControllerTests
     public async Task ApagarPorId_ShouldReturnNotFound_WhenRespostaAlternativaDoesNotExist()
     {
         // Arrange
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ReturnsAsync((RespostaAlternativaResponseDTO)null);
+        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ReturnsAsync((RespostaResponseDTO)null);
 
         // Act
         var result = await _controller.ApagarPorId(1);

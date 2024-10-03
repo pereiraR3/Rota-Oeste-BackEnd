@@ -1,4 +1,6 @@
 using api_rota_oeste.Models.Cliente;
+using api_rota_oeste.Models.ClienteRespondeCheckList;
+using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Usuario;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
@@ -44,7 +46,11 @@ public class ClienteService : IClienteService
         
         var clienteModel = await _clienteRepository.Adicionar(cliente);
         
+        // Adicionando o Cliente à lista de clientes mapeados na entidade Usuario
         usuarioModel.Clientes.Add(cliente);
+        
+        // Refatorando a entidade para não puxar todas as suas associações com outras entidades
+        clienteModel = RefatoraoMinClienteModel(clienteModel);
         
         return _mapper.Map<ClienteResponseDTO>(clienteModel);
     }
@@ -92,6 +98,8 @@ public class ClienteService : IClienteService
         if (cliente == null)
             throw new KeyNotFoundException("Entidade cliente não encontrada");
         
+        cliente = RefatoraoMediumClienteModel(cliente);
+        
         return _mapper.Map<ClienteResponseDTO>(cliente);
     }
 
@@ -104,7 +112,7 @@ public class ClienteService : IClienteService
         List<ClienteModel>? clienteModels = await _clienteRepository.BuscarTodos();
         
         List<ClienteResponseDTO> clientesResponse = clienteModels
-            .Select(i => _mapper.Map<ClienteResponseDTO>(i))
+            .Select(i => _mapper.Map<ClienteResponseDTO>(RefatoraoMinClienteModel(i)))
             .ToList();
         
         return clientesResponse;
@@ -140,4 +148,71 @@ public class ClienteService : IClienteService
         return true;
 
     }
+
+    /**
+    * Método da camada de serviço -> para fazer a refatoracao de clienteModel, de modo que puxe apenas as
+    * informações que foram julgadas como necessárias
+    */
+    public ClienteModel RefatoraoMinClienteModel(ClienteModel clienteModel)
+    {
+        
+        clienteModel.ClienteRespondeCheckLists = new List<ClienteRespondeCheckListModel>();
+        clienteModel.Interacoes = new List<InteracaoModel>();
+        clienteModel.Usuario = new UsuarioModel
+        {
+            Id = clienteModel.Usuario.Id,
+            Nome = clienteModel.Usuario.Nome,
+            Telefone = clienteModel.Usuario.Telefone
+        };
+
+        return clienteModel;
+
+    }
+    
+    /**
+     * Método da camada de serviço -> para fazer a refatoracao de clienteModel, de modo que puxe apenas as
+     * informações que foram julgadas como necessárias para o método getById
+     */
+    public ClienteModel RefatoraoMediumClienteModel(ClienteModel clienteModel)
+    {
+        if (clienteModel.ClienteRespondeCheckLists != null)
+        {
+            var clienteRespondeCheckListModels = clienteModel.ClienteRespondeCheckLists
+                .Select(i => new ClienteRespondeCheckListModel
+                {
+                    ClienteId = i.ClienteId,
+                    CheckListId = i.CheckListId
+                }).ToList();
+            
+            clienteModel.ClienteRespondeCheckLists = clienteRespondeCheckListModels;
+            
+        }
+
+        if (clienteModel.Interacoes != null)
+
+        {
+            var interacaoModels = clienteModel.Interacoes
+                .Select(i => new InteracaoModel
+                {
+                    Id = i.Id,
+                    ClienteId = i.ClienteId,
+                    CheckListId = i.CheckListId,
+                    Status = i.Status
+                }).ToList();
+            
+            clienteModel.Interacoes = interacaoModels;
+            
+        }
+        
+        clienteModel.Usuario = new UsuarioModel
+        {
+            Id = clienteModel.Usuario.Id,
+            Nome = clienteModel.Usuario.Nome,
+            Telefone = clienteModel.Usuario.Telefone
+        };
+
+        return clienteModel;
+
+    }
+    
 }

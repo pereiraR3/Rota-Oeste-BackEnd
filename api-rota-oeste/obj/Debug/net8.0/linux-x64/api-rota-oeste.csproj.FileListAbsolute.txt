@@ -273,3 +273,6 @@ C:/Users/vinic/Documents/Projetos/Rota-Oeste-BackEnd/api-rota-oeste/obj/Debug/ne
 C:/Users/vinic/Documents/Projetos/Rota-Oeste-BackEnd/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.genruntimeconfig.cache
 C:/Users/vinic/Documents/Projetos/Rota-Oeste-BackEnd/api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll
 /home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Newtonsoft.Json.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Microsoft.AspNetCore.JsonPatch.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/bin/Debug/net8.0/linux-x64/Newtonsoft.Json.Bson.dll

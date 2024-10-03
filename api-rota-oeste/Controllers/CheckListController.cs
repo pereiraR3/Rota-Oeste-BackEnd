@@ -12,7 +12,11 @@ namespace api_rota_oeste.Controllers
     {
         private readonly ICheckListService _checkListService;
 
-        public CheckListController(ICheckListService checklistService)
+        public CheckListController(
+            
+            ICheckListService checklistService
+            
+            )
         {
             _checkListService = checklistService;
         }
@@ -34,7 +38,7 @@ namespace api_rota_oeste.Controllers
             );
         }
         
-        [HttpPost("adicionar/cliente/{clienteId}/checklist/{checkListId}")]
+        [HttpPost("adicionar/clienteId/{clienteId}/checklistId/{checkListId}")]
         [SwaggerOperation(
             Summary = "Adiciona uma relação entre Cliente e CheckList",
             Description = "Adiciona uma relação entre um Cliente e um CheckList e retorna os detalhes dessa relação."
@@ -42,7 +46,7 @@ namespace api_rota_oeste.Controllers
         [SwaggerResponse(201, "Relação Cliente-CheckList criada com sucesso.", typeof(ClienteRespondeCheckListResponseDTO))]
         [SwaggerResponse(400, "Dados de entrada inválidos.")]
         [SwaggerResponse(404, "Cliente ou CheckList não encontrado.")]
-        public async Task<ActionResult<ClienteRespondeCheckListResponseDTO>> Adicionar(int clienteId, int checkListId)
+        public async Task<ActionResult<ClienteRespondeCheckListResponseDTO>> AdicionarClienteRespondePorId(int clienteId, int checkListId)
         {
             try
             {
@@ -122,7 +126,7 @@ namespace api_rota_oeste.Controllers
             
         }
         
-        [HttpDelete("apagar/cliente/{clienteId}/checklist/{checkListId}")]
+        [HttpDelete("apagar/clienteId/{clienteId}/checklistId/{checkListId}")]
         [SwaggerOperation(
             Summary = "Remove uma relação entre Cliente e CheckList",
             Description = "Remove o ClienteRespondeCheckList associado aos 2 IDs fornecidos. Retorna 204 No Content se a remoção for bem-sucedida."

@@ -10,7 +10,7 @@ public interface IQuestaoService {
     
     public Task<List<QuestaoResponseDTO>> BuscarTodosAsync();
 
-    public Task<bool> AtualizarAsync(QuestaoPatchDTO request);
+    public Task<bool> AtualizarAsync(QuestaoPatchDTO questaoPatchDto);
 
     public Task<bool> ApagarAsync(int id);
     

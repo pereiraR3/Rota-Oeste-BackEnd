@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api_rota_oeste.Models.Cliente;
+using Microsoft.Extensions.Logging;
 
 namespace api_rota_oeste.Tests.Services
 {
@@ -21,6 +22,8 @@ namespace api_rota_oeste.Tests.Services
         private readonly Mock<IClienteRespondeCheckListRepository> _repositoryClienteRespondeCheckMock;
         private readonly Mock<IMapper> _mapperMock;
         private readonly Mock<IClienteRepository> _repositoryClienteMock;
+        private readonly Mock<ILogger<CheckListService>> _loggerMock;
+        private readonly Mock<IInteracaoRepository> _repositoryInteracaoMock;
         private readonly CheckListService _checkListService;
 
         public CheckListServiceTest()
@@ -31,17 +34,21 @@ namespace api_rota_oeste.Tests.Services
             _mapperMock = new Mock<IMapper>();
             _repositoryClienteRespondeCheckMock = new Mock<IClienteRespondeCheckListRepository>();
             _repositoryClienteMock = new Mock<IClienteRepository>();
+            _loggerMock = new Mock<ILogger<CheckListService>>();
+            _repositoryInteracaoMock = new Mock<IInteracaoRepository>();
 
             _checkListService = new CheckListService(
                 _repositoryCheckListMock.Object,
-                _repositoryUsuarioMock.Object, 
+                _repositoryUsuarioMock.Object,
                 _mapperMock.Object,
                 _repositoryMock.Object,
                 _repositoryClienteRespondeCheckMock.Object,
-                _repositoryClienteMock.Object
+                _repositoryClienteMock.Object,
+                _repositoryInteracaoMock.Object,
+                _loggerMock.Object
             );
         }
-
+        
         [Fact]
         public async Task AdicionarAsync_DeveAdicionarCheckList()
         {
