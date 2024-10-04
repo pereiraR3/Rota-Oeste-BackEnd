@@ -14,7 +14,7 @@ public record ClienteResponseDTO
 
     public UsuarioResponseDTO? Usuario { get; set; }
     public List<InteracaoResponseDTO>? Interacoes { get; set; }
-    public List<ClienteRespondeCheckListModel>? ClienteResponde { get; set; }
+    public List<ClienteRespondeCheckListResponseDTO>? ClienteResponde { get; set; }
 
     // Construtor padrão necessário para compatibilidade com mapeamento automático
     public ClienteResponseDTO() {}

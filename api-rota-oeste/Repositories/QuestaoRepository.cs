@@ -55,12 +55,9 @@ public class QuestaoRepository : IQuestaoRepository
      */
     public async Task<QuestaoModel?> BuscarPorId(int id)
     {
-        
-        return await _context.Questoes
-            .Include(x => x.CheckList)
-            .Include(x => x.RespostaAlternativaModels)
-            .FirstOrDefaultAsync(x => x.Id == id);
-        
+
+        return await _context.Questoes.FindAsync(id);
+
     }
     
     /**

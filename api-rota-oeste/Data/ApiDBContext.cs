@@ -1,4 +1,5 @@
 using api_rota_oeste.Data.Configuration;
+using api_rota_oeste.Models.Alternativa;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.ClienteRespondeCheckList;
@@ -13,17 +14,15 @@ namespace api_rota_oeste.Data;
 public class ApiDBContext : DbContext
 {
     public ApiDBContext(DbContextOptions<ApiDBContext> options) : base(options) { }
-        
+    
     public DbSet<UsuarioModel> Usuarios { get; set; }
     public DbSet<ClienteModel> Clientes { get; set; }
     public DbSet<CheckListModel> CheckLists { get; set; }
     public DbSet<QuestaoModel> Questoes { get; set; }
-    
     public DbSet<InteracaoModel> Interacoes { get; set; }
-    
-    public DbSet<RespostaAlternativaModel> RespostaAlternativaModels { get; set; }
-    
+    public DbSet<RespostaModel> RespostaModels { get; set; }
     public DbSet<ClienteRespondeCheckListModel> ClienteRespondeCheckListModels { get; set; }
+    public DbSet<AlternativaModel> AlternativaModels { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -34,6 +33,8 @@ public class ApiDBContext : DbContext
         modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
         modelBuilder.ApplyConfiguration(new ClienteConfiguration());
         modelBuilder.ApplyConfiguration(new CheckListConfiguration());
+        modelBuilder.ApplyConfiguration(new RespostaConfiguration());
+        modelBuilder.ApplyConfiguration(new AlternativaConfiguration());
         
         base.OnModelCreating(modelBuilder);       
         

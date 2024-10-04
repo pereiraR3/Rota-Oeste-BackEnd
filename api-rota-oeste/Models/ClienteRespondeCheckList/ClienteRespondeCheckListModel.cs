@@ -17,18 +17,18 @@ public class ClienteRespondeCheckListModel
     public int CheckListId { get; set; }
     
     [JsonIgnore]
-    public virtual ClienteModel Cliente { get; set; }
+    public virtual ClienteModel? Cliente { get; set; }
     
     [JsonIgnore]
-    public virtual CheckListModel CheckList { get; set; }
+    public virtual CheckListModel? CheckList { get; set; }
 
     public ClienteRespondeCheckListModel(){}
     
     public ClienteRespondeCheckListModel(
         int clienteId,
         int checkListId,
-        ClienteModel cliente,
-        CheckListModel checkListModel
+        ClienteModel? cliente,
+        CheckListModel? checkListModel
     )
     {
         this.ClienteId = clienteId;

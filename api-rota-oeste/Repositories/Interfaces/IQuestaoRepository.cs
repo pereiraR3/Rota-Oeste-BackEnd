@@ -10,9 +10,9 @@ public interface IQuestaoRepository
 {
     Task<QuestaoModel> Adicionar(QuestaoModel questao);
     
-    Task<List<QuestaoModel>> BuscarTodos();
-    
     Task<QuestaoModel?> BuscarPorId(int id);
+
+    Task<List<QuestaoModel>> BuscarTodos();
     
     Task<bool> Apagar(int id);
 }

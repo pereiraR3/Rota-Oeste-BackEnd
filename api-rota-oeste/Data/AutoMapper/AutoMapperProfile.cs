@@ -1,3 +1,4 @@
+using api_rota_oeste.Models.Alternativa;
 using AutoMapper;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Interacao;
@@ -12,6 +13,18 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         
+        // Mapeando a Entidade Alternativa
+        
+            // -> mapeamento incluindo as entidades de navegação
+            CreateMap<AlternativaModel, AlternativaResponseDTO>()
+                .ForMember(dest => dest.Questao, opt => opt.MapFrom(src => src.Questao));
+            
+                 
+            // -> O mapeamento de atualização deve ignorar campos nulos
+            CreateMap<AlternativaPatchDTO, AlternativaModel>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            
+            
         // Mapeando a Entidade ClienteRespondeCheckList 
         
             // -> mapeamento incluindo as entidades de navegação
@@ -79,12 +92,12 @@ public class AutoMapperProfile : Profile
         // Mapeando a Entidade RespostaAlternativa
         
             // -> mapeamento incluindo as entidades de navegação
-            CreateMap<RespostaAlternativaModel, RespostaAlternativaResponseDTO>()
+            CreateMap<RespostaModel, RespostaResponseDTO>()
                 .ForMember(dest => dest.Interacao, opt => opt.MapFrom(src => src.Interacao))
                 .ForMember(dest => dest.Questao, opt => opt.MapFrom(src => src.Questao));
 
             // -> mapeamento de atualização deve ignorar campos nulos
-            CreateMap<RespostaAlternativaPatchDTO, RespostaAlternativaModel>()
+            CreateMap<RespostaPatchDTO, RespostaModel>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             

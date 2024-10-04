@@ -26,10 +26,10 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task Adicionar_DeveRetornarOk()
         {
             // Arrange
-            var questaoRequest = new QuestaoRequestDTO(1, "Titulo Teste", "Tipo Teste");
+            var questaoRequest = new QuestaoRequestDTO(1, "Titulo Teste", TipoQuestao.QUESTAO_OBJETIVA);
 
             _questaoServiceMock.Setup(service => service.AdicionarAsync(It.IsAny<QuestaoRequestDTO>()))
-                .ReturnsAsync(new QuestaoResponseDTO(1, 1,"Titulo Teste", "Tipo Teste", null, null));
+                .ReturnsAsync(new QuestaoResponseDTO(1, 1,"Titulo Teste", "Tipo Teste", null, null, null));
 
             // Act
             var result = await _controller.Adicionar(questaoRequest);
@@ -43,7 +43,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task BuscarTodos_DeveRetornarListaDeQuestoes()
         {
             // Arrange
-            CheckListModel checkListModel = new CheckListModel
+            CheckListResponseDTO checkListResponse = new CheckListResponseDTO
             {
                 Id = 1,
                 Nome = "CheckList Teste",
@@ -55,8 +55,8 @@ namespace api_rota_oeste.Tests.Controllers
 
             var questoes = new List<QuestaoResponseDTO>
             {
-                new QuestaoResponseDTO(1, 1,"Titulo 1", "Tipo 1", checkListModel, null),
-                new QuestaoResponseDTO(2, 1,"Titulo 2", "Tipo 2", checkListModel, null)
+                new QuestaoResponseDTO(1, 1,"Titulo 1", "Tipo 1", checkListResponse, null, null),
+                new QuestaoResponseDTO(2, 1,"Titulo 2", "Tipo 2", checkListResponse, null, null)
             };
 
             _questaoServiceMock.Setup(service => service.BuscarTodosAsync())
@@ -77,7 +77,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task Obter_DeveRetornarQuestaoPorId()
         {
             // Arrange
-            CheckListModel checkListModel = new CheckListModel
+            CheckListResponseDTO checkListResponse = new CheckListResponseDTO
             {
                 Id = 1,
                 Nome = "CheckList Teste",
@@ -87,7 +87,7 @@ namespace api_rota_oeste.Tests.Controllers
                 DataCriacao = DateTime.Today
             };
 
-            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel, null);
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListResponse, null, null);
 
             _questaoServiceMock.Setup(service => service.BuscarPorIdAsync(It.IsAny<int>()))
                 .ReturnsAsync(questaoResponse);

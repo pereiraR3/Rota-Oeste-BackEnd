@@ -13,7 +13,6 @@ public class InteracaoRepository: IInteracaoRepository
 {
 
     private readonly ApiDBContext _context;
-    private readonly IMapper _mapper;
     
     // Construtor para injeção de dependência do contexto
     public InteracaoRepository(
@@ -23,7 +22,6 @@ public class InteracaoRepository: IInteracaoRepository
         )
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
-        _mapper = mapper;
     }
     
     /**
@@ -45,11 +43,7 @@ public class InteracaoRepository: IInteracaoRepository
     */
     public async Task<InteracaoModel?> BuscarPorId(int id)
     {
-        return await _context.Interacoes
-            .Include(x => x.CheckList)
-            .Include(x => x.Cliente)
-            .Include(x => x.RespostaAlternativaModels)
-            .FirstOrDefaultAsync(x => x.Id == id);
+        return await _context.Interacoes.FindAsync(id);
     }
 
     /**

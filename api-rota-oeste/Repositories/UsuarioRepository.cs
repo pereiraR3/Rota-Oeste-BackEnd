@@ -39,11 +39,9 @@ public class UsuarioRepository : IUsuarioRepository
      */
     public async Task<UsuarioModel?> BuscaPorId(int id)
     {
-        return await _dbContext
-            .Usuarios
-            .Include(x => x.CheckLists)
-            .Include(x => x.Clientes)
-            .FirstOrDefaultAsync(x => x.Id == id);
+        
+        return await _dbContext.Usuarios.FindAsync(id);
+        
     }
 
     /**

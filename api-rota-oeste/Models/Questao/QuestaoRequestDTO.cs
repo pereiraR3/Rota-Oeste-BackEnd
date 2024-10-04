@@ -6,6 +6,6 @@ public record QuestaoRequestDTO(
     
     string Titulo,
     
-    string Tipo
+    TipoQuestao Tipo
     
 );

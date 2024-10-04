@@ -11,23 +11,23 @@ namespace api_rota_oeste.Services;
 /**
  * Representa a camada de serviço, isto é, a camada onde fica as regras de negócio da aplicação
  */
-public class RespostaAlternativaService : IRespostaAlternativaService
+public class RespostaService : IRespostaService
 {
     
-    private readonly IRespostaAlternativaRepository _respostaAlternativaRepository;
+    private readonly IRespostaRepository _respostaRepository;
     private readonly IInteracaoRepository _interacaoRepository;
     private readonly IQuestaoRepository _questaoRepository;
     private readonly IRepository _repository;
     private readonly IMapper _mapper;
 
-    public RespostaAlternativaService(
+    public RespostaService(
         
-        IRespostaAlternativaRepository respostaAlternativaRepository,
+        IRespostaRepository respostaRepository,
         IMapper mapper,
         IInteracaoRepository interacaoRepository,
         IQuestaoRepository questaoRepository, IRepository repository)
     {
-        _respostaAlternativaRepository = respostaAlternativaRepository;
+        _respostaRepository = respostaRepository;
         _mapper = mapper;
         _interacaoRepository = interacaoRepository;
         _questaoRepository = questaoRepository;
@@ -37,12 +37,12 @@ public class RespostaAlternativaService : IRespostaAlternativaService
     /**
     * Método da camada de serviço -> para criar uma entidade do tipo RespostaAlternativa
     */
-    public async Task<RespostaAlternativaResponseDTO> AdicionarAsync(RespostaAlternativaRequestDTO respostaAlternativa)
+    public async Task<RespostaResponseDTO> AdicionarAsync(RespostaRequestDTO respostaRequest)
     {
 
-        InteracaoModel? interacaoModel = await _interacaoRepository.BuscarPorId(respostaAlternativa.InteracaoId);
+        InteracaoModel? interacaoModel = await _interacaoRepository.BuscarPorId(respostaRequest.InteracaoId);
         
-        QuestaoModel? questaoModel = await _questaoRepository.BuscarPorId(respostaAlternativa.QuestaoId);
+        QuestaoModel? questaoModel = await _questaoRepository.BuscarPorId(respostaRequest.QuestaoId);
         
         if(interacaoModel == null)
             throw new KeyNotFoundException("Interação não encontrada");
@@ -50,9 +50,9 @@ public class RespostaAlternativaService : IRespostaAlternativaService
         if(questaoModel == null)
             throw new KeyNotFoundException("Questão não encontrada");
         
-        RespostaAlternativaModel respostaAlternativaModel = new RespostaAlternativaModel(respostaAlternativa, interacaoModel, questaoModel);
+        RespostaModel respostaAlternativaModel = new RespostaModel(respostaRequest, interacaoModel, questaoModel);
         
-        RespostaAlternativaModel? resposta = await _respostaAlternativaRepository.Adicionar(respostaAlternativaModel);
+        RespostaModel? resposta = await _respostaRepository.Adicionar(respostaAlternativaModel);
 
         if (resposta != null)
         {
@@ -61,40 +61,40 @@ public class RespostaAlternativaService : IRespostaAlternativaService
 
         }
         
-        return _mapper.Map<RespostaAlternativaResponseDTO>(respostaAlternativaModel);
+        return _mapper.Map<RespostaResponseDTO>(respostaAlternativaModel);
         
     }
 
     /**
     * Método da camada de serviço -> para buscar uma entidade RespostaAlternativa por meio do ID
     */
-    public async Task<RespostaAlternativaResponseDTO> BuscarPorIdAsync(int id)
+    public async Task<RespostaResponseDTO> BuscarPorIdAsync(int id)
     {
         
         if(id <= 0)
             throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
         
-        RespostaAlternativaModel? respostaAlternativaModel = await _respostaAlternativaRepository.BuscaPorId(id);
+        RespostaModel? respostaModel = await _respostaRepository.BuscaPorId(id);
 
-        if (respostaAlternativaModel is null)
+        if (respostaModel is null)
             throw new KeyNotFoundException("RespostaAlternativa não encontrada");
         
-        return _mapper.Map<RespostaAlternativaResponseDTO>(respostaAlternativaModel);
+        return _mapper.Map<RespostaResponseDTO>(respostaModel);
 
     }
 
     /**
      * Método da camada de serviço -> para atualizar parcialmente uma entidade RespostaAlternativa
      */
-    public async Task<bool> AtualizarAsync(RespostaAlternativaPatchDTO respostaAlternativaPatch)
+    public async Task<bool> AtualizarAsync(RespostaPatchDTO respostaPatch)
     {
-        RespostaAlternativaModel? respostaAlternativaModel = await _respostaAlternativaRepository.BuscaPorId(respostaAlternativaPatch.Id);
+        RespostaModel? respostaModel = await _respostaRepository.BuscaPorId(respostaPatch.Id);
 
-        if (respostaAlternativaModel == null)
+        if (respostaModel == null)
             throw new KeyNotFoundException("RespostaAlternativa não encontrada");
         
         // O mapeamento de atualização deve ignorar campos nulos
-        _mapper.Map(respostaAlternativaPatch, respostaAlternativaModel);
+        _mapper.Map(respostaPatch, respostaModel);
         
         _repository.Salvar();
 
@@ -110,12 +110,12 @@ public class RespostaAlternativaService : IRespostaAlternativaService
         if (id <= 0)
             throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
 
-        var respostaModel = await _respostaAlternativaRepository.BuscaPorId(id); 
+        var respostaModel = await _respostaRepository.BuscaPorId(id); 
 
         if (respostaModel == null)
             throw new KeyNotFoundException("RespostaAlternativa não encontrada.");
         
-        await _respostaAlternativaRepository.Apagar(id);
+        await _respostaRepository.Apagar(id);
 
         return true;
         
@@ -126,7 +126,7 @@ public class RespostaAlternativaService : IRespostaAlternativaService
      */
     public async Task<bool> ApagarTodosAsync()
     {
-        var resultado = await _respostaAlternativaRepository.ApagarTodos();
+        var resultado = await _respostaRepository.ApagarTodos();
 
         if (!resultado)
             throw new ApplicationException("Operação não foi realizada");

@@ -67,7 +67,7 @@ namespace api_rota_oeste.Middlewares
         private class ErrorResponse
         {
             public int StatusCode { get; set; }
-            public string Message { get; set; }
+            public string Message { get; set; } = string.Empty; // Valor padrão para evitar avisos de não inicialização
         }
     }
 }

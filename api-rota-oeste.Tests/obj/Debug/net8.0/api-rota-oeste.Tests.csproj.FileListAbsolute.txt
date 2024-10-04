@@ -159,3 +159,6 @@
 /home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.pdb
 /home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.genruntimeconfig.cache
 /home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/obj/Debug/net8.0/ref/api-rota-oeste.Tests.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll

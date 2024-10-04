@@ -6,8 +6,8 @@ using api_rota_oeste.Models.Questao;
 
 namespace api_rota_oeste.Models.RespostaAlternativa;
 
-[Table("resposta_alternativa")]
-public class RespostaAlternativaModel
+[Table("resposta")]
+public class RespostaModel
 {
         
         [Key]
@@ -37,11 +37,11 @@ public class RespostaAlternativaModel
         [ForeignKey("QuestaoId")]
         public virtual QuestaoModel Questao { get; set; }
         
-        public RespostaAlternativaModel(){}
+        public RespostaModel(){}
         
-        public RespostaAlternativaModel(
+        public RespostaModel(
                 
-                RespostaAlternativaRequestDTO request, 
+                RespostaRequestDTO request, 
                 InteracaoModel interacao,
                 QuestaoModel questao
                 

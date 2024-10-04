@@ -24,7 +24,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Registrar os controladores no contêiner de serviços
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 // Registrar o DbContext com o nome correto
 builder.Services.AddEntityFrameworkSqlServer()
@@ -49,8 +51,11 @@ builder.Services.AddScoped<IQuestaoService,QuestaoService>();
 builder.Services.AddScoped<IInteracaoRepository, InteracaoRepository>();
 builder.Services.AddScoped<IInteracaoService, InteracaoService>();
 
-builder.Services.AddScoped<IRespostaAlternativaRepository, RespostaAlternativaRepository>();
-builder.Services.AddScoped<IRespostaAlternativaService, RespostaAlternativaService>();
+builder.Services.AddScoped<IRespostaRepository, RespostaRepository>();
+builder.Services.AddScoped<IRespostaService, RespostaService>();
+
+builder.Services.AddScoped<IAlternativaRepository, AlternativaRepository>();
+builder.Services.AddScoped<IAlternativaService, AlternativaService>();
 
 builder.Services.AddScoped<IClienteRespondeCheckListRepository, ClienteRespondeCheckListRepository>();
 

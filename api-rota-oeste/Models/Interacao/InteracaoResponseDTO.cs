@@ -19,7 +19,7 @@ public record InteracaoResponseDTO
     
     CheckListResponseDTO? CheckList,
     
-    List<RespostaAlternativaModel>? RespostaAlternativaModels
+    List<RespostaResponseDTO>? RespostaAlternativaModels
     
 );
 

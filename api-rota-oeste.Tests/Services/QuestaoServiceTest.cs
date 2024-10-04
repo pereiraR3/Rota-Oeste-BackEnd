@@ -39,7 +39,7 @@ namespace api_rota_oeste.Tests.Services
         public async Task AdicionarAsync_DeveRetornarQuestaoResponseDTO()
         {
             // Arrange
-            var questaoRequest = new QuestaoRequestDTO(1, "Titulo Teste", "Tipo Teste");
+            var questaoRequest = new QuestaoRequestDTO(1, "Titulo Teste", TipoQuestao.QUESTAO_OBJETIVA);
    
             var checkListModel = new CheckListModel
             {
@@ -55,11 +55,13 @@ namespace api_rota_oeste.Tests.Services
             {
                 Id = 1,
                 Titulo = "Titulo Teste",
-                Tipo = "Tipo Teste",
+                Tipo = TipoQuestao.QUESTAO_OBJETIVA,
                 CheckList = checkListModel
             };
+            
+            var checkListResponse = _mapperMock.Object.Map<CheckListResponseDTO>(checkListModel);
 
-            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel, null);
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListResponse, null, null);
     
             // Configurando o mock para buscar o CheckList
             _repositoryCheckListMock.Setup(repo => repo.BuscarPorId(questaoRequest.CheckListId))
@@ -84,7 +86,7 @@ namespace api_rota_oeste.Tests.Services
         public async Task BuscarPorIdAsync_DeveRetornarQuestaoResponseDTO_SeEncontrado()
         {
             
-            CheckListModel checkListModel = new CheckListModel
+            CheckListResponseDTO checkList = new CheckListResponseDTO
             {
                 Id = 1,
                 Nome = "CheckList Teste",
@@ -95,8 +97,8 @@ namespace api_rota_oeste.Tests.Services
             };
             
             // Arrange
-            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Teste", Tipo = "Tipo Teste" };
-            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListModel, null);
+            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Teste", Tipo = TipoQuestao.QUESTAO_OBJETIVA };
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkList, null, null);
 
             _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(It.IsAny<int>()))
                 .ReturnsAsync(questaoModel);
@@ -128,7 +130,7 @@ namespace api_rota_oeste.Tests.Services
         {
             // Arrange
             var questaoPatch = new QuestaoPatchDTO(1, "Novo Titulo", "Novo Tipo");
-            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Antigo", Tipo = "Tipo Antigo" };
+            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Antigo", Tipo = TipoQuestao.QUESTAO_OBJETIVA };
 
             _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(questaoPatch.Id))
                 .ReturnsAsync(questaoModel);
@@ -160,7 +162,7 @@ namespace api_rota_oeste.Tests.Services
         public async Task ApagarAsync_DeveRetornarTrue_SeApagarBemSucedido()
         {
             // Arrange
-            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Teste", Tipo = "Tipo Teste" };
+            var questaoModel = new QuestaoModel { Id = 1, Titulo = "Titulo Teste", Tipo = TipoQuestao.QUESTAO_OBJETIVA };
 
             _questaoRepositoryMock.Setup(repo => repo.BuscarPorId(It.IsAny<int>()))
                 .ReturnsAsync(questaoModel);
