@@ -53,6 +53,9 @@ public class AlternativaService : IAlternativaService
         // Adicionar a alternativa à lista de alternativas da questão
         questaoModel.AlternativaModels.Add(alternativa);
 
+        // Refatorando AlternativaModel
+        alternativa = RefatoracaoMinAlternativaModel(alternativa);
+        
         // Mapear para o DTO de resposta e retornar
         return _mapper.Map<AlternativaResponseDTO>(alternativa);
         
@@ -73,12 +76,8 @@ public class AlternativaService : IAlternativaService
             throw new KeyNotFoundException("Não há alternativa registrada com o ID informado.");
         }
 
-        alternativa.Questao = new QuestaoModel
-        {
-            Id = alternativa.QuestaoId,
-            Titulo = alternativa.Questao.Titulo,
-            Tipo = alternativa.Questao.Tipo
-        };
+        // Refatorando AlternativaModel
+        alternativa = RefatoracaoMinAlternativaModel(alternativa);
         
         return _mapper.Map<AlternativaResponseDTO>(alternativa);
         
@@ -90,11 +89,13 @@ public class AlternativaService : IAlternativaService
     */
     public async Task<List<AlternativaResponseDTO>> BuscarTodosAsync()
     {
-        var alternativas = await _repositoryAlternativa.BuscarTodos();
+        List<AlternativaModel> alternativas = await _repositoryAlternativa.BuscarTodos();
         
         return alternativas
-            .Select(_mapper.Map<AlternativaResponseDTO>)
+            .Select(RefatoracaoMinAlternativaModel)
+            .Select(refatorado => _mapper.Map<AlternativaResponseDTO>(refatorado))
             .ToList();
+
     }
     
     /**
@@ -134,5 +135,28 @@ public class AlternativaService : IAlternativaService
 
         return true;
     }
+
+    /**
+    * Método da camada de serviço -> para fazer a refatoracao do DTO da entidade Alternativa,
+     * de modo que puxem apenas as informações que foram julgadas como necessárias
+     */
+    public AlternativaModel RefatoracaoMinAlternativaModel(AlternativaModel alternativaModel)
+    {
+        if (alternativaModel == null)
+        {
+            throw new ArgumentNullException(nameof(alternativaModel), "O modelo de alternativa não pode ser nulo.");
+        }
+
+        alternativaModel.Questao = new QuestaoModel
+        {
+            Id = alternativaModel.QuestaoId,
+            Titulo = alternativaModel.Questao.Titulo,
+            Tipo = alternativaModel.Questao.Tipo
+        };
+
+        return alternativaModel;
+    }
+
+
     
 }
