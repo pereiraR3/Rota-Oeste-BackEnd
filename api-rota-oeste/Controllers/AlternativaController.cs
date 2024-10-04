@@ -99,7 +99,7 @@ public class AlternativaController : ControllerBase
         try
         {
             var atualizado = await _alternativaService.AtualizarAsync(alternativaPatch);
-            return Ok(atualizado);
+            return NoContent();
         }
         catch (KeyNotFoundException ex)
         {
@@ -123,7 +123,7 @@ public class AlternativaController : ControllerBase
         try
         {
             var apagado = await _alternativaService.ApagarAsync(id);
-            return Ok(apagado);
+            return NoContent();
         }
         
         catch (KeyNotFoundException ex)
