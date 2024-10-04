@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using api_rota_oeste.Models.Alternativa;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 
@@ -36,6 +37,8 @@ public class RespostaModel
         [JsonIgnore]
         [ForeignKey("QuestaoId")]
         public virtual QuestaoModel Questao { get; set; }
+        
+   
         
         public RespostaModel(){}
         
