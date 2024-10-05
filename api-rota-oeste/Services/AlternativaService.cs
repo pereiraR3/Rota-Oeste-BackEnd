@@ -107,14 +107,14 @@ public class AlternativaService : IAlternativaService
 
         if (alternativaModel == null)
             throw new KeyNotFoundException("Alternativa não encontrada");
-        
-        // O mapeamento de atualização deve ignorar campos nulos
-        _mapper.Map(alternativaPatch, alternativaModel);
-        
+
+        alternativaModel.Descricao = alternativaPatch.Descricao ?? alternativaModel.Descricao;
+
         _repository.Salvar();
 
         return true;
     }
+
     
     /**
     * Método da camada de serviço -> para fazer a deleção relacional de uma entidade do tipo alternativa
@@ -147,16 +147,17 @@ public class AlternativaService : IAlternativaService
             throw new ArgumentNullException(nameof(alternativaModel), "O modelo de alternativa não pode ser nulo.");
         }
 
-        alternativaModel.Questao = new QuestaoModel
+        if (alternativaModel.Questao == null)
         {
-            Id = alternativaModel.QuestaoId,
-            Titulo = alternativaModel.Questao.Titulo,
-            Tipo = alternativaModel.Questao.Tipo
-        };
+            alternativaModel.Questao = new QuestaoModel
+            {
+                Id = alternativaModel.QuestaoId,
+                Titulo = "Título Padrão", // Alterado para não causar NullReferenceException
+                Tipo = TipoQuestao.QUESTAO_OBJETIVA // Alterado para não causar NullReferenceException
+            };
+        }
 
         return alternativaModel;
     }
-
-
     
 }
