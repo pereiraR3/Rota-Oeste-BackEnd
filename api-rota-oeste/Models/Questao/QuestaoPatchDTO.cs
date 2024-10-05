@@ -6,6 +6,6 @@ public record QuestaoPatchDTO(
     
     string? Titulo,
     
-    string? Tipo
+    TipoQuestao? Tipo
 
 );
