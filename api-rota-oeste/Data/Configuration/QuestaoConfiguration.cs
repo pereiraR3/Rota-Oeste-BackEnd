@@ -10,11 +10,11 @@ public class QuestaoConfiguration : IEntityTypeConfiguration<QuestaoModel>
     {
         
         // Configurando a relação entre Questao e Resposta
-        builder.HasMany(q => q.RespostaAlternativaModels)
+        builder.HasMany(q => q.RespostaModels)
             .WithOne(r => r.Questao)
             .HasForeignKey(r => r.QuestaoId)
             .OnDelete(DeleteBehavior.Restrict); // Evitar exclusão em cascata para evitar múltiplos caminhos
-
+        
         // Configurando a relação entre CheckList e Questao
         builder.HasOne(q => q.CheckList)
             .WithMany(cl => cl.Questoes)

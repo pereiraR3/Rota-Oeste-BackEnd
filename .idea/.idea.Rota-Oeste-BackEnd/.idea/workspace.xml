@@ -8,27 +8,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="FIX: edit. Method Apagar &amp; Atualizar in AlternativaController.cs">
+    <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="fix: edit RespostaResponseDTO.cs">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/QuestaoControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/QuestaoControllerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/RespostaControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/RespostaControllerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/RespostaServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/RespostaServiceTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/AlternativaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/AlternativaController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/AlternativaRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/AlternativaRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/AlternativaService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/AlternativaService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/RespostaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/RespostaController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/QuestaoConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/QuestaoConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241003172753_InitDB.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241003172753_InitDB.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/ApiDBContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Questao/QuestaoModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Questao/QuestaoModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Resposta/RespostaModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Resposta/RespostaModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Resposta/RespostaPatchDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Resposta/RespostaPatchDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRespondeCheckListRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRespondeCheckListRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/InteracaoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/InteracaoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/QuestaoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/QuestaoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/RespostaRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/RespostaRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/UsuarioRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/UsuarioRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/ICheckListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/ICheckListService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/RespostaService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/RespostaService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/refint/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/refint/api-rota-oeste.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/api-rota-oeste.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/api-rota-oeste.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.restore.info" afterDir="false" />
     </list>
@@ -41,7 +60,45 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Controllers/QuestaoControllerTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Controllers/RespostaControllerTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/AlternativaServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/AlternativaServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/RespostaServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Controllers/RespostaController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Data/Configuration/QuestaoConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Data/Configuration/RespostaConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Questao/QuestaoModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Questao/QuestaoPatchDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Questao/QuestaoResponseDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaPatchDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaRequestDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaResponseDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaResponseDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/ClienteRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/ClienteRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/ClienteRespondeCheckListRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/InteracaoRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/QuestaoRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/QuestaoRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/Repository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/Repository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/RespostaRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/InteracaoService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/Interfaces/ICheckListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/Interfaces/IRespostaService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/Interfaces/IRespostaService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/RespostaService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/RespostaService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -55,20 +112,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;a85a27c0-5289-4fe1-89e8-b576af808354.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;sprint03-entidade-alternativa-anthony&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "a85a27c0-5289-4fe1-89e8-b576af808354.executor": "Debug",
+    "git-widget-placeholder": "sprint03-entidade-respostaTemAlternativa-anthony",
+    "last_opened_file_path": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CodeInspectionSettingsId",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.api-rota-oeste: http">
     <configuration name="api-rota-oeste: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/api-rota-oeste/api-rota-oeste.csproj" />
@@ -116,7 +174,8 @@
       <workItem from="1727957528489" duration="19746000" />
       <workItem from="1727992030943" duration="4542000" />
       <workItem from="1728042594099" duration="54000" />
-      <workItem from="1728042660028" duration="1706000" />
+      <workItem from="1728042660028" duration="16482000" />
+      <workItem from="1728154915463" duration="2170000" />
     </task>
     <task id="LOCAL-00001" summary="feat: create AlternativaModel.cs">
       <option name="closed" value="true" />
@@ -222,7 +281,207 @@
       <option name="project" value="LOCAL" />
       <updated>1728044365137</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="FIX: edit. method ObterProximoCodigoPorQuestaoId in AlternativaRepository.cs">
+      <option name="closed" value="true" />
+      <created>1728044391498</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1728044391498</updated>
+    </task>
+    <task id="LOCAL-00015" summary="FIX: edit. method BuscarTodosAsync &amp; BuscarPorIdAsync in AlternativaService.cs">
+      <option name="closed" value="true" />
+      <created>1728044426103</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1728044426103</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: finished 2.0 task">
+      <option name="closed" value="true" />
+      <created>1728044458233</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1728044458233</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: create IRespostaTemAlternativaRepository.cs">
+      <option name="closed" value="true" />
+      <created>1728156560053</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156560053</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: create RespostaTemAlternativaRepository.cs">
+      <option name="closed" value="true" />
+      <created>1728156577653</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156577653</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: create model RespostaTemAlternativaModel.cs">
+      <option name="closed" value="true" />
+      <created>1728156601348</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156601348</updated>
+    </task>
+    <task id="LOCAL-00020" summary="feat: create DTO RespostaTemAlternativaResponseDTO.cs">
+      <option name="closed" value="true" />
+      <created>1728156618643</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156618643</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: create RespostaTemAlternativaConfiguration.cs">
+      <option name="closed" value="true" />
+      <created>1728156637981</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156637981</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix: add configura mapper to RespondeTemAlternativaModel">
+      <option name="closed" value="true" />
+      <created>1728156670589</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156670589</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fix: add DbSet&lt;RespostaTemAlternativaModel&gt;">
+      <option name="closed" value="true" />
+      <created>1728156689993</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156689993</updated>
+    </task>
+    <task id="LOCAL-00024" summary="fix: edit AlternativaControllerTest.cs">
+      <option name="closed" value="true" />
+      <created>1728156767074</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156767074</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fix: edit AlternativaConfiguration.cs">
+      <option name="closed" value="true" />
+      <created>1728156782210</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156782210</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fix: edit AlternativaModel.cs">
+      <option name="closed" value="true" />
+      <created>1728156794650</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156794650</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fix: edit AlternativaRepository.cs">
+      <option name="closed" value="true" />
+      <created>1728156817003</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156817003</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix: edit AlternativaResponseDTO.cs">
+      <option name="closed" value="true" />
+      <created>1728156829515</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156829515</updated>
+    </task>
+    <task id="LOCAL-00029" summary="fix: edit AlternativaService.cs">
+      <option name="closed" value="true" />
+      <created>1728156847600</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156847600</updated>
+    </task>
+    <task id="LOCAL-00030" summary="fix: edit. AlternativaServiceTest.cs">
+      <option name="closed" value="true" />
+      <created>1728156865425</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156865425</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix: edit CheckListRepository.cs">
+      <option name="closed" value="true" />
+      <created>1728156882752</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156882752</updated>
+    </task>
+    <task id="LOCAL-00032" summary="fix: edit InteracaoService.cs">
+      <option name="closed" value="true" />
+      <created>1728156930720</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156930720</updated>
+    </task>
+    <task id="LOCAL-00033" summary="fix: edit. IRespostaService.cs">
+      <option name="closed" value="true" />
+      <created>1728156945741</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156945741</updated>
+    </task>
+    <task id="LOCAL-00034" summary="fix: edit. QuestaoPatchDTO.cs">
+      <option name="closed" value="true" />
+      <created>1728156980673</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156980673</updated>
+    </task>
+    <task id="LOCAL-00035" summary="fix: edit QuestaoResponseDTO.cs">
+      <option name="closed" value="true" />
+      <created>1728156999481</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1728156999481</updated>
+    </task>
+    <task id="LOCAL-00036" summary="fix: edit RespostaConfiguration.cs">
+      <option name="closed" value="true" />
+      <created>1728157019648</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1728157019648</updated>
+    </task>
+    <task id="LOCAL-00037" summary="fix: edit RespostaRequestDTO.cs">
+      <option name="closed" value="true" />
+      <created>1728157043431</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1728157043431</updated>
+    </task>
+    <task id="LOCAL-00038" summary="fix: edit RespostaResponseDTO.cs">
+      <option name="closed" value="true" />
+      <created>1728157057646</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1728157057646</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,19 +492,47 @@
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="feat: create AlternativaModel.cs" />
-    <MESSAGE value="feat: create AlternativaRequestDTO.cs" />
-    <MESSAGE value="fix: create AlternativaResponseDTO.cs" />
-    <MESSAGE value="fix: create AlternativaPatchDTO.cs" />
-    <MESSAGE value="fix: create IAlternativaRepository.cs" />
-    <MESSAGE value="fix: create IAlternativaService.cs" />
-    <MESSAGE value="fix: create TipoQuestao.cs" />
-    <MESSAGE value="fix: create AlternativaService.cs" />
-    <MESSAGE value="fix: edit. AlternativaRepository.cs" />
-    <MESSAGE value="fix: edit. AlternativaControllerTest.cs" />
+    <MESSAGE value="FIX: edit. method ObterProximoCodigoPorQuestaoId in AlternativaRepository.cs" />
+    <MESSAGE value="FIX: edit. method BuscarTodosAsync &amp; BuscarPorIdAsync in AlternativaService.cs" />
+    <MESSAGE value="feat: finished 2.0 task" />
+    <MESSAGE value="feat: create IRespostaTemAlternativaRepository.cs" />
+    <MESSAGE value="fix: create RespostaTemAlternativaRepository.cs" />
+    <MESSAGE value="feat: create model RespostaTemAlternativaModel.cs" />
+    <MESSAGE value="feat: create DTO RespostaTemAlternativaResponseDTO.cs" />
+    <MESSAGE value="feat: create RespostaTemAlternativaConfiguration.cs" />
+    <MESSAGE value="fix: add configura mapper to RespondeTemAlternativaModel" />
+    <MESSAGE value="fix: add DbSet&lt;RespostaTemAlternativaModel&gt;" />
+    <MESSAGE value="fix: edit AlternativaControllerTest.cs" />
+    <MESSAGE value="fix: edit AlternativaConfiguration.cs" />
+    <MESSAGE value="fix: edit AlternativaModel.cs" />
+    <MESSAGE value="fix: edit AlternativaRepository.cs" />
+    <MESSAGE value="fix: edit AlternativaResponseDTO.cs" />
+    <MESSAGE value="fix: edit AlternativaService.cs" />
     <MESSAGE value="fix: edit. AlternativaServiceTest.cs" />
-    <MESSAGE value="feat: finished task" />
-    <MESSAGE value="FIX: edit. Method Apagar &amp; Atualizar in AlternativaController.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="FIX: edit. Method Apagar &amp; Atualizar in AlternativaController.cs" />
+    <MESSAGE value="fix: edit CheckListRepository.cs" />
+    <MESSAGE value="fix: edit InteracaoService.cs" />
+    <MESSAGE value="fix: edit. IRespostaService.cs" />
+    <MESSAGE value="fix: edit. QuestaoPatchDTO.cs" />
+    <MESSAGE value="fix: edit QuestaoResponseDTO.cs" />
+    <MESSAGE value="fix: edit RespostaConfiguration.cs" />
+    <MESSAGE value="fix: edit RespostaRequestDTO.cs" />
+    <MESSAGE value="fix: edit RespostaResponseDTO.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: edit RespostaResponseDTO.cs" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet Exception Breakpoints">
+          <properties exception="System.NullReferenceException" isInternal="false" displayValue="NullReferenceException" namespaceName="System">
+            <option name="internal" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

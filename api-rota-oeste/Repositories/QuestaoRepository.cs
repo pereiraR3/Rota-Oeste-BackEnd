@@ -11,13 +11,13 @@ namespace api_rota_oeste.Repositories;
  */
 public class QuestaoRepository : IQuestaoRepository
 {
-    private readonly ApiDBContext _context;
+    private readonly ApiDbContext _context;
     private readonly IMapper _mapper;
     
     // Construtor para injeção de dependência do contexto
     public QuestaoRepository(
         
-        ApiDBContext context,
+        ApiDbContext context,
         IMapper mapper
         
     )

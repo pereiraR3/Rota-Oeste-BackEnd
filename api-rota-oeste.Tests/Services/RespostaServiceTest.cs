@@ -15,7 +15,7 @@ namespace api_rota_oeste.Tests.Services;
 
 public class RespostaServiceTests
 {
-    private readonly Mock<IRespostaRepository> _mockRespostaAlternativaRepository;
+    private readonly Mock<IRespostaRepository> _mockRespostaRepository;
     private readonly Mock<IInteracaoRepository> _mockInteracaoRepository;
     private readonly Mock<IQuestaoRepository> _mockQuestaoRepository;
     private readonly Mock<IRepository> _mockRepository;
@@ -24,66 +24,85 @@ public class RespostaServiceTests
 
     public RespostaServiceTests()
     {
-        _mockRespostaAlternativaRepository = new Mock<IRespostaRepository>();
+        _mockRespostaRepository = new Mock<IRespostaRepository>();
         _mockInteracaoRepository = new Mock<IInteracaoRepository>();
         _mockQuestaoRepository = new Mock<IQuestaoRepository>();
         _mockRepository = new Mock<IRepository>();
         _mockMapper = new Mock<IMapper>();
 
         _service = new RespostaService(
-            _mockRespostaAlternativaRepository.Object,
+            _mockRespostaRepository.Object,
             _mockMapper.Object,
             _mockInteracaoRepository.Object,
             _mockQuestaoRepository.Object,
-            _mockRepository.Object);
+            _mockRepository.Object,
+            new Mock<IRespostaTemAlternativaRepository>().Object,
+            new Mock<IAlternativaRepository>().Object
+        );
     }
 
     [Fact]
-    public async Task Adicionar_DeveAdicionarRespostaAlternativa_QuandoDadosForemValidos()
+    public async Task AtualizarAsync_DeveAtualizarResposta_QuandoDadosForemValidos()
     {
         // Arrange
-        var requestDto = new RespostaRequestDTO(1, 1, 2, null);
-        var interacao = new InteracaoModel { Id = 1 };
-        var questao = new QuestaoModel { Id = 1 };
-        var respostaModel = new RespostaModel(requestDto, interacao, questao);
-        
-        _mockInteracaoRepository.Setup(x => x.BuscarPorId(requestDto.InteracaoId)).ReturnsAsync(interacao);
-        _mockQuestaoRepository.Setup(x => x.BuscarPorId(requestDto.QuestaoId)).ReturnsAsync(questao);
-        _mockRespostaAlternativaRepository.Setup(x => x.Adicionar(It.IsAny<RespostaModel>())).ReturnsAsync(respostaModel);
-        _mockMapper.Setup(x => x.Map<RespostaResponseDTO>(It.IsAny<RespostaModel>())).Returns(new RespostaResponseDTO(1, 1, 1, 2, null, questao, interacao));
+        var respostaPatch = new RespostaPatchDTO(1, new byte[] { 1, 2, 3 });
+        var respostaModel = new RespostaModel
+        {
+            Id = 1,
+            QuestaoId = 1,
+            InteracaoId = 1,
+            Foto = null
+        };
+
+        _mockRespostaRepository.Setup(repo => repo.BuscaPorId(respostaPatch.Id))
+            .ReturnsAsync(respostaModel);
 
         // Act
-        var result = await _service.AdicionarAsync(requestDto);
+        var result = await _service.AtualizarAsync(respostaPatch);
 
         // Assert
-        Assert.NotNull(result);
-        Assert.Equal(1, result.Id);
-        Assert.Equal(requestDto.QuestaoId, result.QuestaoId);
-        Assert.Equal(requestDto.InteracaoId, result.InteracaoId);
-        Assert.Equal(requestDto.Alternativa, result.Alternativa);
+        Assert.True(result);
+        Assert.Equal(respostaPatch.Foto, respostaModel.Foto);
+        _mockRespostaRepository.Verify(repo => repo.BuscaPorId(respostaPatch.Id), Times.Once);
+        _mockRepository.Verify(repo => repo.Salvar(), Times.Once);
     }
 
     [Fact]
-    public async Task Adicionar_DeveLancarExcecao_QuandoInteracaoNaoForEncontrada()
+    public async Task AtualizarAsync_DeveLancarExcecao_QuandoRespostaNaoForEncontrada()
     {
         // Arrange
-        var requestDto = new RespostaRequestDTO(1, 1, 2, null);
-        _mockInteracaoRepository.Setup(x => x.BuscarPorId(requestDto.InteracaoId)).ReturnsAsync((InteracaoModel)null);
+        var respostaPatch = new RespostaPatchDTO(1, new byte[] { 1, 2, 3 });
+
+        _mockRespostaRepository.Setup(repo => repo.BuscaPorId(respostaPatch.Id))
+            .ReturnsAsync((RespostaModel)null);
 
         // Act & Assert
-        await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.AdicionarAsync(requestDto));
+        await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.AtualizarAsync(respostaPatch));
     }
 
     [Fact]
-    public async Task Adicionar_DeveLancarExcecao_QuandoQuestaoNaoForEncontrada()
+    public async Task AtualizarAsync_DeveManterFotoNula_QuandoFotoNaoForFornecida()
     {
         // Arrange
-        var requestDto = new RespostaRequestDTO(1, 1, 2, null);
-        var interacao = new InteracaoModel { Id = 1 };
-        _mockInteracaoRepository.Setup(x => x.BuscarPorId(requestDto.InteracaoId)).ReturnsAsync(interacao);
-        _mockQuestaoRepository.Setup(x => x.BuscarPorId(requestDto.QuestaoId)).ReturnsAsync((QuestaoModel)null);
+        var respostaPatch = new RespostaPatchDTO(1, null);
+        var respostaModel = new RespostaModel
+        {
+            Id = 1,
+            QuestaoId = 1,
+            InteracaoId = 1,
+            Foto = new byte[] { 1, 2, 3 }
+        };
 
-        // Act & Assert
-        await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.AdicionarAsync(requestDto));
+        _mockRespostaRepository.Setup(repo => repo.BuscaPorId(respostaPatch.Id))
+            .ReturnsAsync(respostaModel);
+
+        // Act
+        var result = await _service.AtualizarAsync(respostaPatch);
+
+        // Assert
+        Assert.True(result);
+        Assert.Equal(new byte[] { 1, 2, 3 }, respostaModel.Foto);
+        _mockRespostaRepository.Verify(repo => repo.BuscaPorId(respostaPatch.Id), Times.Once);
+        _mockRepository.Verify(repo => repo.Salvar(), Times.Once);
     }
 }

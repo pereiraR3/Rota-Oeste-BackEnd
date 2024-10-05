@@ -6,11 +6,11 @@ namespace api_rota_oeste.Repositories;
 public class Repository : IRepository
 {
 
-    private readonly ApiDBContext _context;
+    private readonly ApiDbContext _context;
     
     public Repository(
         
-        ApiDBContext context
+        ApiDbContext context
         
         )
     {

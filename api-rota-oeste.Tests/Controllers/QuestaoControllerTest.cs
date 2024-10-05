@@ -23,19 +23,22 @@ namespace api_rota_oeste.Tests.Controllers
         }
 
         [Fact]
-        public async Task Adicionar_DeveRetornarOk()
+        public async Task Adicionar_DeveRetornarCreatedAtAction_QuandoSucesso()
         {
             // Arrange
             var questaoRequest = new QuestaoRequestDTO(1, "Titulo Teste", TipoQuestao.QUESTAO_OBJETIVA);
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", TipoQuestao.QUESTAO_OBJETIVA, null, null, null);
 
             _questaoServiceMock.Setup(service => service.AdicionarAsync(It.IsAny<QuestaoRequestDTO>()))
-                .ReturnsAsync(new QuestaoResponseDTO(1, 1,"Titulo Teste", "Tipo Teste", null, null, null));
+                .ReturnsAsync(questaoResponse);
 
             // Act
             var result = await _controller.Adicionar(questaoRequest);
 
             // Assert
-            Assert.IsType<CreatedAtActionResult>(result);
+            var actionResult = Assert.IsType<CreatedAtActionResult>(result);
+            var retorno = Assert.IsType<QuestaoResponseDTO>(actionResult.Value);
+            Assert.Equal(questaoResponse.Id, retorno.Id);
             _questaoServiceMock.Verify(service => service.AdicionarAsync(It.IsAny<QuestaoRequestDTO>()), Times.Once);
         }
 
@@ -43,7 +46,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task BuscarTodos_DeveRetornarListaDeQuestoes()
         {
             // Arrange
-            CheckListResponseDTO checkListResponse = new CheckListResponseDTO
+            var checkListResponse = new CheckListResponseDTO
             {
                 Id = 1,
                 Nome = "CheckList Teste",
@@ -55,8 +58,8 @@ namespace api_rota_oeste.Tests.Controllers
 
             var questoes = new List<QuestaoResponseDTO>
             {
-                new QuestaoResponseDTO(1, 1,"Titulo 1", "Tipo 1", checkListResponse, null, null),
-                new QuestaoResponseDTO(2, 1,"Titulo 2", "Tipo 2", checkListResponse, null, null)
+                new QuestaoResponseDTO(1, 1, "Titulo 1", TipoQuestao.QUESTAO_OBJETIVA, checkListResponse, null, null),
+                new QuestaoResponseDTO(2, 1, "Titulo 2", TipoQuestao.QUESTAO_MULTIPLA_ESCOLHA, checkListResponse, null, null)
             };
 
             _questaoServiceMock.Setup(service => service.BuscarTodosAsync())
@@ -77,7 +80,7 @@ namespace api_rota_oeste.Tests.Controllers
         public async Task Obter_DeveRetornarQuestaoPorId()
         {
             // Arrange
-            CheckListResponseDTO checkListResponse = new CheckListResponseDTO
+            var checkListResponse = new CheckListResponseDTO
             {
                 Id = 1,
                 Nome = "CheckList Teste",
@@ -87,7 +90,7 @@ namespace api_rota_oeste.Tests.Controllers
                 DataCriacao = DateTime.Today
             };
 
-            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", "Tipo Teste", checkListResponse, null, null);
+            var questaoResponse = new QuestaoResponseDTO(1, 1, "Titulo Teste", TipoQuestao.QUESTAO_OBJETIVA, checkListResponse, null, null);
 
             _questaoServiceMock.Setup(service => service.BuscarPorIdAsync(It.IsAny<int>()))
                 .ReturnsAsync(questaoResponse);
@@ -108,17 +111,82 @@ namespace api_rota_oeste.Tests.Controllers
         {
             // Arrange
             _questaoServiceMock.Setup(service => service.BuscarPorIdAsync(It.IsAny<int>()))
-                .ReturnsAsync((QuestaoResponseDTO)null);
+                .ThrowsAsync(new KeyNotFoundException("Questão não encontrada"));
 
             // Act
             var result = await _controller.BuscarPorId(1);
 
             // Assert
             var actionResult = Assert.IsType<ActionResult<QuestaoResponseDTO>>(result);
-            Assert.IsType<NotFoundObjectResult>(actionResult.Result);
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(actionResult.Result);
+            Assert.Equal("Questão não encontrada", notFoundResult.Value);
             _questaoServiceMock.Verify(service => service.BuscarPorIdAsync(1), Times.Once);
         }
 
-        // Outros testes corrigidos de forma semelhante...
+        [Fact]
+        public async Task Atualizar_DeveRetornarNoContent_QuandoSucesso()
+        {
+            // Arrange
+            var questaoPatch = new QuestaoPatchDTO(1, "Novo Titulo", TipoQuestao.QUESTAO_MULTIPLA_ESCOLHA);
+
+            _questaoServiceMock.Setup(service => service.AtualizarAsync(questaoPatch))
+                .ReturnsAsync(true);
+
+            // Act
+            var result = await _controller.Atualizar(questaoPatch);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+            _questaoServiceMock.Verify(service => service.AtualizarAsync(questaoPatch), Times.Once);
+        }
+
+        [Fact]
+        public async Task Atualizar_DeveRetornarNotFound_QuandoQuestaoNaoExistir()
+        {
+            // Arrange
+            var questaoPatch = new QuestaoPatchDTO(1, "Novo Titulo", TipoQuestao.QUESTAO_UPLOAD_DE_IMAGEM);
+
+            _questaoServiceMock.Setup(service => service.AtualizarAsync(questaoPatch))
+                .ThrowsAsync(new KeyNotFoundException("Questão não encontrada"));
+
+            // Act
+            var result = await _controller.Atualizar(questaoPatch);
+
+            // Assert
+            var actionResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal("Questão não encontrada", actionResult.Value);
+            _questaoServiceMock.Verify(service => service.AtualizarAsync(questaoPatch), Times.Once);
+        }
+
+        [Fact]
+        public async Task Apagar_DeveRetornarNoContent_QuandoSucesso()
+        {
+            // Arrange
+            _questaoServiceMock.Setup(service => service.ApagarAsync(1))
+                .ReturnsAsync(true);
+
+            // Act
+            var result = await _controller.ApagarPorId(1);
+
+            // Assert
+            Assert.IsType<NoContentResult>(result);
+            _questaoServiceMock.Verify(service => service.ApagarAsync(1), Times.Once);
+        }
+
+        [Fact]
+        public async Task Apagar_DeveRetornarNotFound_QuandoQuestaoNaoExistir()
+        {
+            // Arrange
+            _questaoServiceMock.Setup(service => service.ApagarAsync(1))
+                .ThrowsAsync(new KeyNotFoundException("Questão não encontrada"));
+
+            // Act
+            var result = await _controller.ApagarPorId(1);
+
+            // Assert
+            var actionResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal("Questão não encontrada", actionResult.Value);
+            _questaoServiceMock.Verify(service => service.ApagarAsync(1), Times.Once);
+        }
     }
 }

@@ -10,8 +10,6 @@ namespace api_rota_oeste.Services.Interfaces
         
         Task<ClienteRespondeCheckListResponseDTO> AdicionarClienteRespondeCheckAsync(int clienteId, int checkListId);
         
-        Task<bool> ApagarClienteRespondeCheckAsync(int clienteId, int checkListId);
-        
         Task<CheckListResponseDTO?> BuscarPorIdAsync(int id);
 
         Task<List<CheckListResponseDTO>> BuscarTodosAsync();
@@ -19,6 +17,8 @@ namespace api_rota_oeste.Services.Interfaces
         Task<bool> AtualizarAsync(CheckListPatchDTO checkListPatchDto);
         
         Task<bool> ApagarAsync(int id);
+        
+        Task<bool> ApagarClienteRespondeCheckAsync(int clienteId, int checkListId);
 
         Task<bool> ApagarTodosAsync();
     }
