@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../buildMultiTargeting/api-rota-oeste.props" />
+  <Import Project="..\buildMultiTargeting\api-rota-oeste.props" />
 </Project>

@@ -176,6 +176,31 @@ namespace api_rota_oeste.Controllers
 
             return NoContent(); // Retorna 204 No Content se todos os checklists foram removidos com sucesso
         }
+        
+        [HttpGet("relatorio-geral/{idChecklist}")]
+        [SwaggerOperation(
+            Summary = "Gera um relatório geral para um checklist específico",
+            Description = "Retorna informações detalhadas sobre o checklist especificado."
+        )]
+        public async Task<ActionResult<List<CheckListRelatorioGeralDTO>>> GetRelatorioGeralPorCheckListId(int idChecklist)
+        {
+            try
+            {
+                var relatorio = await _checkListService.GerarRelatorioGeralAsync(idChecklist);
+
+                if (relatorio == null || !relatorio.Any())
+                {
+                    return NotFound("Checklist não encontrado ou não há dados disponíveis.");
+                }
+
+                return Ok(relatorio);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ocorreu um erro ao gerar o relatório: {ex.Message}");
+            }
+        }
+
 
     }
 }

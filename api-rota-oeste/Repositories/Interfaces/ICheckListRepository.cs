@@ -17,5 +17,7 @@ namespace api_rota_oeste.Repositories.Interfaces
         Task<bool> Apagar(int id);
 
         Task<bool> ApagarTodos();
+
+        public Task<IEnumerable<dynamic>> GerarRelatorioGeral(int idChecklist);
     }
 }

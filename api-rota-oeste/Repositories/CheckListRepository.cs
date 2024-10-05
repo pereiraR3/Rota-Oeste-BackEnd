@@ -1,8 +1,10 @@
+using System.Data;
 using api_rota_oeste.Data;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Repositories.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Dapper;
 
 namespace api_rota_oeste.Repositories
 {
@@ -70,6 +72,29 @@ namespace api_rota_oeste.Repositories
 
             return true;
         }
+
+        public async Task<IEnumerable<dynamic>> GerarRelatorioGeral(int idChecklist)
+        {
+            try
+            {
+                using (var connection = _context.Database.GetDbConnection())
+                {
+                    if (connection.State == ConnectionState.Closed)
+                        await connection.OpenAsync();
+
+                    var query = "SELECT * FROM dbo.fn_relatorio_geral_checklist(@IdCheckList)";
+                    var result = await connection.QueryAsync(query, new { IdCheckList = idChecklist });
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
+                throw; // Relance a exceção para tratamento adicional se necessário
+            }
+        }
+
+
 
     }
 }
