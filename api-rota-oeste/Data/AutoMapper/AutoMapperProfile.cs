@@ -1,11 +1,14 @@
 using api_rota_oeste.Models.Alternativa;
+
 using AutoMapper;
+
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.ClienteRespondeCheckList;
 using api_rota_oeste.Models.RespostaAlternativa;
+using api_rota_oeste.Models.RespostaTemAlternativa;
 using api_rota_oeste.Models.Usuario;
 
 public class AutoMapperProfile : Profile
@@ -17,13 +20,20 @@ public class AutoMapperProfile : Profile
         
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<AlternativaModel, AlternativaResponseDTO>()
-                .ForMember(dest => dest.Questao, opt => opt.MapFrom(src => src.Questao));
+                .ForMember(dest => dest.Questao, opt => opt.MapFrom(src => src.Questao))
+                .ForMember(dest => dest.RespostaTemAlternativaResponseDtos, opt => opt.MapFrom(src => src.RespostaTemAlternativaModels));
             
-                 
             // -> O mapeamento de atualização deve ignorar campos nulos
             CreateMap<AlternativaPatchDTO, AlternativaModel>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
             
+            
+        // Mapeando a Entidade RespostaTemAlternativaModel 
+
+            // -> mapeamento incluindo as entidades de navegação
+            CreateMap<RespostaTemAlternativaModel, RespostaTemAlternativaResponseDTO>()
+                .ForMember(dest => dest.Alternativa, opt => opt.MapFrom(src => src.Alternativa))
+                .ForMember(dest => dest.Resposta, opt => opt.MapFrom(src => src.Resposta));
             
         // Mapeando a Entidade ClienteRespondeCheckList 
         
@@ -47,7 +57,7 @@ public class AutoMapperProfile : Profile
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<QuestaoModel, QuestaoResponseDTO>()
                 .ForMember(dest => dest.CheckList, opt => opt.MapFrom(src => src.CheckList))
-                .ForMember(dest => dest.RespostaAlternativaModels, opt => opt.MapFrom(src => src.RespostaAlternativaModels));
+                .ForMember(dest => dest.RespostaModels, opt => opt.MapFrom(src => src.RespostaModels));
             
             // -> O mapeamento de atualização deve ignorar campos nulos
             CreateMap<QuestaoPatchDTO, QuestaoModel>()
@@ -94,7 +104,8 @@ public class AutoMapperProfile : Profile
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<RespostaModel, RespostaResponseDTO>()
                 .ForMember(dest => dest.Interacao, opt => opt.MapFrom(src => src.Interacao))
-                .ForMember(dest => dest.Questao, opt => opt.MapFrom(src => src.Questao));
+                .ForMember(dest => dest.Questao, opt => opt.MapFrom(src => src.Questao))
+                .ForMember(dest => dest.RespostaTemAlternativaResponseDtos, opt => opt.MapFrom(src => src.RespostaTemAlternativaModels));
 
             // -> mapeamento de atualização deve ignorar campos nulos
             CreateMap<RespostaPatchDTO, RespostaModel>()
