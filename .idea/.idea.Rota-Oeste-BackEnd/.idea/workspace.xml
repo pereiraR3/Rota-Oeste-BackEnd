@@ -8,48 +8,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="fix: edit RespostaResponseDTO.cs">
+    <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="info: finished task">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/QuestaoControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/QuestaoControllerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/RespostaControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/RespostaControllerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/RespostaServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Services/RespostaServiceTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/Debug/net8.0/api-rota-oeste.Tests.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/RespostaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/RespostaController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/QuestaoConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Data/Configuration/QuestaoConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241003172753_InitDB.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/20241003172753_InitDB.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/ApiDBContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Questao/QuestaoModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Questao/QuestaoModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Resposta/RespostaModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Resposta/RespostaModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Models/Resposta/RespostaPatchDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Resposta/RespostaPatchDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRespondeCheckListRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/ClienteRespondeCheckListRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/InteracaoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/InteracaoRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/QuestaoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/QuestaoRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/Repository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/RespostaRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/RespostaRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Repositories/UsuarioRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Repositories/UsuarioRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/ICheckListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/Interfaces/ICheckListService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Services/RespostaService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Services/RespostaService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/bin/Debug/net8.0/linux-x64/api-rota-oeste.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/ref/api-rota-oeste.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/refint/api-rota-oeste.dll" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/refint/api-rota-oeste.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +135,7 @@
       <workItem from="1727992030943" duration="4542000" />
       <workItem from="1728042594099" duration="54000" />
       <workItem from="1728042660028" duration="16482000" />
-      <workItem from="1728154915463" duration="2170000" />
+      <workItem from="1728154915463" duration="3572000" />
     </task>
     <task id="LOCAL-00001" summary="feat: create AlternativaModel.cs">
       <option name="closed" value="true" />
@@ -481,7 +441,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728157057646</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="info: finished task">
+      <option name="closed" value="true" />
+      <created>1728157303121</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1728157303121</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -492,7 +460,6 @@
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="FIX: edit. method ObterProximoCodigoPorQuestaoId in AlternativaRepository.cs" />
     <MESSAGE value="FIX: edit. method BuscarTodosAsync &amp; BuscarPorIdAsync in AlternativaService.cs" />
     <MESSAGE value="feat: finished 2.0 task" />
     <MESSAGE value="feat: create IRespostaTemAlternativaRepository.cs" />
@@ -517,7 +484,8 @@
     <MESSAGE value="fix: edit RespostaConfiguration.cs" />
     <MESSAGE value="fix: edit RespostaRequestDTO.cs" />
     <MESSAGE value="fix: edit RespostaResponseDTO.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: edit RespostaResponseDTO.cs" />
+    <MESSAGE value="info: finished task" />
+    <option name="LAST_COMMIT_MESSAGE" value="info: finished task" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
