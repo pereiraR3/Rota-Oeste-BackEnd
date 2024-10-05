@@ -3,7 +3,6 @@ using api_rota_oeste.Models.Alternativa;
 using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -24,7 +23,7 @@ public class AlternativaControllerTest
     {
         // Arrange
         var alternativaRequest = new AlternativaRequestDTO(1, "Descrição de teste");
-        var alternativaResponse = new AlternativaResponseDTO(1, 1, "Descrição de teste", 1, null);
+        var alternativaResponse = new AlternativaResponseDTO(1, 1, "Descrição de teste", 1, null, null);
 
         _alternativaServiceMock.Setup(service => service.AdicionarAsync(alternativaRequest))
             .ReturnsAsync(alternativaResponse);
@@ -59,7 +58,7 @@ public class AlternativaControllerTest
     public async Task BuscarPorId_DeveRetornarOk_QuandoAlternativaExiste()
     {
         // Arrange
-        var alternativaResponse = new AlternativaResponseDTO(1, 1, "Descrição de teste", 1, null);
+        var alternativaResponse = new AlternativaResponseDTO(1, 1, "Descrição de teste", 1, null, null);
 
         _alternativaServiceMock.Setup(service => service.BuscarPorIdAsync(1))
             .ReturnsAsync(alternativaResponse);
@@ -94,8 +93,8 @@ public class AlternativaControllerTest
         // Arrange
         var alternativas = new List<AlternativaResponseDTO>
         {
-            new AlternativaResponseDTO(1, 1, "Alternativa 1", 1, null),
-            new AlternativaResponseDTO(2, 1, "Alternativa 2", 2, null)
+            new AlternativaResponseDTO(1, 1, "Alternativa 1", 1, null, null),
+            new AlternativaResponseDTO(2, 1, "Alternativa 2", 2, null, null)
         };
 
         _alternativaServiceMock.Setup(service => service.BuscarTodosAsync())
@@ -111,7 +110,7 @@ public class AlternativaControllerTest
     }
 
     [Fact]
-    public async Task Atualizar_DeveRetornarOk_QuandoSucesso()
+    public async Task Atualizar_DeveRetornarNoContent_QuandoSucesso()
     {
         // Arrange
         var alternativaPatch = new AlternativaPatchDTO(1, "Nova descrição");
@@ -123,8 +122,7 @@ public class AlternativaControllerTest
         var result = await _alternativaController.Atualizar(alternativaPatch);
 
         // Assert
-        var actionResult = Assert.IsType<OkObjectResult>(result);
-        Assert.True((bool)actionResult.Value);
+        Assert.IsType<NoContentResult>(result);
     }
 
     [Fact]
@@ -145,7 +143,7 @@ public class AlternativaControllerTest
     }
 
     [Fact]
-    public async Task Apagar_DeveRetornarOk_QuandoSucesso()
+    public async Task Apagar_DeveRetornarNoContent_QuandoSucesso()
     {
         // Arrange
         _alternativaServiceMock.Setup(service => service.ApagarAsync(1))
@@ -155,8 +153,7 @@ public class AlternativaControllerTest
         var result = await _alternativaController.Apagar(1);
 
         // Assert
-        var actionResult = Assert.IsType<OkObjectResult>(result);
-        Assert.True((bool)actionResult.Value);
+        Assert.IsType<NoContentResult>(result);
     }
 
     [Fact]

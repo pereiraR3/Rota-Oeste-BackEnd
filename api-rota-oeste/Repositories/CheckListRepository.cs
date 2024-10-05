@@ -10,10 +10,10 @@ namespace api_rota_oeste.Repositories
     {
         
         private readonly IMapper _mapper;
-        private readonly ApiDBContext _context;
+        private readonly ApiDbContext _context;
         private readonly IUsuarioRepository _repository;
 
-        public CheckListRepository(IMapper mapper, ApiDBContext context, IUsuarioRepository repository)
+        public CheckListRepository(IMapper mapper, ApiDbContext context, IUsuarioRepository repository)
         {
             _mapper = mapper;
             _context = context;

@@ -6,14 +6,15 @@ using api_rota_oeste.Models.ClienteRespondeCheckList;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.RespostaAlternativa;
+using api_rota_oeste.Models.RespostaTemAlternativa;
 using api_rota_oeste.Models.Usuario;
 using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Data;
 
-public class ApiDBContext : DbContext
+public class ApiDbContext : DbContext
 {
-    public ApiDBContext(DbContextOptions<ApiDBContext> options) : base(options) { }
+    public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options) { }
     
     public DbSet<UsuarioModel> Usuarios { get; set; }
     public DbSet<ClienteModel> Clientes { get; set; }
@@ -23,6 +24,9 @@ public class ApiDBContext : DbContext
     public DbSet<RespostaModel> RespostaModels { get; set; }
     public DbSet<ClienteRespondeCheckListModel> ClienteRespondeCheckListModels { get; set; }
     public DbSet<AlternativaModel> AlternativaModels { get; set; }
+    
+    public DbSet<RespostaTemAlternativaModel> RespostaTemAlternativaModels { get; set; }
+
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -35,6 +39,7 @@ public class ApiDBContext : DbContext
         modelBuilder.ApplyConfiguration(new CheckListConfiguration());
         modelBuilder.ApplyConfiguration(new RespostaConfiguration());
         modelBuilder.ApplyConfiguration(new AlternativaConfiguration());
+        modelBuilder.ApplyConfiguration(new RespostaTemAlternativaConfiguration());
         
         base.OnModelCreating(modelBuilder);       
         

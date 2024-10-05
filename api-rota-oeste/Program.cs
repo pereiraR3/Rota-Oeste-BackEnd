@@ -30,7 +30,7 @@ builder.Services.AddControllers()
 
 // Registrar o DbContext com o nome correto
 builder.Services.AddEntityFrameworkSqlServer()
-    .AddDbContext<ApiDBContext>(
+    .AddDbContext<ApiDbContext>(
         options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database"))
     );
 
@@ -58,6 +58,8 @@ builder.Services.AddScoped<IAlternativaRepository, AlternativaRepository>();
 builder.Services.AddScoped<IAlternativaService, AlternativaService>();
 
 builder.Services.AddScoped<IClienteRespondeCheckListRepository, ClienteRespondeCheckListRepository>();
+
+builder.Services.AddScoped<IRespostaTemAlternativaRepository, RespostaTemAlternativaRepository>();
 
 builder.Services.AddScoped<IRepository, Repository>();
 

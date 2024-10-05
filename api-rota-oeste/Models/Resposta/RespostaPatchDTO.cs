@@ -1,14 +1,12 @@
 namespace api_rota_oeste.Models.RespostaAlternativa;
 
-/**
- * O atributo alternativa serve para identificar as possíveis alternativas/resposta do usuário
- * , e caso o valor for 0 indique que se trata de um upload de imagem 
- */
+/// <summary>
+/// DTO para atualização parcial de uma resposta alternativa.
+/// O atributo foto serve para identificar um tipo de resposta que poderá ser dada pelo usuário
+/// 
 public record RespostaPatchDTO(
 
     int Id,
-    
-    int? Alternativa,
     
     byte[]? Foto
     

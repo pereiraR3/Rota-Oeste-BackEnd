@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using api_rota_oeste.Models.Questao;
+using api_rota_oeste.Models.RespostaTemAlternativa;
 using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Models.Alternativa;
@@ -32,6 +33,9 @@ public class AlternativaModel
     [ForeignKey("QuestaoId")]
     public virtual QuestaoModel Questao { get; set; }
 
+    [JsonIgnore]
+    public virtual List<RespostaTemAlternativaModel> RespostaTemAlternativaModels { get; set; } = new List<RespostaTemAlternativaModel>();
+    
     public AlternativaModel(){}
     
     public AlternativaModel(

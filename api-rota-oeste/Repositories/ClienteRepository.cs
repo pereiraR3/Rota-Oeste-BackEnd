@@ -10,9 +10,9 @@ public class ClienteRepository : IClienteRepository
 {
     
     private readonly IMapper _mapper;
-    private readonly ApiDBContext _dbContext;
+    private readonly ApiDbContext _dbContext;
     
-    public ClienteRepository(IMapper mapper, ApiDBContext dbContext, IUsuarioRepository usuarioRepository)
+    public ClienteRepository(IMapper mapper, ApiDbContext dbContext, IUsuarioRepository usuarioRepository)
     {
         _mapper = mapper; // Injetando AutoMapper
         _dbContext = dbContext; // Injetando contexto de DB

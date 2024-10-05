@@ -14,10 +14,10 @@ namespace api_rota_oeste.Repositories;
 public class UsuarioRepository : IUsuarioRepository
 {
 
-    private readonly ApiDBContext _dbContext; // Injetando contexto de DB
+    private readonly ApiDbContext _dbContext; // Injetando contexto de DB
     private readonly IMapper _mapper; // Injetando AutoMapper
 
-    public UsuarioRepository(ApiDBContext dbContext, IMapper mapper)
+    public UsuarioRepository(ApiDbContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;

@@ -10,6 +10,12 @@ public class RespostaConfiguration : IEntityTypeConfiguration<RespostaModel>
     {
         builder.HasKey(r => r.Id);
 
+        // Relação com RespostaTemAlternativa
+        builder.HasMany(q => q.RespostaTemAlternativaModels)
+            .WithOne(r => r.Resposta)
+            .HasForeignKey(r => r.RespostaId)
+            .OnDelete(DeleteBehavior.Restrict); // Evitar exclusão em cascata para evitar múltiplos caminhos
+        
         // Relação com Interacao
         builder.HasOne(r => r.Interacao)
             .WithMany(i => i.RespostaAlternativaModels)
@@ -18,7 +24,7 @@ public class RespostaConfiguration : IEntityTypeConfiguration<RespostaModel>
 
         // Relação com Questao
         builder.HasOne(r => r.Questao)
-            .WithMany(q => q.RespostaAlternativaModels)
+            .WithMany(q => q.RespostaModels)
             .HasForeignKey(r => r.QuestaoId)
             .OnDelete(DeleteBehavior.NoAction); // Evitar exclusão em cascata para evitar múltiplos caminhos
     }

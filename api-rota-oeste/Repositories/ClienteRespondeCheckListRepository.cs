@@ -8,9 +8,9 @@ namespace api_rota_oeste.Repositories;
 public class ClienteRespondeCheckListRepository : IClienteRespondeCheckListRepository
 {
 
-    private readonly ApiDBContext _context;
+    private readonly ApiDbContext _context;
     
-    public ClienteRespondeCheckListRepository(ApiDBContext context)
+    public ClienteRespondeCheckListRepository(ApiDbContext context)
     {
         _context = context;
     }

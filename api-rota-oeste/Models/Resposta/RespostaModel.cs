@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using api_rota_oeste.Models.Alternativa;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
+using api_rota_oeste.Models.RespostaTemAlternativa;
 
 namespace api_rota_oeste.Models.RespostaAlternativa;
 
@@ -23,9 +25,6 @@ public class RespostaModel
         [Column("id_interacao")]
         public int InteracaoId { get; set; }
         
-        [Column("alternativa")]
-        public int? Alternativa { get; set; }
-        
         [Column( "foto", TypeName = "VARBINARY(MAX)")]
         public byte[]?  Foto { get; set; }
         
@@ -36,6 +35,9 @@ public class RespostaModel
         [JsonIgnore]
         [ForeignKey("QuestaoId")]
         public virtual QuestaoModel Questao { get; set; }
+        
+        [JsonIgnore]
+        public virtual List<RespostaTemAlternativaModel> RespostaTemAlternativaModels { get; set; } = new List<RespostaTemAlternativaModel>();
         
         public RespostaModel(){}
         
@@ -50,7 +52,6 @@ public class RespostaModel
                 
                 this.QuestaoId = request.QuestaoId;
                 this.InteracaoId = request.InteracaoId;
-                this.Alternativa = request.Alternativa;
                 this.Foto = request.Foto;
                 this.Interacao = interacao;
                 this.Questao = questao;

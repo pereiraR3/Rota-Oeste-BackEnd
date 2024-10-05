@@ -34,7 +34,7 @@ public class QuestaoModel{
     public virtual CheckListModel? CheckList { get; set; }
     
     [JsonIgnore]
-    public virtual List<RespostaModel> RespostaAlternativaModels { get; set; } = new List<RespostaModel>();
+    public virtual List<RespostaModel> RespostaModels { get; set; } = new List<RespostaModel>();
 
     [JsonIgnore]
     public virtual List<AlternativaModel> AlternativaModels { get; set; } = new List<AlternativaModel>();

@@ -9,12 +9,12 @@ public class RespostaRepository : IRespostaRepository
 
 {
     
-    private readonly ApiDBContext _dbContext;
+    private readonly ApiDbContext _dbContext;
     
     // Construtor para injeção de dependência do contexto
     public RespostaRepository(
         
-        ApiDBContext context
+        ApiDbContext context
         
         )
     {

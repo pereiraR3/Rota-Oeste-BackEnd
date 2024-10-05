@@ -1,12 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using api_rota_oeste.Controllers;
 using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using api_rota_oeste.Models.RespostaTemAlternativa;
 
 namespace api_rota_oeste.Tests.Controllers;
 
@@ -25,26 +26,26 @@ public class RespostaControllerTests
     public async Task Adicionar_ShouldReturnCreatedAtAction_WhenDataIsValid()
     {
         // Arrange
-        var requestDto = new RespostaRequestDTO(1, 1, 2, null);
-        var responseDto = new RespostaResponseDTO(1, 1, 1, 2, null, null, null);
+        var requestDto = new RespostaRequestDTO(1, 1, null);
+        var responseDto = new RespostaResponseDTO(1, 1, 1, null, null, null, new List<RespostaTemAlternativaResponseDTO>());
 
         _mockRespostaAlternativaService.Setup(x => x.AdicionarAsync(requestDto)).ReturnsAsync(responseDto);
 
         // Act
-        var result = await _controller.Adicionar(requestDto) as CreatedAtActionResult;
+        var result = await _controller.Adicionar(requestDto);
 
         // Assert
-        Assert.NotNull(result);
-        Assert.Equal(201, result.StatusCode);
-        Assert.Equal("BuscarPorId", result.ActionName);
-        Assert.Equal(responseDto, result.Value);
+        var createdResult = Assert.IsType<CreatedAtActionResult>(result);
+        Assert.Equal(201, createdResult.StatusCode);
+        Assert.Equal("BuscarPorId", createdResult.ActionName);
+        Assert.Equal(responseDto, createdResult.Value);
     }
 
     [Fact]
     public async Task BuscarPorId_ShouldReturnOk_WhenRespostaAlternativaExists()
     {
         // Arrange
-        var responseDto = new RespostaResponseDTO(1, 1, 1, 2, null, null, null);
+        var responseDto = new RespostaResponseDTO(1, 1, 1, null, null, null, new List<RespostaTemAlternativaResponseDTO>());
 
         _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ReturnsAsync(responseDto);
 
@@ -61,23 +62,21 @@ public class RespostaControllerTests
     public async Task BuscarPorId_ShouldReturnNotFound_WhenRespostaAlternativaDoesNotExist()
     {
         // Arrange
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ThrowsAsync(new KeyNotFoundException("RespostaAlternativa não encontrada"));
+        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ThrowsAsync(new KeyNotFoundException("Resposta alternativa não encontrada"));
 
         // Act
         var result = await _controller.BuscarPorId(1);
 
         // Assert
-        Assert.IsType<NotFoundObjectResult>(result.Result);
-        var notFoundResult = result.Result as NotFoundObjectResult;
-        Assert.Equal("RespostaAlternativa não encontrada", notFoundResult?.Value);
+        var notFoundResult = Assert.IsType<NotFoundObjectResult>(result.Result);
+        Assert.Equal("Resposta alternativa não encontrada", notFoundResult.Value);
     }
-    
+
     [Fact]
     public async Task Atualizar_ShouldReturnNoContent_WhenRespostaAlternativaIsUpdated()
     {
         // Arrange
-        var patchDto = new RespostaPatchDTO(1, 2, null);
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(patchDto.Id)).ReturnsAsync(new RespostaResponseDTO(1, 1, 1, 2, null, null, null));
+        var patchDto = new RespostaPatchDTO(1, null);
         _mockRespostaAlternativaService.Setup(x => x.AtualizarAsync(patchDto)).ReturnsAsync(true);
 
         // Act
@@ -86,26 +85,26 @@ public class RespostaControllerTests
         // Assert
         Assert.IsType<NoContentResult>(result);
     }
-
+    
     [Fact]
     public async Task Atualizar_ShouldReturnNotFound_WhenRespostaAlternativaDoesNotExist()
     {
         // Arrange
-        var patchDto = new RespostaPatchDTO(1, 2, null);
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(patchDto.Id)).ReturnsAsync((RespostaResponseDTO)null);
+        var patchDto = new RespostaPatchDTO(5, null);
+        _mockRespostaAlternativaService.Setup(x => x.AtualizarAsync(patchDto)).ThrowsAsync(new KeyNotFoundException("RespostaAlternativa não encontrada"));
 
         // Act
         var result = await _controller.Atualizar(patchDto);
 
         // Assert
-        Assert.IsType<NotFoundObjectResult>(result);
+        var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+        Assert.Equal("RespostaAlternativa não encontrada", notFoundResult.Value);
     }
 
     [Fact]
     public async Task ApagarPorId_ShouldReturnNoContent_WhenRespostaAlternativaIsDeleted()
     {
         // Arrange
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ReturnsAsync(new RespostaResponseDTO(1, 1, 1, 2, null, null, null));
         _mockRespostaAlternativaService.Setup(x => x.ApagarAsync(1)).ReturnsAsync(true);
 
         // Act
@@ -119,13 +118,14 @@ public class RespostaControllerTests
     public async Task ApagarPorId_ShouldReturnNotFound_WhenRespostaAlternativaDoesNotExist()
     {
         // Arrange
-        _mockRespostaAlternativaService.Setup(x => x.BuscarPorIdAsync(1)).ReturnsAsync((RespostaResponseDTO)null);
+        _mockRespostaAlternativaService.Setup(x => x.ApagarAsync(1)).ThrowsAsync(new KeyNotFoundException("Resposta alternativa não encontrada"));
 
         // Act
         var result = await _controller.ApagarPorId(1);
 
         // Assert
-        Assert.IsType<NotFoundObjectResult>(result);
+        var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+        Assert.Equal("Resposta alternativa não encontrada", notFoundResult.Value);
     }
 
     [Fact]

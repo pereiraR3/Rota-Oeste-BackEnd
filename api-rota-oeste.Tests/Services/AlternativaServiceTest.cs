@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api_rota_oeste.Models.Alternativa;
+using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Questao;
+using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Repositories;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
@@ -41,7 +43,7 @@ public class AlternativaServiceTest
         var alternativaRequest = new AlternativaRequestDTO(1, "Descrição de teste");
         var questaoModel = new QuestaoModel { Id = 1, Titulo = "Questão Teste", Tipo = TipoQuestao.QUESTAO_OBJETIVA };
         var alternativaModel = new AlternativaModel(alternativaRequest, questaoModel, 1);
-        var alternativaResponse = new AlternativaResponseDTO(1, 1, "Descrição de teste", 1, questaoModel);
+        var alternativaResponse = new AlternativaResponseDTO(1, 1, "Descrição de teste", 1, null, null);
 
         _repositoryQuestaoMock.Setup(repo => repo.BuscarPorId(alternativaRequest.QuestaoId))
             .ReturnsAsync(questaoModel);
@@ -72,9 +74,9 @@ public class AlternativaServiceTest
             QuestaoId = 1,
             Descricao = "Descrição de teste",
             Codigo = 1,
-            Questao = new QuestaoModel { Id = 1, Titulo = "Questão Teste", Tipo = TipoQuestao.QUESTAO_OBJETIVA }
+            Questao = new QuestaoModel { Id = 1, Titulo = "Questão Teste", Tipo = TipoQuestao.QUESTAO_MULTIPLA_ESCOLHA }
         };
-        var alternativaResponse = new AlternativaResponseDTO(1, 1, "Descrição de teste", 1, alternativaModel.Questao);
+        var alternativaResponse = new AlternativaResponseDTO(1, 1, "Descrição de teste", 1, null, null);
 
         _repositoryAlternativaMock.Setup(repo => repo.BuscarPorId(1))
             .ReturnsAsync(alternativaModel);
@@ -100,7 +102,7 @@ public class AlternativaServiceTest
             new AlternativaModel { Id = 1, QuestaoId = 1, Descricao = "Alternativa 1", Codigo = 1 },
             new AlternativaModel { Id = 2, QuestaoId = 1, Descricao = "Alternativa 2", Codigo = 2 }
         };
-        var alternativasResponse = alternativas.Select(a => new AlternativaResponseDTO(a.Id, a.QuestaoId, a.Descricao, a.Codigo, null)).ToList();
+        var alternativasResponse = alternativas.Select(a => new AlternativaResponseDTO(a.Id, a.QuestaoId, a.Descricao, a.Codigo, null, null)).ToList();
 
         _repositoryAlternativaMock.Setup(repo => repo.BuscarTodos())
             .ReturnsAsync(alternativas);
@@ -116,6 +118,7 @@ public class AlternativaServiceTest
         _repositoryAlternativaMock.Verify(repo => repo.BuscarTodos(), Times.Once);
     }
 
+
     [Fact]
     public async Task AtualizarAsync_DeveAtualizarAlternativa()
     {
@@ -125,16 +128,22 @@ public class AlternativaServiceTest
 
         _repositoryAlternativaMock.Setup(repo => repo.BuscarPorId(alternativaPatch.Id))
             .ReturnsAsync(alternativaModel);
+        _mapperMock.Setup(mapper => mapper.Map(alternativaPatch, alternativaModel))
+            .Callback<AlternativaPatchDTO, AlternativaModel>((patch, model) =>
+            {
+                model.Descricao = patch.Descricao ?? model.Descricao;
+            });
 
         // Act
         var result = await _alternativaService.AtualizarAsync(alternativaPatch);
 
         // Assert
         Assert.True(result);
-        Assert.Equal(alternativaPatch.Descricao, alternativaModel.Descricao);
+        Assert.Equal("Nova descrição", alternativaModel.Descricao);
         _repositoryAlternativaMock.Verify(repo => repo.BuscarPorId(alternativaPatch.Id), Times.Once);
         _repositoryMock.Verify(repo => repo.Salvar(), Times.Once);
     }
+
 
     [Fact]
     public async Task ApagarAsync_DeveApagarAlternativa()

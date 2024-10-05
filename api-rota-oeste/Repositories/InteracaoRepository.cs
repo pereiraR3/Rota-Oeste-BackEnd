@@ -12,12 +12,12 @@ namespace api_rota_oeste.Repositories;
 public class InteracaoRepository: IInteracaoRepository 
 {
 
-    private readonly ApiDBContext _context;
+    private readonly ApiDbContext _context;
     
     // Construtor para injeção de dependência do contexto
     public InteracaoRepository(
         
-        ApiDBContext context,
+        ApiDbContext context,
         IMapper mapper
         )
     {

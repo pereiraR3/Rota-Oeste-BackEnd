@@ -7,8 +7,6 @@ public record RespostaRequestDTO
     
     int InteracaoId,
     
-    int Alternativa,
-    
     byte[]? Foto
     
 );
