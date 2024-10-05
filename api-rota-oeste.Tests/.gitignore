@@ -4,8 +4,8 @@
 .idea/
 
 # Artefatos de compilação
-bin/
-obj/
+**/bin/
+**/obj/
 out/
 
 # Logs e arquivos temporários
@@ -118,3 +118,13 @@ MonoDevelop
 
 # Configuração específica do sistema operacional
 app.config
+
+# Arquivos de build para diferentes plataformas
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Excluir arquivos gerados automaticamente por build cross-plataforma
+api-rota-oeste/bin/
+api-rota-oeste/obj/
