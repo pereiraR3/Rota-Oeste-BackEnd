@@ -204,5 +204,44 @@ namespace api_rota_oeste.Tests.Services
             Assert.True(result);
             _repositoryCheckListMock.Verify(repo => repo.ApagarTodos(), Times.Once);
         }
+        
+        [Fact]
+        public async Task GerarRelatorioGeralAsync_DeveRetornarRelatorioGeralDTO()
+        {
+            // Arrange
+            var idChecklist = 1;
+
+            // Criar um objeto do tipo ExpandoObject para simular o retorno do repositório
+            dynamic item = new System.Dynamic.ExpandoObject();
+            item.id_interacao = 1;
+            item.nome_cliente = "Cliente Teste";
+            item.nome_checklist = "Checklist Teste";
+            item.data_interacao = DateTime.Now;
+            item.questao = "Questão Teste";
+            item.id_resposta = 1;
+            item.alternativa = 2;
+
+            var relatorioDinamico = new List<dynamic> { item };
+
+            _repositoryCheckListMock.Setup(repo => repo.GerarRelatorioGeral(idChecklist))
+                .ReturnsAsync(relatorioDinamico);
+
+            // Act
+            var result = await _checkListService.GerarRelatorioGeralAsync(idChecklist);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Single(result);
+            var dto = result.First();
+            Assert.Equal(1, dto.Id_interacao);
+            Assert.Equal("Cliente Teste", dto.Nome_cliente);
+            Assert.Equal("Checklist Teste", dto.Nome_checklist);
+            Assert.Equal("Questão Teste", dto.questao);
+            Assert.Equal(1, dto.Id_resposta);
+            Assert.Equal(2, dto.alternativa);
+            _repositoryCheckListMock.Verify(repo => repo.GerarRelatorioGeral(idChecklist), Times.Once);
+        }
+
+
     }
 }

@@ -310,5 +310,24 @@ namespace api_rota_oeste.Services
             return checkListModel;
         }
         
+        public async Task<List<CheckListRelatorioGeralDTO>> GerarRelatorioGeralAsync(int idChecklist)
+        {
+            var relatorioDinamico = await _repositoryCheckList.GerarRelatorioGeral(idChecklist);
+
+            // Mapear cada item dinâmico para o DTO
+            var relatorioDto = relatorioDinamico.Select(item => new CheckListRelatorioGeralDTO
+            {
+                Id_interacao = item.id_interacao,
+                Nome_cliente = item.nome_cliente,
+                Nome_checklist = item.nome_checklist,
+                Data_interacao = item.data_interacao,
+                questao = item.questao,
+                Id_resposta = item.id_resposta,
+                alternativa = item.alternativa
+            }).ToList();
+
+            return relatorioDto;
+        }
+        
     }
 }
