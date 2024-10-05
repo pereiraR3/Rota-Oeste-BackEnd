@@ -152,7 +152,6 @@ public class InteracaoService : IInteracaoService {
             .Select(o => new RespostaModel
             {
                 Id = o.Id,
-                Alternativa = o.Alternativa,
                 Questao = o.Questao,
                 Interacao = o.Interacao
                 
