@@ -186,5 +186,74 @@ namespace api_rota_oeste.Tests.Controllers
             // Assert
             Assert.IsType<NotFoundResult>(result);
         }
+        
+        [Fact]
+        public async Task GetRelatorioGeralPorCheckListId_DeveRetornarOkComRelatorio()
+        {
+            // Arrange
+            var idChecklist = 1;
+            var relatorio = new List<CheckListRelatorioGeralDTO>
+            {
+                new CheckListRelatorioGeralDTO
+                {
+                    Id_interacao = 1,
+                    Nome_cliente = "Cliente Teste",
+                    Nome_checklist = "Checklist Teste",
+                    Data_interacao = DateTime.Now,
+                    questao = "Questão Teste",
+                    Id_resposta = 1,
+                    alternativa = 2
+                }
+            };
+
+            _checkListServiceMock.Setup(service => service.GerarRelatorioGeralAsync(idChecklist))
+                .ReturnsAsync(relatorio);
+
+            // Act
+            var result = await _controller.GetRelatorioGeralPorCheckListId(idChecklist);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            Assert.Equal(200, okResult.StatusCode);
+            Assert.Equal(relatorio, okResult.Value);
+            _checkListServiceMock.Verify(service => service.GerarRelatorioGeralAsync(idChecklist), Times.Once);
+        }
+
+        [Fact]
+        public async Task GetRelatorioGeralPorCheckListId_DeveRetornarNotFoundSeNaoEncontrado()
+        {
+            // Arrange
+            var idChecklist = 1;
+
+            _checkListServiceMock.Setup(service => service.GerarRelatorioGeralAsync(idChecklist))
+                .ReturnsAsync(new List<CheckListRelatorioGeralDTO>());
+
+            // Act
+            var result = await _controller.GetRelatorioGeralPorCheckListId(idChecklist);
+
+            // Assert
+            Assert.IsType<NotFoundObjectResult>(result.Result);
+            _checkListServiceMock.Verify(service => service.GerarRelatorioGeralAsync(idChecklist), Times.Once);
+        }
+
+        [Fact]
+        public async Task GetRelatorioGeralPorCheckListId_DeveRetornarStatus500SeOcorrerErro()
+        {
+            // Arrange
+            var idChecklist = 1;
+
+            _checkListServiceMock.Setup(service => service.GerarRelatorioGeralAsync(idChecklist))
+                .ThrowsAsync(new Exception("Erro inesperado"));
+
+            // Act
+            var result = await _controller.GetRelatorioGeralPorCheckListId(idChecklist);
+
+            // Assert
+            var objectResult = Assert.IsType<ObjectResult>(result.Result);
+            Assert.Equal(500, objectResult.StatusCode);
+            Assert.Equal("Ocorreu um erro ao gerar o relatório: Erro inesperado", objectResult.Value);
+            _checkListServiceMock.Verify(service => service.GerarRelatorioGeralAsync(idChecklist), Times.Once);
+        }
+
     }
 }

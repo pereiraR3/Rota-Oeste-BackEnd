@@ -21,5 +21,7 @@ namespace api_rota_oeste.Services.Interfaces
         Task<bool> ApagarClienteRespondeCheckAsync(int clienteId, int checkListId);
 
         Task<bool> ApagarTodosAsync();
+        
+        Task<List<CheckListRelatorioGeralDTO>> GerarRelatorioGeralAsync(int idChecklist);
     }
 }
