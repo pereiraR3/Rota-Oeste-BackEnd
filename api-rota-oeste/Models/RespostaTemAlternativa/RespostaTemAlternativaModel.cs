@@ -7,6 +7,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Models.RespostaTemAlternativa;
 
+/// <summary>
+/// Representa a classe <see cref="RespostaTemAlternativaModel"/> que descreve a relação entre uma resposta e uma alternativa.
+/// </summary>
+/// <remarks>
+/// Esta classe é responsável por armazenar as informações do relacionamento entre uma resposta e uma alternativa, indicando quais alternativas foram selecionadas para uma determinada resposta.
+/// </remarks>
+/// <example>
+/// Aqui está um exemplo de como usar a <see cref="RespostaTemAlternativaModel"/>:
+/// <code>
+/// var respostaTemAlternativa = new RespostaTemAlternativaModel(1, 2, respostaModel, alternativaModel);
+/// </code>
+/// </example>
+/// <seealso cref="RespostaModel"/>
+/// <seealso cref="AlternativaModel"/>
 [Table("resposta_tem_alternativa")]
 [Index(nameof(RespostaId), nameof(AlternativaId), IsUnique = true)]
 public class RespostaTemAlternativaModel

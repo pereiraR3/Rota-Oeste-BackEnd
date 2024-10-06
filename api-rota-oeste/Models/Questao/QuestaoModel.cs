@@ -7,6 +7,23 @@ using api_rota_oeste.Models.RespostaAlternativa;
 
 namespace api_rota_oeste.Models.Questao;
 
+/// <summary>
+/// Representa a classe <see cref="QuestaoModel"/> que descreve uma questão associada a um checklist.
+/// </summary>
+/// <remarks>
+/// Esta classe é responsável por armazenar as informações de uma questão, como título, tipo, e a relação com o checklist, respostas e alternativas associadas.
+/// </remarks>
+/// <example>
+/// Aqui está um exemplo de como usar a <see cref="QuestaoModel"/>:
+/// <code>
+/// var questao = new QuestaoModel(requestDto, checkList);
+/// questao.Titulo = "Título da Questão";
+/// questao.Tipo = TipoQuestao.MultiplaEscolha;
+/// </code>
+/// </example>
+/// <seealso cref="CheckListModel"/>
+/// <seealso cref="AlternativaModel"/>
+/// <seealso cref="RespostaModel"/>
 [Table("questao")]
 public class QuestaoModel{
     

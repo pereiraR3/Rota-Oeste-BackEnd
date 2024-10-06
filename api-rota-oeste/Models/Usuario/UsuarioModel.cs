@@ -8,8 +8,19 @@ using Microsoft.EntityFrameworkCore;
 namespace api_rota_oeste.Models.Usuario;
 
 /// <summary>
-/// Representa um usuário do sistema, contendo informações como telefone, nome, senha e foto.
+/// Representa a classe <see cref="UsuarioModel"/> que descreve um usuário do sistema, contendo informações como telefone, nome, senha e foto.
 /// </summary>
+/// <remarks>
+/// Esta classe é responsável por armazenar os dados de um usuário, incluindo a lista de clientes e checklists associados a ele.
+/// </remarks>
+/// <example>
+/// Aqui está um exemplo de como usar a <see cref="UsuarioModel"/>:
+/// <code>
+/// var usuario = new UsuarioModel(new UsuarioRequestDTO("12345678901", "Nome do Usuário", "SenhaSegura123", fotoBytes));
+/// </code>
+/// </example>
+/// <seealso cref="ClienteModel"/>
+/// <seealso cref="CheckListModel"/>
 [Table("usuario")]
 [Index(nameof(Telefone), IsUnique = true)]
 public class UsuarioModel

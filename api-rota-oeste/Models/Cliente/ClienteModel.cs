@@ -9,6 +9,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Models.Cliente;
 
+/// <summary>
+/// Representa a classe <see cref="ClienteModel"/> que descreve um cliente do sistema.
+/// </summary>
+/// <remarks>
+/// Esta classe é responsável por armazenar as informações de um cliente, como nome, telefone, foto, e a relação com o usuário associado, interações, e checklists respondidos.
+/// </remarks>
+/// <example>
+/// Aqui está um exemplo de como usar a <see cref="ClienteModel"/>:
+/// <code>
+/// var cliente = new ClienteModel(requestDto, usuario);
+/// cliente.Nome = "Nome do Cliente";
+/// cliente.Telefone = "12345678901";
+/// </code>
+/// </example>
+/// <seealso cref="UsuarioModel"/>
+/// <seealso cref="InteracaoModel"/>
+/// <seealso cref="ClienteRespondeCheckListModel"/>
 [Table("cliente")]
 [Index(nameof(Telefone), IsUnique = true)]
 public class ClienteModel
