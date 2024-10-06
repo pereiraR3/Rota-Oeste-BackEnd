@@ -8,6 +8,22 @@ using api_rota_oeste.Models.Usuario;
 
 namespace api_rota_oeste.Models.CheckList;
 
+/// <summary>
+/// Representa a classe <see cref="CheckListModel"/> que descreve um checklist criado por um usuário.
+/// </summary>
+/// <remarks>
+/// Esta classe é responsável por armazenar as informações de um checklist, como nome, data de criação, usuário associado, e as questões e clientes que respondem ao checklist.
+/// </remarks>
+/// <example>
+/// Aqui está um exemplo de como usar a <see cref="CheckListModel"/>:
+/// <code>
+/// var checklist = new CheckListModel(checkListRequestDto, usuario);
+/// checklist.Nome = "Novo Checklist";
+/// </code>
+/// </example>
+/// <seealso cref="UsuarioModel"/>
+/// <seealso cref="QuestaoModel"/>
+/// <seealso cref="ClienteRespondeCheckListModel"/>
 [Table("checklist")]
 public class CheckListModel
 {

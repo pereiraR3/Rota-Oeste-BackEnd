@@ -8,6 +8,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Models.Interacao;
 
+/// <summary>
+/// Representa a classe <see cref="InteracaoModel"/> que descreve uma interação do sistema.
+/// </summary>
+/// <remarks>
+/// Esta classe é responsável por armazenar as informações de uma interação realizada, que pode envolver um cliente respondendo a um checklist, incluindo o relacionamento com cliente e resposta.
+/// </remarks>
+/// <example>
+/// Aqui está um exemplo de como usar a <see cref="InteracaoModel"/>:
+/// <code>
+/// var interacao = new InteracaoModel(cliente, checklist);
+/// interacao.Data = DateTime.Now;
+/// </code>
+/// </example>
+/// <seealso cref="ClienteModel"/>
+/// <seealso cref="CheckListModel"/>
 [Table("interacao")]
 [Index(nameof(ClienteId), nameof(CheckListId), IsUnique = true)]
 public class InteracaoModel

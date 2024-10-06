@@ -8,6 +8,22 @@ using api_rota_oeste.Models.RespostaTemAlternativa;
 
 namespace api_rota_oeste.Models.RespostaAlternativa;
 
+/// <summary>
+/// Representa a classe <see cref="RespostaModel"/> que descreve uma resposta fornecida para uma questão em uma interação.
+/// </summary>
+/// <remarks>
+/// Esta classe é responsável por armazenar as informações de uma resposta, incluindo a questão e a interação associadas, além de possíveis alternativas e uma foto como resposta.
+/// </remarks>
+/// <example>
+/// Aqui está um exemplo de como usar a <see cref="RespostaModel"/>:
+/// <code>
+/// var resposta = new RespostaModel(requestDto, interacaoModel, questaoModel);
+/// resposta.Foto = fotoBytes;
+/// </code>
+/// </example>
+/// <seealso cref="QuestaoModel"/>
+/// <seealso cref="InteracaoModel"/>
+/// <seealso cref="RespostaTemAlternativaModel"/>
 [Table("resposta")]
 public class RespostaModel
 {

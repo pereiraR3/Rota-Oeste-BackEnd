@@ -1,5 +1,18 @@
 namespace api_rota_oeste.Models.CheckList;
 
+/// <summary>
+/// Representa o DTO <see cref="CheckListRelatorioGeralDTO"/> que descreve os dados de um relatório geral do checklist, incluindo interações e respostas.
+/// </summary>
+/// <remarks>
+/// Este DTO é utilizado para puxar informações detalhadas de um checklist, incluindo o cliente, questão, respostas e alternativas associadas.
+/// </remarks>
+/// <example>
+/// Aqui está um exemplo de como usar o <see cref="CheckListRelatorioGeralDTO"/>:
+/// <code>
+/// var relatorioGeral = new CheckListRelatorioGeralDTO(1, "Nome do Cliente", "Nome do Checklist", DateTime.Now, "Título da Questão", 1, 2);
+/// </code>
+/// </example>
+/// <seealso cref="CheckListModel"/>
 public record CheckListRelatorioGeralDTO {
     
     public int Id_interacao { get; set; }
