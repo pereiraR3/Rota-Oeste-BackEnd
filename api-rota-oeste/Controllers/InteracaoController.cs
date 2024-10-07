@@ -5,6 +5,14 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace api_rota_oeste.Controllers
 {
+    
+    /// <summary>
+    /// Controller responsável por gerenciar operações de Interação no sistema.
+    /// </summary>
+    /// <remarks>
+    /// Esta controller fornece endpoints para adicionar, buscar, atualizar e remover interações.
+    /// Permite operações para adicionar uma nova interação, buscar uma interação por ID, listar todas as interações, atualizar e remover interações individuais ou em massa.
+    /// </remarks>
     [ApiController]
     [Route("interacao")]
     public class InteracaoController : ControllerBase
@@ -16,6 +24,13 @@ namespace api_rota_oeste.Controllers
             _serviceInteracao = service;
         }
         
+        /// <summary>
+        /// Adiciona uma nova interação ao sistema.
+        /// </summary>
+        /// <param name="req">Objeto que contém as informações da interação a ser adicionada.</param>
+        /// <returns>Retorna os dados da interação criada.</returns>
+        /// <response code="201">Interação criada com sucesso.</response>
+        /// <response code="400">Erro nos dados fornecidos.</response>
         [HttpPost("adicionar")]
         [SwaggerOperation(
             Summary = "Adiciona uma nova interação",
@@ -34,6 +49,13 @@ namespace api_rota_oeste.Controllers
             );
         }
         
+        /// <summary>
+        /// Busca uma interação por ID.
+        /// </summary>
+        /// <param name="id">ID da interação.</param>
+        /// <returns>Retorna os dados da interação correspondente ao ID fornecido.</returns>
+        /// <response code="200">Interação encontrada.</response>
+        /// <response code="404">Interação não encontrada.</response>
         [HttpGet("buscarPorId/{id}")]
         [SwaggerOperation(
             Summary = "Busca uma interação por ID",
@@ -48,6 +70,11 @@ namespace api_rota_oeste.Controllers
             return Ok(interacao);
         }
         
+        /// <summary>
+        /// Lista todas as interações do sistema.
+        /// </summary>
+        /// <returns>Retorna uma lista de todas as interações armazenadas no banco de dados.</returns>
+        /// <response code="200">Lista de interações retornada com sucesso.</response>
         [HttpGet("buscarTodos")]
         [SwaggerOperation(
             Summary = "Lista as interações",
@@ -63,6 +90,14 @@ namespace api_rota_oeste.Controllers
             
         }
         
+        /// <summary>
+        /// Atualiza uma interação existente no sistema.
+        /// </summary>
+        /// <param name="interacao">Objeto contendo os dados atualizados da interação.</param>
+        /// <returns>Retorna um status indicando o sucesso ou falha da atualização.</returns>
+        /// <response code="200">Interação atualizada com sucesso.</response>
+        /// <response code="204">Interação não encontrada.</response>
+        /// <response code="400">Erro ao atualizar a interação.</response>
         [HttpPatch("atualizar")]
         [SwaggerOperation(
             Summary = "Atualiza uma interação",
@@ -82,6 +117,13 @@ namespace api_rota_oeste.Controllers
             return Ok();
         }
         
+        /// <summary>
+        /// Remove uma interação do sistema pelo ID.
+        /// </summary>
+        /// <param name="id">ID da interação a ser removida.</param>
+        /// <returns>Retorna um status indicando o sucesso da remoção.</returns>
+        /// <response code="204">Interação removida com sucesso.</response>
+        /// <response code="404">Interação não encontrada.</response>
         [HttpDelete("apagarPorId/{id}")]
         [SwaggerOperation(
             Summary = "Remove uma interação",
@@ -97,7 +139,12 @@ namespace api_rota_oeste.Controllers
             return NoContent();
         }        
         
-        
+        /// <summary>
+        /// Remove todas as interações do sistema.
+        /// </summary>
+        /// <returns>Retorna um status indicando o sucesso da remoção de todas as interações.</returns>
+        /// <response code="204">Todos os interações removidos com sucesso.</response>
+        /// <response code="404">Nenhuma interação encontrada.</response>
         [HttpDelete("apagarTodos")]
         [SwaggerOperation(
             Summary = "Remove todos as interações",

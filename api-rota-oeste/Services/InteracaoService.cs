@@ -8,9 +8,13 @@ using AutoMapper;
 
 namespace api_rota_oeste.Services;
 
-/**
- * Representa a camada de serviço, isto é, a camada onde fica as regras de negócio da aplicação
- */
+/// <summary>
+/// Serviço responsável pelas operações de lógica de negócio relacionadas à entidade Interacao.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IInteracaoService"/> e define métodos para adicionar, buscar, atualizar e apagar entidades do tipo Interacao.
+/// Também gerencia o relacionamento entre as entidades Cliente, CheckList e RespostaAlternativa.
+/// </remarks>
 public class InteracaoService : IInteracaoService {
     
     private readonly IInteracaoRepository _repositoryInteracao;
@@ -37,9 +41,12 @@ public class InteracaoService : IInteracaoService {
         _repositoryInteracao = repository;
     }
     
-    /**
-     * Método da camada de servico -> para criar uma entidade do tipo interacao
-     */
+    /// <summary>
+    /// Cria uma nova entidade do tipo Interacao e a adiciona ao banco de dados.
+    /// </summary>
+    /// <param name="interacaoDto">Objeto contendo os dados da interação a ser criada.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações da interação criada.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se o cliente ou o checklist associado à interação não for encontrado.</exception>
     public async Task<InteracaoResponseDTO> AdicionarAsync(InteracaoRequestDTO interacaoDto) {
         
         ClienteModel? clienteModel = await _clienteRepository.BuscarPorId(interacaoDto.ClienteId);
@@ -63,9 +70,13 @@ public class InteracaoService : IInteracaoService {
         
     }
     
-    /**
-     * Método da camada de servico -> para buscar uma entidade interacao por ID
-     */
+    /// <summary>
+    /// Busca uma entidade do tipo Interacao pelo ID.
+    /// </summary>
+    /// <param name="id">ID da interação a ser buscada.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações da interação encontrada.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="ArgumentNullException">Lançada se a interação com o ID especificado não for encontrada.</exception>
     public async Task<InteracaoResponseDTO> BuscarPorIdAsync(int id)
     {
         if(id <= 0)
@@ -80,9 +91,10 @@ public class InteracaoService : IInteracaoService {
         return _mapper.Map<InteracaoResponseDTO>(interacao);
     }
 
-    /**
-    * Método da camada de servico -> para buscar todas as entidades do tipo interacao
-    */
+    /// <summary>
+    /// Busca todas as entidades do tipo Interacao armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todas as interações.</returns>
     public async Task<List<InteracaoResponseDTO>> BuscarTodosAsync()
     {
         var interacao = await _repositoryInteracao.BuscarTodos();
@@ -92,9 +104,12 @@ public class InteracaoService : IInteracaoService {
             .ToList();
     }
 
-    /**
-     * Método da camada de servico -> para atualizar parcialmente uma entidade interacao
-     */
+    /// <summary>
+    /// Atualiza parcialmente uma entidade do tipo Interacao.
+    /// </summary>
+    /// <param name="interacaoPatch">Objeto contendo os dados a serem atualizados na interação.</param>
+    /// <returns>Retorna true se a interação for atualizada com sucesso.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se a interação com o ID especificado não for encontrada.</exception>
     public async Task<bool> AtualizarAsync(InteracaoPatchDTO interacaoPatch)
     {
         
@@ -111,9 +126,13 @@ public class InteracaoService : IInteracaoService {
         return true;
     }
     
-    /**
-     * Método da camada de servico -> para apagar uma determinada interacao
-     */
+    /// <summary>
+    /// Remove uma entidade do tipo Interacao pelo ID.
+    /// </summary>
+    /// <param name="id">ID da interação a ser removida.</param>
+    /// <returns>Retorna true se a interação for removida com sucesso.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se a interação com o ID especificado não for encontrada.</exception>
     public async Task<bool> ApagarAsync(int id)
     {
         if (id <= 0)
@@ -129,9 +148,10 @@ public class InteracaoService : IInteracaoService {
         return true;
     }
 
-    /**
-     * Método da camada de servico -> para apagar todas as entidades interacao
-     */
+    /// <summary>
+    /// Remove todas as entidades do tipo Interacao armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna true se todas as interações forem removidas com sucesso.</returns>
     public async Task<bool> ApagarTodosAsync()
     {
 
@@ -141,11 +161,11 @@ public class InteracaoService : IInteracaoService {
 
     }
     
-    /**
-     * Método da camada de serviço -> para fazer a refatoracao de InteracaoModel -> InteracaoResponseDTO sem que haja
-     * problemas de dependência circular de modo que puxem apenas as informações que foram julgadas como necessárias
-     * ao método GET 
-     */
+    /// <summary>
+    /// Refatora o modelo Interacao para manter apenas as informações necessárias para a busca por ID.
+    /// </summary>
+    /// <param name="interacaoModel">Modelo Interacao a ser refatorado.</param>
+    /// <returns>Retorna o modelo refatorado de Interacao.</returns>
     public InteracaoModel RefatoraoMediumInteracaoModel(InteracaoModel interacaoModel)
     {
         var interacaoRespostaAlternativaModels = interacaoModel.RespostaAlternativaModels
@@ -180,11 +200,11 @@ public class InteracaoService : IInteracaoService {
         return interacaoModel;
     }
 
-    /**
-     * Método da camada de serviço -> para fazer a refatoracao de InteracaoModel -> InteracaoResponseDTO sem que haja
-     * problemas de dependência circular de modo que puxem apenas as informações que foram julgadas como necessárias
-     * para retornar ao método POST de criação
-     */
+    /// <summary>
+    /// Refatora o modelo Interacao para manter apenas as informações necessárias para a criação da entidade.
+    /// </summary>
+    /// <param name="interacaoModel">Modelo Interacao a ser refatorado.</param>
+    /// <returns>Retorna o modelo refatorado de Interacao.</returns>
     public InteracaoModel RefatoraoMinInteracaoModel(InteracaoModel interacaoModel)
     {
         interacaoModel.RespostaAlternativaModels = new List<RespostaModel>();

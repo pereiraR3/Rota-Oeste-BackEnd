@@ -11,9 +11,13 @@ using AutoMapper;
 namespace api_rota_oeste.Services
 {
     
-    /**
-     * Representa a camada de serviço, isto é, a camada onde fica as regras de negócio da aplicação
-     */
+    /// <summary>
+    /// Serviço responsável pelas operações de lógica de negócio relacionadas à entidade CheckList.
+    /// </summary>
+    /// <remarks>
+    /// Implementa a interface <see cref="ICheckListService"/> e define métodos para adicionar, buscar, atualizar e apagar entidades do tipo CheckList.
+    /// Além disso, gerencia relacionamentos com outras entidades como Cliente, Usuario, e Interacao.
+    /// </remarks>
     public class CheckListService : ICheckListService
     {
         private readonly ICheckListRepository _repositoryCheckList;
@@ -46,9 +50,12 @@ namespace api_rota_oeste.Services
             _logger = logger;
         }
 
-        /**
-        * Método da camada de servico -> para criar uma entidade do tipo checklist
-        */
+        /// <summary>
+        /// Cria uma nova entidade do tipo CheckList e a adiciona ao banco de dados.
+        /// </summary>
+        /// <param name="checkListRequestDto">Objeto contendo os dados do checklist a ser criado.</param>
+        /// <returns>Retorna o DTO de resposta contendo as informações do checklist criado.</returns>
+        /// <exception cref="KeyNotFoundException">Lançada se o usuário associado ao checklist não for encontrado.</exception>
         public async Task<CheckListResponseDTO?> AdicionarAsync(CheckListRequestDTO checkListRequestDto)
         {
             UsuarioModel? usuarioModel = await _repositoryUsuario.BuscaPorId(checkListRequestDto.UsuarioId);
@@ -72,6 +79,14 @@ namespace api_rota_oeste.Services
             return null;
         }
 
+        /// <summary>
+        /// Cria uma nova relação entre Cliente e CheckList e adiciona uma entidade de interação automaticamente.
+        /// </summary>
+        /// <param name="clienteId">ID do cliente associado.</param>
+        /// <param name="checkListId">ID do checklist associado.</param>
+        /// <returns>Retorna o DTO de resposta contendo as informações da relação Cliente-CheckList criada.</returns>
+        /// <exception cref="KeyNotFoundException">Lançada se o cliente ou o checklist não for encontrado.</exception>
+        /// <exception cref="InvalidOperationException">Lançada se ocorrer um erro ao adicionar ClienteRespondeCheckList ou Interacao.</exception>
         public async Task<ClienteRespondeCheckListResponseDTO> AdicionarClienteRespondeCheckAsync(int clienteId, int checkListId)
         {
             try
@@ -121,11 +136,14 @@ namespace api_rota_oeste.Services
                 throw;
             }
         }
-
-
-        /**
-         * Método da camada de servico -> para buscar determinada entidade checklist por Id
-         */
+        
+        /// <summary>
+        /// Busca uma entidade do tipo CheckList pelo ID.
+        /// </summary>
+        /// <param name="id">ID do checklist a ser buscado.</param>
+        /// <returns>Retorna o DTO de resposta contendo as informações do checklist encontrado.</returns>
+        /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+        /// <exception cref="KeyNotFoundException">Lançada se o checklist com o ID especificado não for encontrado.</exception>
         public async Task<CheckListResponseDTO?> BuscarPorIdAsync(int id)
         {
             
@@ -142,10 +160,11 @@ namespace api_rota_oeste.Services
             
             return _mapper.Map<CheckListResponseDTO>(check);
         }
-
-        /**
-        * Método da camada de servico -> para buscar todas as entidades do tipo checklist
-        */
+        
+        /// <summary>
+        /// Busca todas as entidades do tipo CheckList armazenadas no banco de dados.
+        /// </summary>
+        /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todos os checklists.</returns>
         public async Task<List<CheckListResponseDTO>> BuscarTodosAsync()
         {
 
@@ -158,9 +177,12 @@ namespace api_rota_oeste.Services
             return checklists;
         }
 
-        /**
-        * Método da camada de servico -> para atualizar parcialmente uma entidade do tipo checklist
-        */
+        /// <summary>
+        /// Atualiza parcialmente uma entidade do tipo CheckList com base no DTO fornecido.
+        /// </summary>
+        /// <param name="checkListPatchDto">Objeto contendo os dados a serem atualizados do checklist.</param>
+        /// <returns>Retorna true se a atualização for bem-sucedida.</returns>
+        /// <exception cref="KeyNotFoundException">Lançada se o checklist com o ID especificado não for encontrado.</exception>
         public async Task<bool> AtualizarAsync(CheckListPatchDTO checkListPatchDto)
         {
 
@@ -178,9 +200,13 @@ namespace api_rota_oeste.Services
 
         }
 
-        /**
-         * Método da camada de servico -> para apagar um entidade checklist por Id
-         */
+        /// <summary>
+        /// Remove uma entidade do tipo CheckList pelo ID.
+        /// </summary>
+        /// <param name="id">ID do checklist a ser removido.</param>
+        /// <returns>Retorna true se o checklist for removido com sucesso.</returns>
+        /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+        /// <exception cref="KeyNotFoundException">Lançada se o checklist com o ID especificado não for encontrado.</exception>
         public async Task<bool> ApagarAsync(int id)
         {
             if(id <= 0)
@@ -194,9 +220,13 @@ namespace api_rota_oeste.Services
             return true;
         }
         
-        /**
-       * Método da camada de servico -> para apagar uma determinada entidade ClienteRespondeCheckList via ID
-       */
+        /// <summary>
+        /// Remove uma relação entre Cliente e CheckList com base nos IDs fornecidos.
+        /// </summary>
+        /// <param name="clienteId">ID do cliente associado.</param>
+        /// <param name="checkListId">ID do checklist associado.</param>
+        /// <returns>Retorna true se a relação for removida com sucesso.</returns>
+        /// <exception cref="ApplicationException">Lançada se a operação não for realizada com sucesso.</exception>
         public async Task<bool> ApagarClienteRespondeCheckAsync(int clienteId, int checkListId)
         {
             
@@ -209,9 +239,11 @@ namespace api_rota_oeste.Services
             
         }
         
-        /**
-         * Método da camada de servico -> para apagar todas as entidades do tipo checklist
-         */
+        /// <summary>
+        /// Remove todas as entidades do tipo CheckList armazenadas no banco de dados.
+        /// </summary>
+        /// <returns>Retorna true se todas as entidades forem removidas com sucesso.</returns>
+        /// <exception cref="ApplicationException">Lançada se a operação não for realizada com sucesso.</exception>
         public async Task<bool> ApagarTodosAsync()
         {
             var result = await _repositoryCheckList.ApagarTodos();
@@ -223,10 +255,12 @@ namespace api_rota_oeste.Services
 
         }
         
-        /**
-         * Método da camada de serviço -> para fazer a refatoracao do DTO da entidade ClienteResponde,
-         * de modo que puxem apenas as informações que foram julgadas como necessárias
-         */
+        /// <summary>
+        /// Refatora o modelo ClienteRespondeCheckList para manter apenas as informações necessárias.
+        /// </summary>
+        /// <param name="clienteRespondeCheckListModel">Modelo ClienteRespondeCheckList a ser refatorado.</param>
+        /// <returns>Retorna o modelo refatorado de ClienteRespondeCheckList.</returns>
+        /// <exception cref="ArgumentNullException">Lançada se o modelo ClienteRespondeCheckList for nulo.</exception>
         public ClienteRespondeCheckListModel? RefatoraoMinClienteRespondeCheckList(
             
             ClienteRespondeCheckListModel? clienteRespondeCheckListModel
@@ -258,10 +292,12 @@ namespace api_rota_oeste.Services
             return clienteRespondeCheckListModel;
         }
 
-        /**
-        * Método da camada de serviço -> para fazer a refatoracao do DTO da entidade CheckList,
-         * de modo que puxem apenas as informações que foram julgadas como necessárias
-         */
+        /// <summary>
+        /// Refatora o modelo CheckList para manter apenas as informações necessárias.
+        /// </summary>
+        /// <param name="checkListModel">Modelo CheckList a ser refatorado.</param>
+        /// <returns>Retorna o modelo refatorado de CheckList.</returns>
+        /// <exception cref="ArgumentNullException">Lançada se o modelo CheckList for nulo.</exception>
         public CheckListModel RefatoraoMinCheckListModel(CheckListModel checkListModel)
         {
             if (checkListModel == null)
@@ -310,6 +346,11 @@ namespace api_rota_oeste.Services
             return checkListModel;
         }
         
+        /// <summary>
+        /// Gera um relatório geral para um checklist específico.
+        /// </summary>
+        /// <param name="idChecklist">ID do checklist para o qual o relatório deve ser gerado.</param>
+        /// <returns>Retorna uma lista de DTOs contendo os dados do relatório gerado.</returns>
         public async Task<List<CheckListRelatorioGeralDTO>> GerarRelatorioGeralAsync(int idChecklist)
         {
             var relatorioDinamico = await _repositoryCheckList.GerarRelatorioGeral(idChecklist);

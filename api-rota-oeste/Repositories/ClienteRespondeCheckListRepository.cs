@@ -5,6 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
+/// <summary>
+/// Repositório responsável pelas operações de persistência da entidade ClienteRespondeCheckList no banco de dados.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IClienteRespondeCheckListRepository"/> e define métodos para realizar operações CRUD
+/// relacionadas à entidade ClienteRespondeCheckList, incluindo adição e exclusão de registros.
+/// </remarks>
 public class ClienteRespondeCheckListRepository : IClienteRespondeCheckListRepository
 {
 
@@ -15,6 +22,11 @@ public class ClienteRespondeCheckListRepository : IClienteRespondeCheckListRepos
         _context = context;
     }
     
+    /// <summary>
+    /// Adiciona uma nova instância da entidade ClienteRespondeCheckList ao banco de dados.
+    /// </summary>
+    /// <param name="clienteRespondeCheckList">Objeto contendo os dados da relação Cliente-CheckList a ser adicionada.</param>
+    /// <returns>Retorna a relação Cliente-CheckList adicionada, incluindo os dados do Cliente e do CheckList relacionados.</returns>
     public async Task<ClienteRespondeCheckListModel?> Adicionar(ClienteRespondeCheckListModel clienteRespondeCheckList)
     {
         // Adicionando e salvando no banco de dados
@@ -31,7 +43,12 @@ public class ClienteRespondeCheckListRepository : IClienteRespondeCheckListRepos
         return resultado;
     }
 
-
+    /// <summary>
+    /// Remove uma instância da entidade ClienteRespondeCheckList com base nos IDs do Cliente e do CheckList.
+    /// </summary>
+    /// <param name="clienteId">ID do cliente associado.</param>
+    /// <param name="checkListId">ID do checklist associado.</param>
+    /// <returns>Retorna true se a relação Cliente-CheckList for removida com sucesso, caso contrário, retorna false.</returns>
     public async Task<bool> Apagar(int clienteId, int checkListId)
     {
        ClienteRespondeCheckListModel? clienteResponde = await _context

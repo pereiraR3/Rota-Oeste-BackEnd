@@ -6,6 +6,21 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace api_rota_oeste.Controllers
 {
+    
+    
+    /// <summary>
+    /// Controller responsável pelas operações relacionadas a CheckList no sistema.
+    /// </summary>
+    /// <remarks>
+    /// Esta controller fornece métodos para adicionar, buscar, atualizar e remover checklists, bem como associar um cliente a um checklist específico.
+    /// Os métodos incluem suporte para a adição de novos checklists, atualização parcial de um checklist existente,
+    /// exclusão de checklists e geração de relatórios.
+    /// </remarks>
+    /// <response code="201">Checklist criado ou relação entre Cliente e CheckList adicionada com sucesso.</response>
+    /// <response code="204">Operação realizada com sucesso, sem retorno de conteúdo.</response>
+    /// <response code="400">Dados de entrada inválidos.</response>
+    /// <response code="404">Entidade não encontrada.</response>
+    /// <response code="500">Erro interno do servidor ao processar a solicitação.</response>
     [ApiController]
     [Route("checklist")]
     public class CheckListController : ControllerBase
@@ -21,6 +36,12 @@ namespace api_rota_oeste.Controllers
             _checkListService = checklistService;
         }
 
+        /// <summary>
+        /// Adiciona um novo checklist ao sistema.
+        /// </summary>
+        /// <param name="check">Objeto que contém as informações do checklist a ser adicionado.</param>
+        /// <returns>Retorna o checklist criado.</returns>
+        /// <response code="201">Checklist criado com sucesso.</response>
         [HttpPost("adicionar")]
         [SwaggerOperation(
             Summary = "Adiciona um novo checklist",
@@ -38,6 +59,15 @@ namespace api_rota_oeste.Controllers
             );
         }
         
+        /// <summary>
+        /// Adiciona uma relação entre um Cliente e um CheckList.
+        /// </summary>
+        /// <param name="clienteId">ID do cliente.</param>
+        /// <param name="checkListId">ID do checklist.</param>
+        /// <returns>Retorna os detalhes da relação criada entre Cliente e CheckList.</returns>
+        /// <response code="201">Relação Cliente-CheckList criada com sucesso.</response>
+        /// <response code="400">Dados de entrada inválidos.</response>
+        /// <response code="404">Cliente ou CheckList não encontrado.</response>
         [HttpPost("adicionar/clienteId/{clienteId}/checklistId/{checkListId}")]
         [SwaggerOperation(
             Summary = "Adiciona uma relação entre Cliente e CheckList",
@@ -71,6 +101,13 @@ namespace api_rota_oeste.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca um checklist pelo ID.
+        /// </summary>
+        /// <param name="id">ID do checklist.</param>
+        /// <returns>Retorna o checklist associado ao ID fornecido.</returns>
+        /// <response code="200">Checklist encontrado com sucesso.</response>
+        /// <response code="404">Checklist não encontrado.</response>
         [HttpGet("buscarPorId/{id}")]
         [SwaggerOperation(
             Summary = "Busca um checklist pelo ID",
@@ -90,6 +127,12 @@ namespace api_rota_oeste.Controllers
             return Ok(check);
         }
 
+        /// <summary>
+        /// Busca todos os checklists do sistema.
+        /// </summary>
+        /// <returns>Retorna uma lista de todos os checklists.</returns>
+        /// <response code="200">Checklists encontrados com sucesso.</response>
+        /// <response code="204">Nenhum checklist encontrado.</response>
         [HttpGet("buscarTodos")]
         [SwaggerOperation(
             Summary = "Busca todos os checklists",
@@ -104,6 +147,14 @@ namespace api_rota_oeste.Controllers
             return Ok(checkResponse);
         }
 
+        /// <summary>
+        /// Atualiza as informações de um checklist.
+        /// </summary>
+        /// <param name="checkListPatchDto">Objeto contendo as informações a serem atualizadas no checklist.</param>
+        /// <returns>Retorna um status indicando o sucesso da atualização.</returns>
+        /// <response code="204">Checklist atualizado com sucesso.</response>
+        /// <response code="400">Erro nos dados fornecidos.</response>
+        /// <response code="404">Checklist não encontrado.</response>
         [HttpPatch("atualizar")]
         [SwaggerOperation(
             Summary = "Atualiza as informações de um checklist",
@@ -126,6 +177,14 @@ namespace api_rota_oeste.Controllers
             
         }
         
+        /// <summary>
+        /// Remove uma relação entre um Cliente e um CheckList.
+        /// </summary>
+        /// <param name="clienteId">ID do cliente.</param>
+        /// <param name="checkListId">ID do checklist.</param>
+        /// <returns>Retorna um status indicando o sucesso da remoção.</returns>
+        /// <response code="204">ClienteRespondeCheckList removido com sucesso.</response>
+        /// <response code="404">ClienteRespondeCheckList não encontrado.</response>
         [HttpDelete("apagar/clienteId/{clienteId}/checklistId/{checkListId}")]
         [SwaggerOperation(
             Summary = "Remove uma relação entre Cliente e CheckList",
@@ -143,6 +202,13 @@ namespace api_rota_oeste.Controllers
             return NoContent(); // Retorna 204 No Content se o clienteRespondeCheckList foi removido com sucesso
         }
         
+        /// <summary>
+        /// Remove um checklist pelo ID.
+        /// </summary>
+        /// <param name="id">ID do checklist a ser removido.</param>
+        /// <returns>Retorna um status indicando o sucesso da remoção.</returns>
+        /// <response code="204">Checklist removido com sucesso.</response>
+        /// <response code="404">Checklist não encontrado.</response>
         [HttpDelete("apagarPorId/{id}")]
         [SwaggerOperation(
             Summary = "Remove um checklist",
@@ -160,6 +226,12 @@ namespace api_rota_oeste.Controllers
             return NoContent(); // Retorna 204 No Content se o checklist foi removido com sucesso
         }
         
+        /// <summary>
+        /// Remove todos os checklists do sistema.
+        /// </summary>
+        /// <returns>Retorna um status indicando o sucesso da remoção de todos os checklists.</returns>
+        /// <response code="204">Todos os checklists removidos com sucesso.</response>
+        /// <response code="404">Nenhum checklist encontrado.</response>
         [HttpDelete("apagarTodos")]
         [SwaggerOperation(
             Summary = "Remove todos os checklists",
@@ -177,6 +249,14 @@ namespace api_rota_oeste.Controllers
             return NoContent(); // Retorna 204 No Content se todos os checklists foram removidos com sucesso
         }
         
+        /// <summary>
+        /// Gera um relatório geral para um checklist específico.
+        /// </summary>
+        /// <param name="idChecklist">ID do checklist para o qual o relatório deve ser gerado.</param>
+        /// <returns>Retorna informações detalhadas sobre o checklist especificado.</returns>
+        /// <response code="200">Relatório gerado com sucesso.</response>
+        /// <response code="404">Checklist não encontrado ou não há dados disponíveis.</response>
+        /// <response code="500">Erro ao gerar o relatório.</response>
         [HttpGet("relatorio-geral/{idChecklist}")]
         [SwaggerOperation(
             Summary = "Gera um relatório geral para um checklist específico",

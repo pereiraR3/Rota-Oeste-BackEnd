@@ -7,9 +7,13 @@ using AutoMapper;
 
 namespace api_rota_oeste.Services;
 
-/**
- * Representa a camada de serviço, isto é, a camada onde fica as regras de negócio da aplicação
- */
+/// <summary>
+/// Serviço responsável pelas operações de lógica de negócio relacionadas à entidade Questao.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IQuestaoService"/> e define métodos para adicionar, buscar, atualizar e apagar entidades do tipo Questao.
+/// Este serviço trabalha com as relações entre Questao e CheckList.
+/// </remarks>
 public class QuestaoService : IQuestaoService{
     
     private readonly IQuestaoRepository _repositoryQuestao;
@@ -32,9 +36,12 @@ public class QuestaoService : IQuestaoService{
         _repositoryQuestao = repository;
     }
     
-    /**
-    * Método da camada de serviço -> para criar uma entidade do tipo questao
-   */
+    /// <summary>
+    /// Cria uma nova entidade do tipo Questao e a adiciona ao banco de dados.
+    /// </summary>
+    /// <param name="questaoRequest">Objeto contendo os dados da questão a ser criada.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações da questão criada.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se o checklist associado à questão não for encontrado.</exception>
     public async Task<QuestaoResponseDTO> AdicionarAsync(QuestaoRequestDTO questaoRequest)
     {
 
@@ -53,9 +60,13 @@ public class QuestaoService : IQuestaoService{
         
     }
     
-    /**
-    * Método da camada de serviço -> para buscar uma entidade do tipo questao pelo ID
-    */
+    /// <summary>
+    /// Busca uma entidade do tipo Questao pelo ID.
+    /// </summary>
+    /// <param name="id">ID da questão a ser buscada.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações da questão encontrada.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se a questão com o ID especificado não for encontrada.</exception>
     public async Task<QuestaoResponseDTO> BuscarPorIdAsync(int id)
     {
         if(id <= 0)
@@ -74,9 +85,10 @@ public class QuestaoService : IQuestaoService{
     }
     
     
-    /**
-    * Método da camada de serviço -> para atualizar um entidade do tipo questao
-    */
+    /// <summary>
+    /// Busca todas as entidades do tipo Questao armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todas as questões.</returns>
     public async Task<List<QuestaoResponseDTO>> BuscarTodosAsync()
     {
         var questoes = await _repositoryQuestao.BuscarTodos();
@@ -86,9 +98,12 @@ public class QuestaoService : IQuestaoService{
             .ToList();
     }
     
-    /**
-    * Método da camada de serviço -> para fazer a atualização de um entidade do tipo questao
-    */
+    /// <summary>
+    /// Atualiza parcialmente uma entidade do tipo Questao.
+    /// </summary>
+    /// <param name="questaoPatch">Objeto contendo os dados a serem atualizados na questão.</param>
+    /// <returns>Retorna true se a questão for atualizada com sucesso.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se a questão com o ID especificado não for encontrada.</exception>
     public async Task<bool> AtualizarAsync(QuestaoPatchDTO questaoPatch)
     {
         QuestaoModel? questaoModel = await _repositoryQuestao.BuscarPorId(questaoPatch.Id);
@@ -104,10 +119,13 @@ public class QuestaoService : IQuestaoService{
         return true;
     }
     
-    
-    /**
-    * Método da camada de serviço -> para fazer a deleção relacional de uma entidade do tipo questao
-    */
+    /// <summary>
+    /// Remove uma entidade do tipo Questao pelo ID.
+    /// </summary>
+    /// <param name="id">ID da questão a ser removida.</param>
+    /// <returns>Retorna true se a questão for removida com sucesso.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se a questão com o ID especificado não for encontrada.</exception>
     public async Task<bool> ApagarAsync(int id)
     {
         if (id <= 0)

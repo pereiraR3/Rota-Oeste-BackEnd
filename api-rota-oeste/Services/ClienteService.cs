@@ -8,9 +8,13 @@ using AutoMapper;
 
 namespace api_rota_oeste.Services;
 
-/**
- * Representa a camada de serviço, isto é, a camada onde fica as regras de negócio da aplicação
- */
+/// <summary>
+/// Serviço responsável pelas operações de lógica de negócio relacionadas à entidade Cliente.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IClienteService"/> e define métodos para adicionar, buscar, atualizar e apagar entidades do tipo Cliente.
+/// Além disso, gerencia os relacionamentos entre Cliente e outras entidades, como Usuário, CheckList e Interacao.
+/// </remarks>
 public class ClienteService : IClienteService
 {
     
@@ -31,9 +35,12 @@ public class ClienteService : IClienteService
         _mapper = mapper;
     }
 
-    /**
-     * Método da camada de servico -> para criar uma entidade do tipo cliente
-     */
+    /// <summary>
+    /// Cria uma nova entidade do tipo Cliente e a adiciona ao banco de dados.
+    /// </summary>
+    /// <param name="clienteRequest">Objeto contendo os dados do cliente a ser criado.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações do cliente criado.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se o usuário associado ao cliente não for encontrado.</exception>
     public async Task<ClienteResponseDTO> AdicionarAsync(ClienteRequestDTO clienteRequest)
     {
 
@@ -55,9 +62,12 @@ public class ClienteService : IClienteService
         return _mapper.Map<ClienteResponseDTO>(clienteModel);
     }
     
-    /**
-     * Método da camada de serviço -> para criar em massa entidades do tipo cliente
-     */
+    /// <summary>
+    /// Cria múltiplas entidades do tipo Cliente e as adiciona ao banco de dados.
+    /// </summary>
+    /// <param name="clienteCollectionDto">Objeto contendo uma coleção de clientes a serem criados.</param>
+    /// <returns>Retorna uma lista de DTOs de resposta contendo as informações dos clientes criados.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se o usuário associado aos clientes não for encontrado.</exception>
     public async Task<List<ClienteResponseDTO>> AdicionarColecaoAsync(ClienteCollectionDTO clienteCollectionDto)
     {
 
@@ -84,9 +94,13 @@ public class ClienteService : IClienteService
         return clientesResponse;
     }
 
-    /**
-     * Método da camada de serviço -> para buscar uma entidade do tipo cliente pelo seu ID
-     */
+    /// <summary>
+    /// Busca uma entidade do tipo Cliente pelo ID.
+    /// </summary>
+    /// <param name="id">ID do cliente a ser buscado.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações do cliente encontrado.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se o cliente com o ID especificado não for encontrado.</exception>
     public async Task<ClienteResponseDTO?> BuscarPorIdAsync(int id)
     {
         
@@ -103,9 +117,10 @@ public class ClienteService : IClienteService
         return _mapper.Map<ClienteResponseDTO>(cliente);
     }
 
-    /**
-     * Método da camada de serviço -> para buscar todas entidades do tipo cliente
-     */
+    /// <summary>
+    /// Busca todas as entidades do tipo Cliente armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todos os clientes.</returns>
     public async Task<List<ClienteResponseDTO>> BuscarTodosAsync()
     {
 
@@ -118,9 +133,13 @@ public class ClienteService : IClienteService
         return clientesResponse;
     }
 
-    /**
-     * Método da camada de serviço -> para buscar apagar uma entidade cliente pelo ID
-     */
+    /// <summary>
+    /// Remove uma entidade do tipo Cliente pelo ID.
+    /// </summary>
+    /// <param name="id">ID do cliente a ser removido.</param>
+    /// <returns>Retorna true se o cliente for removido com sucesso.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se o cliente com o ID especificado não for encontrado.</exception>
     public async Task<bool> ApagarAsync(int id)
     {
         
@@ -135,9 +154,11 @@ public class ClienteService : IClienteService
         return true;
     }
 
-    /**
-     * Método da camada de serviço -> para apagar em massa todas as entidades do tipo cliente
-     */
+    /// <summary>
+    /// Remove todas as entidades do tipo Cliente armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna true se todas as entidades forem removidas com sucesso.</returns>
+    /// <exception cref="ApplicationException">Lançada se a operação não for realizada com sucesso.</exception>
     public async Task<bool> ApagarTodosAsync()
     {
         var resultado = await _clienteRepository.ApagarTodos();
@@ -149,10 +170,11 @@ public class ClienteService : IClienteService
 
     }
 
-    /**
-    * Método da camada de serviço -> para fazer a refatoracao de clienteModel, de modo que puxe apenas as
-    * informações que foram julgadas como necessárias
-    */
+    /// <summary>
+    /// Refatora o modelo Cliente para manter apenas as informações necessárias.
+    /// </summary>
+    /// <param name="clienteModel">Modelo Cliente a ser refatorado.</param>
+    /// <returns>Retorna o modelo refatorado de Cliente.</returns>
     public ClienteModel RefatoraoMinClienteModel(ClienteModel clienteModel)
     {
         
@@ -169,10 +191,11 @@ public class ClienteService : IClienteService
 
     }
     
-    /**
-     * Método da camada de serviço -> para fazer a refatoracao de clienteModel, de modo que puxe apenas as
-     * informações que foram julgadas como necessárias para o método getById
-     */
+    /// <summary>
+    /// Refatora o modelo Cliente para manter apenas as informações necessárias para a busca por ID.
+    /// </summary>
+    /// <param name="clienteModel">Modelo Cliente a ser refatorado.</param>
+    /// <returns>Retorna o modelo refatorado de Cliente com informações específicas para a busca por ID.</returns>
     public ClienteModel RefatoraoMediumClienteModel(ClienteModel clienteModel)
     {
         if (clienteModel.ClienteRespondeCheckLists != null)

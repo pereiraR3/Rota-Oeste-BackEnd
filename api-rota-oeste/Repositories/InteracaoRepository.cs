@@ -6,9 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
-/**
- * Representa a camada de persistência de dados, isto é, em relação à classe interacao
- */
+/// <summary>
+/// Repositório responsável pelas operações de persistência da entidade Interacao no banco de dados.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IInteracaoRepository"/> e define métodos para realizar operações CRUD
+/// relacionadas à entidade Interacao.
+/// </remarks>
 public class InteracaoRepository: IInteracaoRepository 
 {
 
@@ -24,9 +28,11 @@ public class InteracaoRepository: IInteracaoRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
     
-    /**
-     * Método que serve para salvar uma nova instância da entidade interacao no banco de dados
-     */
+    /// <summary>
+    /// Salva uma nova instância da entidade Interacao no banco de dados.
+    /// </summary>
+    /// <param name="interacaoModel">Objeto contendo os dados da interação a ser adicionada.</param>
+    /// <returns>Retorna a interação adicionada.</returns>
     public async Task<InteracaoModel?> Adicionar(InteracaoModel interacaoModel)
     {
         
@@ -38,17 +44,20 @@ public class InteracaoRepository: IInteracaoRepository
         
     }
 
-    /**
-    * Método que serve para buscar por determinada entidade do tipo interacao
-    */
+    /// <summary>
+    /// Busca uma instância da entidade Interacao pelo ID.
+    /// </summary>
+    /// <param name="id">ID da interação a ser buscada.</param>
+    /// <returns>Retorna a interação correspondente ao ID fornecido, ou null se não for encontrada.</returns>
     public async Task<InteracaoModel?> BuscarPorId(int id)
     {
         return await _context.Interacoes.FindAsync(id);
     }
 
-    /**
-    * Método que serve para buscar por determinada entidade do tipo interacao
-    */
+    /// <summary>
+    /// Busca todas as instâncias da entidade Interacao armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de todas as interações.</returns>
     public async Task<List<InteracaoModel>> BuscarTodos()
     {
         
@@ -56,9 +65,11 @@ public class InteracaoRepository: IInteracaoRepository
         
     }
 
-    /**
-    * Método que serve para buscar por determinada entidade do tipo interacao
-    */
+    /// <summary>
+    /// Remove uma instância da entidade Interacao pelo ID.
+    /// </summary>
+    /// <param name="id">ID da interação a ser removida.</param>
+    /// <returns>Retorna true se a interação for removida com sucesso, caso contrário, retorna false.</returns>
     public async Task<bool> ApagarPorId(int id)
     {
 
@@ -74,9 +85,10 @@ public class InteracaoRepository: IInteracaoRepository
         return true;
     }
 
-    /**
-    * Método que serve para buscar por determinada entidade do tipo interacao
-    */
+    /// <summary>
+    /// Remove todas as instâncias da entidade Interacao armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna true após remover todas as interações com sucesso.</returns>
     public async Task<bool> ApagarTodos()
     {
         
