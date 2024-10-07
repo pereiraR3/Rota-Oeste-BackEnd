@@ -2,8 +2,6 @@
 
   <PropertyGroup>
 
-    <!-- Runtime Identifier serve fornecer as config. para oferecer suporte para rodar o projeto em Linux -->
-   <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
 
     <TargetFramework>net8.0</TargetFramework>
 
@@ -24,6 +22,10 @@
     <PackageReference Include="Dapper" Version="2.1.35" />
 
     <PackageReference Include="InMemoryDbSet" Version="2.0.10" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
 
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.8" />
 
@@ -54,6 +56,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
     
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.8.0" />
+    
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.1" />
 
   </ItemGroup>
 
