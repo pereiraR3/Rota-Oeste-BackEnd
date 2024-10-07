@@ -5,6 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
+/// <summary>
+/// Repositório responsável pelas operações de persistência da entidade Resposta no banco de dados.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IRespostaRepository"/> e define métodos para realizar operações CRUD
+/// relacionadas à entidade Resposta.
+/// </remarks>
 public class RespostaRepository : IRespostaRepository
 
 {
@@ -22,9 +29,11 @@ public class RespostaRepository : IRespostaRepository
 
     }
     
-    /**
-     * Método que serve para salvar uma nova instância da entidade usuario no banco de dados
-     */
+    /// <summary>
+    /// Salva uma nova instância da entidade Resposta no banco de dados.
+    /// </summary>
+    /// <param name="resposta">Objeto contendo os dados da resposta a ser adicionada.</param>
+    /// <returns>Retorna a resposta adicionada.</returns>
     public async Task<RespostaModel?> Adicionar(RespostaModel resposta)
     {
         
@@ -36,9 +45,11 @@ public class RespostaRepository : IRespostaRepository
     }
     
 
-    /**
-     * Método que serve para recuperar determinado usuario por meio de seu ID
-     */
+    /// <summary>
+    /// Busca uma instância da entidade Resposta pelo ID.
+    /// </summary>
+    /// <param name="id">ID da resposta a ser buscada.</param>
+    /// <returns>Retorna a resposta correspondente ao ID fornecido, ou null se não for encontrada.</returns>
     public async Task<RespostaModel?> BuscaPorId(int id)
     {
 
@@ -46,9 +57,11 @@ public class RespostaRepository : IRespostaRepository
 
     }
 
-    /**
-     * Método usado para realizar deleção relacional de uma entidade do tipo Usuario
-     */
+    /// <summary>
+    /// Remove uma instância da entidade Resposta pelo ID.
+    /// </summary>
+    /// <param name="id">ID da resposta a ser removida.</param>
+    /// <returns>Retorna true se a resposta for removida com sucesso, caso contrário, retorna false.</returns>
     public async Task<bool> Apagar(int id)
     {
         RespostaModel? respostaAlternativa = await _dbContext.RespostaModels.FindAsync(id);
@@ -62,10 +75,10 @@ public class RespostaRepository : IRespostaRepository
         return true;
     }
     
-    
-    /**
-     * Método usado para apagar a todos as entidades do tipo RespostaAlternativaModel
-     */
+    /// <summary>
+    /// Remove todas as instâncias da entidade Resposta armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna true após remover todas as respostas com sucesso.</returns>
     public async Task<bool> ApagarTodos()
     {
        

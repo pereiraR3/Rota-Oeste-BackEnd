@@ -7,9 +7,13 @@ using AutoMapper;
 
 namespace api_rota_oeste.Services;
 
-/**
- * Representa a camada de serviço, isto é, a camada onde fica as regras de negócio da aplicação
- */
+/// <summary>
+/// Serviço responsável pelas operações de lógica de negócio relacionadas à entidade Usuario.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IUsuarioService"/> e define métodos para adicionar, buscar, atualizar e apagar entidades do tipo Usuario.
+/// Este serviço trabalha com as relações entre Usuario, CheckList e Cliente.
+/// </remarks>
 public class UsuarioService : IUsuarioService
 {
     private readonly IUsuarioRepository _usuarioRepository;
@@ -29,9 +33,11 @@ public class UsuarioService : IUsuarioService
         _repository = repository;
     }
     
-    /**
-     * Método da camada de serviço -> para criar uma entidade do tipo usuário
-     */
+    /// <summary>
+    /// Cria uma nova entidade do tipo Usuario e a adiciona ao banco de dados.
+    /// </summary>
+    /// <param name="usuarioRequestDto">Objeto contendo os dados do usuário a ser criado.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações do usuário criado.</returns>
     public async Task<UsuarioResponseDTO> AdicionarAsync(UsuarioRequestDTO usuarioRequestDto)
     {
         
@@ -42,9 +48,13 @@ public class UsuarioService : IUsuarioService
         return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
     }
 
-    /**
-     * Método da camada de serviço -> para buscar uma entidade do tipo usuário pelo ID
-     */
+    /// <summary>
+    /// Busca uma entidade do tipo Usuario pelo ID.
+    /// </summary>
+    /// <param name="id">ID do usuário a ser buscado.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações do usuário encontrado.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se o usuário com o ID especificado não for encontrado.</exception>
     public async Task<UsuarioResponseDTO> BuscarPorIdAsync(int id)
     {
         if(id <= 0)
@@ -60,9 +70,10 @@ public class UsuarioService : IUsuarioService
         return _mapper.Map<UsuarioResponseDTO>(usuarioModel);
     }
 
-    /**
-    * Método da camada de serviço -> para buscar todas as entidades do tipo usuario
-    */
+    /// <summary>
+    /// Busca todas as entidades do tipo Usuario armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todos os usuários.</returns>
     public async Task<List<UsuarioResponseDTO>> BuscarTodosAsync()
     {
         
@@ -75,9 +86,12 @@ public class UsuarioService : IUsuarioService
         return usuarioResponseDtos;
     }
 
-    /**
-     * Método da camada de serviço -> para atualizar um entidade do tipo usuário 
-     */
+    /// <summary>
+    /// Atualiza parcialmente uma entidade do tipo Usuario.
+    /// </summary>
+    /// <param name="usuarioPatchDto">Objeto contendo os dados a serem atualizados no usuário.</param>
+    /// <returns>Retorna true se o usuário for atualizado com sucesso, caso contrário retorna false.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se o usuário com o ID especificado não for encontrado.</exception>
     public async Task<bool> AtualizarAsync(UsuarioPatchDTO usuarioPatchDto)
     {
         UsuarioModel? usuarioModel = await _usuarioRepository.BuscaPorId(usuarioPatchDto.Id);
@@ -93,9 +107,13 @@ public class UsuarioService : IUsuarioService
         return true;
     }
 
-    /**
-     * Método da camada de serviço -> para fazer a deleção relacional de uma entidade do tipo usuário
-     */
+    /// <summary>
+    /// Remove uma entidade do tipo Usuario pelo ID.
+    /// </summary>
+    /// <param name="id">ID do usuário a ser removido.</param>
+    /// <returns>Retorna true se o usuário for removido com sucesso.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se o usuário com o ID especificado não for encontrado.</exception>
     public async Task<bool> ApagarAsync(int id)
     {
         if(id <= 0)
@@ -109,10 +127,11 @@ public class UsuarioService : IUsuarioService
         return resultado;
     }
 
-    /**
-     * Método da camada de serviço -> para fazer a refatoracao dos DTOs, de modo que puxem apenas as
-     * informações que foram julgadas como necessárias
-     */
+    /// <summary>
+    /// Refatora a entidade UsuarioModel para incluir apenas as informações julgadas como necessárias.
+    /// </summary>
+    /// <param name="usuarioModel">Modelo de usuário que será refatorado.</param>
+    /// <returns>Retorna o modelo de usuário refatorado.</returns>
     public UsuarioModel RefatoraoMinUsuarioModel(UsuarioModel usuarioModel)
     {
         var checkListModelsRefatorado = usuarioModel.CheckLists

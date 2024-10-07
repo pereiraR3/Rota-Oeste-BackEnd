@@ -4,6 +4,14 @@ using api_rota_oeste.Services.Interfaces;
 
 namespace api_rota_oeste.Controllers
 {
+    
+    /// <summary>
+    /// Controller responsável por operações de envio de mensagens via WhatsApp.
+    /// </summary>
+    /// <remarks>
+    /// Esta controller fornece um endpoint para enviar mensagens para números de telefone específicos via WhatsApp,
+    /// utilizando a API do WhatsApp Business.
+    /// </remarks>
     [ApiController]
     [Route("whatsapp")]
     public class WhatsAppController : ControllerBase
@@ -15,6 +23,14 @@ namespace api_rota_oeste.Controllers
             _whatsAppService = whatsAppService;
         }
         
+        /// <summary>
+        /// Envia uma mensagem via WhatsApp para um número de telefone específico.
+        /// </summary>
+        /// <param name="request">Objeto contendo o número de telefone e a mensagem a ser enviada.</param>
+        /// <returns>Retorna o status do envio da mensagem.</returns>
+        /// <response code="200">Mensagem enviada com sucesso.</response>
+        /// <response code="400">Erro nos dados fornecidos.</response>
+        /// <response code="500">Erro ao enviar a mensagem.</response>
         [HttpPost("enviar")]
         [SwaggerOperation(
             Summary = "Envia uma mensagem via WhatsApp",

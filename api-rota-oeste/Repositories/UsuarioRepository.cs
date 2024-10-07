@@ -8,9 +8,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
-/**
- * Representa a camada de persistência de dados, isto é, em relação à classe Usuario
- */
+/// <summary>
+/// Repositório responsável pelas operações de persistência da entidade Usuario no banco de dados.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IUsuarioRepository"/> e define métodos para realizar operações CRUD
+/// relacionadas à entidade Usuario.
+/// </remarks>
 public class UsuarioRepository : IUsuarioRepository
 {
 
@@ -23,9 +27,11 @@ public class UsuarioRepository : IUsuarioRepository
         _mapper = mapper;
     }
     
-    /**
-     * Método que serve para salvar uma nova instância da entidade usuario no banco de dados
-     */
+    /// <summary>
+    /// Salva uma nova instância da entidade Usuario no banco de dados.
+    /// </summary>
+    /// <param name="usuario">Objeto contendo os dados do usuário a ser adicionado.</param>
+    /// <returns>Retorna o usuário adicionado.</returns>
     public async Task<UsuarioModel?> Adicionar(UsuarioModel usuario)
     {
         await _dbContext.Usuarios.AddAsync(usuario);
@@ -34,9 +40,11 @@ public class UsuarioRepository : IUsuarioRepository
         return usuario;
     }
 
-    /**
-     * Método que serve para recuperar determinado usuario por meio de seu ID
-     */
+    /// <summary>
+    /// Busca uma instância da entidade Usuario pelo ID.
+    /// </summary>
+    /// <param name="id">ID do usuário a ser buscado.</param>
+    /// <returns>Retorna o usuário correspondente ao ID fornecido, ou null se não for encontrado.</returns>
     public async Task<UsuarioModel?> BuscaPorId(int id)
     {
         
@@ -44,17 +52,23 @@ public class UsuarioRepository : IUsuarioRepository
         
     }
 
-    /**
-    * Método serve para buscar todas as entidades do tipo usuario
-    */
+    /// <summary>
+    /// Busca todas as instâncias da entidade Usuario armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de todos os usuários.</returns>
     public async Task<List<UsuarioModel>> BuscarTodos()
     {
         return await _dbContext.Usuarios.ToListAsync();
     }
 
-    /**
-     * Método serve para alterar os dados de um usuário parcialmente
-     */
+    /// <summary>
+    /// Atualiza parcialmente os dados de um usuário existente no banco de dados.
+    /// </summary>
+    /// <param name="request">Objeto contendo os dados a serem atualizados do usuário.</param>
+    /// <returns>Retorna true se a atualização for bem-sucedida, caso contrário, retorna false.</returns>
+    /// <remarks>
+    /// O mapeamento de atualização deve ignorar campos nulos para garantir que apenas os campos fornecidos sejam atualizados.
+    /// </remarks>
     public async Task<bool> Atualizar(UsuarioPatchDTO request)
     {
         UsuarioModel? usuarioModel = await BuscaPorId(request.Id);
@@ -72,9 +86,11 @@ public class UsuarioRepository : IUsuarioRepository
 
     }
 
-    /**
-     * Método usado para realizar deleção relacional de uma entidade do tipo Usuario 
-     */
+    /// <summary>
+    /// Remove uma instância da entidade Usuario pelo ID.
+    /// </summary>
+    /// <param name="id">ID do usuário a ser removido.</param>
+    /// <returns>Retorna true se o usuário for removido com sucesso, caso contrário, retorna false.</returns>
     public async Task<bool> Apagar(int id)
     {
        UsuarioModel? usuario = await _dbContext.Usuarios.FindAsync(id);
@@ -87,6 +103,5 @@ public class UsuarioRepository : IUsuarioRepository
 
        return true;
     }
-    
     
 }

@@ -5,6 +5,15 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace api_rota_oeste.Controllers
 {
+    
+    /// <summary>
+    /// Controller responsável por gerenciar operações relacionadas a Questões no sistema.
+    /// </summary>
+    /// <remarks>
+    /// Esta controller fornece endpoints para adicionar, buscar, atualizar e remover questões.
+    /// Permite operações para criar novas questões, buscar uma questão pelo ID, listar todas as questões,
+    /// atualizar uma questão existente e removê-la do sistema.
+    /// </remarks>
     [ApiController]
     [Route("questao")]
     public class QuestaoController : ControllerBase
@@ -16,6 +25,13 @@ namespace api_rota_oeste.Controllers
             _service = service;
         }
         
+        /// <summary>
+        /// Adiciona uma nova questão ao sistema.
+        /// </summary>
+        /// <param name="questao">Objeto que contém as informações da questão a ser adicionada.</param>
+        /// <returns>Retorna os dados da questão criada.</returns>
+        /// <response code="200">Questão adicionada com sucesso.</response>
+        /// <response code="400">Erro nos dados fornecidos.</response>
         [HttpPost("adicionar")]
         [SwaggerOperation(
             Summary = "Adiciona uma nova questão",
@@ -37,6 +53,13 @@ namespace api_rota_oeste.Controllers
             
         }
         
+        /// <summary>
+        /// Busca uma questão pelo ID.
+        /// </summary>
+        /// <param name="id">ID da questão.</param>
+        /// <returns>Retorna os detalhes da questão correspondente ao ID fornecido.</returns>
+        /// <response code="200">Questão encontrada.</response>
+        /// <response code="404">Questão não encontrada.</response>
         [HttpGet("buscarPorId/{id}")]
         [SwaggerOperation(
             Summary = "Busca uma questão pelo ID",
@@ -51,6 +74,11 @@ namespace api_rota_oeste.Controllers
             return Ok(questao);
         }
         
+        /// <summary>
+        /// Lista todas as questões do sistema.
+        /// </summary>
+        /// <returns>Retorna uma lista de todas as questões armazenadas no banco de dados.</returns>
+        /// <response code="200">Lista de questões retornada com sucesso.</response>
         [HttpGet("buscarTodos")]
         [SwaggerOperation(
             Summary = "Lista as questões",
@@ -66,6 +94,14 @@ namespace api_rota_oeste.Controllers
             
         }
         
+        /// <summary>
+        /// Atualiza as informações de uma questão existente no sistema.
+        /// </summary>
+        /// <param name="questao">Objeto contendo os dados atualizados da questão.</param>
+        /// <returns>Retorna um status indicando o sucesso da atualização.</returns>
+        /// <response code="204">Questão atualizada com sucesso.</response>
+        /// <response code="400">Erro nos dados fornecidos.</response>
+        /// <response code="404">Questão não encontrada.</response>
         [HttpPatch("atualizar")]
         [SwaggerOperation(
             Summary = "Atualiza as informações de uma questão",
@@ -82,6 +118,13 @@ namespace api_rota_oeste.Controllers
             return NoContent();
         }
         
+        /// <summary>
+        /// Remove uma questão do sistema pelo ID.
+        /// </summary>
+        /// <param name="id">ID da questão a ser removida.</param>
+        /// <returns>Retorna um status indicando o sucesso da remoção.</returns>
+        /// <response code="204">Questão removida com sucesso.</response>
+        /// <response code="404">Questão não encontrada.</response>
         [HttpDelete("apagarPorId/{id}")]
         [SwaggerOperation(
             Summary = "Remove uma questão",

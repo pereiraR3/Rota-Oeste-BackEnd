@@ -6,9 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
-/**
- * Representa a camada de persistência de dados, isto é, em relação à classe Usuario
- */
+/// <summary>
+/// Repositório responsável pelas operações de persistência da entidade Questao no banco de dados.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IQuestaoRepository"/> e define métodos para realizar operações CRUD
+/// relacionadas à entidade Questao.
+/// </remarks>
 public class QuestaoRepository : IQuestaoRepository
 {
     private readonly ApiDbContext _context;
@@ -26,9 +30,11 @@ public class QuestaoRepository : IQuestaoRepository
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    /**
-     * Método que serve para salvar uma nova instância da entidade questao no banco de dados
-     */
+    /// <summary>
+    /// Salva uma nova instância da entidade Questao no banco de dados.
+    /// </summary>
+    /// <param name="questao">Objeto contendo os dados da questão a ser adicionada.</param>
+    /// <returns>Retorna a questão adicionada.</returns>
     public async Task<QuestaoModel> Adicionar(QuestaoModel questao)
     {
         
@@ -40,19 +46,21 @@ public class QuestaoRepository : IQuestaoRepository
         
     }
     
-
-    /**
-     * Método que serve para buscar todas as entidades do tipo questao
-     */
+    /// <summary>
+    /// Busca todas as instâncias da entidade Questao armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de todas as questões.</returns>
     public async Task<List<QuestaoModel>> BuscarTodos()
     {
         return await _context.Questoes.ToListAsync();
         
     }
 
-    /**
-     * Método que serve para buscar por determinada entidade do tipo questao 
-     */
+    /// <summary>
+    /// Busca uma instância da entidade Questao pelo ID.
+    /// </summary>
+    /// <param name="id">ID da questão a ser buscada.</param>
+    /// <returns>Retorna a questão correspondente ao ID fornecido, ou null se não for encontrada.</returns>
     public async Task<QuestaoModel?> BuscarPorId(int id)
     {
 
@@ -60,9 +68,11 @@ public class QuestaoRepository : IQuestaoRepository
 
     }
     
-    /**
-     * Método que serve para apagar uma entidade do tipo questao pelo seu Id
-     */
+    /// <summary>
+    /// Remove uma instância da entidade Questao pelo ID.
+    /// </summary>
+    /// <param name="id">ID da questão a ser removida.</param>
+    /// <returns>Retorna true se a questão for removida com sucesso, caso contrário, retorna false.</returns>
     public async Task<bool> Apagar(int id)
     {
         QuestaoModel? questao = await _context.Questoes.FindAsync(id);

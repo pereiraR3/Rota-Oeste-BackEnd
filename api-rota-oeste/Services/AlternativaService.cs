@@ -7,6 +7,13 @@ using AutoMapper;
 
 namespace api_rota_oeste.Services;
 
+/// <summary>
+/// Serviço responsável pelas operações de lógica de negócio relacionadas à entidade Alternativa.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IAlternativaService"/> e define métodos para adicionar, buscar, atualizar e apagar entidades do tipo Alternativa.
+/// Além disso, realiza validações e mapeamentos necessários para operações relacionadas à entidade Alternativa.
+/// </remarks>
 public class AlternativaService : IAlternativaService
 {
     
@@ -30,9 +37,12 @@ public class AlternativaService : IAlternativaService
         _repositoryAlternativa = repository;
     }
     
-    /**
-    * Método da camada de serviço -> para criar uma entidade do tipo alternativa
-   */
+    /// <summary>
+    /// Cria uma nova entidade do tipo Alternativa e a adiciona ao banco de dados.
+    /// </summary>
+    /// <param name="alternativaRequest">Objeto contendo os dados da alternativa a ser criada.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações da alternativa criada.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se a questão associada à alternativa não for encontrada.</exception>
     public async Task<AlternativaResponseDTO> AdicionarAsync(AlternativaRequestDTO alternativaRequest)
     {
 
@@ -61,9 +71,13 @@ public class AlternativaService : IAlternativaService
         
     }
     
-    /**
-    * Método da camada de serviço -> para buscar uma entidade do tipo alternativa pelo ID
-    */
+    /// <summary>
+    /// Busca uma entidade do tipo Alternativa pelo ID.
+    /// </summary>
+    /// <param name="id">ID da alternativa a ser buscada.</param>
+    /// <returns>Retorna o DTO de resposta contendo as informações da alternativa encontrada.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se a alternativa com o ID especificado não for encontrada.</exception>
     public async Task<AlternativaResponseDTO> BuscarPorIdAsync(int id)
     {
         if(id <= 0)
@@ -83,10 +97,10 @@ public class AlternativaService : IAlternativaService
         
     }
     
-    
-    /**
-    * Método da camada de serviço -> para atualizar um entidade do tipo alternativa
-    */
+    /// <summary>
+    /// Busca todas as entidades do tipo Alternativa armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todas as alternativas.</returns>
     public async Task<List<AlternativaResponseDTO>> BuscarTodosAsync()
     {
         List<AlternativaModel> alternativas = await _repositoryAlternativa.BuscarTodos();
@@ -98,9 +112,12 @@ public class AlternativaService : IAlternativaService
 
     }
     
-    /**
-    * Método da camada de serviço -> para fazer a atualização de um entidade do tipo alternativa
-    */
+    /// <summary>
+    /// Atualiza os dados de uma entidade do tipo Alternativa com base no DTO fornecido.
+    /// </summary>
+    /// <param name="alternativaPatch">Objeto contendo os dados a serem atualizados da alternativa.</param>
+    /// <returns>Retorna true se a atualização for bem-sucedida, caso contrário, retorna false.</returns>
+    /// <exception cref="KeyNotFoundException">Lançada se a alternativa com o ID especificado não for encontrada.</exception>
     public async Task<bool> AtualizarAsync(AlternativaPatchDTO alternativaPatch)
     {
         AlternativaModel? alternativaModel = await _repositoryAlternativa.BuscarPorId(alternativaPatch.Id);
@@ -114,11 +131,14 @@ public class AlternativaService : IAlternativaService
 
         return true;
     }
-
     
-    /**
-    * Método da camada de serviço -> para fazer a deleção relacional de uma entidade do tipo alternativa
-    */
+    /// <summary>
+    /// Remove uma entidade do tipo Alternativa do banco de dados pelo ID.
+    /// </summary>
+    /// <param name="id">ID da alternativa a ser removida.</param>
+    /// <returns>Retorna true se a alternativa for removida com sucesso, caso contrário, lança uma exceção.</returns>
+    /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
+    /// <exception cref="KeyNotFoundException">Lançada se a questão associada não for encontrada.</exception>
     public async Task<bool> ApagarAsync(int id)
     {
         if (id <= 0)
@@ -136,10 +156,12 @@ public class AlternativaService : IAlternativaService
         return true;
     }
 
-    /**
-    * Método da camada de serviço -> para fazer a refatoracao do DTO da entidade Alternativa,
-     * de modo que puxem apenas as informações que foram julgadas como necessárias
-     */
+    /// <summary>
+    /// Refatora a entidade Alternativa para garantir que apenas as informações necessárias sejam mantidas.
+    /// </summary>
+    /// <param name="alternativaModel">Modelo de alternativa a ser refatorado.</param>
+    /// <returns>Retorna o modelo de alternativa refatorado.</returns>
+    /// <exception cref="ArgumentNullException">Lançada se o modelo de alternativa for nulo.</exception>
     public AlternativaModel RefatoracaoMinAlternativaModel(AlternativaModel alternativaModel)
     {
         if (alternativaModel == null)

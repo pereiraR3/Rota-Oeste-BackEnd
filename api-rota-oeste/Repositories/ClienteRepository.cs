@@ -6,6 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_rota_oeste.Repositories;
 
+/// <summary>
+/// Repositório responsável pelas operações de persistência da entidade Cliente no banco de dados.
+/// </summary>
+/// <remarks>
+/// Implementa a interface <see cref="IClienteRepository"/> e define métodos para realizar operações CRUD
+/// e outras operações relacionadas à entidade Cliente.
+/// </remarks>
 public class ClienteRepository : IClienteRepository
 {
     
@@ -18,6 +25,11 @@ public class ClienteRepository : IClienteRepository
         _dbContext = dbContext; // Injetando contexto de DB
     }
     
+    /// <summary>
+    /// Adiciona uma nova instância da entidade Cliente ao banco de dados.
+    /// </summary>
+    /// <param name="clienteModel">Objeto contendo os dados do cliente a ser adicionado.</param>
+    /// <returns>Retorna o cliente adicionado.</returns>
     public async Task<ClienteModel> Adicionar(ClienteModel clienteModel)
     {
         
@@ -27,10 +39,11 @@ public class ClienteRepository : IClienteRepository
         return clienteModel;
     }
     
-
-    /**
-     * Inserção em massa de entidades do tipo cliente
-     */
+    /// <summary>
+    /// Adiciona uma coleção de instâncias da entidade Cliente ao banco de dados.
+    /// </summary>
+    /// <param name="clienteModels">Lista de objetos contendo os dados dos clientes a serem adicionados.</param>
+    /// <returns>Retorna a lista de clientes adicionados.</returns>
     public async Task<List<ClienteModel>> AdicionarColecao(List<ClienteModel> clienteModels)
     {
         
@@ -50,9 +63,11 @@ public class ClienteRepository : IClienteRepository
         
     }
 
-    /**
-     * Método que serve para recuperar determinado usuario por meio de seu ID
-     */
+    /// <summary>
+    /// Busca uma instância da entidade Cliente pelo ID.
+    /// </summary>
+    /// <param name="id">ID do cliente a ser buscado.</param>
+    /// <returns>Retorna o cliente correspondente ao ID fornecido, ou null se não for encontrado.</returns>
     public async Task<ClienteModel?> BuscarPorId(int id)
     {
         
@@ -60,9 +75,10 @@ public class ClienteRepository : IClienteRepository
         
     }
 
-    /**
-     * Método que serve para recuperar todos os clientes do banco de dados
-     */
+    /// <summary>
+    /// Busca todas as instâncias da entidade Cliente armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna uma lista de todos os clientes.</returns>
     public async Task<List<ClienteModel>> BuscarTodos()
     {
         
@@ -70,9 +86,11 @@ public class ClienteRepository : IClienteRepository
         
     }
 
-    /**
-     * Método usado para realizar deleção relacional de uma entidade do tipo Usuario
-     */
+    /// <summary>
+    /// Remove uma instância da entidade Cliente pelo ID.
+    /// </summary>
+    /// <param name="id">ID do cliente a ser removido.</param>
+    /// <returns>Retorna true se o cliente for removido com sucesso, caso contrário, retorna false.</returns>
     public async Task<bool> Apagar(int id)
     {
         
@@ -88,9 +106,10 @@ public class ClienteRepository : IClienteRepository
 
     }
 
-    /**
-     * Método usado para realizar deleção relacional de uma entidade do tipo Usuario
-     */
+    /// <summary>
+    /// Remove todas as instâncias da entidade Cliente armazenadas no banco de dados.
+    /// </summary>
+    /// <returns>Retorna true se todos os clientes forem removidos com sucesso, caso contrário, retorna false.</returns>
     public async Task<bool> ApagarTodos()
     {
         List<ClienteModel> clientes = await BuscarTodos();
