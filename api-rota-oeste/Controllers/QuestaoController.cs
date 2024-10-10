@@ -1,5 +1,6 @@
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -16,6 +17,7 @@ namespace api_rota_oeste.Controllers
     /// </remarks>
     [ApiController]
     [Route("questao")]
+    [Authorize]
     public class QuestaoController : ControllerBase
     {
         private readonly IQuestaoService _service;

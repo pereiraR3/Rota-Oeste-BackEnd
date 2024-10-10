@@ -61,4 +61,9 @@
 
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20241009152025_RefreshTokenMig.cs" />
+    <Compile Remove="Migrations\20241009152025_RefreshTokenMig.Designer.cs" />
+  </ItemGroup>
+
 </Project>
