@@ -1,5 +1,6 @@
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace api_rota_oeste.Controllers;
 /// </remarks>
 [ApiController]
 [Route("cliente")]
+[Authorize]
 public class ClienteController : ControllerBase
 {
     

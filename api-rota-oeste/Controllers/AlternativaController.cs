@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using api_rota_oeste.Models.Alternativa;
 using api_rota_oeste.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace api_rota_oeste.Controllers;
 
 [ApiController]
 [Route("alternativa")]
+[Authorize]
 public class AlternativaController : ControllerBase
 {
     private readonly IAlternativaService _alternativaService;

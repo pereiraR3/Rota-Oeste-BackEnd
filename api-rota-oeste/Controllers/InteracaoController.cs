@@ -1,5 +1,6 @@
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -15,6 +16,7 @@ namespace api_rota_oeste.Controllers
     /// </remarks>
     [ApiController]
     [Route("interacao")]
+    [Authorize]
     public class InteracaoController : ControllerBase
     {
         private readonly IInteracaoService _serviceInteracao;

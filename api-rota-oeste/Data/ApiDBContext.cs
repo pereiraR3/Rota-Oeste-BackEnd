@@ -7,8 +7,10 @@ using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Models.RespostaTemAlternativa;
+using api_rota_oeste.Models.Token;
 using api_rota_oeste.Models.Usuario;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace api_rota_oeste.Data;
 
@@ -27,6 +29,7 @@ public class ApiDbContext : DbContext
     
     public DbSet<RespostaTemAlternativaModel> RespostaTemAlternativaModels { get; set; }
 
+    public DbSet<TokenModel> RefreshTokens { get; set; } 
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -40,6 +43,15 @@ public class ApiDbContext : DbContext
         modelBuilder.ApplyConfiguration(new RespostaConfiguration());
         modelBuilder.ApplyConfiguration(new AlternativaConfiguration());
         modelBuilder.ApplyConfiguration(new RespostaTemAlternativaConfiguration());
+        
+        modelBuilder.Entity<TokenModel>(entity =>
+        {
+            entity.HasKey(e => e.Id); // Definir a chave primária
+            entity.Property(e => e.Token).IsRequired(); // O token é obrigatório
+            entity.Property(e => e.Username).IsRequired(); // O nome de usuário é obrigatório
+            entity.Property(e => e.Expiration).IsRequired(); // A expiração é obrigatória
+            entity.Property(e => e.IsRevoked).IsRequired(); // A revogação é obrigatória
+        });
         
         base.OnModelCreating(modelBuilder);       
         
