@@ -20,5 +20,17 @@
   <ItemGroup>
     <ProjectReference Include="..\api-rota-oeste\api-rota-oeste.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="img\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="img\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="img\**" />
+  </ItemGroup>
   
 </Project>

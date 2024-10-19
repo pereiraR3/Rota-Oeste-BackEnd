@@ -10,7 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="fix: edit RespostaResponseDTO.cs">
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/img/logo.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/CheckListControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/CheckListControllerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +85,8 @@
     ".NET Launch Settings Profile.api-rota-oeste: http.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "a85a27c0-5289-4fe1-89e8-b576af808354.executor": "Debug",
-    "git-widget-placeholder": "sprint03-docstring-service-controller-repository-anthony",
+    "c80c5751-3764-4386-90e4-2f8931bdc96e.executor": "Debug",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -157,6 +162,8 @@
       <workItem from="1728042660028" duration="16482000" />
       <workItem from="1728154915463" duration="2170000" />
       <workItem from="1728164024352" duration="1730000" />
+      <workItem from="1728838692371" duration="4410000" />
+      <workItem from="1729356593985" duration="2320000" />
     </task>
     <task id="LOCAL-00001" summary="feat: create AlternativaModel.cs">
       <option name="closed" value="true" />

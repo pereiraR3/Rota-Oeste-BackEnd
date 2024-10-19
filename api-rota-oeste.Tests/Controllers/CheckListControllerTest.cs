@@ -188,7 +188,7 @@ namespace api_rota_oeste.Tests.Controllers
         }
         
         [Fact]
-        public async Task GetRelatorioGeralPorCheckListId_DeveRetornarOkComRelatorio()
+        public async Task GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio()
         {
             // Arrange
             var idChecklist = 1;
@@ -213,9 +213,11 @@ namespace api_rota_oeste.Tests.Controllers
             var result = await _controller.GetRelatorioGeralPorCheckListId(idChecklist);
 
             // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Equal(200, okResult.StatusCode);
-            Assert.Equal(relatorio, okResult.Value);
+            var objectResult = Assert.IsAssignableFrom<ActionResult>(result);
+            var fileResult = Assert.IsType<FileContentResult>(objectResult);
+            Assert.Equal("application/pdf", fileResult.ContentType);
+            Assert.Equal("RelatorioChecklist.pdf", fileResult.FileDownloadName);
+            Assert.NotNull(fileResult.FileContents); // Verifica se o conteúdo do arquivo não é nulo
             _checkListServiceMock.Verify(service => service.GerarRelatorioGeralAsync(idChecklist), Times.Once);
         }
 
@@ -232,9 +234,11 @@ namespace api_rota_oeste.Tests.Controllers
             var result = await _controller.GetRelatorioGeralPorCheckListId(idChecklist);
 
             // Assert
-            Assert.IsType<NotFoundObjectResult>(result.Result);
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal("Checklist não encontrado ou não há dados disponíveis.", notFoundResult.Value);
             _checkListServiceMock.Verify(service => service.GerarRelatorioGeralAsync(idChecklist), Times.Once);
         }
+
 
         [Fact]
         public async Task GetRelatorioGeralPorCheckListId_DeveRetornarStatus500SeOcorrerErro()
@@ -249,11 +253,12 @@ namespace api_rota_oeste.Tests.Controllers
             var result = await _controller.GetRelatorioGeralPorCheckListId(idChecklist);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result.Result);
+            var objectResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(500, objectResult.StatusCode);
             Assert.Equal("Ocorreu um erro ao gerar o relatório: Erro inesperado", objectResult.Value);
             _checkListServiceMock.Verify(service => service.GerarRelatorioGeralAsync(idChecklist), Times.Once);
         }
+
 
     }
 }

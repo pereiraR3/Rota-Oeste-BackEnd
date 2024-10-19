@@ -3,6 +3,8 @@ using api_rota_oeste.Models.ClienteRespondeCheckList;
 using api_rota_oeste.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace api_rota_oeste.Controllers
 {
@@ -262,7 +264,7 @@ namespace api_rota_oeste.Controllers
             Summary = "Gera um relatório geral para um checklist específico",
             Description = "Retorna informações detalhadas sobre o checklist especificado."
         )]
-        public async Task<ActionResult<List<CheckListRelatorioGeralDTO>>> GetRelatorioGeralPorCheckListId(int idChecklist)
+        public async Task<ActionResult> GetRelatorioGeralPorCheckListId(int idChecklist)
         {
             try
             {
@@ -273,13 +275,84 @@ namespace api_rota_oeste.Controllers
                     return NotFound("Checklist não encontrado ou não há dados disponíveis.");
                 }
 
-                return Ok(relatorio);
+                // Gerar o PDF
+                using (var stream = new MemoryStream())
+                {
+                    // Configurações do documento PDF
+                    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+                    PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+
+                    // Adicionando logo (centralizada)
+                    string logoPath = "img/logo.jpg";
+                    Image logo = Image.GetInstance(logoPath);
+                    logo.ScaleToFit(200f, 170f);
+                    logo.Alignment = Element.ALIGN_CENTER;
+                    pdfDoc.Add(logo);
+
+                    // Título do PDF (centralizado)
+                    Paragraph titulo = new Paragraph("Relatório Geral de Checklist", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER; 
+                    pdfDoc.Add(titulo);
+                    pdfDoc.Add(new Paragraph(" ")); // Espaço em branco
+
+                    // Percorre o relatório e adiciona os dados ao PDF
+                    foreach (var item in relatorio)
+                    {
+                        pdfDoc.Add(new Paragraph($"Cliente: {item.Nome_cliente}", new Font(Font.FontFamily.HELVETICA, 12)));
+                        pdfDoc.Add(new Paragraph($"Checklist: {item.Nome_checklist}"));
+                        pdfDoc.Add(new Paragraph($"Data: {item.Data_interacao.ToString("dd/MM/yyyy HH:mm")}"));
+                        pdfDoc.Add(new Paragraph($"Questão: {item.questao}"));
+                        pdfDoc.Add(new Paragraph($"Alternativa: {item.alternativa?.ToString() ?? "N/A"}"));
+                        pdfDoc.Add(new Paragraph(" ")); // Espaço em branco entre itens
+                    }
+
+                    // Resumo de porcentagens
+                    pdfDoc.Add(new Paragraph("Relatório das Respostas", new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD)));
+                    pdfDoc.Add(new Paragraph(" ")); // Espaço em branco
+
+                    // Calcular as porcentagens de respostas por questão
+                    var questoes = relatorio.GroupBy(r => r.questao)
+                                             .Select(g => new 
+                                             {
+                                                 Questao = g.Key,
+                                                 TotalRespostas = g.Count(),
+                                                 Alternativas = g.GroupBy(a => a.alternativa)
+                                                                 .Select(a => new 
+                                                                 {
+                                                                     Alternativa = a.Key,
+                                                                     Quantidade = a.Count(),
+                                                                     Percentual = (int)((a.Count() / (float)g.Count()) * 100) // Convertendo para inteiro
+                                                                 }).ToList()
+                                             }).ToList();
+
+                    // Adicionar o resumo ao PDF
+                    foreach (var questao in questoes)
+                    {
+                        pdfDoc.Add(new Paragraph($"Questão: {questao.Questao}", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD)));
+                        pdfDoc.Add(new Paragraph($"Total de respostas: {questao.TotalRespostas}"));
+
+                        foreach (var alt in questao.Alternativas)
+                        {
+                            pdfDoc.Add(new Paragraph($"Alternativa {alt.Alternativa}: {alt.Quantidade} respostas ({alt.Percentual:F2}%)"));
+                        }
+
+                        pdfDoc.Add(new Paragraph(" ")); // Espaço em branco entre questões
+                    }
+
+                    // Fechar o documento
+                    pdfDoc.Close();
+
+                    // Retornar o PDF como resposta
+                    return File(stream.ToArray(), "application/pdf", "RelatorioChecklist.pdf");
+                }
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ocorreu um erro ao gerar o relatório: {ex.Message}");
             }
         }
+
 
     }
 }
