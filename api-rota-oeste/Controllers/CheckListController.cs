@@ -1,6 +1,7 @@
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.ClienteRespondeCheckList;
 using api_rota_oeste.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using iTextSharp.text;
@@ -25,6 +26,7 @@ namespace api_rota_oeste.Controllers
     /// <response code="500">Erro interno do servidor ao processar a solicitação.</response>
     [ApiController]
     [Route("checklist")]
+    [Authorize]
     public class CheckListController : ControllerBase
     {
         private readonly ICheckListService _checkListService;

@@ -11,10 +11,26 @@
   <component name="ChangeListManager">
     <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="fix: edit RespostaResponseDTO.cs">
       <change afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/img/logo.jpg" afterDir="false" />
+    <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/AuthController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Token/RefreshToken.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Token/TokenModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Token/TokenSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/CheckListControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/CheckListControllerTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/AlternativaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/AlternativaController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/CheckListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/CheckListController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/InteracaoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/InteracaoController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/LoginController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/QuestaoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/QuestaoController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/RespostaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/RespostaController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Data/ApiDBContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Data/ApiDBContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Migrations/ApiDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Migrations/ApiDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/api-rota-oeste.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/api-rota-oeste.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,76 +43,54 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ndrxy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/pereiraR3/Rota-Oeste-BackEnd.git&quot;,
+    &quot;accountId&quot;: &quot;d1f34242-4afd-46ab-9995-808a5055a1bf&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Controllers/QuestaoControllerTest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Controllers/RespostaControllerTest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/AlternativaServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/AlternativaServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/QuestaoServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste.Tests/Services/RespostaServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Controllers/RespostaController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Data/Configuration/QuestaoConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Data/Configuration/RespostaConfiguration.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Questao/QuestaoModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Questao/QuestaoPatchDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Questao/QuestaoResponseDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaPatchDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaRequestDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaResponseDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Models/Resposta/RespostaResponseDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/ClienteRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/ClienteRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/ClienteRespondeCheckListRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/InteracaoRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/QuestaoRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/QuestaoRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/Repository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/Repository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Repositories/RespostaRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/InteracaoService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/Interfaces/ICheckListService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/Interfaces/IRespostaService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/Interfaces/IRespostaService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/RespostaService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/Services/RespostaService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/api-rota-oeste/Controllers/AuthController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/api-rota-oeste/Migrations/20241009152025_RefreshTokenMig.Designer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api-rota-oeste/obj/Debug/net8.0/linux-x64/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/phost/Documents/projectGithub/Rota-Oeste-BackEnd/api-rota-oeste/obj/Debug/net8.0/linux-x64/api-rota-oeste.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2mcuWEKdbWvth5e3ALGRNCOpNSI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.api-rota-oeste: http.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "a85a27c0-5289-4fe1-89e8-b576af808354.executor": "Debug",
-    "c80c5751-3764-4386-90e4-2f8931bdc96e.executor": "Debug",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CodeInspectionSettingsId",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.api-rota-oeste: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.api-rota-oeste: https.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;a85a27c0-5289-4fe1-89e8-b576af808354.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;oauth2&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/phost/Documents/projectGithub/Rota-Oeste-BackEnd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.api-rota-oeste: http">
     <configuration name="api-rota-oeste: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/api-rota-oeste/api-rota-oeste.csproj" />
@@ -162,6 +156,19 @@
       <workItem from="1728042660028" duration="16482000" />
       <workItem from="1728154915463" duration="2170000" />
       <workItem from="1728164024352" duration="1730000" />
+      <workItem from="1728309059898" duration="2570000" />
+      <workItem from="1728312725949" duration="2528000" />
+      <workItem from="1728321608034" duration="2832000" />
+      <workItem from="1728324534032" duration="1929000" />
+      <workItem from="1728326513732" duration="5755000" />
+      <workItem from="1728333269601" duration="1485000" />
+      <workItem from="1728334771851" duration="6207000" />
+      <workItem from="1728408588469" duration="3432000" />
+      <workItem from="1728477464488" duration="1706000" />
+      <workItem from="1728484286048" duration="3905000" />
+      <workItem from="1728492897292" duration="3302000" />
+      <workItem from="1728499951596" duration="11188000" />
+      <workItem from="1728563908552" duration="1390000" />
       <workItem from="1728838692371" duration="4410000" />
       <workItem from="1729356593985" duration="2320000" />
     </task>
@@ -479,6 +486,9 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/api-rota-oeste" />
+    </ignored-roots>
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="FIX: edit. method ObterProximoCodigoPorQuestaoId in AlternativaRepository.cs" />
     <MESSAGE value="FIX: edit. method BuscarTodosAsync &amp; BuscarPorIdAsync in AlternativaService.cs" />

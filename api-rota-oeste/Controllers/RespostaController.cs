@@ -1,6 +1,7 @@
 using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Models.RespostaTemAlternativa;
 using api_rota_oeste.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -17,6 +18,7 @@ namespace api_rota_oeste.Controllers;
 /// </remarks>
 [ApiController]
 [Route("respostaAlternativa")]
+[Authorize]
 public class RespostaController : ControllerBase
 {
     private readonly IRespostaService _respostaService;

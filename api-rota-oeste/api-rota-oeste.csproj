@@ -25,6 +25,10 @@
 
     <PackageReference Include="InMemoryDbSet" Version="2.0.10" />
 
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
+
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
 
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.8" />
@@ -56,7 +60,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
     
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.8.0" />
+    
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.1" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20241009152025_RefreshTokenMig.cs" />
+    <Compile Remove="Migrations\20241009152025_RefreshTokenMig.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
