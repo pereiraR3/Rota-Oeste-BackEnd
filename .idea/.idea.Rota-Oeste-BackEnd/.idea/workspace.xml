@@ -9,12 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="fix: edit RespostaResponseDTO.cs">
+      <change afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/img/logo.jpg" afterDir="false" />
     <list default="true" id="cc92fb3f-1fe5-4290-a8ad-34176722b545" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/AuthController.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Token/RefreshToken.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Token/TokenModel.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/api-rota-oeste/Models/Token/TokenSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Rota-Oeste-BackEnd/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Rota-Oeste-BackEnd.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/CheckListControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/Controllers/CheckListControllerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste.Tests/api-rota-oeste.Tests.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/AlternativaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/AlternativaController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/CheckListController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/CheckListController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-rota-oeste/Controllers/InteracaoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api-rota-oeste/Controllers/InteracaoController.cs" afterDir="false" />
@@ -164,6 +169,8 @@
       <workItem from="1728492897292" duration="3302000" />
       <workItem from="1728499951596" duration="11188000" />
       <workItem from="1728563908552" duration="1390000" />
+      <workItem from="1728838692371" duration="4410000" />
+      <workItem from="1729356593985" duration="2320000" />
     </task>
     <task id="LOCAL-00001" summary="feat: create AlternativaModel.cs">
       <option name="closed" value="true" />

@@ -2,6 +2,8 @@
 
   <PropertyGroup>
 
+    <!-- Runtime Identifier serve fornecer as config. para oferecer suporte para rodar o projeto em Linux -->
+<!--   <RuntimeIdentifier>linux-x64</RuntimeIdentifier>-->
 
     <TargetFramework>net8.0</TargetFramework>
 
@@ -26,6 +28,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
 
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
+
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
 
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.8" />
 
@@ -65,5 +69,12 @@
     <Compile Remove="Migrations\20241009152025_RefreshTokenMig.cs" />
     <Compile Remove="Migrations\20241009152025_RefreshTokenMig.Designer.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="img\logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>
