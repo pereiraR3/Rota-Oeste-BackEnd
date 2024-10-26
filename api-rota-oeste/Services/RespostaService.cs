@@ -1,6 +1,7 @@
 using api_rota_oeste.Models.Alternativa;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
+using api_rota_oeste.Models.Resposta;
 using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Models.RespostaTemAlternativa;
 using api_rota_oeste.Repositories;
@@ -48,7 +49,7 @@ public class RespostaService : IRespostaService
     /**
     * Método da camada de serviço -> para criar uma entidade do tipo RespostaAlternativa
     */
-    public async Task<RespostaResponseDTO> AdicionarAsync(RespostaRequestDTO respostaRequest)
+    public async Task<RespostaResponseMinDTO> AdicionarAsync(RespostaRequestDTO respostaRequest)
     {
         if (respostaRequest == null)
             throw new ArgumentNullException(nameof(respostaRequest), "A requisição de resposta não pode ser nula.");
@@ -75,13 +76,13 @@ public class RespostaService : IRespostaService
         questaoModel.RespostaModels.Add(resposta);
 
         // Mapear e retornar o DTO de resposta
-        return _mapper.Map<RespostaResponseDTO>(resposta);
+        return _mapper.Map<RespostaResponseMinDTO>(resposta);
     }
 
     /**
     * Método da camada de serviço -> para buscar uma entidade RespostaAlternativa por meio do ID
     */
-    public async Task<RespostaResponseDTO> BuscarPorIdAsync(int id)
+    public async Task<RespostaResponseMinDTO> BuscarPorIdAsync(int id)
     {
         
         if(id <= 0)
@@ -92,7 +93,7 @@ public class RespostaService : IRespostaService
         if (respostaModel is null)
             throw new KeyNotFoundException("RespostaAlternativa não encontrada");
         
-        return _mapper.Map<RespostaResponseDTO>(respostaModel);
+        return _mapper.Map<RespostaResponseMinDTO>(respostaModel);
 
     }
 
