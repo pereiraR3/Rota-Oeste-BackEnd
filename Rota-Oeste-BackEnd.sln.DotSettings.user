@@ -1,32 +1,32 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=7F91285C_002DEAFE_002D4B65_002D8920_002D66005D1AC11D/@EntryIndexedValue">BDDA2D88-6219-4ACA-8B2F-B1202E07F60F</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=xUnit/@EntryIndexedValue">33ff99d8-b1ad-4ed5-a4fd-376b97c2c841</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9a8badd6_002Db8b7_002D4eff_002D9fd3_002D8fb2212eec0c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9a8badd6_002Db8b7_002D4eff_002D9fd3_002D8fb2212eec0c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a85a27c0_002D5289_002D4fe1_002D89e8_002Db576af808354/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ClienteControllerTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.ClienteControllerTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Services.CheckListServiceTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest.BuscarTodos_DeveRetornarOkComListaDeUsuarios_QuandoExistiremUsuarios&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Services.ClienteServiceTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::AlternativaServiceTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::AlternativaControllerTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.RespostaControllerTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveRetornarOkComRelatorio&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveRetornarNotFoundSeNaoEncontrado&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveRetornarStatus500SeOcorrerErro&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a85a27c0_002D5289_002D4fe1_002D89e8_002Db576af808354/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ClienteControllerTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.ClienteControllerTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Services.CheckListServiceTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest.BuscarTodos_DeveRetornarOkComListaDeUsuarios_QuandoExistiremUsuarios&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.UsuarioControllerTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Services.ClienteServiceTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Services.QuestaoServiceTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::AlternativaServiceTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::AlternativaControllerTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.RespostaControllerTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveRetornarOkComRelatorio&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveRetornarNotFoundSeNaoEncontrado&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveRetornarStatus500SeOcorrerErro&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c80c5751_002D3764_002D4386_002D90e4_002D2f8931bdc96e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c80c5751_002D3764_002D4386_002D90e4_002D2f8931bdc96e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::BDDA2D88-6219-4ACA-8B2F-B1202E07F60F::net8.0::api_rota_oeste.Tests.Controllers.CheckListControllerTest.GetRelatorioGeralPorCheckListId_DeveGerarPDFComRelatorio&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	
 	
