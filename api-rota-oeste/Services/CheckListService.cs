@@ -1,9 +1,11 @@
+using api_rota_oeste.Models.Alternativa;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.Cliente;
 using api_rota_oeste.Models.ClienteRespondeCheckList;
 using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.Usuario;
+using api_rota_oeste.Repositories;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services.Interfaces;
 using AutoMapper;
@@ -23,6 +25,8 @@ namespace api_rota_oeste.Services
         private readonly ICheckListRepository _repositoryCheckList;
         private readonly IUsuarioRepository _repositoryUsuario;
         private readonly IClienteRespondeCheckListRepository _repositoryClienteRespondeCheck;
+        private readonly IQuestaoRepository _questaoRepository;
+        private readonly IAlternativaRepository _alternativaRepository;
         private readonly IRepository _repository;
         private readonly IMapper _mapper;
         private readonly IClienteRepository _repositoryCliente;
@@ -37,8 +41,7 @@ namespace api_rota_oeste.Services
             IClienteRespondeCheckListRepository repositoryClienteRespondeCheck,
             IClienteRepository repositoryCliente,
             IInteracaoRepository repositoryInteracao,
-            ILogger<CheckListService> logger
-            )
+            ILogger<CheckListService> logger, IQuestaoRepository questaoRepository, IAlternativaRepository alternativaRepository)
         {
             _repositoryCheckList = repositoryCheckList;
             _repositoryUsuario = repositoryUsuario;
@@ -48,6 +51,8 @@ namespace api_rota_oeste.Services
             _repositoryCliente = repositoryCliente;
             _repositoryInteracao = repositoryInteracao;
             _logger = logger;
+            _questaoRepository = questaoRepository;
+            _alternativaRepository = alternativaRepository;
         }
 
         /// <summary>
@@ -56,7 +61,7 @@ namespace api_rota_oeste.Services
         /// <param name="checkListRequestDto">Objeto contendo os dados do checklist a ser criado.</param>
         /// <returns>Retorna o DTO de resposta contendo as informações do checklist criado.</returns>
         /// <exception cref="KeyNotFoundException">Lançada se o usuário associado ao checklist não for encontrado.</exception>
-        public async Task<CheckListResponseDTO?> AdicionarAsync(CheckListRequestDTO checkListRequestDto)
+        public async Task<CheckListResponseMinDTO?> AdicionarAsync(CheckListRequestDTO checkListRequestDto)
         {
             UsuarioModel? usuarioModel = await _repositoryUsuario.BuscaPorId(checkListRequestDto.UsuarioId);
 
@@ -70,15 +75,113 @@ namespace api_rota_oeste.Services
             if (check != null)
             {
                 usuarioModel.CheckLists.Add(check);
-
-                check = RefatoraoMinCheckListModel(check);
                 
-                return _mapper.Map<CheckListResponseDTO>(check);
+                return _mapper.Map<CheckListResponseMinDTO>(check);
             }
             
             return null;
         }
 
+        /// <summary>
+        /// Cria uma nova entidade do tipo CheckList com suas questões e alternativas, e as adiciona ao banco de dados.
+        /// </summary>
+        /// <param name="checkListCollectionDto">Objeto contendo os dados do checklist a ser criado, incluindo as questões e alternativas associadas.</param>
+        /// <returns>Retorna o DTO de resposta contendo as informações mínimas do checklist criado.</returns>
+        /// <exception cref="KeyNotFoundException">
+        /// Lançada nas seguintes situações:
+        /// <list type="bullet">
+        /// <item><description>Se o usuário associado ao checklist não for encontrado.</description></item>
+        /// <item><description>Se o checklist não for encontrado após a tentativa de criação.</description></item>
+        /// <item><description>Se uma questão não for encontrada após a tentativa de criação.</description></item>
+        /// </list>
+        /// </exception>
+        /// <remarks>
+        /// Este método cria um novo checklist associado a um usuário específico, incluindo questões e alternativas associadas.
+        /// Cada questão e alternativa é criada e adicionada ao checklist no banco de dados.
+        /// </remarks>
+        /// <example>
+        /// Aqui está um exemplo de como usar o método <see cref="AdicionarCollectionAsync"/>:
+        /// <code>
+        /// var checkListCollectionDto = new CheckListRequestCollection
+        /// {
+        ///     CheckList = new CheckListRequestDTO
+        ///     {
+        ///         UsuarioId = 1,
+        ///         Nome = "Nome do Checklist",
+        ///         Descricao = "Descrição do Checklist"
+        ///     },
+        ///     Questoes = new List<QuestaoRequestCollection>
+        ///     {
+        ///         new QuestaoRequestCollection
+        ///         {
+        ///             Questao = new QuestaoRequestDTO
+        ///             {
+        ///                 Titulo = "Pergunta 1",
+        ///                 Tipo = 1
+        ///             },
+        ///             Alternativas = new List<AlternativaRequestDTO>
+        ///             {
+        ///                 new AlternativaRequestDTO { Descricao = "Alternativa 1" },
+        ///                 new AlternativaRequestDTO { Descricao = "Alternativa 2" }
+        ///             }
+        ///         }
+        ///     }
+        /// };
+        ///
+        /// var response = await service.AdicionarCollectionAsync(checkListCollectionDto);
+        /// </code>
+        /// </example>
+        /// <seealso cref="CheckListRequestCollection"/>
+        /// <seealso cref="CheckListResponseMinDTO"/>
+        public async Task<CheckListResponseMinDTO?> AdicionarCollectionAsync(CheckListRequestCollection checkListCollectionDto)
+        {
+            
+            UsuarioModel? usuarioModel = await _repositoryUsuario.BuscaPorId(checkListCollectionDto.CheckList.UsuarioId);
+
+            if (usuarioModel == null)
+                throw new KeyNotFoundException("Usuário não encontrado");
+            
+            CheckListModel checkListModel = new CheckListModel(checkListCollectionDto.CheckList, usuarioModel);
+            
+            var checklistNovo = await _repositoryCheckList.Adicionar(checkListModel);
+
+            foreach (var questao in checkListCollectionDto.Questoes)
+            {
+                if (checklistNovo == null)
+                    throw new KeyNotFoundException("CheckList não encontrado");
+
+                {
+                    
+                    var questaoModel = new QuestaoModel(questao.Questao, checklistNovo);
+
+                    var questaoNova = await _questaoRepository.Adicionar(questaoModel);
+
+                    foreach (var alternativa in questao.Alternativas)
+                    {
+
+                        if (questaoNova == null)
+                            throw new KeyNotFoundException("Questão não encontrado");
+        
+                        // Obter o próximo valor do Código para a questão
+                        int proximoCodigo = await _alternativaRepository.ObterProximoCodigoPorQuestaoId(questaoNova.Id);
+        
+                        // Criar a nova alternativa com o próximo código
+                        var alternativaModel = new AlternativaModel(alternativa, questaoModel, proximoCodigo);
+
+                        // Adicionar a alternativa ao repositório
+                        var alternativaNova = await _alternativaRepository.Adicionar(alternativaModel);
+
+                        // Adicionar a alternativa à lista de alternativas da questão
+                        questaoModel.AlternativaModels.Add(alternativaNova);
+                    }
+                    
+                }
+            }
+            
+            return _mapper.Map<CheckListResponseMinDTO>(checkListModel);
+            
+        }
+        
         /// <summary>
         /// Cria uma nova relação entre Cliente e CheckList e adiciona uma entidade de interação automaticamente.
         /// </summary>
@@ -144,7 +247,7 @@ namespace api_rota_oeste.Services
         /// <returns>Retorna o DTO de resposta contendo as informações do checklist encontrado.</returns>
         /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
         /// <exception cref="KeyNotFoundException">Lançada se o checklist com o ID especificado não for encontrado.</exception>
-        public async Task<CheckListResponseDTO?> BuscarPorIdAsync(int id)
+        public async Task<CheckListResponseMinDTO?> BuscarPorIdAsync(int id)
         {
             
             if(id <= 0)
@@ -154,24 +257,21 @@ namespace api_rota_oeste.Services
 
             if (check == null)
                 throw new KeyNotFoundException("Entidade checklist não encontrada");
-
-            // Restrigindo a navegabilidade
-            check = RefatoraoMinCheckListModel(check);
             
-            return _mapper.Map<CheckListResponseDTO>(check);
+            return _mapper.Map<CheckListResponseMinDTO>(check);
         }
         
         /// <summary>
         /// Busca todas as entidades do tipo CheckList armazenadas no banco de dados.
         /// </summary>
         /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todos os checklists.</returns>
-        public async Task<List<CheckListResponseDTO>> BuscarTodosAsync()
+        public async Task<List<CheckListResponseMinDTO>> BuscarTodosAsync()
         {
 
             var checks = await _repositoryCheckList.BuscarTodos();
 
-            List<CheckListResponseDTO> checklists = checks
-                .Select(i => _mapper.Map<CheckListResponseDTO>(i))
+            List<CheckListResponseMinDTO> checklists = checks
+                .Select(i => _mapper.Map<CheckListResponseMinDTO>(i))
                 .ToList();
 
             return checklists;
