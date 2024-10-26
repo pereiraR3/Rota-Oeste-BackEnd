@@ -1,3 +1,4 @@
+using api_rota_oeste.Models.Resposta;
 using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Models.RespostaTemAlternativa;
 using api_rota_oeste.Services.Interfaces;
@@ -37,11 +38,11 @@ public class RespostaController : ControllerBase
     /// <response code="201">Resposta alternativa criada com sucesso.</response>
     /// <response code="400">Dados de entrada inválidos.</response>
     [HttpPost("adicionar")]
-    [SwaggerResponse(201, "Resposta alternativa criada com sucesso.", typeof(RespostaResponseDTO))]
+    [SwaggerResponse(201, "Resposta alternativa criada com sucesso.", typeof(RespostaResponseMinDTO))]
     [SwaggerResponse(400, "Dados de entrada inválidos.")]
     public async Task<CreatedAtActionResult> Adicionar([FromBody] RespostaRequestDTO resposta)
     {
-        RespostaResponseDTO respostaResponse = await _respostaService.AdicionarAsync(resposta);
+        RespostaResponseMinDTO respostaResponse = await _respostaService.AdicionarAsync(resposta);
 
         return CreatedAtAction(
             nameof(BuscarPorId),
@@ -106,9 +107,9 @@ public class RespostaController : ControllerBase
     /// <response code="200">Resposta alternativa encontrada.</response>
     /// <response code="404">Resposta alternativa não encontrada.</response>
     [HttpGet("buscarPorId/{id}")]
-    [SwaggerResponse(200, "Resposta alternativa encontrada.", typeof(RespostaResponseDTO))]
+    [SwaggerResponse(200, "Resposta alternativa encontrada.", typeof(RespostaResponseMinDTO))]
     [SwaggerResponse(404, "Resposta alternativa não encontrada.")]
-    public async Task<ActionResult<RespostaResponseDTO>> BuscarPorId(int id)
+    public async Task<ActionResult<RespostaResponseMinDTO>> BuscarPorId(int id)
     {
         try
         {
