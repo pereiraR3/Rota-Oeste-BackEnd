@@ -151,11 +151,13 @@ namespace api_rota_oeste.Services
                     throw new KeyNotFoundException("CheckList não encontrado");
 
                 {
-                    
+
                     var questaoModel = new QuestaoModel(questao.Questao, checklistNovo);
-
+                    
                     var questaoNova = await _questaoRepository.Adicionar(questaoModel);
-
+                    
+                    checklistNovo.Questoes?.Add(questaoNova);
+                    
                     foreach (var alternativa in questao.Alternativas)
                     {
 
@@ -170,7 +172,7 @@ namespace api_rota_oeste.Services
 
                         // Adicionar a alternativa ao repositório
                         var alternativaNova = await _alternativaRepository.Adicionar(alternativaModel);
-
+                        
                         // Adicionar a alternativa à lista de alternativas da questão
                         questaoModel.AlternativaModels.Add(alternativaNova);
                     }
@@ -258,7 +260,11 @@ namespace api_rota_oeste.Services
             if (check == null)
                 throw new KeyNotFoundException("Entidade checklist não encontrada");
             
-            return _mapper.Map<CheckListResponseMinDTO>(check);
+            var checkResponseMin = _mapper.Map<CheckListResponseMinDTO>(check);
+            
+            checkResponseMin.QuantityQuestoes = check.Questoes?.Count;
+
+            return checkResponseMin;
         }
         
         /// <summary>

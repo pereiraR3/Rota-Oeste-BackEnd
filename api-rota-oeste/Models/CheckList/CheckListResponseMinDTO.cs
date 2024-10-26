@@ -10,8 +10,10 @@ public record CheckListResponseMinDTO
     
     public DateTime? DataCriacao { get; set; }
     
+    public int? QuantityQuestoes { get; set; }
+    
     // Construtor com parâmetros
-    public CheckListResponseMinDTO(int id, int usuarioId, string nome, DateTime? dataCriacao )
+    public CheckListResponseMinDTO(int id, int usuarioId, string nome, DateTime? dataCriacao)
     {
         Id = id;
         UsuarioId = usuarioId;
