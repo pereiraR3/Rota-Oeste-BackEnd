@@ -7,6 +7,7 @@ using api_rota_oeste.Models.Interacao;
 using api_rota_oeste.Models.Questao;
 using api_rota_oeste.Models.CheckList;
 using api_rota_oeste.Models.ClienteRespondeCheckList;
+using api_rota_oeste.Models.Resposta;
 using api_rota_oeste.Models.RespostaAlternativa;
 using api_rota_oeste.Models.RespostaTemAlternativa;
 using api_rota_oeste.Models.Usuario;
@@ -17,6 +18,9 @@ public class AutoMapperProfile : Profile
     {
         
         // Mapeando a Entidade Alternativa
+        
+            // -> mapeamento sem entidades de navegação
+            CreateMap<AlternativaModel, AlternativaResponseMinDTO>();
         
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<AlternativaModel, AlternativaResponseDTO>()
@@ -44,6 +48,9 @@ public class AutoMapperProfile : Profile
             
         // Mapeando a Entidade Cliente 
 
+            // -> mapeamento sem entidades de navegação
+            CreateMap<ClienteModel, ClienteResponseMinDTO>();
+        
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<ClienteModel, ClienteResponseDTO>()
                 .ForMember(dest => dest.Usuario, opt => opt.Ignore())
@@ -64,7 +71,10 @@ public class AutoMapperProfile : Profile
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
         //  Mapeando a Entidade CheckList
-            
+
+            // -> mapeamento sem entidades de navegação
+            CreateMap<CheckListModel, CheckListResponseMinDTO>();
+        
             CreateMap<CheckListModel, CheckListResponseDTO>()
                 .ForMember(dest => dest.Questoes, opt => opt.MapFrom(src => src.Questoes))
                 .ForMember(dest => dest.Usuario, opt => opt.Ignore())
@@ -76,7 +86,7 @@ public class AutoMapperProfile : Profile
             
         // Mapeando a Entidade Interacao
 
-        CreateMap<InteracaoRequestDTO, InteracaoModel>();
+            CreateMap<InteracaoRequestDTO, InteracaoModel>();
         
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<InteracaoModel, InteracaoResponseDTO>()
@@ -100,6 +110,9 @@ public class AutoMapperProfile : Profile
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
             
         // Mapeando a Entidade RespostaAlternativa
+        
+            // -> mapeamento sem entidades de navegação
+            CreateMap<RespostaModel, RespostaResponseMinDTO>();
         
             // -> mapeamento incluindo as entidades de navegação
             CreateMap<RespostaModel, RespostaResponseDTO>()
