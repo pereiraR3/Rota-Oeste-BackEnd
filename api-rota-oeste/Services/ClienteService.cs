@@ -41,7 +41,7 @@ public class ClienteService : IClienteService
     /// <param name="clienteRequest">Objeto contendo os dados do cliente a ser criado.</param>
     /// <returns>Retorna o DTO de resposta contendo as informações do cliente criado.</returns>
     /// <exception cref="KeyNotFoundException">Lançada se o usuário associado ao cliente não for encontrado.</exception>
-    public async Task<ClienteResponseDTO> AdicionarAsync(ClienteRequestDTO clienteRequest)
+    public async Task<ClienteResponseMinDTO> AdicionarAsync(ClienteRequestDTO clienteRequest)
     {
 
         UsuarioModel? usuarioModel = await _usuarioRepository.BuscaPorId(clienteRequest.UsuarioId);
@@ -56,10 +56,7 @@ public class ClienteService : IClienteService
         // Adicionando o Cliente à lista de clientes mapeados na entidade Usuario
         usuarioModel.Clientes.Add(cliente);
         
-        // Refatorando a entidade para não puxar todas as suas associações com outras entidades
-        clienteModel = RefatoraoMinClienteModel(clienteModel);
-        
-        return _mapper.Map<ClienteResponseDTO>(clienteModel);
+        return _mapper.Map<ClienteResponseMinDTO>(clienteModel);
     }
     
     /// <summary>
@@ -101,7 +98,7 @@ public class ClienteService : IClienteService
     /// <returns>Retorna o DTO de resposta contendo as informações do cliente encontrado.</returns>
     /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
     /// <exception cref="KeyNotFoundException">Lançada se o cliente com o ID especificado não for encontrado.</exception>
-    public async Task<ClienteResponseDTO?> BuscarPorIdAsync(int id)
+    public async Task<ClienteResponseMinDTO?> BuscarPorIdAsync(int id)
     {
         
         if(id <= 0)
@@ -114,20 +111,20 @@ public class ClienteService : IClienteService
         
         cliente = RefatoraoMediumClienteModel(cliente);
         
-        return _mapper.Map<ClienteResponseDTO>(cliente);
+        return _mapper.Map<ClienteResponseMinDTO>(cliente);
     }
 
     /// <summary>
     /// Busca todas as entidades do tipo Cliente armazenadas no banco de dados.
     /// </summary>
     /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todos os clientes.</returns>
-    public async Task<List<ClienteResponseDTO>> BuscarTodosAsync()
+    public async Task<List<ClienteResponseMinDTO>> BuscarTodosAsync()
     {
 
-        List<ClienteModel>? clienteModels = await _clienteRepository.BuscarTodos();
+        var clienteModels = await _clienteRepository.BuscarTodos();
         
-        List<ClienteResponseDTO> clientesResponse = clienteModels
-            .Select(i => _mapper.Map<ClienteResponseDTO>(RefatoraoMinClienteModel(i)))
+        List<ClienteResponseMinDTO> clientesResponse = clienteModels
+            .Select(i => _mapper.Map<ClienteResponseMinDTO>(i))
             .ToList();
         
         return clientesResponse;
