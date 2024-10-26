@@ -61,7 +61,11 @@ public class AlternativaModel
         
         )
     {
-        this.QuestaoId = alternativaRequestDto.QuestaoId;
+        if(alternativaRequestDto.QuestaoId != 0)
+            this.QuestaoId = alternativaRequestDto.QuestaoId;
+        else
+            this.QuestaoId = questaoModel.Id;
+        
         this.Descricao = alternativaRequestDto.Descricao;
         this.Codigo = codigo;
         this.Questao = questaoModel;
