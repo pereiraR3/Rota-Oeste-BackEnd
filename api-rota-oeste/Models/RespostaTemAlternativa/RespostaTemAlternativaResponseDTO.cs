@@ -1,4 +1,5 @@
 using api_rota_oeste.Models.Alternativa;
+using api_rota_oeste.Models.Resposta;
 using api_rota_oeste.Models.RespostaAlternativa;
 
 namespace api_rota_oeste.Models.RespostaTemAlternativa;
@@ -15,20 +16,20 @@ namespace api_rota_oeste.Models.RespostaTemAlternativa;
 /// var respostaTemAlternativaResponse = new RespostaTemAlternativaResponseDTO(1, 2, respostaResponse, alternativaResponse);
 /// </code>
 /// </example>
-/// <seealso cref="RespostaResponseDTO"/>
-/// <seealso cref="AlternativaResponseDTO"/>
+/// <seealso cref="RespostaResponseMinDTO"/>
+/// <seealso cref="AlternativaResponseMinDTO"/>
 public class RespostaTemAlternativaResponseDTO
 {
     public int RespostaId { get; set; }
     public int AlternativaId { get; set; }
-    public RespostaResponseDTO? Resposta { get; set; }
-    public AlternativaResponseDTO? Alternativa { get; set; }
+    public RespostaResponseMinDTO? Resposta { get; set; }
+    public AlternativaResponseMinDTO? Alternativa { get; set; }
 
     // Construtor sem argumentos
     public RespostaTemAlternativaResponseDTO() { }
 
     // Construtor completo (opcional)
-    public RespostaTemAlternativaResponseDTO(int respostaId, int alternativaId, RespostaResponseDTO? resposta, AlternativaResponseDTO? alternativa)
+    public RespostaTemAlternativaResponseDTO(int respostaId, int alternativaId, RespostaResponseMinDTO? resposta, AlternativaResponseMinDTO? alternativa)
     {
         RespostaId = respostaId;
         AlternativaId = alternativaId;

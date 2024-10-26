@@ -15,16 +15,16 @@ namespace api_rota_oeste.Models.ClienteRespondeCheckList;
 /// var clienteRespondeCheckListResponse = new ClienteRespondeCheckListResponseDTO(1, 2, clienteResponse, checkListResponse);
 /// </code>
 /// </example>
-/// <seealso cref="ClienteResponseDTO"/>
-/// <seealso cref="CheckListResponseDTO"/>
+/// <seealso cref="ClienteResponseMinDTO"/>
+/// <seealso cref="CheckListResponseMinDTO"/>
 public record ClienteRespondeCheckListResponseDTO(
     
     int ClienteId,
     
     int CheckListId,
     
-    ClienteResponseDTO? Cliente,
+    ClienteResponseMinDTO? Cliente,
     
-    CheckListResponseDTO? CheckList
+    CheckListResponseMinDTO? CheckList
     
 );

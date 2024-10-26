@@ -27,13 +27,13 @@ public class AlternativaController : ControllerBase
     /// <response code="400">Requisição inválida.</response>
     [HttpPost("adicionar")]
     [SwaggerOperation(Summary = "Adiciona uma nova alternativa", Description = "Adiciona uma alternativa associada a uma questão.")]
-    [SwaggerResponse(201, "Alternativa criada com sucesso", typeof(AlternativaResponseDTO))]
+    [SwaggerResponse(201, "Alternativa criada com sucesso", typeof(AlternativaResponseMinDTO))]
     [SwaggerResponse(400, "Requisição inválida")]
-    public async Task<IActionResult> Adicionar([FromBody] AlternativaRequestDTO alternativaRequest)
+    public async Task<ActionResult<AlternativaResponseMinDTO>> Adicionar([FromBody] AlternativaRequestDTO alternativaRequest)
     {
         try
         {
-            var alternativa = await _alternativaService.AdicionarAsync(alternativaRequest);
+            AlternativaResponseMinDTO alternativa = await _alternativaService.AdicionarAsync(alternativaRequest);
             return CreatedAtAction(nameof(BuscarPorId), new { id = alternativa.Id }, alternativa);
         }
         catch (KeyNotFoundException ex)
@@ -55,9 +55,9 @@ public class AlternativaController : ControllerBase
     /// <response code="404">Alternativa não encontrada.</response>
     [HttpGet("buscarPorId/{id}")]
     [SwaggerOperation(Summary = "Busca uma alternativa pelo ID", Description = "Retorna uma alternativa com base no ID informado.")]
-    [SwaggerResponse(200, "Alternativa encontrada com sucesso", typeof(AlternativaResponseDTO))]
+    [SwaggerResponse(200, "Alternativa encontrada com sucesso", typeof(AlternativaResponseMinDTO))]
     [SwaggerResponse(404, "Alternativa não encontrada")]
-    public async Task<IActionResult> BuscarPorId(int id)
+    public async Task<ActionResult<AlternativaResponseMinDTO>> BuscarPorId(int id)
     {
         try
         {
@@ -77,8 +77,8 @@ public class AlternativaController : ControllerBase
     /// <response code="200">Lista de alternativas encontrada com sucesso.</response>
     [HttpGet("buscarTodos")]
     [SwaggerOperation(Summary = "Busca todas as alternativas", Description = "Retorna uma lista com todas as alternativas cadastradas.")]
-    [SwaggerResponse(200, "Lista de alternativas encontrada com sucesso", typeof(List<AlternativaResponseDTO>))]
-    public async Task<IActionResult> BuscarTodos()
+    [SwaggerResponse(200, "Lista de alternativas encontrada com sucesso", typeof(List<AlternativaResponseMinDTO>))]
+    public async Task<ActionResult<List<AlternativaResponseMinDTO>>> BuscarTodos()
     {
         var alternativas = await _alternativaService.BuscarTodosAsync();
         

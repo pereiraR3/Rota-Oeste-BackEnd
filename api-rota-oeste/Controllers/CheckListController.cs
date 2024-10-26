@@ -52,9 +52,9 @@ namespace api_rota_oeste.Controllers
             Description = "Adiciona um checklist ao sistema e retorna o checklist criado."
         )]
         [SwaggerResponse(201, "Checklist criado com sucesso")]
-        public async Task<ActionResult<CheckListResponseDTO>> Adicionar(CheckListRequestDTO check)
+        public async Task<ActionResult<CheckListResponseMinDTO>> Adicionar(CheckListRequestDTO check)
         {
-            CheckListResponseDTO? checkListResponse = await _checkListService.AdicionarAsync(check);
+            CheckListResponseMinDTO? checkListResponse = await _checkListService.AdicionarAsync(check);
 
             return CreatedAtAction(
                 nameof(BuscarPorId), // Nome da ação que busca o cliente pelo ID
@@ -104,7 +104,52 @@ namespace api_rota_oeste.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro inesperado. Tente novamente mais tarde.");
             }
         }
+        
+        /// <summary>
+        /// Adiciona um novo checklist ao sistema com suas questões e alternativas.
+        /// </summary>
+        /// <param name="checkListCollectionDto">Objeto contendo os dados do checklist a ser criado, incluindo questões e alternativas.</param>
+        /// <returns>Retorna o checklist criado com suas informações mínimas.</returns>
+        /// <response code="201">Checklist criado com sucesso.</response>
+        /// <response code="400">Dados de entrada inválidos.</response>
+        /// <response code="404">Usuário ou entidade relacionada não encontrada.</response>
+        /// <response code="500">Erro interno do servidor ao processar a solicitação.</response>
+        [HttpPost("adicionar-collection")]
+        [SwaggerOperation(
+            Summary = "Adiciona um checklist com questões e alternativas",
+            Description = "Adiciona um checklist ao sistema com suas questões e alternativas e retorna o checklist criado."
+        )]
+        [SwaggerResponse(201, "Checklist criado com sucesso", typeof(CheckListResponseMinDTO))]
+        [SwaggerResponse(400, "Dados de entrada inválidos")]
+        [SwaggerResponse(404, "Usuário ou entidade relacionada não encontrada")]
+        [SwaggerResponse(500, "Erro interno do servidor ao processar a solicitação")]
+        public async Task<ActionResult<CheckListResponseMinDTO>> AdicionarCollection([FromBody] CheckListRequestCollection checkListCollectionDto)
+        {
+            try
+            {
+                CheckListResponseMinDTO? checkListResponse = await _checkListService.AdicionarCollectionAsync(checkListCollectionDto);
 
+                if (checkListResponse == null)
+                {
+                    return BadRequest("Erro ao criar o checklist. Verifique os dados fornecidos.");
+                }
+
+                return CreatedAtAction(
+                    nameof(BuscarPorId), // Nome da ação que busca o checklist pelo ID
+                    new { id = checkListResponse.Id }, // Parâmetro para a rota
+                    checkListResponse // O objeto criado
+                );
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ocorreu um erro ao processar a solicitação: {ex.Message}");
+            }
+        }
+        
         /// <summary>
         /// Busca um checklist pelo ID.
         /// </summary>
@@ -119,9 +164,9 @@ namespace api_rota_oeste.Controllers
         )]
         [SwaggerResponse(200, "Checklist encontrado com sucesso")]
         [SwaggerResponse(404, "Checklist não encontrado")]
-        public async Task<ActionResult<CheckListResponseDTO>> BuscarPorId(int id)
+        public async Task<ActionResult<CheckListResponseMinDTO>> BuscarPorId(int id)
         {
-            CheckListResponseDTO? check = await _checkListService.BuscarPorIdAsync(id);
+            CheckListResponseMinDTO? check = await _checkListService.BuscarPorIdAsync(id);
 
             if (check == null)
             {
@@ -144,9 +189,9 @@ namespace api_rota_oeste.Controllers
         )]
         [SwaggerResponse(200, "Checklists encontrados com sucesso")]
         [SwaggerResponse(204, "Nenhum checklist encontrado")]
-        public async Task<ActionResult<List<CheckListResponseDTO>>> BuscarTodos()
+        public async Task<ActionResult<List<CheckListResponseMinDTO>>> BuscarTodos()
         {
-            List<CheckListResponseDTO> checkResponse = await _checkListService.BuscarTodosAsync();
+            List<CheckListResponseMinDTO> checkResponse = await _checkListService.BuscarTodosAsync();
 
             return Ok(checkResponse);
         }

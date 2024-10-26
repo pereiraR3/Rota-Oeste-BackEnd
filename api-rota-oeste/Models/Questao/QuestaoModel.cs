@@ -60,7 +60,11 @@ public class QuestaoModel{
     
     public QuestaoModel(QuestaoRequestDTO requestDto, CheckListModel checkList)
     {
-        this.CheckListId = requestDto.CheckListId;
+        
+        if(requestDto.CheckListId != 0)
+            this.CheckListId = requestDto.CheckListId;
+        else
+            this.CheckListId = checkList.Id;
         
         this.Titulo = requestDto.Titulo;
         

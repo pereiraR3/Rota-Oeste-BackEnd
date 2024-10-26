@@ -43,7 +43,7 @@ public class AlternativaService : IAlternativaService
     /// <param name="alternativaRequest">Objeto contendo os dados da alternativa a ser criada.</param>
     /// <returns>Retorna o DTO de resposta contendo as informações da alternativa criada.</returns>
     /// <exception cref="KeyNotFoundException">Lançada se a questão associada à alternativa não for encontrada.</exception>
-    public async Task<AlternativaResponseDTO> AdicionarAsync(AlternativaRequestDTO alternativaRequest)
+    public async Task<AlternativaResponseMinDTO> AdicionarAsync(AlternativaRequestDTO alternativaRequest)
     {
 
         QuestaoModel? questaoModel = await _repositoryQuestao.BuscarPorId(alternativaRequest.QuestaoId);
@@ -62,12 +62,9 @@ public class AlternativaService : IAlternativaService
 
         // Adicionar a alternativa à lista de alternativas da questão
         questaoModel.AlternativaModels.Add(alternativa);
-
-        // Refatorando AlternativaModel
-        alternativa = RefatoracaoMinAlternativaModel(alternativa);
         
         // Mapear para o DTO de resposta e retornar
-        return _mapper.Map<AlternativaResponseDTO>(alternativa);
+        return _mapper.Map<AlternativaResponseMinDTO>(alternativa);
         
     }
     
@@ -78,7 +75,7 @@ public class AlternativaService : IAlternativaService
     /// <returns>Retorna o DTO de resposta contendo as informações da alternativa encontrada.</returns>
     /// <exception cref="ArgumentException">Lançada se o ID for menor ou igual a zero.</exception>
     /// <exception cref="KeyNotFoundException">Lançada se a alternativa com o ID especificado não for encontrada.</exception>
-    public async Task<AlternativaResponseDTO> BuscarPorIdAsync(int id)
+    public async Task<AlternativaResponseMinDTO> BuscarPorIdAsync(int id)
     {
         if(id <= 0)
             throw new ArgumentException("O ID deve ser maior que zero.", nameof(id));
@@ -93,7 +90,7 @@ public class AlternativaService : IAlternativaService
         // Refatorando AlternativaModel
         alternativa = RefatoracaoMinAlternativaModel(alternativa);
         
-        return _mapper.Map<AlternativaResponseDTO>(alternativa);
+        return _mapper.Map<AlternativaResponseMinDTO>(alternativa);
         
     }
     
@@ -101,13 +98,13 @@ public class AlternativaService : IAlternativaService
     /// Busca todas as entidades do tipo Alternativa armazenadas no banco de dados.
     /// </summary>
     /// <returns>Retorna uma lista de DTOs de resposta contendo as informações de todas as alternativas.</returns>
-    public async Task<List<AlternativaResponseDTO>> BuscarTodosAsync()
+    public async Task<List<AlternativaResponseMinDTO>> BuscarTodosAsync()
     {
         List<AlternativaModel> alternativas = await _repositoryAlternativa.BuscarTodos();
         
         return alternativas
             .Select(RefatoracaoMinAlternativaModel)
-            .Select(refatorado => _mapper.Map<AlternativaResponseDTO>(refatorado))
+            .Select(refatorado => _mapper.Map<AlternativaResponseMinDTO>(refatorado))
             .ToList();
 
     }

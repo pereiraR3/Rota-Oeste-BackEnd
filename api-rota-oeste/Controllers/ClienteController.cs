@@ -37,9 +37,9 @@ public class ClienteController : ControllerBase
     [SwaggerOperation(Summary = "Adiciona um novo cliente",
         Description = "Adiciona um cliente ao sistema e retorna o cliente criado.")]
     [SwaggerResponse(201, "Cliente criado com sucesso")]
-    public async Task<ActionResult<ClienteResponseDTO>> Adicionar(ClienteRequestDTO usuario)
+    public async Task<ActionResult<ClienteResponseMinDTO>> Adicionar(ClienteRequestDTO usuario)
     {
-        ClienteResponseDTO clienteResponseDto = await _clienteService.AdicionarAsync(usuario);
+        ClienteResponseMinDTO clienteResponseDto = await _clienteService.AdicionarAsync(usuario);
 
         return CreatedAtAction(
             nameof(BuscarPorId), // Nome da ação que busca o cliente pelo ID
@@ -79,9 +79,9 @@ public class ClienteController : ControllerBase
         Description = "Busca o cliente associado ao ID fornecido.")]
     [SwaggerResponse(200, "Cliente encontrado com sucesso")]
     [SwaggerResponse(404, "Cliente não encontrado")]
-    public async Task<ActionResult<ClienteResponseDTO>> BuscarPorId(int id)
+    public async Task<ActionResult<ClienteResponseMinDTO>> BuscarPorId(int id)
     {
-        ClienteResponseDTO? cliente = await _clienteService.BuscarPorIdAsync(id);
+        ClienteResponseMinDTO? cliente = await _clienteService.BuscarPorIdAsync(id);
 
         if (cliente == null)
             return NotFound();
@@ -100,9 +100,9 @@ public class ClienteController : ControllerBase
         Description = "Retorna uma lista de todos os clientes do sistema.")]
     [SwaggerResponse(200, "Clientes encontrados com sucesso")]
     [SwaggerResponse(204, "Nenhum cliente encontrado")]
-    public async Task<ActionResult<List<ClienteResponseDTO>>> BuscarTodos()
+    public async Task<ActionResult<List<ClienteResponseMinDTO>>> BuscarTodos()
     {
-        List<ClienteResponseDTO> clienteResponseDtos = await _clienteService.BuscarTodosAsync();
+        List<ClienteResponseMinDTO> clienteResponseDtos = await _clienteService.BuscarTodosAsync();
         
         return Ok(clienteResponseDtos);
     }
