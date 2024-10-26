@@ -108,9 +108,7 @@ public class ClienteService : IClienteService
 
         if (cliente == null)
             throw new KeyNotFoundException("Entidade cliente não encontrada");
-        
-        cliente = RefatoraoMediumClienteModel(cliente);
-        
+                
         return _mapper.Map<ClienteResponseMinDTO>(cliente);
     }
 
