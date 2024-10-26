@@ -8,11 +8,11 @@ namespace api_rota_oeste.Services.Interfaces;
  */
 public interface IAlternativaService
 {
-    public Task<AlternativaResponseDTO> AdicionarAsync(AlternativaRequestDTO questao);
+    public Task<AlternativaResponseMinDTO> AdicionarAsync(AlternativaRequestDTO questao);
     
-    public Task<AlternativaResponseDTO> BuscarPorIdAsync(int id);
+    public Task<AlternativaResponseMinDTO> BuscarPorIdAsync(int id);
     
-    public Task<List<AlternativaResponseDTO>> BuscarTodosAsync();
+    public Task<List<AlternativaResponseMinDTO>> BuscarTodosAsync();
 
     public Task<bool> AtualizarAsync(AlternativaPatchDTO alternativaPatchDto);
 
