@@ -12,6 +12,8 @@ public interface IClienteRepository
   Task<ClienteModel> Adicionar(ClienteModel clienteModel);
   
   Task<ClienteModel?> BuscarPorId(int id);
+
+  Task<ClienteModel?> BuscarPorTelefone(string telefone);
   
   Task<List<ClienteModel>> BuscarTodos();
   

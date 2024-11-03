@@ -66,9 +66,18 @@ public class MessageOrchestrationService
 
                 var interacaoExist = await _interacaoRepository.BuscarPorIdCliente(cliente.Id);
                 var qtdaQuestoesRespondidas = interacaoExist?.RespostaAlternativaModels?.Count ?? 0;
-                
-                var mensagem = GerarMensagem(checkList, qtdaQuestoesRespondidas, 0);
+
+                var mensagem = "";
                 var telefone = $"+55{dado.Telefone.Trim()}";
+                
+                if (interacaoExist.CheckList.Questoes.Count == qtdaQuestoesRespondidas)
+                {
+                    interacaoExist.Status = true;
+                    mensagem = "Você terminou o checklist, agradeço a sua participação";
+                    await _whatsAppService.EnviarMensagemAsync(telefone, mensagem);
+                }
+                
+                mensagem = GerarMensagem(checkList, qtdaQuestoesRespondidas, 0);
                 
                 await _whatsAppService.EnviarMensagemAsync(telefone, mensagem);
 
@@ -83,7 +92,9 @@ public class MessageOrchestrationService
 
     private string GerarMensagem(CheckListModel checkList, int qtda, int flag)
     {
+        
         var mensagem = "";
+            
         var horarioAtual = DateTime.Now;
 
         if (horarioAtual.Hour < 12 && flag == 0)
@@ -91,7 +102,7 @@ public class MessageOrchestrationService
                 "Bom dia! ☀️ Aqui é a Nova Rota Oeste. Estamos enviando um checklist para ajudá-lo(a) a " +
                 "verificar alguns detalhes importantes. Isso nos ajudará a garantir que tudo está em " +
                 "ordem e que você receba o melhor serviço. Vamos começar? 😊\n\n";
-        else if(horarioAtual.Hour > 12 && flag == 0)
+        else if(horarioAtual.Hour > 12 && horarioAtual.Hour < 18 && flag == 0)
             mensagem +=
                 "Boa tarde! 🌞 Aqui é a Nova Rota Oeste." +
                 " Esperamos que seu dia esteja indo bem! Estamos enviando um checklist rápido para que possamos coletar " +
@@ -133,12 +144,20 @@ public class MessageOrchestrationService
         
         var proxQuestaoLocalizada = interacao.CheckList.Questoes.ElementAtOrDefault(qtdaRespostas);
         
-        return AvaliarTipoQuestao(qtdaRespostas, proxQuestaoLocalizada, interacao, requestBody);
+        return AvaliarTipoQuestao(qtdaRespostas, proxQuestaoLocalizada, interacao, requestBody, requestFrom);
 
     }
     
 
-    public bool AvaliarTipoQuestao(int qtda, QuestaoModel proxQuestaoLocalizada, InteracaoModel interacao, string requestBody)
+    public bool AvaliarTipoQuestao(
+        
+        int qtda,
+        QuestaoModel proxQuestaoLocalizada,
+        InteracaoModel interacao,
+        string requestBody,
+        string requestFrom
+        
+        )
     {
 
         var resultadoRegex = ValidarResposta(requestBody);
@@ -212,7 +231,14 @@ public class MessageOrchestrationService
 
         }
 
-        if (interacao.CheckList != null) GerarMensagem(interacao.CheckList, qtda + 1, 1);
+        if(interacao.CheckList.Questoes.Count < qtda + 1)
+
+
+            if (interacao.CheckList != null)
+            {
+                var mensagem = GerarMensagem(interacao.CheckList, qtda + 1, 1);
+                _whatsAppService.EnviarMensagemAsync(requestFrom, mensagem);
+            }
 
         return true;
     }

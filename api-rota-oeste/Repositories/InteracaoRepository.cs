@@ -53,6 +53,19 @@ public class InteracaoRepository: IInteracaoRepository
     {
         return await _context.Interacoes.FindAsync(id);
     }
+    
+    public async Task<InteracaoModel?> BuscarPorIdCliente(int clienteExistenteId)
+    {
+        return await _context.Interacoes
+            .Where(c => c.ClienteId == clienteExistenteId)
+            .OrderByDescending(c => c.Data)
+            .Include(c => c.RespostaAlternativaModels)
+            .Include(c => c.CheckList)
+            .ThenInclude(cl => cl.Questoes)
+            .ThenInclude(cl => cl.AlternativaModels)
+            .FirstOrDefaultAsync();
+
+    }
 
     /// <summary>
     /// Busca todas as instâncias da entidade Interacao armazenadas no banco de dados.
@@ -99,5 +112,4 @@ public class InteracaoRepository: IInteracaoRepository
         return true;
         
     }
-    
 }
