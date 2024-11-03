@@ -32,6 +32,7 @@ namespace api_rota_oeste.Services
         private readonly IClienteRepository _repositoryCliente;
         private readonly IInteracaoRepository _repositoryInteracao;
         private readonly ILogger<CheckListService> _logger;
+        private readonly IWhatsAppService _whatsAppService;
 
         public CheckListService(
             
@@ -41,7 +42,12 @@ namespace api_rota_oeste.Services
             IClienteRespondeCheckListRepository repositoryClienteRespondeCheck,
             IClienteRepository repositoryCliente,
             IInteracaoRepository repositoryInteracao,
-            ILogger<CheckListService> logger, IQuestaoRepository questaoRepository, IAlternativaRepository alternativaRepository)
+            ILogger<CheckListService> logger,
+            IQuestaoRepository questaoRepository,
+            IAlternativaRepository alternativaRepository,
+            IWhatsAppService whatsAppService
+            
+            )
         {
             _repositoryCheckList = repositoryCheckList;
             _repositoryUsuario = repositoryUsuario;
@@ -53,6 +59,7 @@ namespace api_rota_oeste.Services
             _logger = logger;
             _questaoRepository = questaoRepository;
             _alternativaRepository = alternativaRepository;
+            _whatsAppService = whatsAppService;
         }
 
         /// <summary>
@@ -228,7 +235,7 @@ namespace api_rota_oeste.Services
                 InteracaoModel? interacaoCriada = await _repositoryInteracao.Adicionar(interacaoModel);
                 if (interacaoCriada == null)
                     throw new InvalidOperationException("Erro ao adicionar Interacao automaticamente");
-
+                
                 // Restringir a navegabilidade das entidades associadas a ClienteRespondeCheckList
                 clienteRespondeCheckListModel = RefatoraoMinClienteRespondeCheckList(clienteRespondeCheckListModel);
                 

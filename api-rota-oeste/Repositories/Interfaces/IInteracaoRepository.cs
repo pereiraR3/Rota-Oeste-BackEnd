@@ -18,4 +18,5 @@ public interface IInteracaoRepository {
 
     Task<bool> ApagarTodos();
 
+    Task<InteracaoModel?> BuscarPorIdCliente(int clienteExistenteId);
 }

@@ -76,6 +76,16 @@ public class ClienteRepository : IClienteRepository
     }
 
     /// <summary>
+    /// Busca uma instância da entidade Cliente pelo Telefone.
+    /// </summary>
+    /// <param name="telefone">Telefone do cliente a ser buscado.</param>
+    /// <returns>Retorna o cliente correspondente ao Telefone fornecido, ou null se não for encontrado.</returns>
+    public async Task<ClienteModel?> BuscarPorTelefone(string telefone)
+    {
+        return await _dbContext.Clientes.FirstOrDefaultAsync(x => x.Telefone == telefone);
+    }
+
+    /// <summary>
     /// Busca todas as instâncias da entidade Cliente armazenadas no banco de dados.
     /// </summary>
     /// <returns>Retorna uma lista de todos os clientes.</returns>

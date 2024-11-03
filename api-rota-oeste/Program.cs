@@ -5,6 +5,8 @@ using api_rota_oeste.Repositories;
 using api_rota_oeste.Repositories.Interfaces;
 using api_rota_oeste.Services;
 using api_rota_oeste.Services.Interfaces;
+using api_rota_oeste.Services.Scheduled;
+using api_rota_oeste.Services.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -99,22 +101,17 @@ builder.Services.AddScoped<IRespostaTemAlternativaRepository, RespostaTemAlterna
 
 builder.Services.AddScoped<IRepository, Repository>();
 
-// Registrar o serviço WhatsAppService com HttpClient
-builder.Services.AddHttpClient<IWhatsAppService, WhatsAppService>(client =>
-{
-    client.BaseAddress = new Uri("https://graph.facebook.com/v20.0/399397036595516/messages");
-    client.DefaultRequestHeaders.Add("Authorization", $"Bearer EAAWgnQyeEUEBO3J2Vw5trFeqpFsYHxSHAaSN4Pg3cHLZBxZBY2ZAqoPP5qzTIZC9XTMGlPuWmbnOC62ZCLNZCVNHrDmpypMMoSsRpwjy2mmGGrDrCKR84l9wbYHAOyTPp0ktAK0bWTcXXp2APyggC1Q6PbNi6o0BZCWQyHEZAQpgpoHXlTsCR59WDZCK9fO1Qx9qcovaZBtgVMhqhtX8IjxPMSsNY0kEQZD");
-});
+builder.Services.AddScoped<IWhatsAppService, WhatsAppService>();
+
+builder.Services.AddScoped<ICheckListProcessService, CheckListProcessService>();
+
+builder.Services.AddScoped<MessageOrchestrationService>();
+
+builder.Services.AddHostedService<InsertDataInDatabase>();
 
 // Ativando o AutoMapper no contexto de aplicação
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-// Habilitando as anotações do Swagger
-/*builder.Services.AddSwaggerGen(c =>
-    c.EnableAnnotations()
-    );
-*/
 
 builder.Services.AddSwaggerGen(c =>
 {
