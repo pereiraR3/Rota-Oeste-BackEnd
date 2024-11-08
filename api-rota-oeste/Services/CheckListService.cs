@@ -284,7 +284,12 @@ namespace api_rota_oeste.Services
             var checks = await _repositoryCheckList.BuscarTodos();
 
             List<CheckListResponseMinDTO> checklists = checks
-                .Select(i => _mapper.Map<CheckListResponseMinDTO>(i))
+                .Select(i =>
+                {
+                    var dto = _mapper.Map<CheckListResponseMinDTO>(i);
+                    dto.QuantityQuestoes = i.Questoes?.Count;
+                    return dto;
+                })
                 .ToList();
 
             return checklists;
