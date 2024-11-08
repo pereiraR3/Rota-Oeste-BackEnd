@@ -48,6 +48,14 @@ O banco de dados SQL Server foi projetado para suportar as operações do sistem
 
 Para mais detalhes sobre a estrutura do banco de dados e os relacionamentos entre as tabelas, consulte o [Dicionário de Dados](https://pt.overleaf.com/read/vdwdjvqvtwwr#5cba88).
 
+## DIAGRAMA ENTIDADE RELACIONAMENTO (DER)
+
+[der](assets/der.png)
+
+## DIAGRAMA LÓGICO
+
+[logico](assets/logico.png)
+
 ## Repositório Público
 
 O repositório público [Rota-Oeste-BackEnd](https://github.com/pereiraR3/Rota-Oeste-BackEnd) inclui:
