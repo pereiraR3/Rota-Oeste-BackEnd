@@ -36,4 +36,11 @@ public class Repository : IRepository
     {
         _context.SaveChanges();
     }
+
+    public void Atualizar(bool statusNovo, int id)
+    {
+        var interacao = _context.Interacoes.FirstOrDefault(x => x.Id == id);
+        if (interacao != null) interacao.Status = statusNovo;
+        _context.SaveChanges();
+    }
 }
