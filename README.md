@@ -98,12 +98,3 @@ O projeto segue a metodologia **Agile Scrum** para desenvolvimento iterativo. As
 - [Figma - Prototipagem](https://www.figma.com/design/nwaVccYxXjauVKnK2g10S5/Prototipagem---Desafio-da-Rota-Oeste?node-id=0-1&t=mXpimYtfWCtENctq-1)
 
 ---
-
-
-### Documentações
-
-Seguem os links de todas as documentações das tecnologias usadas nesse projeto:
-
-- [Engenharia de Requisitos](https://pt.overleaf.com/read/frtcrbrscwgs#5915a5)
-- [Modelagem de Banco de Dados](https://pt.overleaf.com/read/vdwdjvqvtwwr#5cba88)
-- [Figma](https://www.figma.com/design/nwaVccYxXjauVKnK2g10S5/Prototipagem---Desafio-da-Rota-Oeste?node-id=0-1&t=mXpimYtfWCtENctq-1)
