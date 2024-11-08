@@ -22,7 +22,7 @@ public class InteracaoConfiguration : IEntityTypeConfiguration<InteracaoModel>
             .OnDelete(DeleteBehavior.NoAction); // Use NoAction para impedir a exclusão em cascata
             
         // Configurando a relação entre Interacao e RespostaAlternativa
-        builder.HasMany(q => q.RespostaAlternativaModels)
+        builder.HasMany(q => q.RespostaModels)
             .WithOne(r => r.Interacao)
             .HasForeignKey(r => r.InteracaoId)
             .OnDelete(DeleteBehavior.Cascade); // Configura a exclusão em cascata
