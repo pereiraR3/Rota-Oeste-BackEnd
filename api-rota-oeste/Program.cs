@@ -49,7 +49,6 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-
 //END OAUTH
 
 builder.Services.AddAuthorization();
@@ -69,7 +68,8 @@ builder.Services.AddControllers()
 // Registrar o DbContext com o nome correto
 builder.Services.AddEntityFrameworkSqlServer()
     .AddDbContext<ApiDbContext>(
-        options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database"))
+        options => options.UseSqlServer(builder.Configuration.GetConnectionString("Database")),
+        ServiceLifetime.Scoped
     );
 
 // Permitir a injecao dos serviços abaixo, no contexto de aplicação
@@ -145,6 +145,52 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
+    context.Database.Migrate(); // Aplicar todas as migrações
+
+    // Executa o script de criação da função somente após as migrações
+    var script = @"
+        IF NOT EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[fn_relatorio_geral_checklist]') AND type in (N'IF', N'TF', N'FN'))
+        BEGIN
+            EXEC('
+                CREATE FUNCTION dbo.fn_relatorio_geral_checklist(@id_checklist INT)
+                RETURNS TABLE
+                AS
+                RETURN
+                (
+                    SELECT 
+                        i.id AS id_interacao,
+                        c.nome AS nome_cliente,
+                        ch.nome AS nome_checklist,
+                        i.data_criacao AS data_interacao,
+                        q.titulo AS questao,
+                        r.id AS id_resposta,
+                        rt.id_alternativa AS alternativa
+                    FROM 
+                        dbo.interacao i
+                    JOIN 
+                        dbo.cliente c ON i.id_cliente = c.id
+                    JOIN 
+                        dbo.checklist ch ON i.id_checklist = ch.id
+                    JOIN 
+                        dbo.resposta r ON r.id_interacao = i.id
+                    JOIN 
+                        dbo.resposta_tem_alternativa rt ON rt.id_resposta = r.id
+                    JOIN 
+                        dbo.questao q ON r.id_questao = q.id
+                    WHERE 
+                        i.status = 1
+                        AND i.id_checklist = @id_checklist
+                );
+            ')
+        END;
+    ";
+    
+    context.Database.ExecuteSqlRaw(script); // Executa o script após migrações serem aplicadas
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

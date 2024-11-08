@@ -57,16 +57,17 @@ public class InteracaoRepository: IInteracaoRepository
     public async Task<InteracaoModel?> BuscarPorIdCliente(int clienteExistenteId)
     {
         return await _context.Interacoes
+            .AsNoTracking()
             .Where(c => c.ClienteId == clienteExistenteId)
             .OrderByDescending(c => c.Data)
-            .Include(c => c.RespostaAlternativaModels)
+            .Include(x => x.RespostaModels)
             .Include(c => c.CheckList)
             .ThenInclude(cl => cl.Questoes)
-            .ThenInclude(cl => cl.AlternativaModels)
+            .ThenInclude(q => q.AlternativaModels)
             .FirstOrDefaultAsync();
-
     }
 
+    
     /// <summary>
     /// Busca todas as instâncias da entidade Interacao armazenadas no banco de dados.
     /// </summary>

@@ -63,7 +63,9 @@ namespace api_rota_oeste.Repositories
         public async Task<List<CheckListModel>> BuscarTodos()
         {
 
-            return await _context.CheckLists.ToListAsync();
+            return await _context.CheckLists
+                .Include(x => x.Questoes)
+                .ToListAsync();
 
         }
 

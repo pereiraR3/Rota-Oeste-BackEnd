@@ -18,7 +18,7 @@ public class RespostaConfiguration : IEntityTypeConfiguration<RespostaModel>
         
         // Relação com Interacao
         builder.HasOne(r => r.Interacao)
-            .WithMany(i => i.RespostaAlternativaModels)
+            .WithMany(i => i.RespostaModels)
             .HasForeignKey(r => r.InteracaoId)
             .OnDelete(DeleteBehavior.Restrict); // Evitar exclusão em cascata para evitar múltiplos caminhos
 

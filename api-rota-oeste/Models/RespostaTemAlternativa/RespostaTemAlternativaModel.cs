@@ -27,9 +27,11 @@ public class RespostaTemAlternativaModel
 {
     
     [Required(ErrorMessage = "RespostaId é necessário")]
+    [Column("id_resposta")]
     public int RespostaId { get; set; }
     
     [Required(ErrorMessage = "Alternativa é necessário")]
+    [Column("id_alternativa")]
     public int AlternativaId { get; set; }
 
     [JsonIgnore]

@@ -100,7 +100,7 @@ public class InteracaoService : IInteracaoService {
         var interacao = await _repositoryInteracao.BuscarTodos();
         
         return interacao
-            .Select(i => _mapper.Map<InteracaoResponseDTO>(RefatoraoMinInteracaoModel(i)))
+            .Select(i => _mapper.Map<InteracaoResponseDTO>(i))
             .ToList();
     }
 
@@ -168,7 +168,7 @@ public class InteracaoService : IInteracaoService {
     /// <returns>Retorna o modelo refatorado de Interacao.</returns>
     public InteracaoModel RefatoraoMediumInteracaoModel(InteracaoModel interacaoModel)
     {
-        var interacaoRespostaAlternativaModels = interacaoModel.RespostaAlternativaModels
+        var interacaoRespostaAlternativaModels = interacaoModel.RespostaModels
             .Select(o => new RespostaModel
             {
                 Id = o.Id,
@@ -177,7 +177,7 @@ public class InteracaoService : IInteracaoService {
                 
             }).ToList();
         
-        interacaoModel.RespostaAlternativaModels = interacaoRespostaAlternativaModels;
+        interacaoModel.RespostaModels = interacaoRespostaAlternativaModels;
 
         if (interacaoModel.CheckList != null)
             interacaoModel.CheckList = new CheckListModel
@@ -207,7 +207,7 @@ public class InteracaoService : IInteracaoService {
     /// <returns>Retorna o modelo refatorado de Interacao.</returns>
     public InteracaoModel RefatoraoMinInteracaoModel(InteracaoModel interacaoModel)
     {
-        interacaoModel.RespostaAlternativaModels = new List<RespostaModel>();
+        interacaoModel.RespostaModels = new List<RespostaModel>();
 
         if (interacaoModel.CheckList != null)
             interacaoModel.CheckList = new CheckListModel

@@ -2,9 +2,6 @@ using api_rota_oeste.Models.WppMessage;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using api_rota_oeste.Services.Interfaces;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 using api_rota_oeste.Services.Utils;
 
 namespace api_rota_oeste.Controllers
@@ -61,7 +58,7 @@ namespace api_rota_oeste.Controllers
             {
                 await _whatsAppService.EnviarMensagemAsync(request.Telefone, request.Mensagem);
                 _logger.LogInformation("Mensagem enviada com sucesso para {Telefone}.", request.Telefone);
-                return Ok("Mensagem enviada com sucesso");
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -97,7 +94,7 @@ namespace api_rota_oeste.Controllers
             {
                 await _messageOrchestrationService.EnviarCheckListParaClientesAsync(mensagemWppDto);
                 _logger.LogInformation("Mensagens de checklist enviadas com sucesso.");
-                return Ok("Mensagens enviadas com sucesso");
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -138,19 +135,12 @@ namespace api_rota_oeste.Controllers
                 if (isValid)
                 {
                     _logger.LogInformation("Mensagem validada com sucesso de {From}.", request.From);
-                    return Ok("Mensagem recebida e validada com sucesso");
+                    return Ok();
                 }
                 else
                 {
                     _logger.LogWarning("Mensagem de {From} não passou na validação.", request.From);
-                    
-                    var envio = new EnviarMensagemRequest
-                    {
-                        Telefone = request.From,
-                        Mensagem = "Resposta Inválida, por favor tente novamente."
-                    };
-                    
-                    return await EnviarMensagemUnica(envio);
+                    return BadRequest();
                 }
             }
             catch (Exception ex)
@@ -159,7 +149,6 @@ namespace api_rota_oeste.Controllers
                 return StatusCode(500, $"Erro ao processar a mensagem: {ex.Message}");
             }
         }
-        
     }
 }
 

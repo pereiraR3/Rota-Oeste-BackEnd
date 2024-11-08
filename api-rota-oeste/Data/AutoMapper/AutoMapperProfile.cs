@@ -92,7 +92,7 @@ public class AutoMapperProfile : Profile
             CreateMap<InteracaoModel, InteracaoResponseDTO>()
                 .ForMember(dest => dest.CheckList, opt => opt.MapFrom(src => src.CheckList))
                 .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.Cliente))
-                .ForMember(dest => dest.RespostaAlternativaModels, opt => opt.MapFrom(src => src.RespostaAlternativaModels));
+                .ForMember(dest => dest.RespostaAlternativaModels, opt => opt.MapFrom(src => src.RespostaModels));
             
             // -> O mapeamento de atualização deve ignorar campos nulos
             CreateMap<InteracaoPatchDTO, InteracaoModel>()
