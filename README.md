@@ -50,11 +50,7 @@ Para mais detalhes sobre a estrutura do banco de dados e os relacionamentos entr
 
 ## DIAGRAMA ENTIDADE RELACIONAMENTO (DER)
 
-[der](assets/der.png)
-
-## DIAGRAMA LÓGICO
-
-[logico](assets/logico.png)
+[der](assets/der.jpg)
 
 ## Repositório Público
 
