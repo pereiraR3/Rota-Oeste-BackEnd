@@ -64,7 +64,10 @@ public class QuestaoRepository : IQuestaoRepository
     public async Task<QuestaoModel?> BuscarPorId(int id)
     {
 
-        return await _context.Questoes.FindAsync(id);
+        return await _context
+            .Questoes
+            .Include(x => x.AlternativaModels)
+            .FirstOrDefaultAsync(x => x.Id == id);
 
     }
     
