@@ -87,7 +87,7 @@ A equipe de backend foi responsável pela implementação do núcleo do sistema,
 | Membro        | Função                | Contribuições                                           | Foto                                  |
 |---------------|-----------------------|---------------------------------------------------------|----------------------------------------|
 | André         | Back-End + DBA        | Estrutura do banco de dados, implementação da lógica de negócios e configuração de segurança do sistema. | ![André](equipe/andre.png)           |
-| Anthony       | Product Owner + Back-End | Coordenação do projeto, implementação da lógica de negócios central da API, Implementação de integrações com o Twilio e estrutura do banco de dados. | ![Anthony](equipe/anthony.png)       |
+| Anthony       | Product Owner + Back-End + DBA | Coordenação do projeto, implementação da lógica de negócios central da API, Implementação de integrações com o Twilio e estrutura do banco de dados. | ![Anthony](equipe/anthony.png)       |
 | Vinícius      | Back-End + DBA        | Implementação de integrações com o Twilio, implementação da lógica de negócios e estrutura do banco de dados. | ![Vinícius](equipe/vinicius.png)     |
 
 ## Links Úteis
