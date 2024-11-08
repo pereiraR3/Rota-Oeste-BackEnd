@@ -72,7 +72,7 @@ public class RespostaService : IRespostaService
         RespostaModel resposta = await _respostaRepository.Adicionar(respostaAlternativaModel);
 
         // Adicionar a resposta às listas de navegação das entidades relacionadas
-        interacaoModel.RespostaAlternativaModels.Add(resposta);
+        interacaoModel.RespostaModels.Add(resposta);
         questaoModel.RespostaModels.Add(resposta);
 
         // Mapear e retornar o DTO de resposta
