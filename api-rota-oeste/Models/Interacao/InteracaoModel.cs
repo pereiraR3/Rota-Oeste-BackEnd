@@ -58,7 +58,7 @@ public class InteracaoModel
     public virtual CheckListModel? CheckList { get; set; }
     
     [JsonIgnore]
-    public virtual List<RespostaModel> RespostaAlternativaModels { get; set; } = new List<RespostaModel>();
+    public virtual List<RespostaModel> RespostaModels { get; set; } = new List<RespostaModel>();
     
     public InteracaoModel() {}
 
