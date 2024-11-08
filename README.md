@@ -11,7 +11,7 @@ Este sistema foi criado para resolver a necessidade de comunicação ágil e cen
 - **Frontend** em Flutter, permitindo uma interface de usuário moderna e responsiva.
 - **Backend** em .NET Core, garantindo escalabilidade e segurança.
 - **Banco de dados** no SQL Server para gerenciamento eficiente de dados e transações.
-- Integração com a **API Next IP WhatsApp** para comunicação direta com os clientes e parceiros.
+- Integração com a **API Wpp do Twillio** para comunicação direta com os clientes e parceiros.
 
 ## Tecnologias Utilizadas
 
@@ -20,7 +20,7 @@ Este sistema foi criado para resolver a necessidade de comunicação ágil e cen
 | Flutter       | Framework para o desenvolvimento do frontend, garantindo uma experiência de usuário multiplataforma. |
 | .NET Core     | Framework de backend utilizado para criar uma API RESTful segura e de alto desempenho.          |
 | SQL Server    | Sistema de Gerenciamento de Banco de Dados Relacional para garantir a segurança e a integridade dos dados. |
-| API Next IP WhatsApp | Protocolo de comunicação para envio e recebimento de mensagens via WhatsApp.                  |
+| API Wpp do Twillio | Protocolo de comunicação para envio e recebimento de mensagens via WhatsApp.                  |
 
 ## Arquitetura do Sistema
 
