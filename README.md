@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-Este projeto visa desenvolver uma solução integrada para facilitar a comunicação e gestão de informações via WhatsApp para a Rota Oeste. Utilizando a **API Next IP WhatsApp**, o sistema permite o envio e recebimento de mensagens, criação de checklists, gerenciamento de interações e geração de relatórios. Com uma arquitetura robusta, a plataforma proporciona uma comunicação eficiente e escalável para a Rota Oeste e seus parceiros.
+Este projeto visa desenvolver uma solução integrada para facilitar a comunicação e gestão de informações via WhatsApp para a Rota Oeste. Utilizando a **API Wpp do Twillio**, o sistema permite o envio e recebimento de mensagens, criação de checklists, gerenciamento de interações e geração de relatórios. Com uma arquitetura robusta, a plataforma proporciona uma comunicação eficiente e escalável para a Rota Oeste e seus parceiros.
 
 ## Proposta do Projeto
 
