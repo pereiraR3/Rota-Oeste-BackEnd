@@ -30,19 +30,50 @@ public class RespostaTemAlternativaRepository : IRespostaTemAlternativaRepositor
     /// <returns>Retorna a relação Resposta-Alternativa adicionada, incluindo os dados das entidades Resposta e Alternativa associadas.</returns>
     public async Task<RespostaTemAlternativaModel?> Adicionar(RespostaTemAlternativaModel respostaTemAlternativaModel)
     {
-        // Adicionando e salvando no banco de dados
+        if (respostaTemAlternativaModel == null)
+        {
+            throw new ArgumentNullException(nameof(respostaTemAlternativaModel), "O modelo de RespostaTemAlternativa não pode ser nulo.");
+        }
+
+        respostaTemAlternativaModel.Resposta = await _context.RespostaModels.FindAsync(respostaTemAlternativaModel.RespostaId) ?? throw new InvalidOperationException();
+        
+        // Verifica se a resposta associada não é nula e a anexa ao contexto se estiver desanexada
+        if (respostaTemAlternativaModel.Resposta == null)
+        {
+            throw new ArgumentNullException(nameof(respostaTemAlternativaModel.Resposta), "A Resposta associada não pode ser nula.");
+        }
+        if (_context.Entry(respostaTemAlternativaModel.Resposta).State == EntityState.Detached)
+        {
+            _context.Attach(respostaTemAlternativaModel.Resposta);
+        }
+        
+        respostaTemAlternativaModel.Alternativa = await _context.AlternativaModels.FindAsync(respostaTemAlternativaModel.AlternativaId) ?? throw new InvalidOperationException();
+
+        // Verifica se a alternativa associada não é nula e a anexa ao contexto se estiver desanexada
+        if (respostaTemAlternativaModel.Alternativa == null)
+        {
+            throw new ArgumentNullException(nameof(respostaTemAlternativaModel.Alternativa), "A Alternativa associada não pode ser nula.");
+        }
+        if (_context.Entry(respostaTemAlternativaModel.Alternativa).State == EntityState.Detached)
+        {
+            _context.Attach(respostaTemAlternativaModel.Alternativa);
+        }
+    
+        // Adiciona a entidade ao contexto e salva no banco de dados
         await _context.AddAsync(respostaTemAlternativaModel);
         await _context.SaveChangesAsync();
-    
-        // Retornando o objeto adicionado, que já estará atualizado com o ID gerado, sem a necessidade de carregar referências explicitamente
+
+        // Retorna o objeto adicionado, já atualizado com o ID gerado
         var resultado = await _context.RespostaTemAlternativaModels
             .Include(crc => crc.Resposta)
             .Include(crc => crc.Alternativa)
             .AsSplitQuery()
-            .FirstOrDefaultAsync(crc => crc.AlternativaId == respostaTemAlternativaModel.AlternativaId && crc.RespostaId == respostaTemAlternativaModel.RespostaId);
+            .FirstOrDefaultAsync(crc => crc.AlternativaId == respostaTemAlternativaModel.AlternativaId && 
+                                        crc.RespostaId == respostaTemAlternativaModel.RespostaId);
 
         return resultado;
     }
+
     
     /// <summary>
     /// Remove uma instância da entidade RespostaTemAlternativa com base nos IDs da Resposta e da Alternativa.
