@@ -89,6 +89,14 @@ O projeto segue a metodologia **Agile Scrum** para desenvolvimento iterativo. As
 - Postman para testes de API.
 - Ferramentas de monitoramento de performance para garantir escalabilidade.
 
+## Equipe de Desenvolvimento
+
+| Membro        | Função      | Foto                                  |
+|---------------|-------------|----------------------------------------|
+| André         | Back-End + DBA  | ![André](equipe/andre.png)           |
+| Anthony       | Product Owner + Back-End + DBA | ![Anthony](equipe/anthony.png)       |
+| Vinícius      | Back-End + DBA  | ![Vinícius](equipe/vinicius.png)     |
+
 ## Links Úteis
 
 ### Documentações
