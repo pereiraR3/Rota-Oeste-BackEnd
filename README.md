@@ -50,7 +50,7 @@ Para mais detalhes sobre a estrutura do banco de dados e os relacionamentos entr
 
 ## DIAGRAMA ENTIDADE RELACIONAMENTO (DER)
 
-[der](assets/der.jpg)
+![der](assets/der.jpg)
 
 ## Repositório Público
 
